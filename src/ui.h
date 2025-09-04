@@ -11,7 +11,11 @@
 class UI {
 public:
     UI() = default;
-    ~UI() = default;
+    ~UI();
+    
+    // Prevent copying to avoid widget ownership issues
+    UI(const UI&) = delete;
+    UI& operator=(const UI&) = delete;
     
     void initialize(Config* config, CombinationTracker* tracker);
     void show_window();
@@ -19,36 +23,44 @@ public:
     bool is_window_visible() const;
     
     void update();
+    void update_aircraft_display(const std::string& aircraft_name);
     
 private:
-    Config* config_ = nullptr;
-    CombinationTracker* tracker_ = nullptr;
+    Config* _config = nullptr;
+    CombinationTracker* _tracker = nullptr;
     
     // Main window
-    XPWidgetID main_window_ = nullptr;
+    XPWidgetID _main_window = nullptr;
+    
+    // Status and info displays
+    XPWidgetID _aircraft_label = nullptr;
+    XPWidgetID _status_message_label = nullptr;
+    XPWidgetID _current_combination_label = nullptr;
     
     // Binding list
-    XPWidgetID binding_list_ = nullptr;
-    XPWidgetID scroll_bar_ = nullptr;
-    
-    // Current combination display
-    XPWidgetID current_combination_label_ = nullptr;
+    XPWidgetID _binding_list = nullptr;
+    XPWidgetID _scroll_bar = nullptr;
     
     // Recording controls
-    XPWidgetID record_button_ = nullptr;
-    XPWidgetID clear_button_ = nullptr;
-    XPWidgetID command_input_ = nullptr;
-    XPWidgetID description_input_ = nullptr;
-    XPWidgetID save_button_ = nullptr;
+    XPWidgetID _record_button = nullptr;
+    XPWidgetID _clear_button = nullptr;
+    XPWidgetID _command_input = nullptr;
+    XPWidgetID _description_input = nullptr;
+    XPWidgetID _save_button = nullptr;
     
     // Edit mode
-    XPWidgetID edit_button_ = nullptr;
-    XPWidgetID delete_button_ = nullptr;
+    XPWidgetID _selection_input = nullptr;
+    XPWidgetID _edit_button = nullptr;
+    XPWidgetID _delete_button = nullptr;
+    XPWidgetID _confirm_button = nullptr;
+    XPWidgetID _cancel_button = nullptr;
     
     // State
-    bool recording_ = false;
-    int selected_binding_index_ = -1;
-    int scroll_position_ = 0;
+    bool _recording = false;
+    int _selected_binding_index = -1;
+    int _scroll_position = 0;
+    bool _confirming_delete = false;
+    int _delete_candidate_index = -1;
     
     // Constants
     static constexpr int WINDOW_WIDTH = 600;
@@ -60,14 +72,20 @@ private:
     
     void create_widgets();
     void destroy_widgets();
+    bool verify_widget_creation();
     void update_binding_list();
     void update_current_combination_display();
+    void show_status_message(const std::string& message, bool is_error = false);
+    void clear_status_message();
     void handle_record_button();
     void handle_clear_button();
     void handle_save_button();
     void handle_edit_button();
     void handle_delete_button();
+    void handle_confirm_button();
+    void handle_cancel_button();
     void handle_binding_selection(int index);
+    void update_button_visibility();
     
     static int widget_callback(XPWidgetMessage message, XPWidgetID widget, intptr_t param1, intptr_t param2);
     int handle_widget_message(XPWidgetMessage message, XPWidgetID widget, intptr_t param1, intptr_t param2);

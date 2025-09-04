@@ -1,15 +1,18 @@
 #include "config.h"
 #include "XPLMUtilities.h"
+#include "constants.h"
+#include "input_validation.h"
 
 #include <fstream>
 #include <sstream>
 #include <algorithm>
 #include <filesystem>
+#include <cstring>
 
 bool Config::load_config(const std::string& aircraft_id)
 {
-    aircraft_id_ = aircraft_id;
-    bindings_.clear();
+    _aircraft_id = aircraft_id;
+    _bindings.clear();
     
     if (!create_multibind_directory()) {
         XPLMDebugString("Multibind: WARNING - Could not create multibind directory\n");
@@ -19,9 +22,8 @@ bool Config::load_config(const std::string& aircraft_id)
     std::ifstream file(config_file);
     
     if (!file.is_open()) {
-        char log_msg[512];
-        snprintf(log_msg, sizeof(log_msg), "Multibind: Config file not found, creating new one: %s\n", config_file.c_str());
-        XPLMDebugString(log_msg);
+        std::string log_msg = "Multibind: Config file not found, creating new one: " + config_file + "\n";
+        XPLMDebugString(log_msg.c_str());
         return save_config(); // Create empty config file
     }
     
@@ -30,6 +32,15 @@ bool Config::load_config(const std::string& aircraft_id)
     
     while (std::getline(file, line)) {
         line_number++;
+        
+        // Bounds checking: prevent extremely long lines from causing issues
+        constexpr size_t MAX_LINE_LENGTH = 2048;
+        if (line.length() > MAX_LINE_LENGTH) {
+            std::string error_msg = "Multibind: Line " + std::to_string(line_number) + " exceeds maximum length (" + 
+                                  std::to_string(MAX_LINE_LENGTH) + " characters), skipping\n";
+            XPLMDebugString(error_msg.c_str());
+            continue;
+        }
         
         // Skip empty lines and comments
         if (line.empty() || line[0] == '#') {
@@ -41,9 +52,10 @@ bool Config::load_config(const std::string& aircraft_id)
         size_t second_pipe = line.find('|', first_pipe + 1);
         
         if (first_pipe == std::string::npos || second_pipe == std::string::npos) {
-            char error_msg[256];
-            snprintf(error_msg, sizeof(error_msg), "Multibind: Invalid line format at line %d: %s\n", line_number, line.c_str());
-            XPLMDebugString(error_msg);
+            std::string truncated_line = line.length() > 100 ? line.substr(0, 100) + "..." : line;
+            std::string error_msg = "Multibind: Invalid line format at line " + std::to_string(line_number) + 
+                                  ": " + truncated_line + "\n";
+            XPLMDebugString(error_msg.c_str());
             continue;
         }
         
@@ -51,22 +63,48 @@ bool Config::load_config(const std::string& aircraft_id)
         std::string command = line.substr(first_pipe + 1, second_pipe - first_pipe - 1);
         std::string description = line.substr(second_pipe + 1);
         
+        // Validate input components
+        if (!multibind::validation::is_valid_xplane_command(command)) {
+            std::string error_msg = "Multibind: Invalid command at line " + std::to_string(line_number) + 
+                                  ": " + command + "\n";
+            XPLMDebugString(error_msg.c_str());
+            continue;
+        }
+        
+        if (!multibind::validation::is_valid_description(description)) {
+            std::string error_msg = "Multibind: Invalid description at line " + std::to_string(line_number) + 
+                                  " (too long)\n";
+            XPLMDebugString(error_msg.c_str());
+            continue;
+        }
+        
         std::set<int> combination = string_to_combination(combination_str);
         if (!combination.empty() && !command.empty()) {
-            bindings_.emplace_back(combination, command, description);
+            // Prevent excessive bindings (DOS protection)
+            constexpr size_t MAX_BINDINGS = 1000;
+            if (_bindings.size() >= MAX_BINDINGS) {
+                std::string error_msg = "Multibind: Maximum number of bindings (" + 
+                                      std::to_string(MAX_BINDINGS) + ") reached at line " + 
+                                      std::to_string(line_number) + ", ignoring remaining entries\n";
+                XPLMDebugString(error_msg.c_str());
+                break;
+            }
+            _bindings.emplace_back(combination, command, description);
+        } else if (combination.empty()) {
+            std::string error_msg = "Multibind: No valid button combination at line " + std::to_string(line_number) + "\n";
+            XPLMDebugString(error_msg.c_str());
         }
     }
     
-    char log_msg[256];
-    snprintf(log_msg, sizeof(log_msg), "Multibind: Loaded %zu bindings from %s\n", bindings_.size(), config_file.c_str());
-    XPLMDebugString(log_msg);
+    std::string log_msg = "Multibind: Loaded " + std::to_string(_bindings.size()) + " bindings from " + config_file + "\n";
+    XPLMDebugString(log_msg.c_str());
     
     return true;
 }
 
 bool Config::save_config()
 {
-    if (aircraft_id_.empty()) {
+    if (_aircraft_id.empty()) {
         XPLMDebugString("Multibind: ERROR - Cannot save config, no aircraft ID set\n");
         return false;
     }
@@ -80,46 +118,44 @@ bool Config::save_config()
     std::ofstream file(config_file);
     
     if (!file.is_open()) {
-        char error_msg[512];
-        snprintf(error_msg, sizeof(error_msg), "Multibind: ERROR - Could not open config file for writing: %s\n", config_file.c_str());
-        XPLMDebugString(error_msg);
+        std::string error_msg = "Multibind: ERROR - Could not open config file for writing: " + config_file + "\n";
+        XPLMDebugString(error_msg.c_str());
         return false;
     }
     
-    file << "# Multibind configuration for " << aircraft_id_ << "\n";
+    file << "# Multibind configuration for " << _aircraft_id << "\n";
     file << "# Format: button1+button2+button3|command|description\n";
     file << "# Example: 1+5+10|sim/starters/engage_starter_1|Start Engine 1\n";
     file << "\n";
     
-    for (const auto& binding : bindings_) {
+    for (const auto& binding : _bindings) {
         file << combination_to_string(binding.button_combination) << "|" 
              << binding.target_command << "|" 
              << binding.description << "\n";
     }
     
-    char log_msg[256];
-    snprintf(log_msg, sizeof(log_msg), "Multibind: Saved %zu bindings to %s\n", bindings_.size(), config_file.c_str());
-    XPLMDebugString(log_msg);
+    std::string log_msg = "Multibind: Saved " + std::to_string(_bindings.size()) + " bindings to " + config_file + "\n";
+    XPLMDebugString(log_msg.c_str());
     
     return true;
 }
 
 void Config::add_binding(const MultibindBinding& binding)
 {
-    bindings_.push_back(binding);
+    _bindings.push_back(binding);
 }
 
 void Config::remove_binding(size_t index)
 {
-    if (index < bindings_.size()) {
-        bindings_.erase(bindings_.begin() + index);
+    if (index < _bindings.size()) {
+        _bindings.erase(_bindings.begin() + index);
     }
 }
 
 void Config::update_binding(size_t index, const MultibindBinding& binding)
 {
-    if (index < bindings_.size()) {
-        bindings_[index] = binding;
+    if (index < _bindings.size()) {
+        _bindings[index] = binding;
     }
 }
 
@@ -131,24 +167,25 @@ bool Config::create_multibind_directory()
         std::filesystem::create_directories(multibind_dir);
         return true;
     } catch (const std::exception& e) {
-        char error_msg[512];
-        snprintf(error_msg, sizeof(error_msg), "Multibind: ERROR - Failed to create directory %s: %s\n", 
-                multibind_dir.c_str(), e.what());
-        XPLMDebugString(error_msg);
+        std::string error_msg = "Multibind: ERROR - Failed to create directory " + multibind_dir + ": " + e.what() + "\n";
+        XPLMDebugString(error_msg.c_str());
         return false;
     }
 }
 
 std::string Config::get_config_file_path() const
 {
-    return get_multibind_directory() + "/" + aircraft_id_ + ".txt";
+    return get_multibind_directory() + "/" + _aircraft_id + ".txt";
 }
 
 std::string Config::get_multibind_directory() const
 {
-    char xplane_path[512];
-    XPLMGetSystemPath(xplane_path);
-    return std::string(xplane_path) + "multibind";
+    using namespace multibind::constants;
+    
+    std::string xplane_path(XPLANE_PATH_BUFFER_SIZE, '\0');
+    XPLMGetSystemPath(&xplane_path[0]);
+    xplane_path.resize(std::strlen(xplane_path.c_str())); // Trim to actual length
+    return xplane_path + "multibind";
 }
 
 std::string Config::combination_to_string(const std::set<int>& combination) const
@@ -167,6 +204,8 @@ std::string Config::combination_to_string(const std::set<int>& combination) cons
 
 std::set<int> Config::string_to_combination(const std::string& str) const
 {
+    using namespace multibind::constants;
+    
     std::set<int> combination;
     std::stringstream ss(str);
     std::string button_str;
@@ -174,7 +213,7 @@ std::set<int> Config::string_to_combination(const std::string& str) const
     while (std::getline(ss, button_str, '+')) {
         try {
             int button = std::stoi(button_str);
-            if (button >= 0 && button < 1000) {
+            if (button >= MIN_BUTTON_ID && button <= MAX_BUTTON_ID) {
                 combination.insert(button);
             }
         } catch (const std::exception&) {

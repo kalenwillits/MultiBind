@@ -27,17 +27,17 @@ public:
     void remove_binding(size_t index);
     void update_binding(size_t index, const MultibindBinding& binding);
     
-    const std::vector<MultibindBinding>& get_bindings() const { return bindings_; }
-    std::vector<MultibindBinding>& get_bindings() { return bindings_; }
+    const std::vector<MultibindBinding>& get_bindings() const { return _bindings; }
+    std::vector<MultibindBinding>& get_bindings() { return _bindings; }
     
-    const std::string& get_aircraft_id() const { return aircraft_id_; }
+    const std::string& get_aircraft_id() const { return _aircraft_id; }
     
     bool create_multibind_directory();
     std::string get_config_file_path() const;
     
 private:
-    std::string aircraft_id_;
-    std::vector<MultibindBinding> bindings_;
+    std::string _aircraft_id;
+    std::vector<MultibindBinding> _bindings;
     
     std::string combination_to_string(const std::set<int>& combination) const;
     std::set<int> string_to_combination(const std::string& str) const;

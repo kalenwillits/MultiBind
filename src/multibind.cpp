@@ -7,9 +7,13 @@
 #include "config.h"
 #include "combination_tracker.h"
 #include "ui.h"
+#include "constants.h"
 
 #include <string>
 #include <vector>
+#include <cstring>
+#include <sstream>
+#include <iomanip>
 
 static XPLMMenuID g_menu_id = nullptr;
 static int g_menu_item_id = -1;
@@ -37,9 +41,19 @@ std::string extract_aircraft_id(const std::string& filename);
 
 PLUGIN_API int XPluginStart(char* out_name, char* out_sig, char* out_desc)
 {
-    strcpy(out_name, "Multibind");
-    strcpy(out_sig, "multibind.plugin");
-    strcpy(out_desc, "Multi-button joystick command binding plugin");
+    using namespace multibind::constants;
+    
+    std::string name = "Multibind";
+    std::string sig = "multibind.plugin";
+    std::string desc = "Multi-button joystick command binding plugin";
+    
+    // Safely copy strings with proper null termination
+    std::strncpy(out_name, name.c_str(), XPLANE_STRING_BUFFER_SIZE - 1);
+    std::strncpy(out_sig, sig.c_str(), XPLANE_STRING_BUFFER_SIZE - 1);
+    std::strncpy(out_desc, desc.c_str(), XPLANE_STRING_BUFFER_SIZE - 1);
+    out_name[XPLANE_STRING_BUFFER_SIZE - 1] = '\0';
+    out_sig[XPLANE_STRING_BUFFER_SIZE - 1] = '\0';
+    out_desc[XPLANE_STRING_BUFFER_SIZE - 1] = '\0';
 
     g_aircraft_filename_ref = XPLMFindDataRef("sim/aircraft/view/acf_filename");
     if (!g_aircraft_filename_ref) {
@@ -99,47 +113,56 @@ PLUGIN_API void XPluginReceiveMessage(XPLMPluginID from, int msg, void* param)
 
 void create_multibind_commands()
 {
-    g_multibind_commands.reserve(1000);
+    using namespace multibind::constants;
     
-    for (int i = 0; i < 1000; i++) {
-        char command_name[64];
-        char command_desc[128];
-        snprintf(command_name, sizeof(command_name), "multibind/%03d", i);
-        snprintf(command_desc, sizeof(command_desc), "Multibind command %03d", i);
+    g_multibind_commands.reserve(MAX_MULTIBIND_COMMANDS);
+    
+    for (int i = 0; i < MAX_MULTIBIND_COMMANDS; i++) {
+        std::ostringstream command_name_ss;
+        command_name_ss << "multibind/" << std::setfill('0') << std::setw(3) << i;
+        std::string command_name = command_name_ss.str();
         
-        XPLMCommandRef command = XPLMCreateCommand(command_name, command_desc);
+        std::ostringstream command_desc_ss;
+        command_desc_ss << "Multibind command " << std::setfill('0') << std::setw(3) << i;
+        std::string command_desc = command_desc_ss.str();
+        
+        XPLMCommandRef command = XPLMCreateCommand(command_name.c_str(), command_desc.c_str());
         if (command) {
             XPLMRegisterCommandHandler(command, multibind_command_handler, 1, (void*)(intptr_t)i);
             g_multibind_commands.push_back(command);
         } else {
-            char error_msg[256];
-            snprintf(error_msg, sizeof(error_msg), "Multibind: ERROR - Failed to create command %s\n", command_name);
-            XPLMDebugString(error_msg);
+            std::string error_msg = "Multibind: ERROR - Failed to create command " + command_name + "\n";
+            XPLMDebugString(error_msg.c_str());
         }
     }
     
-    char log_msg[256];
-    snprintf(log_msg, sizeof(log_msg), "Multibind: Created %zu multibind commands (000-999)\n", g_multibind_commands.size());
-    XPLMDebugString(log_msg);
+    std::ostringstream log_msg_ss;
+    log_msg_ss << "Multibind: Created " << g_multibind_commands.size() << " multibind commands (000-999)\n";
+    std::string log_msg = log_msg_ss.str();
+    XPLMDebugString(log_msg.c_str());
 }
 
 void load_aircraft_config()
 {
-    char aircraft_filename[512];
-    XPLMGetDatab(g_aircraft_filename_ref, aircraft_filename, 0, sizeof(aircraft_filename));
+    using namespace multibind::constants;
     
-    std::string current_aircraft(aircraft_filename);
-    if (current_aircraft != g_last_aircraft_filename) {
-        g_last_aircraft_filename = current_aircraft;
+    std::string aircraft_filename(XPLANE_PATH_BUFFER_SIZE, '\0');
+    XPLMGetDatab(g_aircraft_filename_ref, &aircraft_filename[0], 0, aircraft_filename.size());
+    aircraft_filename.resize(std::strlen(aircraft_filename.c_str())); // Trim to actual length
+    
+    if (aircraft_filename != g_last_aircraft_filename) {
+        g_last_aircraft_filename = aircraft_filename;
         
-        std::string aircraft_id = extract_aircraft_id(current_aircraft);
+        std::string aircraft_id = extract_aircraft_id(aircraft_filename);
         
-        char log_msg[512];
-        snprintf(log_msg, sizeof(log_msg), "Multibind: Loading config for aircraft: %s\n", aircraft_id.c_str());
-        XPLMDebugString(log_msg);
+        std::string log_msg = "Multibind: Loading config for aircraft: " + aircraft_id + "\n";
+        XPLMDebugString(log_msg.c_str());
         
         g_config.load_config(aircraft_id);
         g_tracker.set_bindings(g_config.get_bindings());
+        
+        // Update UI with current aircraft name
+        g_ui.update_aircraft_display(aircraft_id);
     }
 }
 
@@ -171,9 +194,8 @@ static float flight_loop_callback(float elapsed_since_last_call,
         if (command_ref) {
             XPLMCommandOnce(command_ref);
             
-            char log_msg[256];
-            snprintf(log_msg, sizeof(log_msg), "Multibind: Triggered command: %s\n", triggered_command.c_str());
-            XPLMDebugString(log_msg);
+            std::string log_msg = "Multibind: Triggered command: " + triggered_command + "\n";
+            XPLMDebugString(log_msg.c_str());
         }
     }
     

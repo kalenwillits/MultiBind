@@ -1,0 +1,116 @@
+name: Build Multibind Plugin
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - name: Windows
+            os: windows-latest
+            cmake_generator: "Visual Studio 17 2022"
+            cmake_arch: "-A x64"
+            output_dir: win_x64
+            artifact_name: multibind-windows
+            
+          - name: macOS
+            os: macos-latest
+            cmake_generator: "Xcode"
+            cmake_arch: ""
+            output_dir: mac_x64
+            artifact_name: multibind-macos
+            
+          - name: Linux
+            os: ubuntu-latest
+            cmake_generator: "Unix Makefiles"
+            cmake_arch: ""
+            output_dir: lin_x64
+            artifact_name: multibind-linux
+
+    name: Build ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup CMake
+      uses: jwlawson/actions-setup-cmake@v1
+      with:
+        cmake-version: '3.16'
+        
+    - name: Cache X-Plane SDK
+      id: cache-sdk
+      uses: actions/cache@v3
+      with:
+        path: SDK
+        key: xplane-sdk-4.1.1-${{ runner.os }}
+        
+    - name: Download X-Plane SDK
+      if: steps.cache-sdk.outputs.cache-hit != 'true'
+      run: |
+        curl -L -o XPSDK411.zip https://developer.x-plane.com/wp-content/plugins/code-sample-generation/sdk_zip_files/XPSDK411.zip
+        unzip -q XPSDK411.zip
+      shell: bash
+      
+    - name: Verify SDK structure
+      run: |
+        ls -la SDK/CHeaders/XPLM/ || echo "SDK structure verification failed"
+      shell: bash
+      
+    - name: Configure CMake (Windows)
+      if: matrix.name == 'Windows'
+      run: |
+        mkdir build
+        cd build
+        cmake .. -G "${{ matrix.cmake_generator }}" ${{ matrix.cmake_arch }} -DCMAKE_BUILD_TYPE=Release
+        
+    - name: Configure CMake (Unix)
+      if: matrix.name != 'Windows'
+      run: |
+        mkdir build
+        cd build
+        cmake .. -G "${{ matrix.cmake_generator }}" -DCMAKE_BUILD_TYPE=Release
+        
+    - name: Build plugin
+      run: |
+        cd build
+        cmake --build . --config Release --parallel
+        
+    - name: Verify build output
+      run: |
+        find build -name "multibind.xpl" -type f || echo "Plugin not found"
+      shell: bash
+      
+    - name: Prepare artifacts (Windows)
+      if: matrix.name == 'Windows'
+      run: |
+        mkdir -p artifacts/${{ matrix.output_dir }}
+        copy build\Release\multibind.xpl artifacts\${{ matrix.output_dir }}\multibind.xpl 2>nul || copy build\${{ matrix.output_dir }}\multibind.xpl artifacts\${{ matrix.output_dir }}\multibind.xpl
+      shell: cmd
+      
+    - name: Prepare artifacts (Unix)
+      if: matrix.name != 'Windows'
+      run: |
+        mkdir -p artifacts/${{ matrix.output_dir }}
+        find build -name "multibind.xpl" -exec cp {} artifacts/${{ matrix.output_dir }}/multibind.xpl \;
+        
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ matrix.artifact_name }}
+        path: artifacts/${{ matrix.output_dir }}/
+        retention-days: 30
+        
+    - name: Display build info
+      run: |
+        echo "Build completed for ${{ matrix.name }}"
+        echo "Artifact: ${{ matrix.artifact_name }}"
+        file artifacts/${{ matrix.output_dir }}/multibind.xpl || echo "File info not available"
+      shell: bash

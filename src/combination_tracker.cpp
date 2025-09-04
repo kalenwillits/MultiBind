@@ -1,22 +1,25 @@
 #include "combination_tracker.h"
 #include "XPLMUtilities.h"
+#include "constants.h"
 
 void CombinationTracker::set_button_pressed(int button_id, bool pressed)
 {
-    if (button_id < 0 || button_id >= 1000) {
+    using namespace multibind::constants;
+    
+    if (button_id < MIN_BUTTON_ID || button_id > MAX_BUTTON_ID) {
         return;
     }
     
-    bool was_pressed = button_states_[button_id];
-    button_states_[button_id] = pressed;
+    bool was_pressed = _button_states[button_id];
+    _button_states[button_id] = pressed;
     
     if (pressed && !was_pressed) {
-        currently_pressed_.insert(button_id);
-        if (recording_) {
-            recorded_combination_.insert(button_id);
+        _currently_pressed.insert(button_id);
+        if (_recording) {
+            _recorded_combination.insert(button_id);
         }
     } else if (!pressed && was_pressed) {
-        currently_pressed_.erase(button_id);
+        _currently_pressed.erase(button_id);
     }
     
     process_combination_change();
@@ -24,49 +27,49 @@ void CombinationTracker::set_button_pressed(int button_id, bool pressed)
 
 void CombinationTracker::set_bindings(const std::vector<MultibindBinding>& bindings)
 {
-    bindings_ = bindings;
+    _bindings = bindings;
 }
 
 void CombinationTracker::update()
 {
-    // Clear any triggered command from previous frame
-    triggered_command_.clear();
+    // Note: _triggered_command is cleared by get_triggered_command() 
+    // after being retrieved, not here. This allows commands triggered
+    // during update to be properly retrieved.
 }
 
 std::string CombinationTracker::get_triggered_command()
 {
-    std::string command = triggered_command_;
-    triggered_command_.clear(); // Only trigger once
+    std::string command = _triggered_command;
+    _triggered_command.clear(); // Only trigger once
     return command;
 }
 
 void CombinationTracker::process_combination_change()
 {
+    using namespace multibind::constants;
+    
     auto now = std::chrono::steady_clock::now();
     
     // Only process if we have buttons pressed
-    if (currently_pressed_.empty()) {
+    if (_currently_pressed.empty()) {
         return;
     }
     
     // Check if current combination matches any binding
-    for (const auto& binding : bindings_) {
-        if (check_combination_match(currently_pressed_, binding.button_combination)) {
+    for (const auto& binding : _bindings) {
+        if (check_combination_match(_currently_pressed, binding.button_combination)) {
             // Found a match - but wait a bit to see if more buttons are coming
-            last_combination_time_ = now;
+            _last_combination_time = now;
             
             // If this is an exact match and we've waited long enough, trigger it
-            if (currently_pressed_ == binding.button_combination) {
+            if (_currently_pressed == binding.button_combination) {
                 // Small delay to prevent accidental double-triggering
-                static auto last_trigger = std::chrono::steady_clock::time_point{};
-                if (now - last_trigger > std::chrono::milliseconds(200)) {
-                    triggered_command_ = binding.target_command;
-                    last_trigger = now;
+                if (now - _last_trigger_time > std::chrono::milliseconds(TRIGGER_DEBOUNCE_MS)) {
+                    _triggered_command = binding.target_command;
+                    _last_trigger_time = now;
                     
-                    char log_msg[256];
-                    snprintf(log_msg, sizeof(log_msg), "Multibind: Combination matched, triggering: %s\n", 
-                            binding.target_command.c_str());
-                    XPLMDebugString(log_msg);
+                    std::string log_msg = "Multibind: Combination matched, triggering: " + binding.target_command + "\n";
+                    XPLMDebugString(log_msg.c_str());
                 }
             }
             return;

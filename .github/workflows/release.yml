@@ -1,0 +1,188 @@
+name: Release Multibind Plugin
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to release (e.g., v1.0.0)'
+        required: true
+
+jobs:
+  build-all:
+    strategy:
+      matrix:
+        include:
+          - name: Windows
+            os: windows-latest
+            cmake_generator: "Visual Studio 17 2022"
+            cmake_arch: "-A x64"
+            output_dir: win_x64
+            artifact_name: multibind-windows
+            
+          - name: macOS
+            os: macos-latest
+            cmake_generator: "Xcode"
+            cmake_arch: ""
+            output_dir: mac_x64
+            artifact_name: multibind-macos
+            
+          - name: Linux
+            os: ubuntu-latest
+            cmake_generator: "Unix Makefiles"
+            cmake_arch: ""
+            output_dir: lin_x64
+            artifact_name: multibind-linux
+
+    name: Build ${{ matrix.name }} Release
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup CMake
+      uses: jwlawson/actions-setup-cmake@v1
+      with:
+        cmake-version: '3.16'
+        
+    - name: Cache X-Plane SDK
+      id: cache-sdk
+      uses: actions/cache@v3
+      with:
+        path: SDK
+        key: xplane-sdk-4.1.1-${{ runner.os }}
+        
+    - name: Download X-Plane SDK
+      if: steps.cache-sdk.outputs.cache-hit != 'true'
+      run: |
+        curl -L -o XPSDK411.zip https://developer.x-plane.com/wp-content/plugins/code-sample-generation/sdk_zip_files/XPSDK411.zip
+        unzip -q XPSDK411.zip
+      shell: bash
+      
+    - name: Configure CMake (Windows)
+      if: matrix.name == 'Windows'
+      run: |
+        mkdir build
+        cd build
+        cmake .. -G "${{ matrix.cmake_generator }}" ${{ matrix.cmake_arch }} -DCMAKE_BUILD_TYPE=Release
+        
+    - name: Configure CMake (Unix)
+      if: matrix.name != 'Windows'
+      run: |
+        mkdir build
+        cd build
+        cmake .. -G "${{ matrix.cmake_generator }}" -DCMAKE_BUILD_TYPE=Release
+        
+    - name: Build plugin
+      run: |
+        cd build
+        cmake --build . --config Release --parallel
+        
+    - name: Package release (Windows)
+      if: matrix.name == 'Windows'
+      run: |
+        mkdir -p release-package/Multibind/${{ matrix.output_dir }}
+        copy build\Release\multibind.xpl release-package\Multibind\${{ matrix.output_dir }}\multibind.xpl 2>nul || copy build\${{ matrix.output_dir }}\multibind.xpl release-package\Multibind\${{ matrix.output_dir }}\multibind.xpl
+        copy README.md release-package\Multibind\README.md
+        copy DECISION_LOG.md release-package\Multibind\DECISION_LOG.md
+        cd release-package
+        7z a -tzip ../multibind-${{ matrix.artifact_name }}.zip Multibind/
+      shell: cmd
+      
+    - name: Package release (Unix)
+      if: matrix.name != 'Windows'
+      run: |
+        mkdir -p release-package/Multibind/${{ matrix.output_dir }}
+        find build -name "multibind.xpl" -exec cp {} release-package/Multibind/${{ matrix.output_dir }}/multibind.xpl \;
+        cp README.md release-package/Multibind/README.md
+        cp DECISION_LOG.md release-package/Multibind/DECISION_LOG.md
+        cd release-package
+        zip -r ../multibind-${{ matrix.artifact_name }}.zip Multibind/
+        
+    - name: Upload release artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: release-${{ matrix.artifact_name }}
+        path: multibind-${{ matrix.artifact_name }}.zip
+        retention-days: 90
+
+  create-release:
+    needs: build-all
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Get tag name
+      id: tag
+      run: |
+        if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          echo "tag_name=${{ github.event.inputs.tag }}" >> $GITHUB_OUTPUT
+        else
+          echo "tag_name=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+        fi
+        
+    - name: Download all artifacts
+      uses: actions/download-artifact@v3
+      with:
+        path: artifacts/
+        
+    - name: Display downloaded artifacts
+      run: |
+        find artifacts/ -type f -name "*.zip" || echo "No zip files found"
+        
+    - name: Create release notes
+      run: |
+        cat > release_notes.md << 'EOF'
+        # Multibind Plugin ${{ steps.tag.outputs.tag_name }}
+        
+        Multi-button joystick command binding plugin for X-Plane 12.
+        
+        ## Installation
+        
+        1. Download the appropriate package for your platform:
+           - **Windows**: `multibind-windows.zip`
+           - **macOS**: `multibind-macos.zip` 
+           - **Linux**: `multibind-linux.zip`
+        
+        2. Extract the zip file
+        
+        3. Copy the `Multibind` folder to your X-Plane plugins directory:
+           - **Windows**: `X-Plane 12/Resources/plugins/`
+           - **macOS**: `X-Plane 12/Resources/plugins/`
+           - **Linux**: `X-Plane 12/Resources/plugins/`
+        
+        ## What's New
+        
+        See DECISION_LOG.md for detailed changes and architecture decisions.
+        
+        ## Requirements
+        
+        - X-Plane 12.1.0 or newer
+        - 64-bit operating system
+        
+        ## Support
+        
+        For issues and questions, please check the README.md included in the package.
+        EOF
+        
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ steps.tag.outputs.tag_name }}
+        name: Multibind ${{ steps.tag.outputs.tag_name }}
+        body_path: release_notes.md
+        draft: false
+        prerelease: false
+        files: |
+          artifacts/release-multibind-windows/multibind-multibind-windows.zip
+          artifacts/release-multibind-macos/multibind-multibind-macos.zip
+          artifacts/release-multibind-linux/multibind-multibind-linux.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

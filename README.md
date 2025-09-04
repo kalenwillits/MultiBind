@@ -1,5 +1,10 @@
 # Multibind - XPlane-12 Multi-Button Command Plugin
 
+[![Build Status](https://github.com/yourusername/multibind/workflows/Build%20Multibind%20Plugin/badge.svg)](https://github.com/yourusername/multibind/actions)
+[![Release](https://img.shields.io/github/v/release/yourusername/multibind)](https://github.com/yourusername/multibind/releases)
+[![License](https://img.shields.io/github/license/yourusername/multibind)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-blue)](https://github.com/yourusername/multibind/releases)
+
 An X-Plane 12 plugin that enables multi-button joystick command binding. Create complex button combinations on your joystick/HOTAS and map them to any X-Plane command.
 
 ## Features
@@ -17,13 +22,51 @@ An X-Plane 12 plugin that enables multi-button joystick command binding. Create 
 3. **Combination Phase**: Define combinations in the plugin UI (e.g., "buttons 5+10+15 = start engine 1")
 4. **Execution Phase**: When you press the button combination, the plugin triggers the target X-Plane command
 
-## Installation
+## 🚀 Quick Start
+
+**Want to build immediately?** See [QUICKSTART.md](QUICKSTART.md) for the 2-step build process!
+
+## Download
+
+### Pre-built Releases
+Download the latest pre-built plugin from the [Releases page](https://github.com/yourusername/multibind/releases):
+
+- **Windows**: `multibind-windows.zip` 
+- **macOS**: `multibind-macos.zip` (Universal binary: Intel + Apple Silicon)
+- **Linux**: `multibind-linux.zip`
+
+### Installation from Release
+1. Download the appropriate package for your platform
+2. Extract the zip file  
+3. Copy the `Multibind` folder to `X-Plane 12/Resources/plugins/`
+4. Restart X-Plane
+
+## Building from Source
+
+### ⚡ Simple Method (Recommended)
+
+**Windows:**
+```cmd
+setup-sdk.bat
+build.bat
+```
+
+**Linux/Mac:**
+```bash
+./setup-sdk.sh
+./build.sh
+```
+
+### 🔧 Manual Method
 
 ### Prerequisites
-- X-Plane 12
-- X-Plane SDK (for compilation)
-- CMake 3.16+
-- C++17 compatible compiler
+- **X-Plane 12**
+- **X-Plane SDK** (for compilation) - See download instructions below
+- **CMake 3.16+**
+- **C++17 compatible compiler**:
+  - **Windows**: Visual Studio 2019/2022 with C++ development tools, or MinGW-w64
+  - **macOS**: Xcode Command Line Tools or full Xcode
+  - **Linux**: GCC 7+ or Clang 5+
 
 ### Download X-Plane SDK
 1. Download the X-Plane SDK from [developer.x-plane.com](https://developer.x-plane.com/sdk/plugin-sdk-downloads/)
@@ -31,12 +74,31 @@ An X-Plane 12 plugin that enables multi-button joystick command binding. Create 
 
 ### Compilation
 
-#### Windows (Visual Studio)
+#### Windows
+
+**Option 1: Visual Studio (Recommended)**
 ```cmd
 mkdir build
 cd build
+# For Visual Studio 2022
+cmake .. -G "Visual Studio 17 2022" -A x64
+cmake --build . --config Release
+
+# For Visual Studio 2019
 cmake .. -G "Visual Studio 16 2019" -A x64
 cmake --build . --config Release
+
+# Or let CMake auto-detect your Visual Studio version
+cmake .. -A x64
+cmake --build . --config Release
+```
+
+**Option 2: MinGW-w64**
+```cmd
+mkdir build
+cd build
+cmake .. -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release
+cmake --build .
 ```
 
 #### Mac
@@ -109,20 +171,59 @@ Example file content:
 
 ## Troubleshooting
 
-### Plugin Not Loading
+### Compilation Issues
+
+#### Windows-Specific Issues
+- **"Visual Studio not found"**: Install Visual Studio 2019/2022 with "Desktop development with C++" workload
+- **CMake not found**: Install CMake via Visual Studio Installer or from [cmake.org](https://cmake.org/download/)
+- **"SDK not found"**: Ensure the X-Plane SDK is extracted to the `SDK/` directory in your project folder
+- **Path issues**: Use forward slashes or double backslashes in paths: `C:/path/to/sdk` or `C:\\path\\to\\sdk`
+- **Antivirus interference**: Add your build directory to antivirus exclusions
+- **"LNK2019 unresolved external symbol"**: Make sure you're building for x64 architecture with `-A x64`
+
+#### General Issues
+- **CMake version error**: Ensure CMake 3.16+ is installed
+- **C++17 compiler error**: Update your compiler to support C++17 standard
+- **SDK path issues**: Set `XPLANE_SDK_PATH` environment variable if SDK is not in project directory
+
+### Plugin Runtime Issues
+
+#### Plugin Not Loading
 - Check X-Plane's **Log.txt** for error messages
 - Ensure the plugin is in the correct directory structure
 - Verify you have the correct architecture (64-bit)
+- **Windows**: Make sure Visual C++ Redistributable is installed
 
-### Commands Not Working
+#### Commands Not Working
 - Ensure you've assigned multibind commands to your joystick buttons in X-Plane's settings
 - Check that the target X-Plane command exists (use X-Plane's command search)
 - Look for debug messages in X-Plane's developer console
 
-### Combinations Not Triggering
+#### Combinations Not Triggering
 - Verify all buttons in the combination are assigned to multibind commands
 - Check the timing - all buttons must be pressed within a short time window
 - Ensure button combinations don't conflict with existing X-Plane assignments
+
+## Continuous Integration
+
+This project uses GitHub Actions for automated building and releasing:
+
+### Build Workflow
+- **Triggers**: Push to main/develop, pull requests, manual dispatch
+- **Platforms**: Windows (VS2022), macOS (Xcode), Linux (GCC)
+- **Artifacts**: Build outputs stored for 30 days
+- **SDK Caching**: X-Plane SDK cached to speed up builds
+
+### Release Workflow  
+- **Triggers**: Git tags (`v*.*.*`) or manual dispatch
+- **Automatic Releases**: Creates GitHub releases with downloadable binaries
+- **Cross-Platform Packages**: Windows, macOS, and Linux builds packaged automatically
+
+To trigger a release:
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
 
 ## Development
 

@@ -17,25 +17,26 @@ public:
     void update();
     std::string get_triggered_command();
     
-    const std::set<int>& get_currently_pressed_buttons() const { return currently_pressed_; }
-    void clear_currently_pressed() { currently_pressed_.clear(); }
+    const std::set<int>& get_currently_pressed_buttons() const { return _currently_pressed; }
+    void clear_currently_pressed() { _currently_pressed.clear(); }
     
-    bool is_recording() const { return recording_; }
-    void start_recording() { recording_ = true; recorded_combination_.clear(); }
-    void stop_recording() { recording_ = false; }
-    const std::set<int>& get_recorded_combination() const { return recorded_combination_; }
+    bool is_recording() const { return _recording; }
+    void start_recording() { _recording = true; _recorded_combination.clear(); }
+    void stop_recording() { _recording = false; }
+    const std::set<int>& get_recorded_combination() const { return _recorded_combination; }
     
 private:
-    std::unordered_map<int, bool> button_states_;  // button_id -> pressed
-    std::set<int> currently_pressed_;              // Currently pressed buttons
-    std::vector<MultibindBinding> bindings_;       // Current bindings to check against
+    std::unordered_map<int, bool> _button_states;  // button_id -> pressed
+    std::set<int> _currently_pressed;              // Currently pressed buttons
+    std::vector<MultibindBinding> _bindings;       // Current bindings to check against
     
-    std::string triggered_command_;                // Command to execute this frame
+    std::string _triggered_command;                // Command to execute this frame
     
-    bool recording_ = false;                       // Whether we're recording a new combination
-    std::set<int> recorded_combination_;           // Buttons recorded during recording mode
+    bool _recording = false;                       // Whether we're recording a new combination
+    std::set<int> _recorded_combination;           // Buttons recorded during recording mode
     
-    std::chrono::steady_clock::time_point last_combination_time_;
+    std::chrono::steady_clock::time_point _last_combination_time;
+    std::chrono::steady_clock::time_point _last_trigger_time{};
     static constexpr auto COMBINATION_TIMEOUT = std::chrono::milliseconds(100);
     
     bool check_combination_match(const std::set<int>& pressed, const std::set<int>& target) const;
