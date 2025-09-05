@@ -1,0 +1,1889 @@
+Log.txt for X-Plane 12.2.1-r1-ab13dbf0 (build 122103 Intel 64-bit, Vulkan 937cabd93e77a60d6e3c7c402b8db273e06056cc)
+Compiled on Jul 10 2025 12:48:07
+X-Plane Started on Fri Sep  5 06:04:27 2025
+
+This log file is generated automatically by Laminar Research applications and contains diagnostics about your graphics hardware, installation, and any error conditions.
+If you need to contact tech support or file a bug, please send us this file. NOTE: this file is rewritten every time you start ANY of your X-System applications.
+
+Windows 10.0 (build 19045/2)
+This is a 64-bit version of Windows.
+CPU type: Intel Core i7-7700T CPU - Speed: 2.8-3.2 GHz - Cores: 8
+          Microcode 0xb400000000
+Physical Memory (total for computer): 17142206464
+Maximum Virtual Memory (for X-Plane only): 140737488224256
+
+X-System folder:'C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/', case sensitive=0
+
+0:00:00.000 I/GFX/VK: Vulkan Layers: VK_LAYER_NV_optimus (1), VK_LAYER_NV_gr2608 (1), VK_LAYER_VALVE_steam_overlay (1), VK_LAYER_VALVE_steam_fossilize (1)
+0:00:00.000 I/GFX/VK: 
+Vulkan Device       : NVIDIA GeForce RTX 3050 (b68b000000)
+Vulkan Version      : 1.4.303
+Vulkan Driver       : 572.70.0
+Vulkan Extensions   : VK_KHR_16bit_storage VK_KHR_8bit_storage VK_KHR_acceleration_structure VK_KHR_bind_memory2 VK_KHR_buffer_device_address VK_KHR_calibrated_timestamps VK_KHR_compute_shader_derivatives VK_KHR_cooperative_matrix VK_KHR_copy_commands2 VK_KHR_create_renderpass2 VK_KHR_dedicated_allocation VK_KHR_deferred_host_operations VK_KHR_depth_stencil_resolve VK_KHR_descriptor_update_template VK_KHR_device_group VK_KHR_draw_indirect_count VK_KHR_driver_properties VK_KHR_dynamic_rendering VK_KHR_dynamic_rendering_local_read VK_KHR_external_fence VK_KHR_external_fence_win32 VK_KHR_external_memory VK_KHR_external_memory_win32 VK_KHR_external_semaphore VK_KHR_external_semaphore_win32 VK_KHR_format_feature_flags2 VK_KHR_fragment_shader_barycentric VK_KHR_fragment_shading_rate VK_KHR_get_memory_requirements2 VK_KHR_global_priority VK_KHR_image_format_list VK_KHR_imageless_framebuffer VK_KHR_index_type_uint8 VK_KHR_line_rasterization VK_KHR_load_store_op_none VK_KHR_maintenance1 VK_KHR_maintenance2 VK_KHR_maintenance3 VK_KHR_maintenance4 VK_KHR_maintenance5 VK_KHR_maintenance6 VK_KHR_maintenance7 VK_KHR_map_memory2 VK_KHR_multiview VK_KHR_pipeline_binary VK_KHR_pipeline_executable_properties VK_KHR_pipeline_library VK_KHR_present_id VK_KHR_present_wait VK_KHR_push_descriptor VK_KHR_ray_query VK_KHR_ray_tracing_maintenance1 VK_KHR_ray_tracing_pipeline VK_KHR_ray_tracing_position_fetch VK_KHR_relaxed_block_layout VK_KHR_sampler_mirror_clamp_to_edge VK_KHR_sampler_ycbcr_conversion VK_KHR_separate_depth_stencil_layouts VK_KHR_shader_atomic_int64 VK_KHR_shader_clock VK_KHR_shader_draw_parameters VK_KHR_shader_expect_assume VK_KHR_shader_float16_int8 VK_KHR_shader_float_controls VK_KHR_shader_float_controls2 VK_KHR_shader_integer_dot_product VK_KHR_shader_maximal_reconvergence VK_KHR_shader_non_semantic_info VK_KHR_shader_quad_control VK_KHR_shader_relaxed_extended_instruction VK_KHR_shader_subgroup_extended_types VK_KHR_shader_subgroup_rotate VK_KHR_shader_subgroup_uniform_control_flow VK_KHR_shader_terminate_invocation VK_KHR_spirv_1_4 VK_KHR_storage_buffer_storage_class VK_KHR_swapchain VK_KHR_swapchain_mutable_format VK_KHR_synchronization2 VK_KHR_timeline_semaphore VK_KHR_uniform_buffer_standard_layout VK_KHR_variable_pointers VK_KHR_vertex_attribute_divisor VK_KHR_video_decode_av1 VK_KHR_video_decode_h264 VK_KHR_video_decode_h265 VK_KHR_video_decode_queue VK_KHR_video_encode_h264 VK_KHR_video_encode_h265 VK_KHR_video_encode_queue VK_KHR_video_maintenance1 VK_KHR_video_queue VK_KHR_vulkan_memory_model VK_KHR_win32_keyed_mutex VK_KHR_workgroup_memory_explicit_layout VK_KHR_zero_initialize_workgroup_memory VK_EXT_4444_formats VK_EXT_attachment_feedback_loop_dynamic_state VK_EXT_attachment_feedback_loop_layout VK_EXT_blend_operation_advanced VK_EXT_border_color_swizzle VK_EXT_buffer_device_address VK_EXT_calibrated_timestamps VK_EXT_color_write_enable VK_EXT_conditional_rendering VK_EXT_conservative_rasterization VK_EXT_custom_border_color VK_EXT_depth_bias_control VK_EXT_depth_clamp_control VK_EXT_depth_clamp_zero_one VK_EXT_depth_clip_control VK_EXT_depth_clip_enable VK_EXT_depth_range_unrestricted VK_EXT_descriptor_buffer VK_EXT_descriptor_indexing VK_EXT_device_fault VK_EXT_device_generated_commands VK_EXT_discard_rectangles VK_EXT_dynamic_rendering_unused_attachments VK_EXT_extended_dynamic_state VK_EXT_extended_dynamic_state2 VK_EXT_extended_dynamic_state3 VK_EXT_external_memory_host VK_EXT_fragment_shader_interlock VK_EXT_full_screen_exclusive VK_EXT_global_priority VK_EXT_global_priority_query VK_EXT_graphics_pipeline_library VK_EXT_hdr_metadata VK_EXT_host_image_copy VK_EXT_host_query_reset VK_EXT_image_2d_view_of_3d VK_EXT_image_robustness VK_EXT_image_sliced_view_of_3d VK_EXT_image_view_min_lod VK_EXT_index_type_uint8 VK_EXT_inline_uniform_block VK_EXT_legacy_vertex_attributes VK_EXT_line_rasterization VK_EXT_load_store_op_none VK_EXT_memory_budget VK_EXT_memory_priority VK_EXT_mesh_shader VK_EXT_multi_draw VK_EXT_mutable_descriptor_type VK_EXT_nested_command_buffer VK_EXT_non_seamless_cube_map VK_EXT_opacity_micromap VK_EXT_pageable_device_local_memory VK_EXT_pci_bus_info VK_EXT_pipeline_creation_cache_control VK_EXT_pipeline_creation_feedback VK_EXT_pipeline_library_group_handles VK_EXT_pipeline_robustness VK_EXT_post_depth_coverage VK_EXT_primitive_topology_list_restart VK_EXT_primitives_generated_query VK_EXT_private_data VK_EXT_provoking_vertex VK_EXT_queue_family_foreign VK_EXT_robustness2 VK_EXT_sample_locations VK_EXT_sampler_filter_minmax VK_EXT_scalar_block_layout VK_EXT_separate_stencil_usage VK_EXT_shader_atomic_float VK_EXT_shader_demote_to_helper_invocation VK_EXT_shader_image_atomic_int64 VK_EXT_shader_module_identifier VK_EXT_shader_object VK_EXT_shader_replicated_composites VK_EXT_shader_subgroup_ballot VK_EXT_shader_subgroup_vote VK_EXT_shader_viewport_index_layer VK_EXT_subgroup_size_control VK_EXT_swapchain_maintenance1 VK_EXT_texel_buffer_alignment VK_EXT_tooling_info VK_EXT_transform_feedback VK_EXT_vertex_attribute_divisor VK_EXT_vertex_input_dynamic_state VK_EXT_ycbcr_2plane_444_formats VK_EXT_ycbcr_image_arrays VK_NV_clip_space_w_scaling VK_NV_cluster_acceleration_structure VK_NV_compute_shader_derivatives VK_NV_cooperative_matrix VK_NV_cooperative_vector VK_NV_copy_memory_indirect VK_NV_corner_sampled_image VK_NV_coverage_reduction_mode VK_NV_cuda_kernel_launch VK_NV_dedicated_allocation VK_NV_dedicated_allocation_image_aliasing VK_NV_descriptor_pool_overallocation VK_NV_device_diagnostic_checkpoints VK_NV_device_diagnostics_config VK_NV_device_generated_commands VK_NV_device_generated_commands_compute VK_NV_external_memory VK_NV_external_memory_win32 VK_NV_fill_rectangle VK_NV_fragment_coverage_to_color VK_NV_fragment_shader_barycentric VK_NV_fragment_shading_rate_enums VK_NV_framebuffer_mixed_samples VK_NV_geometry_shader_passthrough VK_NV_inherited_viewport_scissor VK_NV_linear_color_attachment VK_NV_low_latency VK_NV_low_latency2 VK_NV_memory_decompression VK_NV_mesh_shader VK_NV_optical_flow VK_NV_partitioned_acceleration_structure VK_NV_present_metering VK_NV_raw_access_chains VK_NV_ray_tracing VK_NV_ray_tracing_invocation_reorder VK_NV_ray_tracing_motion_blur VK_NV_representative_fragment_test VK_NV_sample_mask_override_coverage VK_NV_scissor_exclusive VK_NV_shader_atomic_float16_vector VK_NV_shader_image_footprint VK_NV_shader_sm_builtins VK_NV_shader_subgroup_partitioned VK_NV_shading_rate_image VK_NV_viewport_array2 VK_NV_viewport_swizzle VK_NV_win32_keyed_mutex VK_NVX_binary_import VK_NVX_image_view_handle VK_NVX_multiview_per_view_attributes VK_AMD_buffer_marker VK_GOOGLE_user_type 
+Vulkan Instance Extensions: VK_KHR_device_group_creation VK_KHR_external_fence_capabilities VK_KHR_external_memory_capabilities VK_KHR_external_semaphore_capabilities VK_KHR_get_physical_device_properties2 VK_KHR_get_surface_capabilities2 VK_KHR_surface VK_KHR_surface_protected_capabilities VK_KHR_win32_surface VK_EXT_debug_report VK_EXT_debug_utils VK_EXT_surface_maintenance1 VK_EXT_swapchain_colorspace VK_NV_external_memory_capabilities VK_KHR_portability_enumeration VK_LUNARG_direct_driver_loading 
+checkpoints         : 0	aftermath           : 0	descriptor buffers  : 0	
+0:00:00.000 I/GFX: 
+anisotropic_avail   : 1	coarse_timer_avail  : 1	precise_timer_avail : 1	tess_avail          : 0	geom_avail          : 0	
+viewport_arr        : 1	layer_arr           : 1	native_reverse_z    : 1	has_reverse_z       : 1	
+persistent map      : 1	msaa shader write   : 1	shader float16      : 0	shader int16        : 1	
+rebar_avail         : 0	alpha_to_one_avail  : 1	msaa_storage_image_avail: 1	
+sparse bindings     : 0	sparse page size    : 0	
+max iso filtering   : 16
+max samples         : 3
+max texture size    : 32768 (hardware limit)
+max tex units       : 1048576
+
+This video card is bucketed as: Vulkan with async compute
+0:00:00.000 I/GFX/VK: Device Queues:
+Queue 0: Generic, Presentation, (VK_QUEUE_GRAPHICS_BIT|VK_QUEUE_COMPUTE_BIT|VK_QUEUE_TRANSFER_BIT|VK_QUEUE_SPARSE_BINDING_BIT)
+Queue 1: Transfer, (VK_QUEUE_TRANSFER_BIT|VK_QUEUE_SPARSE_BINDING_BIT)
+Queue 2: Async Compute, (VK_QUEUE_COMPUTE_BIT|VK_QUEUE_TRANSFER_BIT|VK_QUEUE_SPARSE_BINDING_BIT)
+Queue 3: (VK_QUEUE_TRANSFER_BIT|VK_QUEUE_SPARSE_BINDING_BIT|VK_QUEUE_VIDEO_DECODE_BIT_KHR)
+Queue 4: (VK_QUEUE_TRANSFER_BIT|VK_QUEUE_SPARSE_BINDING_BIT|VK_QUEUE_VIDEO_ENCODE_BIT_KHR)
+Queue 5: (VK_QUEUE_TRANSFER_BIT|VK_QUEUE_SPARSE_BINDING_BIT|VK_QUEUE_OPTICAL_FLOW_BIT_NV)
+0:00:00.000 I/GFX/VK: Heap info (3 heaps)
+	Heap 0 - Flags: VK_MEMORY_HEAP_DEVICE_LOCAL_BIT, size: 5.86 gb
+	Heap 1 - Flags: VkMemoryHeapFlags(0), size: 7.98 gb
+	Heap 2 - Flags: VK_MEMORY_HEAP_DEVICE_LOCAL_BIT, size: 214.00 mb
+Memory type info (6 types)
+	Heap: 1, flags: VkMemoryPropertyFlags(0)
+	Heap: 0, flags: VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT
+	Heap: 0, flags: VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT
+	Heap: 1, flags: VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT|VK_MEMORY_PROPERTY_HOST_COHERENT_BIT
+	Heap: 1, flags: VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT|VK_MEMORY_PROPERTY_HOST_COHERENT_BIT|VK_MEMORY_PROPERTY_HOST_CACHED_BIT
+	Heap: 2, flags: VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT|VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT|VK_MEMORY_PROPERTY_HOST_COHERENT_BIT
+0:00:00.000 I/GFX/VK: 
+Discovered Vulkan devices, in order of preference:
+	 (0) NVIDIA GeForce RTX 3050
+		Vulkan: 1.4.303, driver: 572.70.0
+		LUID: b68b000000
+		Bridge distance: 0
+		Zink profile: VP_ZINK_gl46_baseline
+		This device is usable
+
+0:00:00.000 I/GFX/Bridge: OpenGL bridge device:
+	 NVIDIA GeForce RTX 3050/PCIe/SSE2
+		OpenGL: 4.6.0 NVIDIA 572.70
+		LUID: b68b000000
+
+0:00:00.000 I/GFX: Diagnostics         : memory	
+Device memory       : 5709955072
+Host memory         : 7874112615
+
+
+0:00:00.000 I/GFX: Loaded mapping Resources/shaders/bin/depth_resolve_mapping.xsv with hash: 84cabb1da18ce8af418a66ad554e1bf8
+0:00:00.000 I/GFX: Loaded archive Resources/shaders/bin/spv/depth_resolve.xsa with hash: 8835a0884947aa94186288cb80f9777e
+0:00:00.000 I/GFX/bridge: 
+OpenGL bridge device:
+OpenGL Vendor       : NVIDIA Corporation
+OpenGL Render       : NVIDIA GeForce RTX 3050/PCIe/SSE2 (b68b000000)
+OpenGL Version      : 4.6.0 NVIDIA 572.70 (460/0)
+OpenGL Extensions   : GL_AMD_multi_draw_indirect GL_AMD_seamless_cubemap_per_texture GL_AMD_vertex_shader_viewport_index GL_AMD_vertex_shader_layer GL_ARB_arrays_of_arrays GL_ARB_base_instance GL_ARB_bindless_texture GL_ARB_blend_func_extended GL_ARB_buffer_storage GL_ARB_clear_buffer_object GL_ARB_clear_texture GL_ARB_clip_control GL_ARB_color_buffer_float GL_ARB_compatibility GL_ARB_compressed_texture_pixel_storage GL_ARB_conservative_depth GL_ARB_compute_shader GL_ARB_compute_variable_group_size GL_ARB_conditional_render_inverted GL_ARB_copy_buffer GL_ARB_copy_image GL_ARB_cull_distance GL_ARB_debug_output GL_ARB_depth_buffer_float GL_ARB_depth_clamp GL_ARB_depth_texture GL_ARB_derivative_control GL_ARB_direct_state_access GL_ARB_draw_buffers GL_ARB_draw_buffers_blend GL_ARB_draw_indirect GL_ARB_draw_elements_base_vertex GL_ARB_draw_instanced GL_ARB_enhanced_layouts GL_ARB_ES2_compatibility GL_ARB_ES3_compatibility GL_ARB_ES3_1_compatibility GL_ARB_ES3_2_compatibility GL_ARB_explicit_attrib_location GL_ARB_explicit_uniform_location GL_ARB_fragment_coord_conventions GL_ARB_fragment_layer_viewport GL_ARB_fragment_program GL_ARB_fragment_program_shadow GL_ARB_fragment_shader GL_ARB_fragment_shader_interlock GL_ARB_framebuffer_no_attachments GL_ARB_framebuffer_object GL_ARB_framebuffer_sRGB GL_ARB_geometry_shader4 GL_ARB_get_program_binary GL_ARB_get_texture_sub_image GL_ARB_gl_spirv GL_ARB_gpu_shader5 GL_ARB_gpu_shader_fp64 GL_ARB_gpu_shader_int64 GL_ARB_half_float_pixel GL_ARB_half_float_vertex GL_ARB_imaging GL_ARB_indirect_parameters GL_ARB_instanced_arrays GL_ARB_internalformat_query GL_ARB_internalformat_query2 GL_ARB_invalidate_subdata GL_ARB_map_buffer_alignment GL_ARB_map_buffer_range GL_ARB_multi_bind GL_ARB_multi_draw_indirect GL_ARB_multisample GL_ARB_multitexture GL_ARB_occlusion_query GL_ARB_occlusion_query2 GL_ARB_parallel_shader_compile GL_ARB_pipeline_statistics_query GL_ARB_pixel_buffer_object GL_ARB_point_parameters GL_ARB_point_sprite GL_ARB_polygon_offset_clamp GL_ARB_post_depth_coverage GL_ARB_program_interface_query GL_ARB_provoking_vertex GL_ARB_query_buffer_object GL_ARB_robust_buffer_access_behavior GL_ARB_robustness GL_ARB_sample_locations GL_ARB_sample_shading GL_ARB_sampler_objects GL_ARB_seamless_cube_map GL_ARB_seamless_cubemap_per_texture GL_ARB_separate_shader_objects GL_ARB_shader_atomic_counter_ops GL_ARB_shader_atomic_counters GL_ARB_shader_ballot GL_ARB_shader_bit_encoding GL_ARB_shader_clock GL_ARB_shader_draw_parameters GL_ARB_shader_group_vote GL_ARB_shader_image_load_store GL_ARB_shader_image_size GL_ARB_shader_objects GL_ARB_shader_precision GL_ARB_shader_storage_buffer_object GL_ARB_shader_subroutine GL_ARB_shader_texture_image_samples GL_ARB_shader_texture_lod GL_ARB_shading_language_100 GL_ARB_shader_viewport_layer_array GL_ARB_shading_language_420pack GL_ARB_shading_language_include GL_ARB_shading_language_packing GL_ARB_shadow GL_ARB_sparse_buffer GL_ARB_sparse_texture GL_ARB_sparse_texture2 GL_ARB_sparse_texture_clamp GL_ARB_spirv_extensions GL_ARB_stencil_texturing GL_ARB_sync GL_ARB_tessellation_shader GL_ARB_texture_barrier GL_ARB_texture_border_clamp GL_ARB_texture_buffer_object GL_ARB_texture_buffer_object_rgb32 GL_ARB_texture_buffer_range GL_ARB_texture_compression GL_ARB_texture_compression_bptc GL_ARB_texture_compression_rgtc GL_ARB_texture_cube_map GL_ARB_texture_cube_map_array GL_ARB_texture_env_add GL_ARB_texture_env_combine GL_ARB_texture_env_crossbar GL_ARB_texture_env_dot3 GL_ARB_texture_filter_anisotropic GL_ARB_texture_filter_minmax GL_ARB_texture_float GL_ARB_texture_gather GL_ARB_texture_mirror_clamp_to_edge GL_ARB_texture_mirrored_repeat GL_ARB_texture_multisample GL_ARB_texture_non_power_of_two GL_ARB_texture_query_levels GL_ARB_texture_query_lod GL_ARB_texture_rectangle GL_ARB_texture_rg GL_ARB_texture_rgb10_a2ui GL_ARB_texture_stencil8 GL_ARB_texture_storage GL_ARB_texture_storage_multisample GL_ARB_texture_swizzle GL_ARB_texture_view GL_ARB_timer_query GL_ARB_transform_feedback2 GL_ARB_transform_feedback3 GL_ARB_transform_feedback_instanced GL_ARB_transform_feedback_overflow_query GL_ARB_transpose_matrix GL_ARB_uniform_buffer_object GL_ARB_vertex_array_bgra GL_ARB_vertex_array_object GL_ARB_vertex_attrib_64bit GL_ARB_vertex_attrib_binding GL_ARB_vertex_buffer_object GL_ARB_vertex_program GL_ARB_vertex_shader GL_ARB_vertex_type_10f_11f_11f_rev GL_ARB_vertex_type_2_10_10_10_rev GL_ARB_viewport_array GL_ARB_window_pos GL_ATI_draw_buffers GL_ATI_texture_float GL_ATI_texture_mirror_once GL_S3_s3tc GL_EXT_texture_env_add GL_EXT_abgr GL_EXT_bgra GL_EXT_bindable_uniform GL_EXT_blend_color GL_EXT_blend_equation_separate GL_EXT_blend_func_separate GL_EXT_blend_minmax GL_EXT_blend_subtract GL_EXT_compiled_vertex_array GL_EXT_Cg_shader GL_EXT_depth_bounds_test GL_EXT_direct_state_access GL_EXT_draw_buffers2 GL_EXT_draw_instanced GL_EXT_draw_range_elements GL_EXT_fog_coord GL_EXT_framebuffer_blit GL_EXT_framebuffer_multisample GL_EXTX_framebuffer_mixed_formats GL_EXT_framebuffer_multisample_blit_scaled GL_EXT_framebuffer_object GL_EXT_framebuffer_sRGB GL_EXT_geometry_shader4 GL_EXT_gpu_program_parameters GL_EXT_gpu_shader4 GL_EXT_multi_draw_arrays GL_EXT_multiview_texture_multisample GL_EXT_multiview_timer_query GL_EXT_packed_depth_stencil GL_EXT_packed_float GL_EXT_packed_pixels GL_EXT_pixel_buffer_object GL_EXT_point_parameters GL_EXT_polygon_offset_clamp GL_EXT_post_depth_coverage GL_EXT_provoking_vertex GL_EXT_raster_multisample GL_EXT_rescale_normal GL_EXT_secondary_color GL_EXT_separate_shader_objects GL_EXT_separate_specular_color GL_EXT_shader_image_load_formatted GL_EXT_shader_image_load_store GL_EXT_shader_integer_mix GL_EXT_shadow_funcs GL_EXT_sparse_texture2 GL_EXT_stencil_two_side GL_EXT_stencil_wrap GL_EXT_texture3D GL_EXT_texture_array GL_EXT_texture_buffer_object GL_EXT_texture_compression_dxt1 GL_EXT_texture_compression_latc GL_EXT_texture_compression_rgtc GL_EXT_texture_compression_s3tc GL_EXT_texture_cube_map GL_EXT_texture_edge_clamp GL_EXT_texture_env_combine GL_EXT_texture_env_dot3 GL_EXT_texture_filter_anisotropic GL_EXT_texture_filter_minmax GL_EXT_texture_integer GL_EXT_texture_lod GL_EXT_texture_lod_bias GL_EXT_texture_mirror_clamp GL_EXT_texture_object GL_EXT_texture_shadow_lod GL_EXT_texture_shared_exponent GL_EXT_texture_sRGB GL_EXT_texture_sRGB_R8 GL_EXT_texture_sRGB_decode GL_EXT_texture_storage GL_EXT_texture_swizzle GL_EXT_timer_query GL_EXT_transform_feedback2 GL_EXT_vertex_array GL_EXT_vertex_array_bgra GL_EXT_vertex_attrib_64bit GL_EXT_window_rectangles GL_EXT_import_sync_object GL_IBM_rasterpos_clip GL_IBM_texture_mirrored_repeat GL_KHR_context_flush_control GL_KHR_debug GL_EXT_memory_object GL_EXT_memory_object_win32 GL_NV_memory_object_sparse GL_EXT_win32_keyed_mutex GL_KHR_parallel_shader_compile GL_KHR_no_error GL_KHR_robust_buffer_access_behavior GL_KHR_robustness GL_EXT_semaphore GL_EXT_semaphore_win32 GL_NV_timeline_semaphore GL_KHR_shader_subgroup GL_KTX_buffer_region GL_NV_alpha_to_coverage_dither_control GL_NV_bindless_multi_draw_indirect GL_NV_bindless_multi_draw_indirect_count GL_NV_bindless_texture GL_NV_blend_equation_advanced GL_NV_blend_equation_advanced_coherent GL_NVX_blend_equation_advanced_multi_draw_buffers GL_NV_blend_minmax_factor GL_NV_blend_square GL_NV_clip_space_w_scaling GL_NV_command_list GL_NV_compute_program5 GL_NV_compute_shader_derivatives GL_NV_conditional_render GL_NV_conservative_raster GL_NV_conservative_raster_dilate GL_NV_conservative_raster_pre_snap GL_NV_conservative_raster_pre_snap_triangles GL_NV_conservative_raster_underestimation GL_NV_copy_depth_to_color GL_NV_copy_image GL_NV_depth_buffer_float GL_NV_depth_clamp GL_NV_draw_texture GL_NV_draw_vulkan_image GL_NV_ES1_1_compatibility GL_NV_ES3_1_compatibility GL_NV_explicit_multisample GL_NV_feature_query GL_NV_fence GL_NV_fill_rectangle GL_NV_float_buffer GL_NV_fog_distance GL_NV_fragment_coverage_to_color GL_NV_fragment_program GL_NV_fragment_p
+CPU count        : 8
+0:00:00.000 I/GFX/VK: Surface formats for surface:
+0:00:00.000 I/GFX/VK: 	VK_FORMAT_B8G8R8A8_UNORM
+0:00:00.000 I/GFX/VK: 	VK_FORMAT_B8G8R8A8_SRGB
+0:00:00.000 I/GFX/VK: 	VK_FORMAT_R8G8B8A8_UNORM
+0:00:00.000 I/GFX/VK: 	VK_FORMAT_R8G8B8A8_SRGB
+0:00:00.000 I/GFX/VK: 	VK_FORMAT_A2B10G10R10_UNORM_PACK32
+0:00:00.000 I/GFX/VK: Picked VK_FORMAT_B8G8R8A8_SRGB as the common window surface format
+0:00:00.000 I/GFX/VK: Surface 000001AEF1B4D130:
+0:00:00.000 I/GFX/VK: 	minImageCount 2:
+0:00:00.000 I/GFX/VK: 	maxImageCount 8:
+0:00:00.000 I/GFX/VK: 	supportedUsageFlags 9f:
+0:00:00.000 I/GFX/VK: 	supportedTransforms: VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR
+0:00:00.000 I/GFX/VK: 	currentTransform: VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR
+0:00:00.000 I/GFX/VK: 	supported modes:
+0:00:00.000 I/GFX/VK: 		VK_PRESENT_MODE_MAILBOX_KHR:
+0:00:00.000 I/GFX/VK: 		VK_PRESENT_MODE_IMMEDIATE_KHR:
+0:00:00.000 I/GFX/VK: 		VK_PRESENT_MODE_FIFO_KHR:
+0:00:00.000 I/GFX/VK: 		VK_PRESENT_MODE_FIFO_RELAXED_KHR:
+0:00:00.000 I/GFX/VK: Disabling fullscreen exclusive mode for swapchain 000001AEF3BD9230
+0:00:00.000 I/GFX/VK: Created swapchain for 000001AEF3BD9230 with size { 1920x1080x3 }. Mode: VK_PRESENT_MODE_MAILBOX_KHR
+0:00:00.000 I/wmgr: Monitor 0: { 0, 0, 1920, 1080 }
+0:00:00.000 I/wmgr: Monitor 1: { 0, 1080, 1920, 1080 }
+0:00:00.000 I/wmgr: Re-building fbos for window 000001AEF1ADC7B0 using pool 6
+0:00:00.000 I/GFX: Loaded mapping Resources/shaders/bin/legacy_flat_mapping.xsv with hash: eb29fdd6554f16d8e4efd4541dea72a
+0:00:00.000 I/GFX: Loaded archive Resources/shaders/bin/spv/legacy_flat.xsa with hash: 9a55dc777a7b233cc71448333171dc
+0:00:00.000 I/GFX: Loaded mapping Resources/shaders/bin/legacy_depth_mapping.xsv with hash: 255fba8eb20b2dcc6a96ccb3c1d8dcf
+0:00:00.000 I/GFX: Loaded archive Resources/shaders/bin/spv/legacy_depth.xsa with hash: 40288d7c5f3d86f13de689cc30c1cb15
+0:00:00.000 I/GFX: Loaded mapping Resources/shaders/bin/blit_mapping.xsv with hash: b2bb326ca6a6f443d0c3e81482296232
+0:00:00.000 I/GFX: Loaded archive Resources/shaders/bin/spv/blit.xsa with hash: 9deae64ac4a9f16c31ab7407bfe8931
+0:00:00.000 I/GFX: Loaded mapping Resources/shaders/bin/font_mapping.xsv with hash: ee62dd7d11e3b973687d6ee045a9215d
+0:00:00.000 I/GFX: Loaded archive Resources/shaders/bin/spv/font.xsa with hash: e56222389c61ee1ea7697ae6f8e14e7
+0:00:00.000 I/GFX: Loaded mapping Resources/shaders/bin/minify_mapping.xsv with hash: c6366ed1bdef73ec16ea1acb790
+0:00:00.000 I/GFX: Loaded archive Resources/shaders/bin/spv/minify.xsa with hash: 486d38778213e9ea2b3858eb1a2b5b2e
+0:00:00.000 I/GFX: Loaded mapping Resources/shaders/bin/gstack_mapping.xsv with hash: df3947beb02bf3aac2288aa9345eb6
+0:00:00.000 I/GFX: Loaded archive Resources/shaders/bin/spv/gstack.xsa with hash: b3a66ae656122cb8e3b845997d65c7c9
+0:00:00.000 I/GFX: Loaded mapping Resources/shaders/bin/in_place_blur_mapping.xsv with hash: af9dc15925f6045a4fe7877f4215b49
+0:00:00.000 I/GFX: Loaded archive Resources/shaders/bin/spv/in_place_blur.xsa with hash: 36989187a59fbfe99742be882b695896
+0:00:00.000 I/GFX: Loaded mapping Resources/shaders/bin/single_pass_blur_mapping.xsv with hash: fbebedda6e8e322f3fc73a42b6f7ef6
+0:00:00.000 I/GFX: Loaded archive Resources/shaders/bin/spv/single_pass_blur.xsa with hash: 8f2ceb93864029da4148e682cc627528
+0:00:00.000 I/GFX: Loaded mapping Resources/shaders/bin/background_blur_mapping.xsv with hash: 544873302636339dd2e93f95e06c70a9
+0:00:00.000 I/GFX: Loaded archive Resources/shaders/bin/spv/background_blur.xsa with hash: 3597d3a75a7bf4c0341cbbe13c442150
+0:00:00.000 I/GFX: Loaded mapping Resources/shaders/bin/resolve_mapping.xsv with hash: 8465c498728fa73e8ad5967aca8926c
+0:00:00.000 I/GFX: Loaded archive Resources/shaders/bin/spv/resolve.xsa with hash: 44e89b5676b3d86b3ca5e0889838c876
+0:00:00.000 I/GFX: Loaded mapping Resources/shaders/bin/fake_terrain_mapping.xsv with hash: 7fa9847ba7239bf35d1661e9988c8dd8
+0:00:00.000 I/GFX: Loaded archive Resources/shaders/bin/spv/fake_terrain.xsa with hash: 611148d671f052e261f87c787f28
+0:00:00.000 I/GFX: Loaded mapping Resources/shaders/bin/line3d_mapping.xsv with hash: b882a9961bf22f46cd099b06e3ef084
+0:00:00.000 I/GFX: Loaded archive Resources/shaders/bin/spv/line3d.xsa with hash: 2c50e5d7abd8576cd56f604fd2ddc
+0:00:00.000 I/GFX: Loaded mapping Resources/shaders/bin/terrain_mapping.xsv with hash: 1372f551f7f85268161e43c5b9358f2
+0:00:00.000 I/GFX: Loaded archive Resources/shaders/bin/spv/terrain.xsa with hash: 10607ce1f5f4e780b0b54870e36bfe1
+0:00:00.000 I/FMOD: Initial Sample rate: 48000 speaker mode: 3 (2 speakers)
+0:00:00.000 I/FMOD: Using driver 0: Speakers (AB13X USB Audio)
+Fetching plugins for C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Resources/plugins
+
+Loaded: C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Resources/plugins/PluginAdmin/64/win.xpl (xpsdk.examples.pluginadmin).
+
+C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Resources/plugins/124thATC64/win_x64/124thATC64.xpl : Error Code = 126 : The specified module could not be found.
+C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Resources/plugins/124thATC64/64/win.xpl : Error Code = 126 : The specified module could not be found.
+Loaded: C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Resources/plugins/Air Plugin/64/win.xpl (com.siminnovations.AirPlugin).
+
+Loaded: C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Resources/plugins/DataRefEditor/win_x64/DataRefEditor.xpl (xplanesdk.examples.DataRefEditor).
+
+FlyWithLua: Your system path is C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/
+FlyWithLua: System Dir: C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/
+FlyWithLua: Plugin Dir: C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Resources/plugins/FlyWithLua
+FlyWithLua: Plugin Scripts Dir: C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Resources/plugins/FlyWithLua/Scripts
+FlyWithLua: Plugin Internals Dir: C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Resources/plugins/FlyWithLua/Internals/
+FlyWithLua: Plugin Modules Dir: C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Resources/plugins/FlyWithLua/Modules/
+FlyWithLua: Plugin Scripts Quarantine Dir: C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Resources/plugins/FlyWithLua/Scripts (Quarantine)/
+FlyWithLua: Plugin Version: 2.8.12 build Mar 31 2024 09:02:02
+Loaded: C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Resources/plugins/FlyWithLua/win_x64/FlyWithLua.xpl (CarstenLynker.FlyWithLua.NG+).
+
+0:00:00.000 G64:  core: Gizmo64 Script Engine v21.03.16.0101 Windows
+0:00:00.000 G64:  core: 	built: Mar 16 2021, 01:03:58
+0:00:00.000 G64:  core: X-P Folder:[C:/Program Files (x86)/Steam/steamapps/common/X-Plane 12/]
+0:00:00.000 G64:  core: Sim Langauge set to: us
+Loaded: C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Resources/plugins/Gizmo64.plugin/win_x64/Gizmo64.plugin.xpl (gizmo.x-plugins.com).
+
+Loaded: C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Resources/plugins/HeadShake/64/win.xpl (com.simcoders.headshake).
+
+0:00:00.000 LiveTraffic: LiveTraffic 4.2.0 (22-Feb-2025) starting up...
+0:00:00.000    LT/XPMP2 INFO  XPMPMultiplayer.cpp:517/XPMPSetDefaultPlaneICAO: Default ICAO aircraft type now is A320
+0:00:00.000    LT/XPMP2 INFO  XPMPMultiplayer.cpp:523/XPMPSetDefaultPlaneICAO: Ground vehicle ICAO type now is ZZZC
+0:00:00.000    LT/XPMP2 INFO  XPMPMultiplayer.cpp:163/XPMPMultiplayerInit: XPMP2 3.4.0 with FMOD sound support initializing under X-Plane version 12210/Vulkan and XPLM version 412
+0:00:00.000    LT/XPMP2 WARN  CSLModels.cpp:400/AddMatchCriteria: Line 19: Different aircraft type (A320 instead of A321) for model 'BB_German_Air_Express_VA A321_Hannover' ignored, rest  processed
+0:00:00.000    LT/XPMP2 WARN  CSLModels.cpp:400/AddMatchCriteria: Line 25: Different aircraft type (A320 instead of A321) for model 'BB_German_Air_Express_VA A321_Karlsruhe' ignored, rest  processed
+0:00:00.000    LT/XPMP2 WARN  CSLModels.cpp:400/AddMatchCriteria: Line 37: Different aircraft type (B350 instead of BE20) for model 'BB_WAT_VA BE20_WAT' ignored, rest  processed
+0:00:00.000    LT/XPMP2 WARN  CSLModels.cpp:400/AddMatchCriteria: Line 68: Different aircraft type (B748 instead of B744) for model 'BB_WAT_VA B744_WAT' ignored, rest  processed
+0:00:00.000    LT/XPMP2 WARN  CSLModels.cpp:400/AddMatchCriteria: Line 79: Different aircraft type (B753 instead of B752) for model 'BB_WAT_VA B752_WAT' ignored, rest  processed
+0:00:00.000    LT/XPMP2 WARN  CSLModels.cpp:400/AddMatchCriteria: Line 85: Different aircraft type (B763 instead of B762) for model 'BB_WAT_VA B763_WAT' ignored, rest  processed
+0:00:00.000    LT/XPMP2 WARN  CSLModels.cpp:400/AddMatchCriteria: Line 141: Different aircraft type (E195 instead of E190) for model 'BB_WAT_VA E195_WAT' ignored, rest  processed
+0:00:00.000    LT/XPMP2 WARN  CSLModels.cpp:400/AddMatchCriteria: Line 157: Different aircraft type (MD88 instead of MD82) for model 'BB_WAT_VA MD83_WAT' ignored, rest  processed
+Loaded: C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Resources/plugins/LiveTraffic/win_x64/LiveTraffic.xpl (TwinFan.plugin.LiveTraffic).
+
+[MISSIONGENERATOR INFO]: Starting X-Plane SASL plugin v3.16.4+06caa36
+[MISSIONGENERATOR INFO]: MissionGenerator | Global | Start Full
+[MISSIONGENERATOR INFO]: Loading cursors...
+Loaded: C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Resources/plugins/MissionGenerator/64/win.xpl (1-sim MissionGenerator).
+
+Multibind: ERROR - Could not find aircraft filename dataref
+Failed: C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Resources/plugins/Multibind/win.xpl. (The plugin refused to start by returning 0 from XPluginStart.)
+
+Loaded: C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Resources/plugins/X-Camera/win_x64/X-Camera.xpl (SRS.X-Camera).
+
+[RealityXP.GTN][INFO ] 
+[RealityXP.GTN][-    ] # win.xpl version 2.6.2.0
+Loaded: C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Resources/plugins/rxpGTN/64/win.xpl (RealityXP.GTN).
+
+0:00:00.000 xPilot: xPilot version 3.0.1 initialized
+Loaded: C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Resources/plugins/xPilot/win_x64/xPilot.xpl (org.vatsim.xpilot).
+
+[Gizmo64]: Dataref 'sim/flightmodel/position/magpsi' has been replaced. Please use the new name.
+0:00:05.710 G64:  core: curl_easy_init() provided by:[C:\Program Files (x86)\Steam\steamapps\common\X-Plane 12\Resources\plugins\Gizmo64.plugin\win_x64\libcurl.dll]
+0:00:05.711 G64:  core: Boot Count: 1
+0:00:05.712 G64:  core: OpenAL: Shared OpenAL context..
+0:00:05.715 G64: debug: Firmware v21.03.20.0220
+0:00:05.754 G64: debug: gxt: AutoLoading..
+0:00:05.754 G64: debug:   gxt.load: Console
+0:00:05.755 G64: debug:   gxt.load: ToolTray
+0:00:05.756 G64: debug:   gxt.load: Mute
+0:00:05.757 G64: debug:   gxt.load: Preferences
+0:00:05.758 G64: debug:   gxt.load: RebootButton
+0:00:05.759 G64: debug:   gxt.load: GateKeeper
+0:00:05.761 G64: debug: 	GK: Load license from disk..
+0:00:05.763 G64: debug: 	GK: License is good.
+0:00:05.764 G64: debug: 	GK: IPC v21.03.18 loaded.
+0:00:05.764 G64: debug:   gxt.load: MAXX_RWC
+0:00:05.765 G64: debug:   gxt.load: LuaGC
+0:00:05.766 G64: debug:   gxt.load: Shell
+0:00:05.767 G64: debug:   gxt.load: Stats
+0:00:05.768 G64: debug: gxt: Completed AutoLoad.
+0:00:05.770 G64: debug: firmware_init.lua completed.
+[SimCoders - HeadShake 1.14.0]: Dataref 'sim/cockpit2/controls/parking_brake_ratio' has been replaced. Please use the new name.
+[SimCoders - HeadShake 1.14.0]: Dataref 'sim/graphics/view/cinema_verite' has been replaced. Please use the new name.
+[MISSIONGENERATOR INFO]: Enabling...
+[MISSIONGENERATOR INFO]: Sound output device: OpenAL Soft
+[MISSIONGENERATOR INFO]: Initializing...
+[MISSIONGENERATOR INFO]: [DISPLAY] Monitor 0: 0, 0, 1280, 720
+[MISSIONGENERATOR INFO]: Path to module: C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Resources/plugins/MissionGenerator/data/modules/main.lua
+[MISSIONGENERATOR INFO]: Loading module...
+[MISSIONGENERATOR INFO]: [LUA]: loading	module
+[MISSIONGENERATOR INFO]: [LUA]: Version:	v1.7.1
+[MissionGenerator (SASL)]: Dataref 'sim/aircraft/vtolcontrols/acf_cyclic_ailn' has been replaced. Please use the new name.
+[MissionGenerator (SASL)]: Dataref 'sim/aircraft/vtolcontrols/acf_cyclic_elev' has been replaced. Please use the new name.
+[MISSIONGENERATOR INFO]: [LUA]: No scenery database changes detected.
+[MISSIONGENERATOR INFO]: Module loaded
+[MISSIONGENERATOR WARN]: Enable/disable interactivity option explicitly (sasl.options.setInteractivity)
+X-Camera: X-Camera license was verified, X-Camera will run in full feature mode
+[X-Camera]: Dataref 'sim/graphics/view/cinema_verite' has been replaced. Please use the new name.
+X-Camera: Initialization complete for version 2.4.3
+0:00:00.000 xPilot/XPMP2 INFO  XPMPMultiplayer.cpp:518/XPMPSetDefaultPlaneICAO: Default ICAO aircraft type now is A320
+0:00:00.000 xPilot/XPMP2 INFO  Sound.cpp:800/SoundInit: Initializing FMOD version 2.2.3
+0:00:00.000 xPilot: xPilot plugin enabled
+Found stats plugin: 3
+0:00:00.000 D/HID: HID Bridge Running
+0:00:00.000 I/GFX: Loaded mapping Resources/shaders/bin/tchotchke_mapping.xsv with hash: bb1b2c9614ceccda9a77a492b11c27e0
+0:00:00.000 I/GFX: Loaded archive Resources/shaders/bin/spv/tchotchke.xsa with hash: 553fb6f6e0ddb77fd6aec15f656bf9ed
+I found the following scenery packages (prioritized in this order):
+  0 Custom Scenery/Aerosoft - LFMN Nice Cote d Azur X/
+  1 Custom Scenery/Aerosoft - LPFR Faro/
+  2 Custom Scenery/X-Plane Airports - EGPR Barra/
+  3 Custom Scenery/X-Plane Airports - KBTV Burlington/
+  4 Custom Scenery/X-Plane Airports - KJRB Downtown Manhattan Heliport/
+  5 Custom Scenery/X-Plane Airports - TFFJ St Barthelemy/
+  6 Custom Scenery/X-Plane Airports - TNCS Juancho E Yrausquin/
+  7 Custom Scenery/X-Plane Landmarks - Dubai/
+  8 Custom Scenery/X-Plane Landmarks - Saint Louis/
+  9 Custom Scenery/X-Plane Airports - LSEZ Zermatt Heliport/
+ 10 Global Scenery/Global Airports/
+ 11 Custom Scenery/simHeaven_X-World_America-1-vfr/
+ 12 Custom Scenery/simHeaven_X-World_America-2-regions/
+ 13 Custom Scenery/simHeaven_X-World_America-3-details/
+ 14 Custom Scenery/simHeaven_X-World_America-4-extras/
+ 15 Custom Scenery/simHeaven_X-World_America-5-footprints/
+ 16 Custom Scenery/simHeaven_X-World_America-6-scenery/
+ 17 Custom Scenery/simHeaven_X-World_America-7-forests/
+ 18 Custom Scenery/simHeaven_X-World_America-8-network/
+ 19 Custom Scenery/simHeaven_X-World_Vegetation_Library/
+ 20 Custom Scenery/X-Plane Landmarks - Berlin and Frankfurt/
+ 21 Custom Scenery/X-Plane Landmarks - Budapest/
+ 22 Custom Scenery/X-Plane Landmarks - Chicago/
+ 23 Custom Scenery/X-Plane Landmarks - Las Vegas/
+ 24 Custom Scenery/X-Plane Landmarks - London/
+ 25 Custom Scenery/X-Plane Landmarks - Los Angeles/
+ 26 Custom Scenery/X-Plane Landmarks - New York/
+ 27 Custom Scenery/X-Plane Landmarks - Paris/
+ 28 Custom Scenery/X-Plane Landmarks - Portland/
+ 29 Custom Scenery/X-Plane Landmarks - Rio De Janeiro/
+ 30 Custom Scenery/X-Plane Landmarks - Salzburg/
+ 31 Custom Scenery/X-Plane Landmarks - San Francisco/
+ 32 Custom Scenery/X-Plane Landmarks - Sydney/
+ 33 Custom Scenery/X-Plane Landmarks - Washington DC/
+ 34 Global Scenery/X-Plane 12 Demo Areas/
+ 35 Global Scenery/X-Plane 12 Global Scenery/
+ 36 Resources/default scenery/1000 autogen/
+ 37 Resources/default scenery/1000 decals/
+ 38 Resources/default scenery/1000 roads/
+ 39 Resources/default scenery/1000 world terrain/
+ 40 Resources/default scenery/1200 atc data/
+ 41 Resources/default scenery/1200 beaches/
+ 42 Resources/default scenery/1200 forests/
+ 43 Resources/default scenery/700 roads/
+ 44 Resources/default scenery/900 beaches/
+ 45 Resources/default scenery/900 europe objects/
+ 46 Resources/default scenery/900 forests/
+ 47 Resources/default scenery/900 roads/
+ 48 Resources/default scenery/900 us objects/
+ 49 Resources/default scenery/900 world object placeholders/
+ 50 Resources/default scenery/airport scenery/
+ 51 Resources/default scenery/sim objects/
+ 52 Resources/tutorials/tutorials_Alaska/
+ 53 Resources/tutorials/tutorials_Hawaii/
+ 54 Resources/tutorials/tutorials_Portland/
+ 55 Resources/tutorials/tutorials_Seattle/
+
+0:00:00.000 E/APT: The airport ETOU (Wiesbaden Erbenheim AAF) has lost some controllers due to bad frequencies.  Each controller needs at least one frequency in the range of 118.00 to 136.990 mhz.
+0:00:00.000 E/APT: The airport EEEI (Ämari AB) has lost some controllers due to bad frequencies.  Each controller needs at least one frequency in the range of 118.00 to 136.990 mhz.
+0:00:00.000 E/APT: The airport EBCV (Chievres Air Base) has lost some controllers due to bad frequencies.  Each controller needs at least one frequency in the range of 118.00 to 136.990 mhz.
+0:00:00.000 E/APT: The airport EHLW (Leeuwarden) has lost some controllers due to bad frequencies.  Each controller needs at least one frequency in the range of 118.00 to 136.990 mhz.
+0:00:00.000 E/APT: The airport KPSM (PORTSMOUTH INTL AT PEASE) has lost some controllers due to bad frequencies.  Each controller needs at least one frequency in the range of 118.00 to 136.990 mhz.
+0:00:00.000 E/APT: The airport KAGC (Allegheny Co) has lost some controllers due to bad frequencies.  Each controller needs at least one frequency in the range of 118.00 to 136.990 mhz.
+0:00:00.000 E/APT: The airport KTRI (Tri Cities Rgnl Tn Va) has lost some controllers due to bad frequencies.  Each controller needs at least one frequency in the range of 118.00 to 136.990 mhz.
+0:00:00.000 I/NAVT: Airspaces are done loading async...
+0:00:00.000 E/APT: The airport LIED (Decimomannu) has lost some controllers due to bad frequencies.  Each controller needs at least one frequency in the range of 118.00 to 136.990 mhz.
+0:00:00.000 E/APT: The airport LERT (Cadiz Rota) has lost some controllers due to bad frequencies.  Each controller needs at least one frequency in the range of 118.00 to 136.990 mhz.
+0:00:00.000 E/APT: The airport XLT0003 (Cukurova) has lost some controllers due to bad frequencies.  Each controller needs at least one frequency in the range of 118.00 to 136.990 mhz.
+0:00:00.000 E/APT: The airport KAFW (Fort Worth Alliance) has lost some controllers due to bad frequencies.  Each controller needs at least one frequency in the range of 118.00 to 136.990 mhz.
+0:00:00.000 E/APT: The airport LCPH (Pafos Intl) has lost some controllers due to bad frequencies.  Each controller needs at least one frequency in the range of 118.00 to 136.990 mhz.
+0:00:00.000 E/APT: The airport RJOP ([H] Komatsushima AB) has lost some controllers due to bad frequencies.  Each controller needs at least one frequency in the range of 118.00 to 136.990 mhz.
+0:00:00.000 E/APT: The airport RCKH (Kaohsiung Intl) has lost some controllers due to bad frequencies.  Each controller needs at least one frequency in the range of 118.00 to 136.990 mhz.
+0:00:00.000 E/APT: The airport RCFN (Taitung Fongnian) has lost some controllers due to bad frequencies.  Each controller needs at least one frequency in the range of 118.00 to 136.990 mhz.
+0:00:00.000 E/APT: The airport OEDF (King Fahd Intl) has lost some controllers due to bad frequencies.  Each controller needs at least one frequency in the range of 118.00 to 136.990 mhz.
+0:00:00.000 W/APT: WARNING: airport Hubbard (ID TA49) overrides code 25TX but it has already been overridden by Chennault Airfield (ID XK00BR)
+0:00:00.000 W/APT: WARNING: airport Standard Field (ID 1M6) overrides code 5KY4 but it has already been overridden by Muhlenberg Co (ID M21)
+0:00:00.000 W/APT: WARNING: airport Stony Creek (ID XY000M) overrides code AU999 but it has already been overridden by Bunurong Field (ID XY000G)
+0:00:00.000 W/APT: WARNING: airport Washington Island (ID XK2P2) overrides code WI47 but it has already been overridden by Timberline (ID XKWI47)
+0:00:00.000 W/APT: WARNING: airport [X] Stockton Muni (ID SN07) overrides code 07S but it has already been overridden by Beaumont Hotel (ID 7K9)
+0:00:00.000 I/APT: Airport 'Outlaw Flyers' (ID XK009M, code 16XS) overrides 'Propwash' (ID 16XS).
+0:00:00.000 I/APT: Airport 'Slack' (ID 9N6, code 18PA) overrides 'Echo' (ID 18PA).
+0:00:00.000 I/APT: Airport 'Nest of Eagles' (ID 9WI7, code 1H9) overrides 'Ribble' (ID 1H9).
+0:00:00.000 I/APT: Airport 'Ickes' (ID XK006G, code 1PS0) overrides '[H] Southern Adams County' (ID 1PS0).
+0:00:00.000 I/APT: Airport 'Pela 15' (ID XK007J, code 1TN1) overrides '[H] Clayton' (ID 1TN1).
+0:00:00.000 I/APT: Airport 'Etna' (ID XK004V, code 2AR1) overrides 'Ozark Aerodrome' (ID 2AR1).
+0:00:00.000 I/APT: Airport 'Flying Hare Field' (ID XK009C, code 34XS) overrides 'Kenley Ranch' (ID 34XS).
+0:00:00.000 I/APT: Airport 'Philadelphia Gliderport' (ID 0PA0, code 3PA2) overrides 'Neeb' (ID 3PA2).
+0:00:00.000 I/APT: Airport 'Clark' (ID 3TX6, code 3T6) overrides 'Gum Island' (ID 3T6).
+0:00:00.000 I/APT: Airport 'Middle Bass Island' (ID XK0033, code 3T7) overrides 'Pavlat' (ID 3T7).
+0:00:00.000 I/APT: Airport 'Gerald Weidner' (ID H33, code 4IS9) overrides '[H] Doctors Hospital' (ID 4IS9).
+0:00:00.000 I/APT: Airport 'Catoctin Crosswind' (ID XK005S, code 4MD7) overrides 'Wood' (ID 4MD7).
+0:00:00.000 I/APT: Airport 'Kapaun-Wilson Field' (ID 00Y, code 4MN5) overrides '[H] Chisago Health Services' (ID 4MN5).
+0:00:00.000 I/APT: Airport '[H] Meritus Hospital' (ID XK005Q, code 5MD3) overrides '[H] Sinai Hospital' (ID 5MD3).
+0:00:00.000 I/APT: Airport 'Old Hoppe Place' (ID 67TX, code 67T) overrides 'Fisher Ranch' (ID 67T).
+0:00:00.000 I/APT: Airport 'Heathcliff Airpark' (ID XK00A6, code 7OH7) overrides 'Hydebrook' (ID 7OH7).
+0:00:00.000 I/APT: Airport 'American Creek' (ID AK80, code 80A) overrides 'McLean Brothers' (ID 80A).
+0:00:00.000 I/APT: Airport 'Maxson Airfield' (ID 89N, code 89NY) overrides 'Sheldon Airstrip' (ID 89NY).
+0:00:00.000 I/APT: Airport 'Barnesville Muni' (ID 8M3, code 9MN3) overrides '[S] Fountain Lake' (ID 9MN3).
+0:00:00.000 I/APT: Airport 'CD-3 Airstrip' (ID XPA000D, code AK20) overrides 'Quail Creek' (ID AK20).
+0:00:00.000 I/APT: Airport 'Big Creek' (ID XPA000J, code AK51) overrides '[S] Tazlina Smokey Lake' (ID AK51).
+0:00:00.000 I/APT: Airport 'Snowy Range' (ID XY000K, code AU53) overrides 'Mundrabilla Road' (ID AU53).
+0:00:00.000 I/APT: Airport 'Dingo' (ID XY0034, code AU90) overrides 'Cranbrook' (ID AU90).
+0:00:00.000 I/APT: Airport 'Hidden Valley' (ID XK0011, code AZ43) overrides 'Solair Estates' (ID AZ43).
+0:00:00.000 I/APT: Airport 'Lower Loon Creek' (ID ID67, code C53) overrides 'John Deere Dubuque Works' (ID C53).
+0:00:00.000 I/APT: Airport 'Cayuse Creek USFS' (ID S74, code C64) overrides 'Wawasee' (ID C64).
+0:00:00.000 I/APT: Airport 'Ullswater' (ID XC008L, code CLW2) overrides 'Lewvan (Farr Air)' (ID CLW2).
+0:00:00.000 I/APT: Airport 'Colorado Springs East' (ID A50, code CO49) overrides 'Flying Lazy D Ranch' (ID CO49).
+0:00:00.000 I/APT: Airport 'Pakuba Airfield' (ID HUKF, code HUPA) overrides 'Bugungu Airstrip' (ID HUPA).
+0:00:00.000 I/APT: Airport 'Hell Roaring Ranch' (ID XK00CE, code ID39) overrides 'Owen Ranches Inc' (ID ID39).
+0:00:00.000 I/APT: Airport 'Fairfield Ranch (pvt)' (ID XK00CD, code ID70) overrides '[H] Adams Gulch' (ID ID70).
+0:00:00.000 I/APT: Airport 'Foster Field' (ID 7A4, code IL28) overrides 'Werries' (ID IL28).
+0:00:00.000 I/APT: Airport 'Harrold' (ID 2IN6, code IN16) overrides 'Wilkins Strip' (ID IN16).
+0:00:00.000 I/APT: Airport 'Wolfe Field' (ID 3C9, code IN65) overrides 'Culp Farms' (ID IN65).
+0:00:00.000 I/APT: Airport '[H] Kantonsspital St.Gallen' (ID XLS0010, code LSHG) overrides '[H] Gampel' (ID LSHG).
+0:00:00.000 I/APT: Airport 'Mountainair Muni' (ID Q04, code M10) overrides 'Hunter' (ID M10).
+0:00:00.000 I/APT: Airport 'Bel-Voir Acres' (ID MO61, code MO04) overrides 'Lyell' (ID MO04).
+0:00:00.000 I/APT: Airport 'Sassuolo' (ID XLI001U, code MO07) overrides '[S] Bagnell' (ID MO07).
+0:00:00.000 I/APT: Airport 'Table Rock' (ID 36M, code MO32) overrides 'Princeton-Kauffman Meml' (ID MO32).
+0:00:00.000 I/APT: Airport '[H] Red River Heliport' (ID XK006N, code N02) overrides '[H] Keystone' (ID N02).
+0:00:00.000 I/APT: Airport 'Blue Heron' (ID NK93, code N25) overrides 'Westport' (ID N25).
+0:00:00.000 I/APT: Airport 'Harvey Point Defense Test Act' (ID XK008A, code NC01) overrides 'May' (ID NC01).
+0:00:00.000 I/APT: Airport 'Deck Airpark' (ID 02W, code NC11) overrides 'Bear Creek' (ID NC11).
+0:00:00.000 I/APT: Airport 'Old Forge NY' (ID XK00CM, code NK26) overrides 'Coles Landing' (ID NK26).
+0:00:00.000 I/APT: Airport 'Cielo Dorado Estates' (ID TA50, code NM05) overrides 'Williams' (ID NM05).
+0:00:00.000 I/APT: Airport 'Porter' (ID 2I6, code OH92) overrides 'Camstra' (ID OH92).
+0:00:00.000 I/APT: Airport 'JJ & PK Airstrip' (ID 73W, code PA08) overrides 'Moorhead Airpark' (ID PA08).
+0:00:00.000 I/APT: Airport 'Kingsdale Air Park' (ID 76W, code PA23) overrides 'Mifflintown' (ID PA23).
+0:00:00.000 I/APT: Airport 'Cloudbound' (ID XK006F, code PA47) overrides 'Jim Shearer' (ID PA47).
+0:00:00.000 I/APT: Airport 'Port Alsworth' (ID XPA000G, code PALJ) overrides 'Wilder Runway' (ID PALJ).
+0:00:00.000 I/APT: Airport 'Adjuntas' (ID XTJ0003, code PR20) overrides '[H] Old San Juan' (ID PR20).
+0:00:00.000 I/APT: Airport 'Fazenda Sao Miguel' (ID SJOY, code SDTV) overrides '[H] Tivoli Center' (ID SDTV).
+0:00:00.000 I/APT: Airport 'Agropastoril Bom Pastor' (ID SDRO, code SDWC) overrides 'Aldeia Bau' (ID SDWC).
+0:00:00.000 I/APT: Airport 'Clube CEU' (ID XSB000R, code SIAN) overrides '[H] Hospital Dom Vicente Scherer' (ID SIAN).
+0:00:00.000 I/APT: Airport 'Irmãos Gonçalves' (ID XSB0008, code SIDG) overrides 'Fazenda Jotabasso' (ID SIDG).
+0:00:00.000 I/APT: Airport 'Rio Negrinho' (ID SSRN, code SILN) overrides 'Fazenda Rio Capim' (ID SILN).
+0:00:00.000 I/APT: Airport 'Manoel Urbano' (ID SSPX, code SIMB) overrides '[H] Monumental Business' (ID SIMB).
+0:00:00.000 I/APT: Airport 'Grupo Scheffer' (ID SJIE, code SJIF) overrides 'Fazenda Nova Era' (ID SJIF).
+0:00:00.000 I/APT: Airport 'Jorge Luiz Stocco' (ID XSB000C, code SJOY) overrides 'Fazenda Sao Miguel' (ID SJOY).
+0:00:00.000 I/APT: Airport 'Cond. Aeron. Santos Dumont' (ID XSB000I, code SNDD) overrides 'Fazenda Eldorado' (ID SNDD).
+0:00:00.000 I/APT: Airport 'Tancredo Thomas de Faria' (ID SBGU, code SSGG) overrides 'Fazenda Jacare de Chifre' (ID SSGG).
+0:00:00.000 I/APT: Airport 'Forquilhinha' (ID SBCM, code SSIM) overrides 'Boqueirao Alegre' (ID SSIM).
+0:00:00.000 I/APT: Airport 'Fazenda Serra Dourada' (ID SNIF, code SSUD) overrides '[H] Bom Dia Cafe' (ID SSUD).
+0:00:00.000 I/APT: Airport 'Telemaco Borba' (ID SBTL, code SSVL) overrides 'Fazenda Santa Claudina' (ID SSVL).
+0:00:00.000 I/APT: Airport 'Sao Joao dos Patos' (ID XSB0003, code SSYR) overrides 'Fazenda Santa Maria' (ID SSYR).
+0:00:00.000 I/APT: Airport 'Zirondi' (ID XSB0009, code SSZD) overrides '[H] Aficel' (ID SSZD).
+0:00:00.000 I/APT: Airport 'Playa Pintada' (ID XSVPQ, code SVPQ) overrides 'El Pardillero' (ID SVPQ).
+0:00:00.000 I/APT: Airport 'Luis Eduardo Magalhaes' (ID XSB000G, code SWNB) overrides 'Nobres' (ID SWNB).
+0:00:00.000 I/APT: Airport 'Aero Estates' (ID TS96, code T25) overrides 'Jennings Ranch' (ID T25).
+0:00:00.000 I/APT: Airport 'Goldthwaite Muni' (ID XK007O, code T37) overrides 'Locker Brothers' (ID T37).
+0:00:00.000 I/APT: Airport 'Southwest Lubbock' (ID XK00DD, code T96) overrides 'El Campo Airpark' (ID T96).
+0:00:00.000 I/APT: Airport 'Flying B Ranch' (ID XK009L, code TA12) overrides '[H] Petroleum Helicopters Inc' (ID TA12).
+0:00:00.000 I/APT: Airport 'West Liberty' (ID XK009G, code TS35) overrides '[H] Marriott Astrodome' (ID TS35).
+0:00:00.000 I/APT: Airport 'Hammer Airfield' (ID XK009K, code TS75) overrides 'Mitchell Nr One' (ID TS75).
+0:00:00.000 I/APT: Airport 'El Campo Airpark' (ID T96, code TS96) overrides 'Aero Estates' (ID TS96).
+0:00:00.000 I/APT: Airport 'Fair Weather Field' (ID XK009I, code TX42) overrides 'Bransom Farm' (ID TX42).
+0:00:00.000 I/APT: Airport 'Eberly Ranch' (ID XK008Z, code TX70) overrides 'Hess' (ID TX70).
+0:00:00.000 I/APT: Airport 'Morowali Industrial Park' (ID XWI000L, code WAMP) overrides 'Kasiguncu' (ID WAMP).
+0:00:00.000 I/APT: Airport 'Mukah Lapangan Terbang' (ID XWB0005, code WBGK) overrides 'Mukah' (ID WBGK).
+0:00:00.000 I/APT: Airport 'Rainelle' (ID 9W4, code WV30) overrides 'Leon' (ID WV30).
+0:00:00.000 I/APT: Airport 'Mundaring Weir' (ID YMWR, code YMDW) overrides 'MAITLAND DOWNS' (ID YMDW).
+0:00:00.000 I/APT: Airport 'Mandemar' (ID XY004M, code YMMR) overrides 'MUNMARLARY' (ID YMMR).
+0:00:00.000 I/APT: Airport 'Port Hedland/Wodgina' (ID XY001Z, code YWGA) overrides 'Wonga Beach' (ID YWGA).
+0:00:00.000 I/GFX: Loaded mapping Resources/shaders/bin/cube_filter_compute_mapping.xsv with hash: bad21c347f6af072901f41f65e6c12ac
+0:00:00.000 I/GFX: Loaded archive Resources/shaders/bin/spv/cube_filter_compute.xsa with hash: f638eabdf601966cc53a8e022b9614
+0:00:00.000 I/GFX: Loaded mapping Resources/shaders/bin/cube_filter_raster_mapping.xsv with hash: 42e5dfb39f46f98fc65ddd67a18c298
+0:00:00.000 I/GFX: Loaded archive Resources/shaders/bin/spv/cube_filter_raster.xsa with hash: 212de296a9be1dc748a07dfbe843309
+0:00:00.000 I/GFX: Loaded mapping Resources/shaders/bin/ssr_deferred_mapping.xsv with hash: 6e9ba45a625ab6bb3dc9a32b638f12
+0:00:00.000 I/GFX: Loaded archive Resources/shaders/bin/spv/ssr_deferred.xsa with hash: 8e1343d053146ae491080c1bf175b8e
+0:00:00.000 I/GFX: Loaded mapping Resources/shaders/bin/ssr_mesh_mapping.xsv with hash: fa251c8446aa6ea51d38d8effd615790
+0:00:00.000 I/GFX: Loaded archive Resources/shaders/bin/spv/ssr_mesh.xsa with hash: df1c1239252677ce7360c5c993c93ac
+0:00:00.000 I/GFX: Loaded mapping Resources/shaders/bin/ground_lights_mapping.xsv with hash: 1c97a55643b34f44f31b65d5e9798
+0:00:00.000 I/GFX: Loaded archive Resources/shaders/bin/spv/ground_lights.xsa with hash: 32d476a479634c464be1f02fd9e11bd2
+0:00:00.000 I/GFX: Loaded mapping Resources/shaders/bin/light_mapping.xsv with hash: 7aae35fdc5436ae3c0d76edeb4d9121
+0:00:00.000 I/GFX: Loaded archive Resources/shaders/bin/spv/light.xsa with hash: c0327a9b6121654eb11f47cb9c484d0
+0:00:00.000 I/GFX: Loaded mapping Resources/shaders/bin/light_tile_mapping.xsv with hash: bcaed692c6b765d372d261bc921fa568
+0:00:00.000 I/GFX: Loaded archive Resources/shaders/bin/spv/light_tile.xsa with hash: ebc0dc88ccc464bf36b6897a85b6a90
+0:00:00.000 I/GFX: Loaded mapping Resources/shaders/bin/light_transform_mapping.xsv with hash: b3396f416f3c8fee2fa5ac7596429
+0:00:00.000 I/GFX: Loaded archive Resources/shaders/bin/spv/light_transform.xsa with hash: d8f784f5269bb5f39b2b03d40e8cfa0
+0:00:00.000 I/GFX: Loaded mapping Resources/shaders/bin/light_vis_mapping.xsv with hash: 72e7a7ac823b7778235a829aa655e6d
+0:00:00.000 I/GFX: Loaded archive Resources/shaders/bin/spv/light_vis.xsa with hash: 269a295c77b1ce1a6e1818dba8b6ea10
+0:00:00.000 I/REN: Setting texture resolution read from prefs as 3
+0:00:00.000 I/REN: Setting |dim under high G-load or hypoxia read from prefs as 1.
+0:00:00.000 I/REN: Setting |3-d drawing detail read from prefs as 1.
+0:00:00.000 I/REN: Setting |drawing range read from prefs as 1.
+0:00:00.000 I/REN: Setting |draw parked aircraft at airports read from prefs as 1.
+0:00:00.000 I/REN: Setting |draw boats in the water  read from prefs as 1.
+0:00:00.000 I/REN: Setting |Cloud quality read from prefs as 1.
+0:00:00.000 I/REN: Setting |FSR quality level read from prefs as 2.
+0:00:00.000 I/REN: Setting |SSAO quality level read from prefs as 2.
+0:00:00.000 I/REN: Setting |Enable 3D trees read from prefs as 1.
+0:00:00.000 I/REN: Setting |3-d shadows read from prefs as 0.
+0:00:00.000 I/REN: Setting |Tree quality level read from prefs as 1.
+0:00:00.000 I/REN: Setting |HDR anti-aliasing read from prefs as 0.
+0:00:00.000 I/REN: Setting |Enable FXAA to remove jagged lines via post processing which is cheaper than MSAA. read from prefs as 1.
+0:00:00.000 I/REN: Setting |Texture Resolution read from prefs as 2.
+0:00:00.000 I/REN: Setting |Anisotropic Filtering read from prefs as 1.
+0:00:00.000 D/KTX2: [Resources/bitmaps/world/moon_NML.ktx2] 1024x1024x0 0 layers 11 levels 1 faces none
+0:00:00.000 I/WEBSRV: Port 8086 bound
+0:00:00.000 I/WEBSRV: Port 50348 bound
+0:00:00.000 I/gfx: Max budget for managed buffers changed to 134217728
+0:00:00.000 I/NET: OS has RFC 4941 Privacy Extensions for IPv6 *enabled*, using TEMPORARY IPv6 addresses
+0:00:00.000 I/NET: Ethernet (Intel(R) Ethernet Connection (2) I219-V) 192.168.1.22
+0:00:00.000 I/NET: Ethernet 2 (Microsoft KM-TEST Loopback Adapter) 169.254.36.53
+0:00:00.000 I/NET: Ethernet (Intel(R) Ethernet Connection (2) I219-V) fd6b:cd44:df38:c14b:4d98:c1e7:cd0e:274
+0:00:00.000 I/NET: (RakNet) Init: Successful!
+0:00:00.000 I/NET: Networking initialized successfully
+0:00:00.000 I/TEX: Target scale moved to 0.125000. Texture usage is 0.00 b out of 3.90 gb available. Memory headroom is 4.00 gb
+0:00:00.000 D/HID: Hardware ADDED(231d, 011f) -  VKBSim T-Rudder  at path \\?\hid#vid_231d&pid_011f#7&1016f7ae&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}
+0:00:00.000 I/JOY: REGISTER Joystick device: VKBSim T-Rudder - VID:8989PID:287, this is a familiar device.
+0:00:00.000 D/HID: 	BUTTON Added Index: 0 (HID_Page_Button/01) for handle: 000001AEE15C16A0
+0:00:00.000 D/HID: 	BUTTON Added Index: 1 (HID_Page_Button/02) for handle: 000001AEE15C16A0
+0:00:00.000 D/HID: 	AXIS Added Index: 0 (HID_Page_Undefined/00) for handle: 000001AEE15C16A0. Min/Max 0 - 1023
+0:00:00.000 D/HID: 	AXIS Added Index: 1 (HID_Page_Undefined/00) for handle: 000001AEE15C16A0. Min/Max 0 - 1023
+0:00:00.000 D/HID: 	AXIS Added Index: 2 (HID_Page_Undefined/00) for handle: 000001AEE15C16A0. Min/Max 0 - 1023
+0:00:00.000 D/HID: 	AXIS Added Index: 3 (HID_Page_Undefined/00) for handle: 000001AEE15C16A0. Min/Max 0 - 1023
+0:00:00.000 D/HID: 	AXIS Added Index: 4 (HID_Page_Undefined/00) for handle: 000001AEE15C16A0. Min/Max 0 - 1023
+0:00:00.000 D/HID: 	AXIS Added Index: 5 (HID_Page_GenericDesktop/HID_Usage_GD_Y) for handle: 000001AEE15C16A0. Min/Max 0 - 1023
+0:00:00.000 D/HID: 	AXIS Added Index: 6 (HID_Page_GenericDesktop/HID_Usage_GD_X) for handle: 000001AEE15C16A0. Min/Max 0 - 4095
+0:00:00.000 D/HID: 	AXIS Added Index: 7 (HID_Page_GenericDesktop/HID_Usage_GD_Z) for handle: 000001AEE15C16A0. Min/Max 0 - 1023
+0:00:00.000 D/HID: END HARDWARE
+0:00:00.000 E/JOY: UNCALIBRATED AXIS DETECTED: VKBSim T-Rudder (VID:8989PID:287) Axis #0, assigned to joy_use_none, has an expected min/max range of [0.000000, 1023.000000], but is calibrated for [8999999488.000000, -8999999488.000000]. You should recalibrate the device in the Settings menu.
+0:00:00.000 E/JOY: CALIBRATION OVERRIDE: VKBSim T-Rudder (VID:8989PID:287) Axis #0 forced to be treated as calibrated due to a user pref.
+0:00:00.000 E/JOY: UNCALIBRATED AXIS DETECTED: VKBSim T-Rudder (VID:8989PID:287) Axis #1, assigned to joy_use_none, has an expected min/max range of [0.000000, 1023.000000], but is calibrated for [8999999488.000000, -8999999488.000000]. You should recalibrate the device in the Settings menu.
+0:00:00.000 E/JOY: CALIBRATION OVERRIDE: VKBSim T-Rudder (VID:8989PID:287) Axis #1 forced to be treated as calibrated due to a user pref.
+0:00:00.000 E/JOY: UNCALIBRATED AXIS DETECTED: VKBSim T-Rudder (VID:8989PID:287) Axis #2, assigned to joy_use_none, has an expected min/max range of [0.000000, 1023.000000], but is calibrated for [8999999488.000000, -8999999488.000000]. You should recalibrate the device in the Settings menu.
+0:00:00.000 E/JOY: CALIBRATION OVERRIDE: VKBSim T-Rudder (VID:8989PID:287) Axis #2 forced to be treated as calibrated due to a user pref.
+0:00:00.000 E/JOY: UNCALIBRATED AXIS DETECTED: VKBSim T-Rudder (VID:8989PID:287) Axis #3, assigned to joy_use_none, has an expected min/max range of [0.000000, 1023.000000], but is calibrated for [8999999488.000000, -8999999488.000000]. You should recalibrate the device in the Settings menu.
+0:00:00.000 E/JOY: CALIBRATION OVERRIDE: VKBSim T-Rudder (VID:8989PID:287) Axis #3 forced to be treated as calibrated due to a user pref.
+0:00:00.000 E/JOY: UNCALIBRATED AXIS DETECTED: VKBSim T-Rudder (VID:8989PID:287) Axis #4, assigned to joy_use_none, has an expected min/max range of [0.000000, 1023.000000], but is calibrated for [8999999488.000000, -8999999488.000000]. You should recalibrate the device in the Settings menu.
+0:00:00.000 E/JOY: CALIBRATION OVERRIDE: VKBSim T-Rudder (VID:8989PID:287) Axis #4 forced to be treated as calibrated due to a user pref.
+0:00:00.000 E/JOY: UNCALIBRATED AXIS DETECTED: VKBSim T-Rudder (VID:8989PID:287) Axis #5, assigned to joy_use_none, has an expected min/max range of [0.000000, 1023.000000], but is calibrated for [8999999488.000000, -8999999488.000000]. You should recalibrate the device in the Settings menu.
+0:00:00.000 E/JOY: CALIBRATION OVERRIDE: VKBSim T-Rudder (VID:8989PID:287) Axis #5 forced to be treated as calibrated due to a user pref.
+0:00:00.000 E/JOY: UNCALIBRATED AXIS DETECTED: VKBSim T-Rudder (VID:8989PID:287) Axis #7, assigned to joy_use_none, has an expected min/max range of [0.000000, 1023.000000], but is calibrated for [8999999488.000000, -8999999488.000000]. You should recalibrate the device in the Settings menu.
+0:00:00.000 E/JOY: CALIBRATION OVERRIDE: VKBSim T-Rudder (VID:8989PID:287) Axis #7 forced to be treated as calibrated due to a user pref.
+0:00:00.000 D/HID: Hardware ADDED(231d, 0200) -  VKBsim Gladiator EVO R   at path \\?\hid#vid_231d&pid_0200#7&35c129be&0&0000#{4d1e55b2-f16f-11cf-88cb-001111000030}
+0:00:00.000 I/JOY: REGISTER Joystick device: VKBsim Gladiator EVO R - VID:8989PID:512, this is a familiar device.
+0:00:00.000 D/HID: 	BUTTON Added Index: 0 (HID_Page_Button/01) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 1 (HID_Page_Button/02) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 2 (HID_Page_Button/03) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 3 (HID_Page_Button/04) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 4 (HID_Page_Button/05) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 5 (HID_Page_Button/06) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 6 (HID_Page_Button/07) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 7 (HID_Page_Button/08) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 8 (HID_Page_Button/09) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 9 (HID_Page_Button/0a) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 10 (HID_Page_Button/0b) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 11 (HID_Page_Button/0c) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 12 (HID_Page_Button/0d) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 13 (HID_Page_Button/0e) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 14 (HID_Page_Button/0f) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 15 (HID_Page_Button/10) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 16 (HID_Page_Button/11) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 17 (HID_Page_Button/12) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 18 (HID_Page_Button/13) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 19 (HID_Page_Button/14) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 20 (HID_Page_Button/15) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 21 (HID_Page_Button/16) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 22 (HID_Page_Button/17) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 23 (HID_Page_Button/18) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 24 (HID_Page_Button/19) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 25 (HID_Page_Button/1a) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 26 (HID_Page_Button/1b) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 27 (HID_Page_Button/1c) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 28 (HID_Page_Button/1d) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 29 (HID_Page_Button/1e) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 30 (HID_Page_Button/1f) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 31 (HID_Page_Button/20) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 32 (HID_Page_Button/21) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 33 (HID_Page_Button/22) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 34 (HID_Page_Button/23) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 35 (HID_Page_Button/24) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 36 (HID_Page_Button/25) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 37 (HID_Page_Button/26) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 38 (HID_Page_Button/27) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 39 (HID_Page_Button/28) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 40 (HID_Page_Button/29) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 41 (HID_Page_Button/2a) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 42 (HID_Page_Button/2b) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 43 (HID_Page_Button/2c) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 44 (HID_Page_Button/2d) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 45 (HID_Page_Button/2e) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 46 (HID_Page_Button/2f) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 47 (HID_Page_Button/30) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 48 (HID_Page_Button/31) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 49 (HID_Page_Button/32) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 50 (HID_Page_Button/33) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 51 (HID_Page_Button/34) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 52 (HID_Page_Button/35) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 53 (HID_Page_Button/36) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 54 (HID_Page_Button/37) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 55 (HID_Page_Button/38) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 56 (HID_Page_Button/39) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 57 (HID_Page_Button/3a) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 58 (HID_Page_Button/3b) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 59 (HID_Page_Button/3c) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 60 (HID_Page_Button/3d) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 61 (HID_Page_Button/3e) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 62 (HID_Page_Button/3f) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 63 (HID_Page_Button/40) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 64 (HID_Page_Button/41) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 65 (HID_Page_Button/42) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 66 (HID_Page_Button/43) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 67 (HID_Page_Button/44) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 68 (HID_Page_Button/45) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 69 (HID_Page_Button/46) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 70 (HID_Page_Button/47) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 71 (HID_Page_Button/48) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 72 (HID_Page_Button/49) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 73 (HID_Page_Button/4a) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 74 (HID_Page_Button/4b) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 75 (HID_Page_Button/4c) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 76 (HID_Page_Button/4d) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 77 (HID_Page_Button/4e) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 78 (HID_Page_Button/4f) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 79 (HID_Page_Button/50) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 80 (HID_Page_Button/51) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 81 (HID_Page_Button/52) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 82 (HID_Page_Button/53) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 83 (HID_Page_Button/54) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 84 (HID_Page_Button/55) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 85 (HID_Page_Button/56) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 86 (HID_Page_Button/57) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 87 (HID_Page_Button/58) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 88 (HID_Page_Button/59) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 89 (HID_Page_Button/5a) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 90 (HID_Page_Button/5b) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 91 (HID_Page_Button/5c) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 92 (HID_Page_Button/5d) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 93 (HID_Page_Button/5e) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 94 (HID_Page_Button/5f) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 95 (HID_Page_Button/60) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 96 (HID_Page_Button/61) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 97 (HID_Page_Button/62) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 98 (HID_Page_Button/63) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 99 (HID_Page_Button/64) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 100 (HID_Page_Button/65) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 101 (HID_Page_Button/66) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 102 (HID_Page_Button/67) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 103 (HID_Page_Button/68) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 104 (HID_Page_Button/69) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 105 (HID_Page_Button/6a) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 106 (HID_Page_Button/6b) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 107 (HID_Page_Button/6c) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 108 (HID_Page_Button/6d) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 109 (HID_Page_Button/6e) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 110 (HID_Page_Button/6f) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 111 (HID_Page_Button/70) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 112 (HID_Page_Button/71) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 113 (HID_Page_Button/72) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 114 (HID_Page_Button/73) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 115 (HID_Page_Button/74) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 116 (HID_Page_Button/75) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 117 (HID_Page_Button/76) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 118 (HID_Page_Button/77) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 119 (HID_Page_Button/78) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 120 (HID_Page_Button/79) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 121 (HID_Page_Button/7a) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 122 (HID_Page_Button/7b) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 123 (HID_Page_Button/7c) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 124 (HID_Page_Button/7d) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 125 (HID_Page_Button/7e) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 126 (HID_Page_Button/7f) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	BUTTON Added Index: 127 (HID_Page_Button/80) for handle: 000001AEE15C1A60
+0:00:00.000 D/HID: 	AXIS Added Index: 0 (HID_Page_GenericDesktop/HID_Usage_GD_X) for handle: 000001AEE15C1A60. Min/Max 0 - 4095
+0:00:00.000 D/HID: 	AXIS Added Index: 1 (HID_Page_GenericDesktop/HID_Usage_GD_Y) for handle: 000001AEE15C1A60. Min/Max 0 - 4095
+0:00:00.000 D/HID: 	AXIS Added Index: 2 (HID_Page_GenericDesktop/HID_Usage_GD_Rz) for handle: 000001AEE15C1A60. Min/Max 0 - 2047
+0:00:00.000 D/HID: 	AXIS Added Index: 3 (HID_Page_GenericDesktop/HID_Usage_GD_Z) for handle: 000001AEE15C1A60. Min/Max 0 - 2047
+0:00:00.000 D/HID: 	AXIS Added Index: 4 (HID_Page_GenericDesktop/HID_Usage_GD_Rx) for handle: 000001AEE15C1A60. Min/Max 0 - 1023
+0:00:00.000 D/HID: 	AXIS Added Index: 5 (HID_Page_GenericDesktop/HID_Usage_GD_Ry) for handle: 000001AEE15C1A60. Min/Max 0 - 1023
+0:00:00.000 D/HID: 	AXIS Added Index: 6 (HID_Page_GenericDesktop/HID_Usage_GD_Slider) for handle: 000001AEE15C1A60. Min/Max 0 - 2047
+0:00:00.000 D/HID: 	AXIS Added Index: 7 (HID_Page_GenericDesktop/HID_Usage_GD_Dial) for handle: 000001AEE15C1A60. Min/Max 0 - 2047
+0:00:00.000 D/HID: 	HATSWITCH Added Index: 0 (HID_Page_GenericDesktop/HID_Usage_GD_Hatswitch) for handle: 000001AEE15C1A60. It has 8 positions.
+0:00:00.000 D/HID: END HARDWARE
+0:00:00.000 E/JOY: UNCALIBRATED AXIS DETECTED: VKBsim Gladiator EVO R (VID:8989PID:512) Axis #2, assigned to joy_use_hdng, has an expected min/max range of [0.000000, 2047.000000], but is calibrated for [0.500244, 0.500244]. You should recalibrate the device in the Settings menu.
+0:00:00.000 E/JOY: CALIBRATION OVERRIDE: VKBsim Gladiator EVO R (VID:8989PID:512) Axis #2 forced to be treated as calibrated due to a user pref.
+0:00:00.000 E/JOY: UNCALIBRATED AXIS DETECTED: VKBsim Gladiator EVO R (VID:8989PID:512) Axis #4, assigned to joy_use_none, has an expected min/max range of [0.000000, 1023.000000], but is calibrated for [0.500489, 0.500489]. You should recalibrate the device in the Settings menu.
+0:00:00.000 E/JOY: CALIBRATION OVERRIDE: VKBsim Gladiator EVO R (VID:8989PID:512) Axis #4 forced to be treated as calibrated due to a user pref.
+0:00:00.000 E/JOY: UNCALIBRATED AXIS DETECTED: VKBsim Gladiator EVO R (VID:8989PID:512) Axis #5, assigned to joy_use_none, has an expected min/max range of [0.000000, 1023.000000], but is calibrated for [0.500489, 0.500489]. You should recalibrate the device in the Settings menu.
+0:00:00.000 E/JOY: CALIBRATION OVERRIDE: VKBsim Gladiator EVO R (VID:8989PID:512) Axis #5 forced to be treated as calibrated due to a user pref.
+0:00:00.000 E/JOY: UNCALIBRATED AXIS DETECTED: VKBsim Gladiator EVO R (VID:8989PID:512) Axis #6, assigned to joy_use_none, has an expected min/max range of [0.000000, 2047.000000], but is calibrated for [0.500244, 0.500244]. You should recalibrate the device in the Settings menu.
+0:00:00.000 E/JOY: CALIBRATION OVERRIDE: VKBsim Gladiator EVO R (VID:8989PID:512) Axis #6 forced to be treated as calibrated due to a user pref.
+0:00:00.000 E/JOY: UNCALIBRATED AXIS DETECTED: VKBsim Gladiator EVO R (VID:8989PID:512) Axis #7, assigned to joy_use_none, has an expected min/max range of [0.000000, 2047.000000], but is calibrated for [0.500244, 0.500244]. You should recalibrate the device in the Settings menu.
+0:00:00.000 D/STM: Transitioning from state state_InitialLoading to state_QuickFlightWizard
+0:00:00.000 I/ACF: Loading airplane number 20 with Aircraft/Thranda_C172/Thranda_C172.acf
+0:00:12.697 G64:  core: Run: [OnAircraftLoad]
+0:00:00.000 I/WIN: Showing subscreen Main Menu
+0:00:00.000 I/OVR: User is entering the holodeck.
+0:00:00.000 I/WIN: Opened window Primary V11 UI
+0:00:00.000 I/WXR: wxr cache: (window 000001AEF1ADC7B0) 320 x 180
+0:00:00.261 D/KTX2: [Resources/bitmaps/world/moon_NML.ktx2] 1024x1024x0 0 layers 11 levels 1 faces none
+0:00:00.338 I/TEX: Target scale moved to 0.250000. Texture usage is 84.01 kb out of 3.84 gb available. Memory headroom is 3.93 gb
+0:00:00.349 D/KTX2: [Resources/bitmaps/world/moon_NML.ktx2] 1024x1024x0 0 layers 11 levels 1 faces none
+0:00:00.468 I/TEX: Target scale moved to 0.500000. Texture usage is 336.00 kb out of 3.81 gb available. Memory headroom is 3.90 gb
+0:00:00.510 I/TEX: Target scale moved to 1.000000. Texture usage is 336.00 kb out of 3.74 gb available. Memory headroom is 3.84 gb
+0:00:00.555 I/TEX: Target scale moved to 2.000000. Texture usage is 336.00 kb out of 3.62 gb available. Memory headroom is 3.71 gb
+0:00:00.599 I/TEX: Target scale moved to 4.000000. Texture usage is 336.00 kb out of 3.38 gb available. Memory headroom is 3.46 gb
+0:00:00.643 I/TEX: Target scale moved to 8.000000. Texture usage is 336.00 kb out of 2.89 gb available. Memory headroom is 2.96 gb
+0:00:00.690 I/TEX: Target scale moved to 16.000000. Texture usage is 336.00 kb out of 2.89 gb available. Memory headroom is 2.96 gb
+0:00:05.651 I/NAVT: NavData is done loading async...
+0:00:05.843 I/NAVT: Navaids are done loading async...
+0:00:06.188 I/NAVT: Fixes are done loading async...
+0:00:07.031 I/NAVT: Airways are done loading async...
+0:00:07.031 I/NAVT: All navt data is done loading async...
+0:09:31.175 I/WIN: Showing subscreen Freeflight
+0:09:37.130 I/FCG: Applying changes from Flight Configuration screen
+0:09:37.130 I/FCG: Starting new flight in Aircraft/Thranda_C172/Thranda_C172.acf at North Ramp Tie-Down (Size Class A)
+0:09:37.130 I/WXR: Parsing weather manifest ID '62240'
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/rain_mapping.xsv with hash: abdd46b8dc626952828d44baef4224
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/rain.xsa with hash: 445f734133b996df73efa513be6432e
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/shadow_rect_mapping.xsv with hash: 829eede3c44de89fc219915e47e07cfd
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/shadow_rect.xsa with hash: 9177903baa79178a7199285259575ba
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/debug_mapping.xsv with hash: afbf5a4d94e2c6cb3a12b5dc2c47ee88
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/debug.xsa with hash: ea9e7dca5aa5dd415e20b9de5bc51e1
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/z_minmax_mapping.xsv with hash: 804e9916c6d3c42e72535924f68536e
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/z_minmax.xsa with hash: 9db1418cdb286717fb90d19f792bffc
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/lumi_histo_mapping.xsv with hash: 613699431c62bf439a90f422862c991e
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/lumi_histo.xsa with hash: de35b2be588b529ea18f64854175
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/histo_debug_mapping.xsv with hash: 1beeac403e3a84db56125fac30435a2
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/histo_debug.xsa with hash: 3fbc14e2361627897b1af6ad51326df
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/vegetation_data_mapping.xsv with hash: f6f77767eb6634ef8fb86ad027f835
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/vegetation_data.xsa with hash: 4f618718d0ac6e2af13f613c96c386
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/vegetation_cull_mapping.xsv with hash: a82ba5da2e29f0b36e184b678e6fe9a5
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/vegetation_cull.xsa with hash: b06bf0a677d7ab071fa2c5ca0a528d
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/weather_apply_compute_mapping.xsv with hash: c8b361558bc4818916379985e5d59852
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/weather_apply_compute.xsa with hash: 13fc141f534cc43ca11801061d2e8
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/weather_apply_raster_mapping.xsv with hash: c049d75996a4fcfb20d321bf3dbfbe89
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/weather_apply_raster.xsa with hash: 59ec1ead7cb9290db7d2280e553a8
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/cloud_upscale_mapping.xsv with hash: a17d6523678f6c88cba7b8d45cbdf2e4
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/cloud_upscale.xsa with hash: 32b1382e4aef603ba530dfbbf68e56a8
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/volumetric_apply_mapping.xsv with hash: 4cad1029c284d2144ff999a0bd523068
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/volumetric_apply.xsa with hash: 7eda25c4ee5e76e734733fb320d86b
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/volumetric_fog_mapping.xsv with hash: f5e56bb9fe8e7496956f883ca2e4c656
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/volumetric_fog.xsa with hash: 543fc4e3db534470968b537cc18
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/cloud_render_raster_mapping.xsv with hash: cc3c4c11ef0e2ac78959bcfcddb1fde
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/cloud_render_raster.xsa with hash: a16091611ccbe4cdb45ca8adb34344
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/cloud_render_compute_mapping.xsv with hash: 5f343e6d7f27af2a6b7aac3519343a8
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/cloud_render_compute.xsa with hash: b519a613fb5f962f42dc2630aad2899
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/cloud_update_mapping.xsv with hash: 63bb0a21d97baa63846ee956bc5973
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/cloud_update.xsa with hash: f710be2064aa49742de2975241de3135
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/cloud_minify_mapping.xsv with hash: 9e725cb1a9dacd338ed6c634cd7733f
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/cloud_minify.xsa with hash: c8363a2376313666d8d9bf8118edb729
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/cloud_map_mapping.xsv with hash: 62419fd5aa4e9472fe4851e0ea6bc
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/cloud_map.xsa with hash: 7074ad21985d2f72e887d431b16d7e1
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/cloud_shadows_mapping.xsv with hash: 446d1919d1c0a6675f25f4f928673293
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/cloud_shadows.xsa with hash: f46a2fd657eb853e1113983ca4111fd5
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/cloud_precipitation_mapping.xsv with hash: 24212577d9629e6fbf9c1cb0a3c221b4
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/cloud_precipitation.xsa with hash: d6a0a86d2f978d42eb855afd38d2157
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/cloud_categorize_mapping.xsv with hash: d69d84917d5d4369d463df2e7b1544ec
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/cloud_categorize.xsa with hash: 8d21799a8be1c1e275a0df4ce3489fe0
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/ripple_mapping.xsv with hash: fbe7e88b431fcc1cd52e9a5f92f347bf
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/ripple.xsa with hash: 93f7b7f3bf50789f1075a4778b543f
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/rain_surface_mapping.xsv with hash: 4b6662daa081654dc32e37b09bacab53
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/rain_surface.xsa with hash: 88c33216bd576b43749425fb99546583
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/rain_visualize_mapping.xsv with hash: d4535d78d93aa7828e2f24dfafe4475
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/rain_visualize.xsa with hash: e3b39d428c9b8b8db991bb9333a0e0f9
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/rain_forces_visualize_mapping.xsv with hash: 59afc7108d734989f9984739b634f
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/rain_forces_visualize.xsa with hash: 6fc293397590484443f1e0e9f02e3eea
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/rain_ice_accumulation_mapping.xsv with hash: 9f1427cd30b58012b5b2c82a87877963
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/rain_ice_accumulation.xsa with hash: 805b9e67ecb3e126927786752b8bbda2
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/rain_droplets_compute_mapping.xsv with hash: 6c332dc32f159f20beb2cb9e492de4
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/rain_droplets_compute.xsa with hash: 945521d25885036881f7db25f12ffb0
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/rain_droplets_wipers_mapping.xsv with hash: 15b9425e19746ba33a29f3c17128793
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/rain_droplets_wipers.xsa with hash: 8a77f6cc170b4e15a8af024bffbf78
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/rain_forces_mapping.xsv with hash: 2382412489919ad1ceb3db6ac6fbf59f
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/rain_forces.xsa with hash: 888b794642d46b2e3256abaeffabcc9
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/rain_normals_mapping.xsv with hash: cff63cddab72fb9159c96d3b1d8d27f9
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/rain_normals.xsa with hash: 681c4f65711b8153a7d62469477f4e6
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/rain_draw_mapping.xsv with hash: e1d217c612f61a1b98be5b6c544bbc6
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/rain_draw.xsa with hash: 6ee1b7b0da9b214cab28d0f6c8ace9e
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/compute_fft_mapping.xsv with hash: 7ca6c6a755c591f88b2fd8a295a7fb6
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/compute_fft.xsa with hash: 315137f97662249e10fb1111535d9084
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/cacao_mapping.xsv with hash: 16f0bd4d699ae02585b8e1925e63aca3
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/cacao.xsa with hash: 449314edbaac4d7a2be05eae8f19
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/depth_of_field_mapping.xsv with hash: e1f94930c4d898caf2fef533dc7963
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/depth_of_field.xsa with hash: 2c9da56b13aabf8bf0a4c3684535ab7
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/fsr_mapping.xsv with hash: 7c85436c5dfddfc1724c6391cd1da7
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/fsr.xsa with hash: 624ec831a97d8046abb4b286b541c367
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/sectional2_mapping.xsv with hash: ea205649a641ab409f69f7cbcc10535b
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/sectional2.xsa with hash: 22f7f2943b77b123e848b878f82c1533
+Initializing off screen memory.
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/scatter_compute_t_mapping.xsv with hash: 9639e3d6fb3d91532ecda0a62f6b557f
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/scatter_compute_t.xsa with hash: f7cdaae7682276bd5c80d8481e176a
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/scatter_compute_multi_mapping.xsv with hash: 7e69c56e11b6a4b8a5df1166df2f4afc
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/scatter_compute_multi.xsa with hash: 31429df7c41892316b15cd774568b
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/scatter_compute_skydome_mapping.xsv with hash: 6f8948282faeb114d304db91b777e67
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/scatter_compute_skydome.xsa with hash: e679ef742220591d71d61369fad8cfbc
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/scatter_compute_scattering_mapping.xsv with hash: e8dad12e3afda7d25c81bd09454dbce
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/scatter_compute_scattering.xsa with hash: d829aaa54b5d31cb9a1b25eb81a152c
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/scatter_render_atmosphere_mapping.xsv with hash: 2588c2261796706bd76f51f23ec8435f
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/scatter_render_atmosphere.xsa with hash: bd92ae724a911b52e9352b2f343f52bf
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/deferred_gbuf_mapping.xsv with hash: bd4dfe6c44f7692bc12b0e98e8c819b
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/deferred_gbuf.xsa with hash: 739cdfb3f5e98c5340ba550c73a09b
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/msaa_categorize_mapping.xsv with hash: d754a4b0fa8baa49c8ecaceb3c5853
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/msaa_categorize.xsa with hash: f6f1d3d3e827d4a5c3e7428f8c2e7d
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/csm_resolve_mapping.xsv with hash: 4f1cf2716ab3537a407c4aa6d2a2155
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/csm_resolve.xsa with hash: ac7c57494e2554b94b3abb611ab1ad9
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/hdr_mapping.xsv with hash: 264b5b1b7d79617c69c8ee9c852511
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/hdr.xsa with hash: 707a2dc9eec7c50b21215e6a5736ea8
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/bloom_mapping.xsv with hash: 37bc21971391d796346bb9cafdbdc9ca
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/bloom.xsa with hash: 4910d23e29c96a7a42138810e73dd7
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/exposure_fusion_mapping.xsv with hash: ac6b7b43996128fefdd74a8d7af81d1
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/exposure_fusion.xsa with hash: aff3d73ca26fcb2e79d3023cfae6f33
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/airport_raster_mapping.xsv with hash: c922df7bd0dc1398fcae63e1868e03c
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/airport_raster.xsa with hash: e9c5bc587d171eb6526011f8b17c7
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/acf_map_icon_mapping.xsv with hash: f4bdb370d840a877b53bc454fd968869
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/acf_map_icon.xsa with hash: 2b26b52b9fb11637cb84a05b98119f
+Initializing off screen memory complete.
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/ocean_spectrum_mapping.xsv with hash: 8785517c82761a9c1b7e97d8e120f4
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/ocean_spectrum.xsa with hash: f6be999b6bff4ebc66c1e1209a24
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/ocean_bake_textures_mapping.xsv with hash: 9b1895efb4d8f35d4e5f9c434771175e
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/ocean_bake_textures.xsa with hash: 71db9c7889b11e373ac41d23e6faa
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/ocean_variance_mapping.xsv with hash: 784e3ff8ba619c8ccda606d5bc7b2c3
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/ocean_variance.xsa with hash: efbbcc0de1b81276aac8347bcfe61d3
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/ocean_mesh_data_mapping.xsv with hash: 43c0114b58b97b736b7a5f5b866581f
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/ocean_mesh_data.xsa with hash: c645a85ec1521ff9931d8d23f2e7b90
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/ocean_mesh_bake_mapping.xsv with hash: 10cbbb69cf87a7304ae0debba110559c
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/ocean_mesh_bake.xsa with hash: dd69ba25f5449fea31fdd980db5ab4
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/ocean_shading_mapping.xsv with hash: 4e67ad10fa43df8df42e512471ba20fc
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/ocean_shading.xsa with hash: 171a852d6a8169f7d4efd88191c89a2d
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/ocean_meta_data_mapping.xsv with hash: cea84ceffd6044427b4ea75c115b4776
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/ocean_meta_data.xsa with hash: 583fb7155851af4f958edd3bc85d4eb1
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/ocean_readback_mapping.xsv with hash: e3dd93aa6857137981bb4773bbcf2a7e
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/ocean_readback.xsa with hash: 6db0da7d24e799e14bcc9f6ae10f441
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/planet_mapping.xsv with hash: 992040b3bcca83da17216986158f51c
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/planet.xsa with hash: 65d9277d8da83aeeeaf764c5e051b7d7
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/dome_mapping.xsv with hash: 6a43db90ecbe9b5e6337fa76ebc55
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/dome.xsa with hash: 3eea194cb5f775f486c5b11c15db92
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/astronomical_mapping.xsv with hash: 6c736aa3443fca266d41398bcee61394
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/astronomical.xsa with hash: 3db0db68ddbec3f29c4784f6d0879
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/particle_mapping.xsv with hash: 718a6a78102ddaba12ef1a63b3dd025
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/particle.xsa with hash: 886e76c4e2d9efabab4c689939e7842a
+0:09:37.130 I/GFX: Loaded mapping Resources/shaders/bin/manip3d_mapping.xsv with hash: 3e1c5957792e92c65ba3b2a6d8477eb2
+0:09:37.130 I/GFX: Loaded archive Resources/shaders/bin/spv/manip3d.xsa with hash: 8365d8487081723167f31ccf62f9be5
+0:09:37.130 D/STM: Transitioning from state state_QuickFlightWizard to state_NormalLoading
+0:09:37.130 I/ACF: Loading airplane number 0 with Aircraft/Thranda_C172/Thranda_C172.acf
+FlyWithLua Info: XPLM_MSG_FMOD_BANK_UNLOADING & xplm_RadioBank  true
+FlyWithLua Info: fmod_uninitialize() FmodSounds.size =  0
+FlyWithLua Info: fmod_uninitialize()  Should be 0 now FmodSounds.size =  0
+0:09:37.130 I/WXR: Parsing weather manifest ID '62240'
+0:10:01.557 G64:  core:  Aircraft File: (Aircraft/Thranda_C172/Thranda_C172.acf)
+0:10:01.561 G64:  core:       MD5 Hash: (426d675268be2394ef31c7f9a18aba6d)
+0:10:01.561 G64:  core:    Description: (Cessna 172M)
+0:10:01.561 G64:  core:         Author: (Thranda Design)
+0:10:01.561 G64:  core: Run: [OnBeforeReboot]
+0:10:01.561 G64: debug: --- -- --- -- --- -- --- -- --- -- Firmware Reboot -- --- -- --- -- --- -- --- -- --- -- ---
+0:10:01.562 G64:  core: curl_easy_init() provided by:[C:\Program Files (x86)\Steam\steamapps\common\X-Plane 12\Resources\plugins\Gizmo64.plugin\win_x64\libcurl.dll]
+0:10:01.562 G64:  core: Boot Count: 2
+0:10:01.563 G64:  core: OpenAL: Shared OpenAL context..
+0:10:01.564 G64: debug: Firmware v21.03.20.0220
+0:10:01.581 G64: debug: gxt: AutoLoading..
+0:10:01.581 G64: debug:   gxt.load: Console
+0:10:01.582 G64: debug:   gxt.load: ToolTray
+0:10:01.582 G64: debug:   gxt.load: Mute
+0:10:01.583 G64: debug:   gxt.load: Preferences
+0:10:01.584 G64: debug:   gxt.load: RebootButton
+0:10:01.584 G64: debug:   gxt.load: GateKeeper
+0:10:01.586 G64: debug: 	GK: Load license from disk..
+0:10:01.587 G64: debug: 	GK: License is good.
+0:10:01.587 G64: debug: 	GK: IPC v21.03.18 loaded.
+0:10:01.587 G64: debug:   gxt.load: MAXX_RWC
+0:10:01.588 G64: debug:   gxt.load: LuaGC
+0:10:01.588 G64: debug:   gxt.load: Shell
+0:10:01.589 G64: debug:   gxt.load: Stats
+0:10:01.589 G64: debug: gxt: Completed AutoLoad.
+0:10:01.589 G64: debug: firmware_init.lua completed.
+0:10:01.590 G64:  core: Run: [OnKickStart]
+0:10:01.590 G64: debug: 	KS: Plain text scripts..
+0:10:01.590 G64: debug: 	KS: End crypto check.
+0:10:01.590 G64: debug: 	KS: End OnKickStart..
+0:10:01.590 G64: debug: --------------------------------------------------
+0:10:01.590 G64:  core: Register Draw Call: OnDraw_Windows
+0:10:01.590 G64:  core: 	Alias: OnDraw_Windows_Toast
+0:10:01.590 G64:  core: 	Alias: OnDraw_Windows_ShardTasks
+0:10:01.590 G64:  core: 	Alias: OnDraw_Windows_ToolTray
+0:10:01.590 G64:  core: 	Alias: OnDraw_Windows_MuteSymbol
+0:10:01.591 G64:  core: X-P Lua Memory Stats:
+0:10:01.591 G64:  core: 	Max Used:     0.466 MiB     488727 B
+0:10:01.591 G64:  core: 	  In Use:     0.466 MiB     488727 B
+0:10:01.591 G64:  core: 	   Gizmo:     0.466 MiB     488727 B
+0:10:01.591 G64:  core: 	   Delta:     0.000 MiB          0 B
+X-Camera: Scenic Flyer not found
+X-Camera: Attempting to initialize HeadShake
+X-Camera: HeadShake was found and will be enabled
+X-Camera: TrackIR was found and is enabled
+0:09:37.130 I/GFX/VK: Surface formats for surface:
+0:09:37.130 I/GFX/VK: 	VK_FORMAT_B8G8R8A8_UNORM
+0:09:37.130 I/GFX/VK: 	VK_FORMAT_B8G8R8A8_SRGB
+0:09:37.130 I/GFX/VK: 	VK_FORMAT_R8G8B8A8_UNORM
+0:09:37.130 I/GFX/VK: 	VK_FORMAT_R8G8B8A8_SRGB
+0:09:37.130 I/GFX/VK: 	VK_FORMAT_A2B10G10R10_UNORM_PACK32
+0:09:37.130 I/GFX/VK: Surface 000001AF063DFEF0:
+0:09:37.130 I/GFX/VK: 	minImageCount 2:
+0:09:37.130 I/GFX/VK: 	maxImageCount 8:
+0:09:37.130 I/GFX/VK: 	supportedUsageFlags 9f:
+0:09:37.130 I/GFX/VK: 	supportedTransforms: VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR
+0:09:37.130 I/GFX/VK: 	currentTransform: VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR
+0:09:37.130 I/GFX/VK: 	supported modes:
+0:09:37.130 I/GFX/VK: 		VK_PRESENT_MODE_MAILBOX_KHR:
+0:09:37.130 I/GFX/VK: 		VK_PRESENT_MODE_IMMEDIATE_KHR:
+0:09:37.130 I/GFX/VK: 		VK_PRESENT_MODE_FIFO_KHR:
+0:09:37.130 I/GFX/VK: 		VK_PRESENT_MODE_FIFO_RELAXED_KHR:
+0:09:37.130 I/GFX/VK: Created swapchain for 000001AECA2CB200 with size { 1245x525x3 }. Mode: VK_PRESENT_MODE_MAILBOX_KHR
+0:09:37.130 I/wmgr: Re-building fbos for window 000001AF0D3D8C60 using pool 7
+Fetching plugins for C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Aircraft/Thranda_C172/plugins
+
+[SASL3_T12 INFO]: Starting X-Plane SASL plugin v3.16.4+06caa36 [Commercial Edition]
+[SASL3_T12 INFO]: SASL3_T12 | Aircraft | Start Full
+[SASL3_T12 INFO]: Loading cursors...
+Loaded: C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Aircraft/Thranda_C172/plugins/SASL3_Thranda12/64/win.xpl (1-sim SASL3_T12).
+
+[SASL3_T12 INFO]: Enabling...
+[SASL3_T12 INFO]: Sound output device: OpenAL Soft
+[SASL3_T12 INFO]: Initializing...
+[SASL3_T12 INFO]: [DISPLAY] Monitor 0: 0, 0, 1280, 720
+[SASL3_T12 INFO]: Path to module: C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Aircraft/Thranda_C172/plugins/SASL3_Thranda12/data/modules/main.key
+[SASL3_T12 INFO]: Loading module...
+[SASL3_T12 INFO]: [LUA]: loading	module
+[SASL3_T12 INFO]: [LUA]: including	Tbient/DRFS/XPDRFS.lua
+[SASL3_T12 (SASL)]: Dataref 'sim/aircraft/vtolcontrols/acf_cyclic_ailn' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/aircraft/vtolcontrols/acf_cyclic_elev' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/aircraft/engine/acf_gear_rat' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/cockpit/electrical/ah_bar' is deprecated and will be removed in a future version.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/barometer_current_inhg' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/barometer_sealevel_inhg' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/cockpit2/gauges/actuators/airspeed_bug_deg' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/cockpit2/controls/flap_ratio' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/cockpit2/controls/parking_brake_ratio' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/cockpit/pressure/cabin_altitude_actual_m_msl' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/cockpit/pressure/cabin_altitude_set_m_msl' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/cockpit/pressure/cabin_vvi_actual_m_msec' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/cockpit/pressure/cabin_vvi_set_m_msec' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/flightmodel/misc/cgz_ref_to_default' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/cloud_base_msl_m[0]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/cloud_base_msl_m[1]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/cloud_base_msl_m[2]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/cloud_coverage[0]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/cloud_coverage[1]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/cloud_coverage[2]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/cloud_tops_msl_m[0]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/cloud_tops_msl_m[1]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/cloud_tops_msl_m[2]' has been replaced. Please use the new name.
+[SASL3_T12 WARN]: [STACK]:| rMAsIWpR7vuC : DataRefsHandler::luaFindDataRef: <sim/graphics/animation/deer/deer_run_cycle> not found
+[SASL3_T12 WARN]: [STACK]:| [string "b2c3ebe13254772/data/init/initProperties"]:297 in function <globalPropertyf>
+[SASL3_T12 WARN]: [STACK]:| [string "XPDRFS"]:2 in function <DRF>
+[SASL3_T12 WARN]: [STACK]:| [string "XPDRFS"]:690 in function <?>
+[SASL3_T12 WARN]: [STACK]:| [string ".../initMain.secured"]:0 in function <include>
+[SASL3_T12 WARN]: [STACK]:| [string ".../initMain.secured"]:0 in function <include>
+[SASL3_T12 WARN]: [STACK]:| ...
+[SASL3_T12 WARN]: [STACK]:| rMAsIWpR7vuC : DataRefsHandler::luaFindDataRef: <sim/graphics/animation/deer/deer_turn_cycle> not found
+[SASL3_T12 WARN]: [STACK]:| [string "b2c3ebe13254772/data/init/initProperties"]:297 in function <globalPropertyf>
+[SASL3_T12 WARN]: [STACK]:| [string "XPDRFS"]:2 in function <DRF>
+[SASL3_T12 WARN]: [STACK]:| [string "XPDRFS"]:691 in function <?>
+[SASL3_T12 WARN]: [STACK]:| [string ".../initMain.secured"]:0 in function <include>
+[SASL3_T12 WARN]: [STACK]:| [string ".../initMain.secured"]:0 in function <include>
+[SASL3_T12 WARN]: [STACK]:| ...
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/dewpoi_sealevel_c' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/flightmodel/engine/ENGN_thro_override' is deprecated and will be removed in a future version.
+[SASL3_T12 (SASL)]: Dataref 'sim/flightmodel2/controls/flap_handle_deploy_ratio' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/gravity_mss' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/operation/failures/hydraulic_pressure_ratio' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/operation/failures/hydraulic_pressure_ratio2' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/flightmodel/misc/jett_size' is deprecated and will be removed in a future version.
+[SASL3_T12 (SASL)]: Dataref 'sim/graphics/misc/light_attenuation' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/cockpit/radios/obs_mag' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane1_yolk_pitch' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane1_yolk_roll' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane1_yolk_yaw' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane10_yolk_pitch' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane10_yolk_roll' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane10_yolk_yaw' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane11_yolk_pitch' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane11_yolk_roll' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane11_yolk_yaw' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane12_yolk_pitch' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane12_yolk_roll' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane12_yolk_yaw' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane13_yolk_pitch' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane13_yolk_roll' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane13_yolk_yaw' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane14_yolk_pitch' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane14_yolk_roll' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane14_yolk_yaw' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane15_yolk_pitch' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane15_yolk_roll' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane15_yolk_yaw' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane16_yolk_pitch' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane16_yolk_roll' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane16_yolk_yaw' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane17_yolk_pitch' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane17_yolk_roll' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane17_yolk_yaw' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane18_yolk_pitch' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane18_yolk_roll' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane18_yolk_yaw' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane19_yolk_pitch' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane19_yolk_roll' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane19_yolk_yaw' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane2_yolk_pitch' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane2_yolk_roll' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane2_yolk_yaw' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane3_yolk_pitch' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane3_yolk_roll' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane3_yolk_yaw' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane4_yolk_pitch' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane4_yolk_roll' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane4_yolk_yaw' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane5_yolk_pitch' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane5_yolk_roll' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane5_yolk_yaw' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane6_yolk_pitch' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane6_yolk_roll' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane6_yolk_yaw' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane7_yolk_pitch' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane7_yolk_roll' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane7_yolk_yaw' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane8_yolk_pitch' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane8_yolk_roll' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane8_yolk_yaw' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane9_yolk_pitch' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane9_yolk_roll' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/multiplayer/position/plane9_yolk_yaw' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/precipitation_on_aircraft_ratio' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/rain_percent' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/runway_friction' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/shear_direction_degt[0]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/shear_direction_degt[1]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/shear_direction_degt[2]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/shear_speed_kt[0]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/shear_speed_kt[1]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/shear_speed_kt[2]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/speed_sound_ms' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/temperature_ambient_c' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/temperature_le_c' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/temperature_sealevel_c' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/thermal_rate_ms' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/turbulence[0]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/turbulence[1]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/turbulence[2]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/visibility_reported_m' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/wave_amplitude' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/wave_length' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/wave_speed' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/wind_altitude_msl_m[0]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/wind_altitude_msl_m[1]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/wind_altitude_msl_m[2]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/wind_direction_degt' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/wind_direction_degt[0]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/wind_direction_degt[1]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/wind_direction_degt[2]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/wind_now_x_msc' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/wind_now_y_msc' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/wind_now_z_msc' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/wind_speed_kt' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/wind_speed_kt[0]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/wind_speed_kt[1]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/wind_speed_kt[2]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/wind_turbulence_percent' is deprecated and will be removed in a future version.
+[SASL3_T12 (SASL)]: Dataref 'sim/joystick/yolk_heading_ratio' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/joystick/yolk_pitch_ratio' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/joystick/yolk_roll_ratio' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/cockpit/autopilot/airspeed_mode' is deprecated and will be removed in a future version.
+[SASL3_T12 (SASL)]: Dataref 'sim/cockpit/autopilot/altitude_mode' is deprecated and will be removed in a future version.
+[SASL3_T12 (SASL)]: Dataref 'sim/cockpit/switches/anti_ice_auto_ignite' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/cockpit/switches/anti_ice_on' is deprecated and will be removed in a future version.
+[SASL3_T12 (SASL)]: Dataref 'sim/cockpit/pressure/bleed_air_on' is deprecated and will be removed in a future version.
+[SASL3_T12 (SASL)]: Dataref 'sim/cockpit2/ice/ice_auto_ignite_on' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/graphics/view/cinema_verite' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/cloud_type[0]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/cloud_type[1]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/cloud_type[2]' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/graphics/scenery/current_planet' is deprecated and will be removed in a future version.
+[SASL3_T12 (SASL)]: Dataref 'sim/cockpit/switches/EFIFS_shows_weather' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/cockpit/switches/EFIS_map_mode' is deprecated and will be removed in a future version.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/has_real_weather_bool' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/cockpit/autopilot/heading_mode' is deprecated and will be removed in a future version.
+[SASL3_T12 (SASL)]: Dataref 'sim/cockpit/autopilot/mode_gls' is deprecated and will be removed in a future version.
+[SASL3_T12 (SASL)]: Dataref 'sim/cockpit/autopilot/mode_hnav' is deprecated and will be removed in a future version.
+[SASL3_T12 (SASL)]: Dataref 'sim/operation/override/override_camera' is deprecated and will be removed in a future version.
+[SASL3_T12 WARN]: [STACK]:| rMAsIWpR7vuC : DataRefsHandler::luaFindDataRef: <sim/operation/override/override_clouds> not found
+[SASL3_T12 WARN]: [STACK]:| [string "b2c3ebe13254772/data/init/initProperties"]:390 in function <globalPropertyi>
+[SASL3_T12 WARN]: [STACK]:| [string "XPDRFS"]:4 in function <DRI>
+[SASL3_T12 WARN]: [STACK]:| [string "XPDRFS"]:2620 in function <?>
+[SASL3_T12 WARN]: [STACK]:| [string ".../initMain.secured"]:0 in function <include>
+[SASL3_T12 WARN]: [STACK]:| [string ".../initMain.secured"]:0 in function <include>
+[SASL3_T12 WARN]: [STACK]:| ...
+[SASL3_T12 (SASL)]: Dataref 'sim/operation/failures/rel_antice' is deprecated and will be removed in a future version.
+[SASL3_T12 (SASL)]: Dataref 'sim/operation/failures/rel_fc_ail_L' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/operation/failures/rel_fc_ail_R' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/operation/failures/rel_fc_elv_D' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/operation/failures/rel_fc_elv_U' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/operation/failures/rel_fc_rud_L' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/operation/failures/rel_fc_rud_R' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/operation/failures/rel_ice_surf_boot' is deprecated and will be removed in a future version.
+[SASL3_T12 (SASL)]: Dataref 'sim/operation/prefs/reset_on_crash' is deprecated and will be removed in a future version.
+[SASL3_T12 (SASL)]: Dataref 'sim/operation/windows/system_window' is deprecated and will be removed in a future version.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/use_real_weather_bool' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/wave_dir' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/airfoils/afl_mach_div' is deprecated and will be removed in a future version.
+[SASL3_T12 (SASL)]: Dataref 'sim/aircraft/parts/acf_gear_tirrad' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/aircraft/bodies/acf_fuse_cd_array' is deprecated and will be removed in a future version.
+[SASL3_T12 (SASL)]: Dataref 'sim/cockpit/switches/anti_ice_inlet_heat_per_enigne' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/flightmodel/engine/ENGN_CHT' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/cockpit2/engine/indicators/CHT_deg_C' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/flightmodel/engine/ENGN_CHT_c' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/flightmodel/engine/ENGN_EGT' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/cockpit2/engine/indicators/EGT_deg_C' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/flightmodel/engine/ENGN_EGT_c' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/cockpit2/engine/indicators/ITT_deg_C' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/flightmodel/engine/ENGN_ITT_c' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/flightmodel/engine/ENGN_ITT' has been replaced. Please use the new name.
+[SASL3_T12 (SASL)]: Dataref 'sim/cockpit/engine/starter_duration' has been replaced. Please use the new name.
+[SASL3_T12 WARN]: [STACK]:| rMAsIWpR7vuC : DataRefsHandler::luaFindDataRef: <sim/aircraft/parts/acf_s> not found
+[SASL3_T12 WARN]: [STACK]:| [string "b2c3ebe13254772/data/init/initProperties"]:746 in function <globalPropertyfa>
+[SASL3_T12 WARN]: [STACK]:| [string "XPDRFS"]:44 in function <XPDRFA>
+[SASL3_T12 WARN]: [STACK]:| [string "XPDRFS"]:3981 in function <?>
+[SASL3_T12 WARN]: [STACK]:| [string ".../initMain.secured"]:0 in function <include>
+[SASL3_T12 WARN]: [STACK]:| [string ".../initMain.secured"]:0 in function <include>
+[SASL3_T12 WARN]: [STACK]:| ...
+[SASL3_T12 WARN]: [STACK]:| rMAsIWpR7vuC : DataRefsHandler::luaFindDataRef: <sim/aircraft/parts/acf_mac> not found
+[SASL3_T12 WARN]: [STACK]:| [string "b2c3ebe13254772/data/init/initProperties"]:746 in function <globalPropertyfa>
+[SASL3_T12 WARN]: [STACK]:| [string "XPDRFS"]:44 in function <XPDRFA>
+[SASL3_T12 WARN]: [STACK]:| [string "XPDRFS"]:4008 in function <?>
+[SASL3_T12 WARN]: [STACK]:| [string ".../initMain.secured"]:0 in function <include>
+[SASL3_T12 WARN]: [STACK]:| [string ".../initMain.secured"]:0 in function <include>
+[SASL3_T12 WARN]: [STACK]:| ...
+[SASL3_T12 WARN]: [STACK]:| rMAsIWpR7vuC : DataRefsHandler::luaFindDataRef: <sim/world/boat/pitch_amplitude_deg_mtr> not found
+[SASL3_T12 WARN]: [STACK]:| [string "b2c3ebe13254772/data/init/initProperties"]:746 in function <globalPropertyfa>
+[SASL3_T12 WARN]: [STACK]:| [string "XPDRFS"]:44 in function <XPDRFA>
+[SASL3_T12 WARN]: [STACK]:| [string "XPDRFS"]:4160 in function <?>
+[SASL3_T12 WARN]: [STACK]:| [string ".../initMain.secured"]:0 in function <include>
+[SASL3_T12 WARN]: [STACK]:| [string ".../initMain.secured"]:0 in function <include>
+[SASL3_T12 WARN]: [STACK]:| ...
+[SASL3_T12 WARN]: [STACK]:| rMAsIWpR7vuC : DataRefsHandler::luaFindDataRef: <sim/world/boat/pitch_frequency_hz> not found
+[SASL3_T12 WARN]: [STACK]:| [string "b2c3ebe13254772/data/init/initProperties"]:746 in function <globalPropertyfa>
+[SASL3_T12 WARN]: [STACK]:| [string "XPDRFS"]:44 in function <XPDRFA>
+[SASL3_T12 WARN]: [STACK]:| [string "XPDRFS"]:4161 in function <?>
+[SASL3_T12 WARN]: [STACK]:| [string ".../initMain.secured"]:0 in function <include>
+[SASL3_T12 WARN]: [STACK]:| [string ".../initMain.secured"]:0 in function <include>
+[SASL3_T12 WARN]: [STACK]:| ...
+[SASL3_T12 WARN]: [STACK]:| rMAsIWpR7vuC : DataRefsHandler::luaFindDataRef: <sim/world/boat/roll_amplitude_deg_mtr> not found
+[SASL3_T12 WARN]: [STACK]:| [string "b2c3ebe13254772/data/init/initProperties"]:746 in function <globalPropertyfa>
+[SASL3_T12 WARN]: [STACK]:| [string "XPDRFS"]:44 in function <XPDRFA>
+[SASL3_T12 WARN]: [STACK]:| [string "XPDRFS"]:4163 in function <?>
+[SASL3_T12 WARN]: [STACK]:| [string ".../initMain.secured"]:0 in function <include>
+[SASL3_T12 WARN]: [STACK]:| [string ".../initMain.secured"]:0 in function <include>
+[SASL3_T12 WARN]: [STACK]:| ...
+[SASL3_T12 WARN]: [STACK]:| rMAsIWpR7vuC : DataRefsHandler::luaFindDataRef: <sim/world/boat/roll_frequency_hz> not found
+[SASL3_T12 WARN]: [STACK]:| [string "b2c3ebe13254772/data/init/initProperties"]:746 in function <globalPropertyfa>
+[SASL3_T12 WARN]: [STACK]:| [string "XPDRFS"]:44 in function <XPDRFA>
+[SASL3_T12 WARN]: [STACK]:| [string "XPDRFS"]:4164 in function <?>
+[SASL3_T12 WARN]: [STACK]:| [string ".../initMain.secured"]:0 in function <include>
+[SASL3_T12 WARN]: [STACK]:| [string ".../initMain.secured"]:0 in function <include>
+[SASL3_T12 WARN]: [STACK]:| ...
+[SASL3_T12 DEBUG]: [LUA]: "sim/cockpit2/autopilot/TOGA_pitch_deg": Casting float to int
+[SASL3_T12 (SASL)]: Dataref 'sim/flightmodel/position/magpsi' has been replaced. Please use the new name.
+[SASL3_T12 INFO]: [LUA]: including	Tbient/DRFS/THDRFS.lua
+[SASL3_T12 (SASL)]: Dataref 'sim/weather/tropo_alt_mtr' has been replaced. Please use the new name.
+[SASL3_T12 INFO]: [LUA]: including	Tbient/DRFS/THCMNDS.lua
+[SASL3_T12 INFO]: [LUA]: including	Tbient/DRFS/XPCMNDS.lua
+[SASL3_T12 INFO]: [LUA]: including	Tbient/Core3.lua
+[SASL3_T12 INFO]: [LUA]: including	custom_shared_components/TBString.lua
+[SASL3_T12 INFO]: [LUA]: including	Tbient/SaslConfigReader.lua
+[SASL3_T12 DEBUG]: [LUA]: "module"	Loading SASL configuration from C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Aircraft/Thranda_C172/plugins/SASL3_Thranda12/data/modules/configuration/configuration.ini
+[SASL3_T12 INFO]: [LUA]: "module"	[id] = [0]
+[SASL3_T12 INFO]: [LUA]: "module"	[name] = [SASL3_T12]
+[SASL3_T12 INFO]: [LUA]: "module"	[type] = [0]
+[SASL3_T12 INFO]: [LUA]: "module"	[startDisabled] = [0]
+[SASL3_T12 INFO]: [LUA]: "module"	[widget] = [1]
+[SASL3_T12 INFO]: [LUA]: "module"	[maskingMode] = [1]
+[SASL3_T12 INFO]: [LUA]: "module"	[centerLatitude] = [0.0000000]
+[SASL3_T12 INFO]: [LUA]: "module"	[centerLongitude] = [0.0000000]
+[SASL3_T12 INFO]: [LUA]: "module"	[maxElevation] = [0.0]
+[SASL3_T12 INFO]: [LUA]: "module"	[radius] = [0.0]
+[SASL3_T12 INFO]: [LUA]: "module"	[font] = [SourceCodePro.ttf]
+[SASL3_T12 INFO]: [LUA]: "module"	[fontSize] = [22]
+[SASL3_T12 INFO]: [LUA]: "module"	[ptComponentColorR] = [0.0]
+[SASL3_T12 INFO]: [LUA]: "module"	[ptComponentColorG] = [1.0]
+[SASL3_T12 INFO]: [LUA]: "module"	[ptComponentColorB] = [0.0]
+[SASL3_T12 INFO]: [LUA]: "module"	[ptComponentColorA] = [1.0]
+[SASL3_T12 INFO]: [LUA]: "module"	[ptStandardComponentColorR] = [0.729]
+[SASL3_T12 INFO]: [LUA]: "module"	[ptStandardComponentColorG] = [0.729]
+[SASL3_T12 INFO]: [LUA]: "module"	[ptStandardComponentColorB] = [0.0]
+[SASL3_T12 INFO]: [LUA]: "module"	[ptStandardComponentColorA] = [1.0]
+[SASL3_T12 INFO]: [LUA]: "module"	[ptLabelComponentColorR] = [0.5]
+[SASL3_T12 INFO]: [LUA]: "module"	[ptLabelComponentColorG] = [1.0]
+[SASL3_T12 INFO]: [LUA]: "module"	[ptLabelComponentColorB] = [0.5]
+[SASL3_T12 INFO]: [LUA]: "module"	[ptLabelComponentColorA] = [1.0]
+[SASL3_T12 INFO]: [LUA]: "module"	[logWarnColorR] = [1.0]
+[SASL3_T12 INFO]: [LUA]: "module"	[logWarnColorG] = [0.76]
+[SASL3_T12 INFO]: [LUA]: "module"	[logWarnColorB] = [0.0]
+[SASL3_T12 INFO]: [LUA]: "module"	[logWarnColorA] = [1.0]
+[SASL3_T12 INFO]: [LUA]: "module"	[logErrorColorR] = [1.0]
+[SASL3_T12 INFO]: [LUA]: "module"	[logErrorColorG] = [0.0]
+[SASL3_T12 INFO]: [LUA]: "module"	[logErrorColorB] = [0.0]
+[SASL3_T12 INFO]: [LUA]: "module"	[logErrorColorA] = [1.0]
+[SASL3_T12 INFO]: [LUA]: including	Tbient/AcfLib.lua
+[SASL3_T12 INFO]: [LUA]: "module"	Debug loaded AcfLib
+[SASL3_T12 INFO]: [LUA]: including	Tbient/THRCursors/THRCursors.lua
+[SASL3_T12 INFO]: [LUA]: "module"	Cursors added OK
+[SASL3_T12 INFO]: [LUA]: including	Tbient/THRNeedles/thrandaNeedles.lua
+[SASL3_T12 DEBUG]: [LUA]: "module"	Loading production (local) SASL
+[SASL3_T12 DEBUG]: [LUA]: "module"	We will attempt to load SASL component manifest from C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Aircraft/Thranda_C172/manifest.json
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 ANIM_EXTR
+[SASL3_T12 INFO]: [LUA]: loading	ANIM_EXTR
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 999.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Control_Surfaces
+[SASL3_T12 INFO]: [LUA]: loading	Control_Surfaces
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 800  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Doors
+[SASL3_T12 INFO]: [LUA]: loading	Doors
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 900  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	Fixed_Retr_Gear will not be loaded (load flag is false)
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 KillParts
+[SASL3_T12 INFO]: [LUA]: loading	KillParts
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1100  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 LandingGear
+[SASL3_T12 INFO]: [LUA]: loading	LandingGear
+[SASL3_T12 INFO]: [LUA]: "module"	Initializing ACF library
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1200  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 PILOTS
+[SASL3_T12 INFO]: [LUA]: loading	PILOTS
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 900  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 PropDiscVFX
+[SASL3_T12 INFO]: [LUA]: loading	PropDiscVFX
+[SASL3_T12 INFO]: [LUA]: "PropDiscVFX"	SideNumberOfBlades=350
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 699.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 TailNumUpdate
+[SASL3_T12 INFO]: [LUA]: loading	TailNumUpdate
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 699.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Windows
+[SASL3_T12 INFO]: [LUA]: loading	Windows
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1499.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 ANIM_INTR
+[SASL3_T12 INFO]: [LUA]: loading	ANIM_INTR
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1100  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 GlassReflections
+[SASL3_T12 INFO]: [LUA]: loading	GlassReflections
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 899.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 FacePlateRotation
+[SASL3_T12 INFO]: [LUA]: loading	FacePlateRotation
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 899.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 RadioKnobs
+[SASL3_T12 INFO]: [LUA]: loading	RadioKnobs
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1000  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 StarterLogic
+[SASL3_T12 INFO]: [LUA]: loading	StarterLogic
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1299.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 SwitchesCoversEtc
+[SASL3_T12 INFO]: [LUA]: loading	SwitchesCoversEtc
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 800  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 ThrottleQuadrant
+[SASL3_T12 INFO]: [LUA]: loading	ThrottleQuadrant
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 899.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 GearHandleAnim
+[SASL3_T12 INFO]: [LUA]: loading	GearHandleAnim
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1699.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 HideYokes
+[SASL3_T12 INFO]: [LUA]: loading	HideYokes
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 799.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 RMI_Needles
+[SASL3_T12 INFO]: [LUA]: loading	RMI_Needles
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1000  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 CMND_Buttons
+[SASL3_T12 INFO]: [LUA]: loading	CMND_Buttons
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1100  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 CMND_Rheostats
+[SASL3_T12 INFO]: [LUA]: loading	CMND_Rheostats
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1000  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 CMND_Switches
+[SASL3_T12 INFO]: [LUA]: loading	CMND_Switches
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1000  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 ELEC_SYST
+[SASL3_T12 INFO]: [LUA]: loading	ELEC_SYST
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1000  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 CircuitBreakers
+[SASL3_T12 INFO]: [LUA]: loading	CircuitBreakers
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 900  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 ElectricalNeedles
+[SASL3_T12 INFO]: [LUA]: loading	ElectricalNeedles
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1299.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 ExteriorLights
+[SASL3_T12 INFO]: [LUA]: loading	ExteriorLights
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 999.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 InteriorLights
+[SASL3_T12 INFO]: [LUA]: loading	InteriorLights
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 800  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	AmmeterVoltmeter will not be loaded (load flag is false)
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 ELT
+[SASL3_T12 INFO]: [LUA]: loading	ELT
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 899.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 MasterSwitch
+[SASL3_T12 INFO]: [LUA]: loading	MasterSwitch
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 899.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 FUEL_SYST
+[SASL3_T12 INFO]: [LUA]: loading	FUEL_SYST
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 899.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 FuelSwitches
+[SASL3_T12 INFO]: [LUA]: loading	FuelSwitches
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 999.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 INST
+[SASL3_T12 INFO]: [LUA]: loading	INST
+[SASL3_T12 INFO]: [LUA]: "INST"	34
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1000  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Registration
+[SASL3_T12 INFO]: [LUA]: loading	Registration
+[SASL3_T12 INFO]: [LUA]: loading	Registration_2D
+[SASL3_T12 INFO]: [LUA]: loading	rectangle
+[SASL3_T12 INFO]: [LUA]: loading	popupCloseButton
+[SASL3_T12 INFO]: [LUA]: loading	mouseFocusedZone
+[SASL3_T12 INFO]: [LUA]: loading	interactive
+[SASL3_T12 INFO]: [LUA]: loading	popupResizeButton
+[SASL3_T12 INFO]: [LUA]: loading	Registration_3D
+[SASL3_T12 INFO]: [LUA]: loading	Registration_logic
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1800  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 GTX327
+[SASL3_T12 INFO]: [LUA]: loading	GTX327
+[SASL3_T12 INFO]: [LUA]: loading	GTX327_2D
+[SASL3_T12 INFO]: [LUA]: loading	GTX327_logic
+[SASL3_T12 INFO]: [LUA]: loading	clickable
+[SASL3_T12 INFO]: [LUA]: loading	GTX327_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1000  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 InstArray
+[SASL3_T12 INFO]: [LUA]: loading	InstArray
+[SASL3_T12 INFO]: [LUA]: loading	InstArray_3D
+[SASL3_T12 INFO]: [LUA]: loading	InstArray_logic
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1200  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 BndxKngNAVCOM1
+[SASL3_T12 INFO]: [LUA]: loading	BndxKngNAVCOM1
+[SASL3_T12 INFO]: [LUA]: loading	BndxKngNAVCOM1_2D
+[SASL3_T12 INFO]: [LUA]: loading	BndxKngNAVCOM1_logic
+[SASL3_T12 INFO]: [LUA]: loading	BndxKngNAVCOM1_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 799.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 BndxKngNAVCOM2
+[SASL3_T12 INFO]: [LUA]: loading	BndxKngNAVCOM2
+[SASL3_T12 INFO]: [LUA]: loading	BndxKngNAVCOM2_2D
+[SASL3_T12 INFO]: [LUA]: loading	BndxKngNAVCOM2_logic
+[SASL3_T12 INFO]: [LUA]: loading	BndxKngNAVCOM2_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 899.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Ins01
+[SASL3_T12 INFO]: [LUA]: loading	Ins01
+[SASL3_T12 INFO]: [LUA]: loading	Ins01_2D
+[SASL3_T12 INFO]: [LUA]: loading	Ins01_logic
+[SASL3_T12 INFO]: [LUA]: loading	Ins01_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 799.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Ins02
+[SASL3_T12 INFO]: [LUA]: loading	Ins02
+[SASL3_T12 INFO]: [LUA]: loading	Ins02_2D
+[SASL3_T12 INFO]: [LUA]: loading	Ins02_logic
+[SASL3_T12 INFO]: [LUA]: loading	Ins02_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1000  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Ins03
+[SASL3_T12 INFO]: [LUA]: loading	Ins03
+[SASL3_T12 INFO]: [LUA]: loading	Ins03_2D
+[SASL3_T12 INFO]: [LUA]: loading	Ins03_logic
+[SASL3_T12 INFO]: [LUA]: loading	Ins03_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 800  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Ins04
+[SASL3_T12 INFO]: [LUA]: loading	Ins04
+[SASL3_T12 INFO]: [LUA]: loading	Ins04_2D
+[SASL3_T12 INFO]: [LUA]: loading	Ins04_logic
+[SASL3_T12 INFO]: [LUA]: loading	Ins04_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 899.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Ins05
+[SASL3_T12 INFO]: [LUA]: loading	Ins05
+[SASL3_T12 INFO]: [LUA]: loading	Ins05_2D
+[SASL3_T12 INFO]: [LUA]: loading	Ins05_logic
+[SASL3_T12 INFO]: [LUA]: loading	Ins05_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1099.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Ins06
+[SASL3_T12 INFO]: [LUA]: loading	Ins06
+[SASL3_T12 INFO]: [LUA]: loading	Ins06_2D
+[SASL3_T12 INFO]: [LUA]: loading	Ins06_logic
+[SASL3_T12 INFO]: [LUA]: loading	Ins06_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1100  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Ins07
+[SASL3_T12 INFO]: [LUA]: loading	Ins07
+[SASL3_T12 INFO]: [LUA]: loading	Ins07_2D
+[SASL3_T12 INFO]: [LUA]: loading	Ins07_logic
+[SASL3_T12 INFO]: [LUA]: loading	Ins07_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1100  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Ins08
+[SASL3_T12 INFO]: [LUA]: loading	Ins08
+[SASL3_T12 INFO]: [LUA]: loading	Ins08_2D
+[SASL3_T12 INFO]: [LUA]: loading	Ins08_logic
+[SASL3_T12 INFO]: [LUA]: loading	Ins08_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1000  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Ins09
+[SASL3_T12 INFO]: [LUA]: loading	Ins09
+[SASL3_T12 INFO]: [LUA]: loading	Ins09_2D
+[SASL3_T12 INFO]: [LUA]: loading	Ins09_logic
+[SASL3_T12 INFO]: [LUA]: loading	Ins09_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 900  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 IndicatedAirspeedConverter
+[SASL3_T12 INFO]: [LUA]: loading	IndicatedAirspeedConverter
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 899.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Ins10
+[SASL3_T12 INFO]: [LUA]: loading	Ins10
+[SASL3_T12 INFO]: [LUA]: loading	Ins10_2D
+[SASL3_T12 INFO]: [LUA]: loading	Ins10_logic
+[SASL3_T12 INFO]: [LUA]: loading	Ins10_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 999.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 ALT_VVI_set
+[SASL3_T12 INFO]: [LUA]: loading	ALT_VVI_set
+[SASL3_T12 INFO]: [LUA]: loading	ALT_VVI_set_2D
+[SASL3_T12 INFO]: [LUA]: loading	ALT_VVI_set_logic
+[SASL3_T12 INFO]: [LUA]: loading	ALT_VVI_set_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1100  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Ins11
+[SASL3_T12 INFO]: [LUA]: loading	Ins11
+[SASL3_T12 INFO]: [LUA]: loading	Ins11_2D
+[SASL3_T12 INFO]: [LUA]: loading	Ins11_logic
+[SASL3_T12 INFO]: [LUA]: loading	Ins11_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 799.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Ins12
+[SASL3_T12 INFO]: [LUA]: loading	Ins12
+[SASL3_T12 INFO]: [LUA]: loading	Ins12_2D
+[SASL3_T12 INFO]: [LUA]: loading	Ins12_logic
+[SASL3_T12 INFO]: [LUA]: loading	Ins12_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 999.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Ins13
+[SASL3_T12 INFO]: [LUA]: loading	Ins13
+[SASL3_T12 INFO]: [LUA]: loading	Ins13_2D
+[SASL3_T12 INFO]: [LUA]: loading	Ins13_logic
+[SASL3_T12 INFO]: [LUA]: loading	Ins13_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 799.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Ins14
+[SASL3_T12 INFO]: [LUA]: loading	Ins14
+[SASL3_T12 INFO]: [LUA]: loading	Ins14_2D
+[SASL3_T12 INFO]: [LUA]: loading	Ins14_logic
+[SASL3_T12 INFO]: [LUA]: loading	Ins14_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1200  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Ins15
+[SASL3_T12 INFO]: [LUA]: loading	Ins15
+[SASL3_T12 INFO]: [LUA]: loading	Ins15_2D
+[SASL3_T12 INFO]: [LUA]: loading	Ins15_logic
+[SASL3_T12 INFO]: [LUA]: loading	Ins15_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1100  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Ins16
+[SASL3_T12 INFO]: [LUA]: loading	Ins16
+[SASL3_T12 INFO]: [LUA]: loading	Ins16_2D
+[SASL3_T12 INFO]: [LUA]: loading	Ins16_logic
+[SASL3_T12 INFO]: [LUA]: loading	Ins16_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 900  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Ins28
+[SASL3_T12 INFO]: [LUA]: loading	Ins28
+[SASL3_T12 INFO]: [LUA]: loading	Ins28_2D
+[SASL3_T12 INFO]: [LUA]: loading	Ins28_logic
+[SASL3_T12 INFO]: [LUA]: loading	Ins28_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 900  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Ins32
+[SASL3_T12 INFO]: [LUA]: loading	Ins32
+[SASL3_T12 INFO]: [LUA]: loading	Ins32_2D
+[SASL3_T12 INFO]: [LUA]: loading	Ins32_logic
+[SASL3_T12 INFO]: [LUA]: loading	Ins32_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 900  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Ins33
+[SASL3_T12 INFO]: [LUA]: loading	Ins33
+[SASL3_T12 INFO]: [LUA]: loading	Ins33_2D
+[SASL3_T12 INFO]: [LUA]: loading	Ins33_logic
+[SASL3_T12 INFO]: [LUA]: loading	Ins33_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1000  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Ins35
+[SASL3_T12 INFO]: [LUA]: loading	Ins35
+[SASL3_T12 INFO]: [LUA]: loading	Ins35_2D
+[SASL3_T12 INFO]: [LUA]: loading	Ins35_logic
+[SASL3_T12 INFO]: [LUA]: loading	Ins35_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 899.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 ASPEN_EFD1000
+[SASL3_T12 INFO]: [LUA]: loading	ASPEN_EFD1000
+[SASL3_T12 INFO]: [LUA]: loading	ASPEN_EFD1000_2D
+[SASL3_T12 INFO]: [LUA]: loading	ASPEN_EFD1000_logic
+[SASL3_T12 INFO]: [LUA]: loading	EADI
+[SASL3_T12 INFO]: [LUA]: loading	EHSI
+[SASL3_T12 INFO]: [LUA]: loading	ASPEN_EFD1000_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 799.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Ins36
+[SASL3_T12 INFO]: [LUA]: loading	Ins36
+[SASL3_T12 INFO]: [LUA]: loading	Ins36_2D
+[SASL3_T12 INFO]: [LUA]: loading	Ins36_logic
+[SASL3_T12 INFO]: [LUA]: loading	Ins36_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1000  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	Ins43 will not be loaded (load flag is false)
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Ins47
+[SASL3_T12 INFO]: [LUA]: loading	Ins47
+[SASL3_T12 INFO]: [LUA]: loading	Ins47_2D
+[SASL3_T12 INFO]: [LUA]: loading	Ins47_logic
+[SASL3_T12 INFO]: [LUA]: loading	Ins47_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1200  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Ins48
+[SASL3_T12 INFO]: [LUA]: loading	Ins48
+[SASL3_T12 INFO]: [LUA]: loading	Ins48_2D
+[SASL3_T12 INFO]: [LUA]: loading	Ins48_logic
+[SASL3_T12 INFO]: [LUA]: loading	Ins48_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 799.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Ins49
+[SASL3_T12 INFO]: [LUA]: loading	Ins49
+[SASL3_T12 INFO]: [LUA]: loading	Ins49_2D
+[SASL3_T12 INFO]: [LUA]: loading	Ins49_logic
+[SASL3_T12 INFO]: [LUA]: loading	Ins49_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1200  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 GENERIC
+[SASL3_T12 INFO]: [LUA]: loading	GENERIC
+[SASL3_T12 INFO]: [LUA]: including	GDI_calculator.lua
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1999.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 GENERIC_DME
+[SASL3_T12 INFO]: [LUA]: loading	GENERIC_DME
+[SASL3_T12 INFO]: [LUA]: loading	GENERIC_DME_2D
+[SASL3_T12 INFO]: [LUA]: loading	GENERIC_DME_logic
+[SASL3_T12 INFO]: [LUA]: loading	GENERIC_DME_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 899.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	GDI will not be loaded (load flag is false)
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 AoA_Eagle
+[SASL3_T12 INFO]: [LUA]: loading	AoA_Eagle
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1000  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Ins53
+[SASL3_T12 INFO]: [LUA]: loading	Ins53
+[SASL3_T12 INFO]: [LUA]: loading	Ins53_2D
+[SASL3_T12 INFO]: [LUA]: loading	Ins53_logic
+[SASL3_T12 INFO]: [LUA]: loading	Ins53_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 900  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 ADF1
+[SASL3_T12 INFO]: [LUA]: loading	ADF1
+[SASL3_T12 INFO]: [LUA]: loading	ADF1_2D
+[SASL3_T12 INFO]: [LUA]: loading	ADF1_logic
+[SASL3_T12 INFO]: [LUA]: loading	ADF1_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 899.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Ins23
+[SASL3_T12 INFO]: [LUA]: loading	Ins23
+[SASL3_T12 INFO]: [LUA]: loading	Ins23_2D
+[SASL3_T12 INFO]: [LUA]: loading	Ins23_logic
+[SASL3_T12 INFO]: [LUA]: loading	Ins23_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 999.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 JPI_EDM800
+[SASL3_T12 INFO]: [LUA]: loading	JPI_EDM800
+[SASL3_T12 INFO]: [LUA]: loading	JPI_EDM800_2D
+[SASL3_T12 INFO]: [LUA]: loading	JPI_EDM800_logic
+[SASL3_T12 INFO]: [LUA]: "module"	ACF library already initialized
+[SASL3_T12 INFO]: [LUA]: loading	JPI_EDM800_3D
+[SASL3_T12 INFO]: [LUA]: "module"	ACF library already initialized
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 899.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 POP_WIN
+[SASL3_T12 INFO]: [LUA]: loading	POP_WIN
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1000  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Thranda_Popup
+[SASL3_T12 INFO]: [LUA]: loading	Thranda_Popup
+[SASL3_T12 INFO]: [LUA]: loading	Thranda_Popup_2D
+[SASL3_T12 INFO]: [LUA]: loading	Thranda_Popup_logic
+[SASL3_T12 INFO]: [LUA]: loading	Page01
+[SASL3_T12 INFO]: [LUA]: loading	switch
+[SASL3_T12 INFO]: [LUA]: loading	texture
+[SASL3_T12 INFO]: [LUA]: loading	Page02
+[SASL3_T12 INFO]: [LUA]: loading	DynLivery
+[SASL3_T12 INFO]: [LUA]: loading	keyin
+[SASL3_T12 INFO]: [LUA]: loading	button
+[SASL3_T12 INFO]: [LUA]: loading	Apply_Livery
+[SASL3_T12 INFO]: [LUA]: loading	StaticLivery
+[SASL3_T12 INFO]: [LUA]: loading	Page03
+[SASL3_T12 INFO]: [LUA]: loading	Page04
+[SASL3_T12 INFO]: [LUA]: loading	CustomViews
+[SASL3_T12 INFO]: [LUA]: loading	NumPad
+[SASL3_T12 INFO]: [LUA]: loading	leverV
+[SASL3_T12 INFO]: [LUA]: loading	Page05
+[SASL3_T12 INFO]: [LUA]: loading	AudioPanel
+[SASL3_T12 INFO]: [LUA]: loading	Slew
+[SASL3_T12 INFO]: [LUA]: loading	Page06
+[SASL3_T12 INFO]: [LUA]: loading	Page07
+[SASL3_T12 INFO]: [LUA]: loading	Land
+[SASL3_T12 INFO]: [LUA]: loading	Amphib
+[SASL3_T12 INFO]: [LUA]: loading	Thranda_Popup_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1500  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Thranda_Popup_Tab
+[SASL3_T12 INFO]: [LUA]: loading	Thranda_Popup_Tab
+[SASL3_T12 INFO]: [LUA]: loading	Thranda_Popup_Tab_2D
+[SASL3_T12 INFO]: [LUA]: loading	Thranda_Popup_Tab_logic
+[SASL3_T12 INFO]: [LUA]: loading	Thranda_Popup_Tab_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1600  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 Checklist
+[SASL3_T12 INFO]: [LUA]: loading	Checklist
+[SASL3_T12 INFO]: [LUA]: loading	Checklist_2D
+[SASL3_T12 INFO]: [LUA]: loading	Checklist_logic
+[SASL3_T12 INFO]: [LUA]: loading	blank
+[SASL3_T12 INFO]: [LUA]: loading	list01
+[SASL3_T12 INFO]: [LUA]: loading	list02
+[SASL3_T12 INFO]: [LUA]: loading	list03
+[SASL3_T12 INFO]: [LUA]: loading	list04
+[SASL3_T12 INFO]: [LUA]: loading	list05
+[SASL3_T12 INFO]: [LUA]: loading	list06
+[SASL3_T12 INFO]: [LUA]: loading	list07
+[SASL3_T12 INFO]: [LUA]: loading	list08
+[SASL3_T12 INFO]: [LUA]: loading	list09
+[SASL3_T12 INFO]: [LUA]: loading	list10
+[SASL3_T12 INFO]: [LUA]: loading	list11
+[SASL3_T12 INFO]: [LUA]: loading	list12
+[SASL3_T12 INFO]: [LUA]: loading	list13
+[SASL3_T12 INFO]: [LUA]: loading	list14
+[SASL3_T12 INFO]: [LUA]: loading	list15
+[SASL3_T12 INFO]: [LUA]: loading	list16
+[SASL3_T12 INFO]: [LUA]: loading	list17
+[SASL3_T12 INFO]: [LUA]: loading	list18
+[SASL3_T12 INFO]: [LUA]: loading	list19
+[SASL3_T12 INFO]: [LUA]: loading	list20
+[SASL3_T12 INFO]: [LUA]: loading	list21
+[SASL3_T12 INFO]: [LUA]: loading	list22
+[SASL3_T12 INFO]: [LUA]: loading	list23
+[SASL3_T12 INFO]: [LUA]: loading	list24
+[SASL3_T12 INFO]: [LUA]: loading	list25
+[SASL3_T12 INFO]: [LUA]: loading	list26
+[SASL3_T12 INFO]: [LUA]: loading	list27
+[SASL3_T12 INFO]: [LUA]: loading	list28
+[SASL3_T12 INFO]: [LUA]: loading	list29
+[SASL3_T12 INFO]: [LUA]: loading	list30
+[SASL3_T12 INFO]: [LUA]: loading	list31
+[SASL3_T12 INFO]: [LUA]: loading	list32
+[SASL3_T12 INFO]: [LUA]: loading	list33
+[SASL3_T12 INFO]: [LUA]: loading	list34
+[SASL3_T12 INFO]: [LUA]: loading	list35
+[SASL3_T12 INFO]: [LUA]: loading	list36
+[SASL3_T12 INFO]: [LUA]: loading	list37
+[SASL3_T12 INFO]: [LUA]: loading	list38
+[SASL3_T12 INFO]: [LUA]: loading	list39
+[SASL3_T12 INFO]: [LUA]: loading	list40
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1499.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 SASLChecker
+[SASL3_T12 INFO]: [LUA]: loading	SASLChecker
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1200  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 CUST_LOGC
+[SASL3_T12 INFO]: [LUA]: loading	CUST_LOGC
+[SASL3_T12 INFO]: [LUA]: "CUST_LOGC"	0 0 1280 720
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1099.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 U206GColdAndDark
+[SASL3_T12 INFO]: [LUA]: loading	U206GColdAndDark
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1000  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 GearManualPump
+[SASL3_T12 INFO]: [LUA]: loading	GearManualPump
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 800  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 GearAdvisory
+[SASL3_T12 INFO]: [LUA]: loading	GearAdvisory
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1100  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 SND_SYST
+[SASL3_T12 INFO]: [LUA]: loading	SND_SYST
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1100  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 FLIGHT_DYNAMICS
+[SASL3_T12 INFO]: [LUA]: loading	FLIGHT_DYNAMICS
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 999.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 ControlForces
+[SASL3_T12 INFO]: [LUA]: loading	ControlForces
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 900  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 FloatDynamics
+[SASL3_T12 INFO]: [LUA]: loading	FloatDynamics
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1100  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 AUTO_PILT
+[SASL3_T12 INFO]: [LUA]: loading	AUTO_PILT
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 899.999  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	loading component from Core3 STEC55
+[SASL3_T12 INFO]: [LUA]: loading	STEC55
+[SASL3_T12 INFO]: [LUA]: loading	STEC55_2D
+[SASL3_T12 INFO]: [LUA]: loading	STEC55_logic
+[SASL3_T12 INFO]: [LUA]: loading	STEC55_3D
+[SASL3_T12 INFO]: [LUA]: "module"	________________________________________This component took: 1100  nanoseconds to load
+[SASL3_T12 INFO]: [LUA]: "module"	Thranda aircraft zone|custom
+[SASL3_T12 DEBUG]: [LUA]: "module"	SASL Project Path=C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Aircraft/Thranda_C172/plugins/SASL3_Thranda12/data/manifest.json
+[SASL3_T12 DEBUG]: [LUA]: "module"	SASL Aircraft Path=C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Aircraft/Thranda_C172
+[SASL3_T12 INFO]: Module loaded
+0:09:37.130 D/OBJ: CPU Geometry: 76525 (75.90%) 298422 (90.53%) "Aircraft/Thranda_C172/objects/cockpit.obj"
+0:09:37.130 I/FMOD: Master bank Aircraft/Thranda_C172/fmod/ Sample rate: 48000 speaker mode: 3 (2 speakers)
+0:09:37.130 I/SND: This aircraft is using FMOD in FULL mode.
+0:09:37.130 E/SOUN: snd error in file: Aircraft/Thranda_C172/fmod/Thranda_C172.snd line 140
+0:09:37.130 E/SOUN: Param name thranda/cockpit/animations/door[*] is missing a valid index in the sound file.
+0:09:37.130 E/SOUN: snd error in file: Aircraft/Thranda_C172/fmod/Thranda_C172.snd line 149
+0:09:37.130 E/SOUN: Param name thranda/cockpit/animations/door[*] is missing a valid index in the sound file.
+0:09:37.130 E/SOUN: snd error in file: Aircraft/Thranda_C172/fmod/Thranda_C172.snd line 157
+0:09:37.130 E/SOUN: Param name thranda/cockpit/animations/door[*] is missing a valid index in the sound file.
+0:09:37.130 E/SOUN: snd error in file: Aircraft/Thranda_C172/fmod/Thranda_C172.snd line 167
+0:09:37.130 E/SOUN: Param name thranda/cockpit/animations/door[*] is missing a valid index in the sound file.
+0:09:37.130 E/SOUN: snd error in file: Aircraft/Thranda_C172/fmod/Thranda_C172.snd line 176
+0:09:37.130 E/SOUN: Param name thranda/cockpit/animations/door[*] is missing a valid index in the sound file.
+0:09:37.130 E/SOUN: snd error in file: Aircraft/Thranda_C172/fmod/Thranda_C172.snd line 184
+0:09:37.130 E/SOUN: Param name thranda/cockpit/animations/door[*] is missing a valid index in the sound file.
+0:09:37.130 E/SOUN: snd error in file: Aircraft/Thranda_C172/fmod/Thranda_C172.snd line 192
+0:09:37.130 E/SOUN: Param name thranda/cockpit/animations/door[*] is missing a valid index in the sound file.
+0:09:37.130 E/SOUN: snd error in file: Aircraft/Thranda_C172/fmod/Thranda_C172.snd line 202
+0:09:37.130 E/SOUN: Param name thranda/cockpit/animations/door[*] is missing a valid index in the sound file.
+0:09:37.130 E/SOUN: snd error in file: Aircraft/Thranda_C172/fmod/Thranda_C172.snd line 636
+0:09:37.130 E/SOUN: Sound event:/SYSTEMS_EVENTS/ELECTRICAL/flapRollUp has a cue but no trigger condition.
+0:09:37.130 E/SOUN: snd error in file: Aircraft/Thranda_C172/fmod/Thranda_C172.snd line 682
+0:09:37.130 E/SOUN: Sound event:/SYSTEMS_EVENTS/ELECTRICAL/flapRollDown has a cue but no trigger condition.
+0:09:37.130 E/SOUN: snd error in file: Aircraft/Thranda_C172/fmod/Thranda_C172.snd line 3100
+0:09:37.130 E/SOUN: Sound event:/SYSTEMS_EVENTS/CABIN AIR/cabinAirPullOut has a cue but no trigger condition.
+0:09:37.130 E/SOUN: snd error in file: Aircraft/Thranda_C172/fmod/Thranda_C172.snd line 3109
+0:09:37.130 E/SOUN: Sound event:/SYSTEMS_EVENTS/CABIN AIR/cabinAirPullIn has a cue but no trigger condition.
+0:09:37.130 E/SOUN: snd error in file: Aircraft/Thranda_C172/fmod/Thranda_C172.snd line 3118
+0:09:37.130 E/SOUN: Sound event:/SYSTEMS_EVENTS/CABIN AIR/cabinAirPullOut has a cue but no trigger condition.
+0:09:37.130 E/SOUN: snd error in file: Aircraft/Thranda_C172/fmod/Thranda_C172.snd line 3127
+0:09:37.130 E/SOUN: Sound event:/SYSTEMS_EVENTS/CABIN AIR/cabinAirPullIn has a cue but no trigger condition.
+0:09:37.130 E/SOUN: snd error in file: Aircraft/Thranda_C172/fmod/Thranda_C172.snd line 3136
+0:09:37.130 E/SOUN: Sound event:/SYSTEMS_EVENTS/CABIN AIR/cabinAirPullOut has a cue but no trigger condition.
+0:09:37.130 E/SOUN: snd error in file: Aircraft/Thranda_C172/fmod/Thranda_C172.snd line 3145
+0:09:37.130 E/SOUN: Sound event:/SYSTEMS_EVENTS/CABIN AIR/cabinAirPullIn has a cue but no trigger condition.
+0:09:37.130 E/SOUN: snd error in file: Aircraft/Thranda_C172/fmod/Thranda_C172.snd line 3154
+0:09:37.130 E/SOUN: Sound event:/SYSTEMS_EVENTS/CABIN AIR/cabinAirPullOut has a cue but no trigger condition.
+0:09:37.130 E/SOUN: snd error in file: Aircraft/Thranda_C172/fmod/Thranda_C172.snd line 3163
+0:09:37.130 E/SOUN: Sound event:/SYSTEMS_EVENTS/CABIN AIR/cabinAirPullIn has a cue but no trigger condition.
+0:09:37.130 E/SOUN: snd error in file: Aircraft/Thranda_C172/fmod/Thranda_C172.snd line 3172
+0:09:37.130 E/SOUN: Sound event:/SYSTEMS_EVENTS/cowlFlapDown has a cue but no trigger condition.
+0:09:37.130 E/SOUN: snd error in file: Aircraft/Thranda_C172/fmod/Thranda_C172.snd line 3180
+0:09:37.130 E/SOUN: Sound event:/SYSTEMS_EVENTS/cowlFlapUp has a cue but no trigger condition.
+FlyWithLua Info: XPLM_MSG_FMOD_BANK_LOADED & xplm_RadioBank  true
+0:10:40.183 G64:  core: Livery Changed: Name:(liveries)  Folder:(Aircraft/Thranda_C172/liveries/THRANDA/)
+0:09:37.130 I/FLT: Init dat_p0 type:loc_ram apt:KPWM start at:North Ramp Tie-Down
+0:09:37.130 I/GFX/VK: Destroying old swapchain for 000001AECA2CB200
+0:09:37.130 I/GFX/VK: Created swapchain for 000001AECA2CB200 with size { 830x350x3 }. Mode: VK_PRESENT_MODE_MAILBOX_KHR
+0:09:37.130 I/wmgr: Re-building fbos for window 000001AF0D3D8C60 using pool 7
+0:09:37.130 I/SCN: DSF load time: 863 for file Custom Scenery/simHeaven_X-World_America-6-scenery/Earth nav data/+40-070/+42-070.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 31828 for file Global Scenery/Global Airports/Earth nav data/+40-080/+44-072.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 8505 for file Custom Scenery/simHeaven_X-World_America-3-details/Earth nav data/+40-080/+44-072.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 82148 for file Custom Scenery/simHeaven_X-World_America-4-extras/Earth nav data/+40-080/+44-072.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 144519 for file Global Scenery/Global Airports/Earth nav data/+40-070/+44-070.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 1138 for file Custom Scenery/simHeaven_X-World_America-1-vfr/Earth nav data/+40-070/+44-070.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 6523 for file Custom Scenery/simHeaven_X-World_America-3-details/Earth nav data/+40-070/+44-070.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 38985 for file Custom Scenery/simHeaven_X-World_America-5-footprints/Earth nav data/+40-080/+44-072.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 75088 for file Custom Scenery/simHeaven_X-World_America-6-scenery/Earth nav data/+40-080/+44-072.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 38508 for file Custom Scenery/simHeaven_X-World_America-7-forests/Earth nav data/+40-080/+44-072.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 377680 for file Custom Scenery/simHeaven_X-World_America-4-extras/Earth nav data/+40-070/+44-070.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 116855 for file Custom Scenery/simHeaven_X-World_America-5-footprints/Earth nav data/+40-070/+44-070.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 119075 for file Custom Scenery/simHeaven_X-World_America-6-scenery/Earth nav data/+40-070/+44-070.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 9915 for file Custom Scenery/simHeaven_X-World_America-7-forests/Earth nav data/+40-070/+44-070.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/DSF: Warning for missing scenery file: +42-070
+0:09:37.130 I/DSF: Warning for missing scenery file: +42-069
+0:09:37.130 I/SCN: DSF load time: 1113532 for file Global Scenery/Global Airports/Earth nav data/+40-080/+42-072.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 2220 for file Custom Scenery/simHeaven_X-World_America-1-vfr/Earth nav data/+40-080/+42-072.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 16860 for file Custom Scenery/simHeaven_X-World_America-3-details/Earth nav data/+40-080/+42-072.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 889889 for file Custom Scenery/simHeaven_X-World_America-8-network/Earth nav data/+40-080/+44-072.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 402920 for file Custom Scenery/simHeaven_X-World_America-8-network/Earth nav data/+40-070/+44-070.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 677984 for file Custom Scenery/simHeaven_X-World_America-4-extras/Earth nav data/+40-080/+42-072.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 83548 for file Custom Scenery/simHeaven_X-World_America-5-footprints/Earth nav data/+40-080/+42-072.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 729450 for file Custom Scenery/simHeaven_X-World_America-6-scenery/Earth nav data/+40-080/+42-072.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 88128 for file Custom Scenery/simHeaven_X-World_America-7-forests/Earth nav data/+40-080/+42-072.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 2737601 for file Global Scenery/X-Plane 12 Global Scenery/Earth nav data/+40-080/+44-072.dsf (275580 tris, 31 skipped for -40.5 m^2)
+0:09:37.130 I/SCN: DSF load time: 3527458 for file Global Scenery/X-Plane 12 Global Scenery/Earth nav data/+40-070/+44-070.dsf (279888 tris, 17 skipped for -21.0 m^2)
+0:09:37.130 D/OBJ: CPU Geometry: 5 (2.65%) 9 (2.27%) "Custom Scenery/simHeaven_X-World_America-6-scenery/objects/US-houses/house_09x10x2.obj"
+0:09:37.130 D/OBJ: CPU Geometry: 5 (2.40%) 9 (2.14%) "Custom Scenery/simHeaven_X-World_America-6-scenery/objects/US-houses/house_09x09x1.obj"
+0:09:37.130 D/OBJ: CPU Geometry: 10 (3.01%) 18 (2.63%) "Custom Scenery/simHeaven_X-World_America-6-scenery/objects/US-houses/house_09x20x1.obj"
+0:09:37.130 I/SCN: DSF load time: 44942 for file Global Scenery/Global Airports/Earth nav data/+40-070/+43-070.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 4543 for file Custom Scenery/simHeaven_X-World_America-3-details/Earth nav data/+40-070/+43-070.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 37410 for file Custom Scenery/simHeaven_X-World_America-4-extras/Earth nav data/+40-070/+43-070.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 35986 for file Custom Scenery/simHeaven_X-World_America-5-footprints/Earth nav data/+40-070/+43-070.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 57000 for file Custom Scenery/simHeaven_X-World_America-6-scenery/Earth nav data/+40-070/+43-070.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 3677 for file Custom Scenery/simHeaven_X-World_America-7-forests/Earth nav data/+40-070/+43-070.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 34970 for file Custom Scenery/simHeaven_X-World_America-8-network/Earth nav data/+40-070/+43-070.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 3601500 for file Custom Scenery/simHeaven_X-World_America-8-network/Earth nav data/+40-080/+42-072.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 2491391 for file Global Scenery/X-Plane 12 Global Scenery/Earth nav data/+40-070/+43-070.dsf (146227 tris, 24 skipped for -1315.9 m^2)
+0:09:37.130 I/SCN: DSF load time: 3813 for file Global Scenery/Global Airports/Earth nav data/+40-070/+43-069.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 451 for file Custom Scenery/simHeaven_X-World_America-3-details/Earth nav data/+40-070/+43-069.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 2017 for file Custom Scenery/simHeaven_X-World_America-4-extras/Earth nav data/+40-070/+43-069.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 7285 for file Custom Scenery/simHeaven_X-World_America-5-footprints/Earth nav data/+40-070/+43-069.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 13408 for file Custom Scenery/simHeaven_X-World_America-6-scenery/Earth nav data/+40-070/+43-069.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 623 for file Custom Scenery/simHeaven_X-World_America-7-forests/Earth nav data/+40-070/+43-069.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 546 for file Custom Scenery/simHeaven_X-World_America-8-network/Earth nav data/+40-070/+43-069.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 72784 for file Global Scenery/Global Airports/Earth nav data/+40-080/+44-071.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 5006 for file Custom Scenery/simHeaven_X-World_America-3-details/Earth nav data/+40-080/+44-071.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 E/OBJ: OBJ read failed: the file path Resources/default scenery/sim objects/ships/parts/Dinghy_360_03.obj could not be opened.
+0:09:37.130 E/DSF: The DSF Custom Scenery/simHeaven_X-World_America-8-network/Earth nav data/+40-070/+43-070.dsf has a number of problems with its road network: 6 doubled nodes, 0 direction reverses, 0 short segments, 3 roads deleted.
+0:09:37.130 I/SCN: DSF load time: 408090 for file Custom Scenery/simHeaven_X-World_America-4-extras/Earth nav data/+40-080/+44-071.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 106466 for file Custom Scenery/simHeaven_X-World_America-5-footprints/Earth nav data/+40-080/+44-071.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 103034 for file Custom Scenery/simHeaven_X-World_America-6-scenery/Earth nav data/+40-080/+44-071.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 22733 for file Custom Scenery/simHeaven_X-World_America-7-forests/Earth nav data/+40-080/+44-071.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 689602 for file Global Scenery/X-Plane 12 Global Scenery/Earth nav data/+40-070/+43-069.dsf (4580 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 67522 for file Custom Scenery/simHeaven_X-World_America-8-network/Earth nav data/+40-080/+44-071.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 112840 for file Global Scenery/Global Airports/Earth nav data/+40-070/+44-069.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 6240 for file Custom Scenery/simHeaven_X-World_America-3-details/Earth nav data/+40-070/+44-069.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 138706 for file Custom Scenery/simHeaven_X-World_America-4-extras/Earth nav data/+40-070/+44-069.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 58366 for file Custom Scenery/simHeaven_X-World_America-5-footprints/Earth nav data/+40-070/+44-069.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 100987 for file Custom Scenery/simHeaven_X-World_America-6-scenery/Earth nav data/+40-070/+44-069.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 16783 for file Custom Scenery/simHeaven_X-World_America-7-forests/Earth nav data/+40-070/+44-069.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 86603 for file Custom Scenery/simHeaven_X-World_America-8-network/Earth nav data/+40-070/+44-069.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 3081912 for file Global Scenery/X-Plane 12 Global Scenery/Earth nav data/+40-080/+44-071.dsf (318587 tris, 24 skipped for -660.7 m^2)
+0:09:37.130 D/OBJ: CPU Geometry: 12 (0.18%) 30 (0.16%) "Resources/default scenery/1000 autogen/global_objects/objects/RooftopHelipad5.obj"
+0:09:37.130 E/DSF: The DSF Custom Scenery/simHeaven_X-World_America-8-network/Earth nav data/+40-080/+44-072.dsf has a number of problems with its road network: 26 doubled nodes, 0 direction reverses, 0 short segments, 5 roads deleted.
+0:09:37.130 I/SCN: DSF load time: 2829025 for file Global Scenery/X-Plane 12 Global Scenery/Earth nav data/+40-070/+44-069.dsf (301161 tris, 18 skipped for -1476.2 m^2)
+0:09:37.130 E/DSF: The DSF Custom Scenery/simHeaven_X-World_America-8-network/Earth nav data/+40-080/+44-071.dsf has a number of problems with its road network: 24 doubled nodes, 0 direction reverses, 0 short segments, 8 roads deleted.
+0:09:37.130 D/OBJ: CPU Geometry: 35 (0.25%) 78 (0.23%) "Resources/default scenery/1000 autogen/global_objects/objects/RooftopHelipad2.obj"
+0:09:37.130 E/DSF: The DSF Custom Scenery/simHeaven_X-World_America-8-network/Earth nav data/+40-070/+44-069.dsf has a number of problems with its road network: 6 doubled nodes, 0 direction reverses, 0 short segments, 2 roads deleted.
+0:09:37.130 E/DSF: The DSF Custom Scenery/simHeaven_X-World_America-8-network/Earth nav data/+40-070/+44-070.dsf has a number of problems with its road network: 8 doubled nodes, 0 direction reverses, 0 short segments, 7 roads deleted.
+0:09:37.130 I/SCN: DSF load time: 56967 for file Global Scenery/Global Airports/Earth nav data/+40-080/+42-071.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 11201 for file Custom Scenery/simHeaven_X-World_America-3-details/Earth nav data/+40-080/+42-071.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 111626 for file Custom Scenery/simHeaven_X-World_America-4-extras/Earth nav data/+40-080/+42-071.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 38557 for file Custom Scenery/simHeaven_X-World_America-5-footprints/Earth nav data/+40-080/+42-071.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 8947876 for file Global Scenery/X-Plane 12 Global Scenery/Earth nav data/+40-080/+42-072.dsf (558992 tris, 31 skipped for -30.3 m^2)
+0:09:37.130 I/SCN: DSF load time: 159057 for file Custom Scenery/simHeaven_X-World_America-6-scenery/Earth nav data/+40-080/+42-071.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 35816 for file Custom Scenery/simHeaven_X-World_America-7-forests/Earth nav data/+40-080/+42-071.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 182565 for file Custom Scenery/simHeaven_X-World_America-8-network/Earth nav data/+40-080/+42-071.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 D/OBJ: CPU Geometry: 46 (0.55%) 84 (0.34%) "Resources/default scenery/1000 autogen/global_objects/objects/RooftopHelipad1.obj"
+0:09:37.130 D/OBJ: CPU Geometry: 44 (0.43%) 66 (0.26%) "Resources/default scenery/1000 autogen/global_objects/objects/RooftopHelipad4.obj"
+0:09:37.130 D/OBJ: CPU Geometry: 35 (0.26%) 78 (0.24%) "Resources/default scenery/1000 autogen/global_objects/objects/RooftopHelipad2A.obj"
+0:09:37.130 D/OBJ: CPU Geometry: 72 (0.49%) 108 (0.29%) "Resources/default scenery/1000 autogen/global_objects/objects/RooftopHelipad3.obj"
+0:09:37.130 I/SCN: DSF load time: 36841 for file Global Scenery/Global Airports/Earth nav data/+40-080/+43-072.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 809 for file Custom Scenery/simHeaven_X-World_America-1-vfr/Earth nav data/+40-080/+43-072.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 10331 for file Custom Scenery/simHeaven_X-World_America-3-details/Earth nav data/+40-080/+43-072.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 1922413 for file Global Scenery/X-Plane 12 Global Scenery/Earth nav data/+40-080/+42-071.dsf (269169 tris, 86 skipped for -9130.7 m^2)
+0:09:37.130 I/SCN: DSF load time: 133169 for file Custom Scenery/simHeaven_X-World_America-4-extras/Earth nav data/+40-080/+43-072.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 70117 for file Custom Scenery/simHeaven_X-World_America-5-footprints/Earth nav data/+40-080/+43-072.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 97028 for file Custom Scenery/simHeaven_X-World_America-6-scenery/Earth nav data/+40-080/+43-072.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 19388 for file Custom Scenery/simHeaven_X-World_America-7-forests/Earth nav data/+40-080/+43-072.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 162706 for file Custom Scenery/simHeaven_X-World_America-8-network/Earth nav data/+40-080/+43-072.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 E/DSF: The DSF Custom Scenery/simHeaven_X-World_America-8-network/Earth nav data/+40-080/+42-071.dsf has a number of problems with its road network: 38 doubled nodes, 0 direction reverses, 0 short segments, 9 roads deleted.
+0:09:37.130 E/DSF: The DSF Custom Scenery/simHeaven_X-World_America-8-network/Earth nav data/+40-080/+42-072.dsf has a number of problems with its road network: 209 doubled nodes, 0 direction reverses, 0 short segments, 81 roads deleted.
+0:09:37.130 I/SCN: DSF load time: 173216 for file Global Scenery/Global Airports/Earth nav data/+40-080/+43-071.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 3386798 for file Global Scenery/X-Plane 12 Global Scenery/Earth nav data/+40-080/+43-072.dsf (367744 tris, 30 skipped for -23735.9 m^2)
+0:09:37.130 I/SCN: DSF load time: 10940 for file Custom Scenery/simHeaven_X-World_America-3-details/Earth nav data/+40-080/+43-071.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 425628 for file Custom Scenery/simHeaven_X-World_America-4-extras/Earth nav data/+40-080/+43-071.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 E/DSF: The DSF Custom Scenery/simHeaven_X-World_America-8-network/Earth nav data/+40-080/+43-072.dsf has a number of problems with its road network: 44 doubled nodes, 0 direction reverses, 0 short segments, 7 roads deleted.
+0:09:37.130 I/SCN: DSF load time: 147362 for file Custom Scenery/simHeaven_X-World_America-5-footprints/Earth nav data/+40-080/+43-071.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 232964 for file Custom Scenery/simHeaven_X-World_America-6-scenery/Earth nav data/+40-080/+43-071.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 27967 for file Custom Scenery/simHeaven_X-World_America-7-forests/Earth nav data/+40-080/+43-071.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 198410 for file Custom Scenery/simHeaven_X-World_America-8-network/Earth nav data/+40-080/+43-071.dsf (0 tris, 0 skipped for 0.0 m^2)
+0:09:37.130 I/SCN: DSF load time: 3024400 for file Global Scenery/X-Plane 12 Global Scenery/Earth nav data/+40-080/+43-071.dsf (350521 tris, 43 skipped for -2125.0 m^2)
+0:09:37.130 E/DSF: The DSF Custom Scenery/simHeaven_X-World_America-8-network/Earth nav data/+40-080/+43-071.dsf has a number of problems with its road network: 43 doubled nodes, 0 direction reverses, 0 short segments, 12 roads deleted.
+0:11:11.236 G64:  core: Run: [OnSceneryLoaded]
+0:09:37.130 I/SCN: Preload time: 306762
+0:09:37.130 E/GFX: Rebuilding offscreens for window resize: x=1920 y=1080 hdrx=1280 hdry=720
+0:09:37.130 I/REPLAY: Starting replay recording
+0:09:37.130 I/SCN: Preload time: 5038819
+0:09:37.130 E/GFX: Rebuilding offscreens for window resize: x=1920 y=1080 hdrx=1280 hdry=720
+0:09:37.130 I/GFX/VK: Cleared memory pool 3, allocations: 3, block bytes: 33554432
+0:09:37.130 D/OBJ: CPU Geometry: 584 (100.00%) 1464 (100.00%) "Resources/default scenery/sim objects/dynamic/ford_carrier_parts/Gerald_R_Ford_Deck.obj"
+0:09:37.130 D/OBJ: CPU Geometry: 57 (100.00%) 57 (100.00%) "Resources/default scenery/sim objects/dynamic/ford_carrier_parts/Gerald_R_Ford_HangarPavement.obj"
+0:09:37.130 D/OBJ: CPU Geometry: 320 (0.37%) 480 (0.21%) "Resources/default scenery/sim objects/ships/parts/BulkCarrier_155A_BaseModel.obj"
+0:09:37.130 D/OBJ: CPU Geometry: 320 (0.40%) 480 (0.23%) "Resources/default scenery/sim objects/ships/parts/BulkCarrier_155B_BaseModel.obj"
+0:09:37.130 D/OBJ: CPU Geometry: 122 (0.08%) 216 (0.08%) "Resources/default scenery/sim objects/dynamic/Perry.obj"
+0:09:37.130 D/OBJ: CPU Geometry: 327 (0.30%) 822 (0.31%) "Resources/default scenery/sim objects/ships/parts/BulkCarrier_190A_BaseModel.obj"
+0:09:37.130 D/OBJ: CPU Geometry: 327 (0.30%) 822 (0.31%) "Resources/default scenery/sim objects/ships/parts/BulkCarrier_190C_BaseModel.obj"
+0:09:37.130 D/OBJ: CPU Geometry: 480 (0.46%) 1146 (0.47%) "Resources/default scenery/sim objects/ships/parts/BulkCarrier_342B_BaseModel.obj"
+0:09:37.130 D/OBJ: CPU Geometry: 28 (0.03%) 42 (0.02%) "Resources/default scenery/sim objects/ships/parts/ContainerCarrier_155A_BaseModel.obj"
+0:09:37.130 D/OBJ: CPU Geometry: 408 (0.22%) 612 (0.12%) "Resources/default scenery/sim objects/ships/parts/ContainerCarrier_399A_BaseModel.obj"
+0:09:37.130 D/OBJ: CPU Geometry: 408 (0.22%) 612 (0.12%) "Resources/default scenery/sim objects/ships/parts/ContainerCarrier_399B_BaseModel.obj"
+0:09:37.130 D/OBJ: CPU Geometry: 225 (0.12%) 636 (0.13%) "Resources/default scenery/sim objects/ships/parts/LNGCarrier_190A_BaseModel.obj"
+0:09:37.130 D/OBJ: CPU Geometry: 300 (0.15%) 756 (0.15%) "Resources/default scenery/sim objects/ships/parts/LNGCarrier_190B_BaseModel.obj"
+0:09:37.130 D/OBJ: CPU Geometry: 225 (0.12%) 636 (0.13%) "Resources/default scenery/sim objects/ships/parts/LNGCarrier_190C_BaseModel.obj"
+0:09:37.130 D/OBJ: CPU Geometry: 320 (0.16%) 816 (0.17%) "Resources/default scenery/sim objects/ships/parts/LNGCarrier_190D_BaseModel.obj"
+0:09:37.130 D/OBJ: CPU Geometry: 230 (0.13%) 666 (0.15%) "Resources/default scenery/sim objects/ships/parts/OilTanker_183A_BaseModel.obj"
+0:09:37.130 D/OBJ: CPU Geometry: 230 (0.13%) 666 (0.15%) "Resources/default scenery/sim objects/ships/parts/OilTanker_183B_BaseModel.obj"
+0:09:37.130 D/OBJ: CPU Geometry: 308 (0.17%) 798 (0.18%) "Resources/default scenery/sim objects/ships/parts/OilTanker_190A_BaseModel.obj"
+0:09:37.130 D/OBJ: CPU Geometry: 220 (0.11%) 708 (0.14%) "Resources/default scenery/sim objects/ships/parts/OilTanker_250A_BaseModel.obj"
+0:09:37.130 D/OBJ: CPU Geometry: 208 (0.10%) 666 (0.13%) "Resources/default scenery/sim objects/ships/parts/OilTanker_250B_BaseModel.obj"
+0:09:37.130 D/OBJ: CPU Geometry: 190 (0.32%) 348 (0.17%) "Resources/default scenery/sim objects/ships/parts/Luxury_Yacht_6500_01_BaseModel.obj"
+0:09:37.130 I/REPLAY: Registered birth event for flt 0, entity id: 26
+0:09:37.130 I/REPLAY: Creating flt entity with entity id 26 and p_index 0
+0:09:37.130 I/SCN: Loading sim objects for airport KPWM
+0:09:37.130 I/SCN: Loading sim objects for airport XK00AB
+0:09:37.130 I/SCN: Preload time: 1838728
+0:09:37.130 E/GFX: Rebuilding offscreens for window resize: x=1920 y=1080 hdrx=1280 hdry=720
+0:09:37.130 I/GFX/VK: Cleared memory pool 3, allocations: 3, block bytes: 33554432
+FlyWithLua: User switched to a new airport (or changed the plane). Script files have to be reloaded.
+FlyWithLua: Found fwl_prefs.ini in the FlyWithLua plugin path and it is
+./Resources/plugins/FlyWithLua/fwl_prefs.ini
+FlyWithLua Info:  deinitFmodSupport() FmodSounds.size =  0
+FlyWithLua Info: deinitFmodSupport()  Should be 0 now FmodSounds.size =  0
+FlyWithLua Info: Lua engine (re)started. LUA_RUN =1, SDK_VERSION = 412, XPLANE_VERSION = 12210, XPLANE_LANGUAGE = English and XPLANE_HOSTID = 1
+FlyWithLua Info: HID access initialized.
+FlyWithLua Info: FlyWithLua.ini full path 
+C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Resources/plugins/FlyWithLua/Internals/FlyWithLua.ini
+FlyWithLua Info: Discovered 19 HID devices.
+FlyWithLua Info: Initial assignments successfully saved.
+FlyWithLua Info: Load ini file.
+FlyWithLua Info: Searching for Lua script files
+FlyWithLua Info: Sorting Lua script files
+FlyWithLua Info: Start loading script file C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Resources/plugins/FlyWithLua/Scripts/control_extender.lua
+[FlyWithLua NG+ 2.8.12 build Mar 31 2024 09:02:02]: Dataref 'sim/cockpit2/controls/parking_brake_ratio' has been replaced. Please use the new name.
+FlyWithLua Info: Finished loading script file C:\Program Files (x86)/Steam/steamapps/common/X-Plane 12/Resources/plugins/FlyWithLua/Scripts/control_extender.lua
+FlyWithLua Info: All script files loaded successfully.
+FlyWithLua Info: Loading time for all scripts is 0.053 sec.
+0:11:31.221 G64:  core: Run: [OnAirportChanged]
+0:09:37.130 I/OVR: Reading VR conf file: Aircraft/Thranda_C172/Thranda_C172_vrconfig.txt
+0:09:37.130 D/STM: Transitioning from state state_NormalLoading to state_Normal
+0:09:37.130 I/OVR: User is leaving the holodeck.
+0:11:17.704 I/TEX: Pre-warming paging cache 000001AE81ADE5E0
+0:11:17.704 I/TEX: Target scale moved to 1.000000. Texture usage is 19.60 mb out of 2.38 gb available. Memory headroom is 2.42 gb
+0:11:17.704 I/TEX: Pager pre-warm status: Stable evaluation: true. Stable collection: false. Execution queue: 0. Retirement queue: 3
+0:11:17.704 I/TEX: Pager pre-warm status: Stable evaluation: true. Stable collection: false. Execution queue: 0. Retirement queue: 2
+0:11:17.704 I/TEX: Pager pre-warm status: Stable evaluation: true. Stable collection: false. Execution queue: 0. Retirement queue: 5
+0:11:17.704 I/TEX: Pager pre-warm status: Stable evaluation: true. Stable collection: false. Execution queue: 0. Retirement queue: 3
+0:11:17.704 I/TEX: Finished pre-warming paging cache. Time taken: 9.672s
+FlyWithLua Info: Searching for Lua quarantined script files
+FlyWithLua Info: The folder /Resources/plugins/FlyWithLua/Scripts (Quarantine)/ does not exist or it is empty.
+[SASL3_T12 DEBUG]: [LUA]: "FuelSwitches"	saved File
+0:11:17.704 xPilot/XPMP2 INFO  XPMPMultiplayer.cpp:160/XPMPMultiplayerInit: XPMP2 3.1.1 with FMOD sound support initializing under X-Plane version 12210/Vulkan and XPLM version 412
+0:11:17.704 xPilot/XPMP2 WARN  CSLModels.cpp:397/AddMatchCriteria: Line 19: Different aircraft type (A320 instead of A321) for model 'BB_German_Air_Express_VA A321_Hannover' ignored, rest  processed
+0:11:17.704 xPilot/XPMP2 WARN  CSLModels.cpp:397/AddMatchCriteria: Line 25: Different aircraft type (A320 instead of A321) for model 'BB_German_Air_Express_VA A321_Karlsruhe' ignored, rest  processed
+0:11:17.704 xPilot/XPMP2 WARN  CSLModels.cpp:397/AddMatchCriteria: Line 37: Different aircraft type (B350 instead of BE20) for model 'BB_WAT_VA BE20_WAT' ignored, rest  processed
+0:11:17.704 xPilot/XPMP2 WARN  CSLModels.cpp:397/AddMatchCriteria: Line 68: Different aircraft type (B748 instead of B744) for model 'BB_WAT_VA B744_WAT' ignored, rest  processed
+0:11:17.704 xPilot/XPMP2 WARN  CSLModels.cpp:397/AddMatchCriteria: Line 79: Different aircraft type (B753 instead of B752) for model 'BB_WAT_VA B752_WAT' ignored, rest  processed
+0:11:17.704 xPilot/XPMP2 WARN  CSLModels.cpp:397/AddMatchCriteria: Line 85: Different aircraft type (B763 instead of B762) for model 'BB_WAT_VA B763_WAT' ignored, rest  processed
+0:11:17.704 xPilot/XPMP2 WARN  CSLModels.cpp:397/AddMatchCriteria: Line 141: Different aircraft type (E195 instead of E190) for model 'BB_WAT_VA E195_WAT' ignored, rest  processed
+0:11:17.704 xPilot/XPMP2 WARN  CSLModels.cpp:397/AddMatchCriteria: Line 157: Different aircraft type (MD88 instead of MD82) for model 'BB_WAT_VA MD83_WAT' ignored, rest  processed
+0:11:17.704 I/PLG: The plugin xPilot 3.0.1 is setting global TCAS override to 1.
+0:11:17.704 xPilot: Now listening on ipc:///tmp//xpilot.ipc
+0:11:41.193 G64:  core: Run: [OnBoot]
+0:11:41.193 G64: debug: 	GK: Auto license update is on.
+0:11:41.193 G64: debug: 	GK: License days remaining: 12.15 - No update required.
+0:11:41.193 G64: debug: 	GK: Update required when <= 2.00 days.
+0:11:41.193 G64:  core: Run: [OnFirstFrame]
+0:11:17.704 I/WIN: Opened window menu bar
+0:11:39.628 LiveTraffic: Current System time is 2025-09-05 13:16:25Z, current simulated time is 2025-09-05 13:14:42.9Z
+0:11:39.808 I/TEX: Target scale moved to 2.000000. Texture usage is 217.30 mb out of 2.05 gb available. Memory headroom is 1.89 gb
+0:11:40.130    LT/XPMP2 WARN  AIMultiplayer.cpp:1161/XPMPMultiplayerEnable: xPilot 3.0.1 controls TCAS / AI. LiveTraffic could NOT acquire control, our planes might NOT appear on TCAS or 3rd party apps.
+0:11:40.130 LiveTraffic WARN  LTMain.cpp:1242/LTMainTryGetAIAircraft: xPilot 3.0.1 controls TCAS / AI. LiveTraffic could NOT acquire control, our planes might NOT appear on TCAS or 3rd party apps.
+0:11:40.104 LiveTraffic WARN  LTOpenSky.cpp:933/TryOpenDbFile: Download of https://s3.opensky-network.org/data-samples/metadata/aircraft-database-complete-2025-09.csv unavailable
+0:11:41.066 LiveTraffic ERROR LTVersion.cpp:251/FetchXPlaneOrgVersion: Could not browse X-Plane.org for version info: 301 - HTTP response was not HTTP_OK
+0:12:28.444 I/TEX: Target scale moved to 4.000000. Texture usage is 253.60 mb out of 1.78 gb available. Memory headroom is 1.58 gb
+0:13:17.905 I/TEX: Target scale moved to 8.000000. Texture usage is 369.56 mb out of 1.84 gb available. Memory headroom is 1.52 gb
+0:13:18.078 I/TEX: Target scale moved to 16.000000. Texture usage is 369.56 mb out of 1.83 gb available. Memory headroom is 1.52 gb
+0:15:39.514 I/WXR: Parsing weather manifest ID '62241'
+0:16:27.149 I/WXR: KTGI had a METAR from the future (051335Z)
+0:17:27.125 I/WXR: KTGI had a METAR from the future (051335Z)
+0:18:27.073 I/WXR: KTGI had a METAR from the future (051335Z)
+0:19:27.039 I/WXR: KTGI had a METAR from the future (051335Z)
+0:20:05.440 I/WIN: Opened window Plugin Admin
+0:20:29.953 G64:  core: Run: [OnBeforeXPSavePrefs]
+0:20:19.447 I/SIM: Exiting the sim without confirmation
+0:20:19.447 D/STM: Transitioning from state state_Normal to state_ShuttingDown
+0:20:34.354 G64:  core: Run: [OnBeforeXPSavePrefs]
+0:20:34.391 G64:  core: Run: [OnBeforeXPSavePrefs]
+FlyWithLua Info: Load exit file.
+FlyWithLua Info: Exit file loaded.
+FlyWithLua Info:  deinitFmodSupport() FmodSounds.size =  0
+FlyWithLua Info: deinitFmodSupport()  Should be 0 now FmodSounds.size =  0
+FlyWithLua Info: FlyWithLua plugin disabled.
+0:20:34.597 G64:  core: Plugin Disabled.
+0:20:19.447 LiveTraffic: Disabled
+[MISSIONGENERATOR INFO]: Disabling...
+X-Camera: TrackIR has been shutdown
+0:20:19.447 I/PLG: The plugin xPilot 3.0.1 is setting global TCAS override to 0.
+The plugin xPilot 3.0.1 is releasing control of AI aircraft.
+0:20:19.447 I/PLG: The plugin xPilot 3.0.1 is setting global TCAS override to 0.
+0:20:19.447 xPilot: xPilot plugin disabled
+[SASL3_T12 INFO]: Disabling...
+FlyWithLua Info:  deinitFmodSupport() FmodSounds.size =  0
+FlyWithLua Info: deinitFmodSupport()  Should be 0 now FmodSounds.size =  0
+[MISSIONGENERATOR INFO]: SASL plugin stopped...
+[SASL3_T12 INFO]: SASL plugin stopped...
+Clean exit from threads.
+0:20:19.447 I/JOY: Control response for axis joy_use_ptch: 0.000000
+0:20:19.447 I/JOY: Control response for axis joy_use_roll: 0.000000
+0:20:19.447 I/JOY: Control response for axis joy_use_hdng: 0.000000
+0:20:19.447 I/JOY: Control response for axis joy_use_flap: 0.000000
+0:20:19.447 I/JOY: UNREGISTER Joystick device: VKBSim T-Rudder - VID:8989PID:287
+0:20:19.447 I/JOY: UNREGISTER Joystick device: VKBsim Gladiator EVO R - VID:8989PID:512
+0:20:19.447 D/HID: HID Bridge Shutdown
+----- X-Plane has shut down -----
