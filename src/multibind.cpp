@@ -22,8 +22,8 @@ static Config g_config;
 static CombinationTracker g_tracker;
 static UI g_ui;
 
-static XPLMDataRef g_aircraft_filename_ref = nullptr;
-static std::string g_last_aircraft_filename;
+static XPLMDataRef g_aircraft_icao_ref = nullptr;
+static std::string g_last_aircraft_icao;
 
 static float flight_loop_callback(float elapsed_since_last_call, 
                                  float elapsed_time_since_last_flightloop,
@@ -37,7 +37,6 @@ static int multibind_command_handler(XPLMCommandRef command,
 
 void create_multibind_commands();
 void load_aircraft_config();
-std::string extract_aircraft_id(const std::string& filename);
 
 PLUGIN_API int XPluginStart(char* out_name, char* out_sig, char* out_desc)
 {
@@ -55,9 +54,10 @@ PLUGIN_API int XPluginStart(char* out_name, char* out_sig, char* out_desc)
     out_sig[XPLANE_STRING_BUFFER_SIZE - 1] = '\0';
     out_desc[XPLANE_STRING_BUFFER_SIZE - 1] = '\0';
 
-    g_aircraft_filename_ref = XPLMFindDataRef("sim/aircraft/view/acf_filename");
-    if (!g_aircraft_filename_ref) {
-        XPLMDebugString("Multibind: ERROR - Could not find aircraft filename dataref\n");
+    // X-Plane 12: Use acf_ICAO instead of deprecated acf_filename
+    g_aircraft_icao_ref = XPLMFindDataRef("sim/aircraft/view/acf_ICAO");
+    if (!g_aircraft_icao_ref) {
+        XPLMDebugString("Multibind: ERROR - Could not find aircraft ICAO dataref\n");
         return 0;
     }
 
@@ -146,14 +146,14 @@ void load_aircraft_config()
 {
     using namespace multibind::constants;
     
-    std::string aircraft_filename(XPLANE_PATH_BUFFER_SIZE, '\0');
-    XPLMGetDatab(g_aircraft_filename_ref, &aircraft_filename[0], 0, aircraft_filename.size());
-    aircraft_filename.resize(std::strlen(aircraft_filename.c_str())); // Trim to actual length
+    std::string aircraft_icao(XPLANE_PATH_BUFFER_SIZE, '\0');
+    XPLMGetDatab(g_aircraft_icao_ref, &aircraft_icao[0], 0, aircraft_icao.size());
+    aircraft_icao.resize(std::strlen(aircraft_icao.c_str())); // Trim to actual length
     
-    if (aircraft_filename != g_last_aircraft_filename) {
-        g_last_aircraft_filename = aircraft_filename;
+    if (aircraft_icao != g_last_aircraft_icao) {
+        g_last_aircraft_icao = aircraft_icao;
         
-        std::string aircraft_id = extract_aircraft_id(aircraft_filename);
+        std::string aircraft_id = aircraft_icao; // Use ICAO directly as aircraft ID
         
         std::string log_msg = "Multibind: Loading config for aircraft: " + aircraft_id + "\n";
         XPLMDebugString(log_msg.c_str());
@@ -166,19 +166,6 @@ void load_aircraft_config()
     }
 }
 
-std::string extract_aircraft_id(const std::string& filename)
-{
-    size_t last_slash = filename.find_last_of("/\\");
-    std::string basename = (last_slash != std::string::npos) ? 
-                          filename.substr(last_slash + 1) : filename;
-    
-    size_t dot_pos = basename.find_last_of('.');
-    if (dot_pos != std::string::npos) {
-        basename = basename.substr(0, dot_pos);
-    }
-    
-    return basename;
-}
 
 static float flight_loop_callback(float elapsed_since_last_call, 
                                  float elapsed_time_since_last_flightloop,
