@@ -102,7 +102,7 @@ jobs:
         find build -name "multibind.xpl" -exec cp {} artifacts/${{ matrix.output_dir }}/multibind.xpl \;
         
     - name: Upload artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ${{ matrix.artifact_name }}
         path: artifacts/${{ matrix.output_dir }}/
