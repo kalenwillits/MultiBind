@@ -122,31 +122,47 @@ if !errorlevel! neq 0 (
     exit /b 1
 )
 
+REM Create the plugin directory structure
+echo.
+echo Creating plugin directory structure...
+cmake --build . --target plugin
+
+if !errorlevel! neq 0 (
+    echo.
+    echo ❌ Plugin structure creation failed!
+    echo.
+    pause
+    cd ..
+    exit /b 1
+)
+
 cd ..
 
 REM Check if build was successful
-if exist "build\win_x64\multibind.xpl" (
+if exist "build\Multibind\win.xpl" (
     echo.
     echo ========================================
     echo ✅ BUILD SUCCESSFUL!
     echo ========================================
     echo.
-    echo Plugin built: build\win_x64\multibind.xpl
+    echo Plugin built: build\Multibind\win.xpl
     echo.
     echo Installation:
     echo 1. Copy the entire 'Multibind' folder to:
     echo    X-Plane 12\Resources\plugins\
     echo.
-    echo 2. The folder structure should be:
-    echo    X-Plane 12\Resources\plugins\Multibind\win_x64\multibind.xpl
+    echo 2. Final path should be:
+    echo    X-Plane 12\Resources\plugins\Multibind\win.xpl
     echo.
-    echo Press any key to open the build directory...
+    echo The plugin is now ready for installation!
+    echo.
+    echo Press any key to open the plugin directory...
     pause >nul
-    explorer build\win_x64
+    explorer build\Multibind
 ) else (
     echo.
     echo ❌ Build completed but plugin file not found!
-    echo Expected: build\win_x64\multibind.xpl
+    echo Expected: build\Multibind\win.xpl
     echo.
     pause
     exit /b 1

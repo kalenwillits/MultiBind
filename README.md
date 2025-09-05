@@ -41,6 +41,11 @@ Download the latest pre-built plugin from the [Releases page](https://github.com
 3. Copy the `Multibind` folder to `X-Plane 12/Resources/plugins/`
 4. Restart X-Plane
 
+The final plugin path should be: `X-Plane 12/Resources/plugins/Multibind/[platform].xpl`
+- Linux: `X-Plane 12/Resources/plugins/Multibind/lin.xpl`
+- macOS: `X-Plane 12/Resources/plugins/Multibind/mac.xpl`  
+- Windows: `X-Plane 12/Resources/plugins/Multibind/win.xpl`
+
 ## Building from Source
 
 ### ⚡ Simple Method (Recommended)
@@ -118,10 +123,14 @@ make
 ```
 
 ### Plugin Installation
-1. Copy the compiled plugin file to your X-Plane plugins directory:
-   - **Windows**: `X-Plane 12/Resources/plugins/Multibind/win_x64/multibind.xpl`
-   - **Mac**: `X-Plane 12/Resources/plugins/Multibind/mac_x64/multibind.xpl`
-   - **Linux**: `X-Plane 12/Resources/plugins/Multibind/lin_x64/multibind.xpl`
+After building, copy the generated `Multibind` folder to your X-Plane plugins directory:
+1. Copy the entire `build/Multibind/` folder to `X-Plane 12/Resources/plugins/`
+2. The final plugin path will be:
+   - **Linux**: `X-Plane 12/Resources/plugins/Multibind/lin.xpl`
+   - **macOS**: `X-Plane 12/Resources/plugins/Multibind/mac.xpl`
+   - **Windows**: `X-Plane 12/Resources/plugins/Multibind/win.xpl`
+
+**Note**: The build process now automatically creates the correct `Multibind` folder structure for easy installation.
 
 ## Usage
 

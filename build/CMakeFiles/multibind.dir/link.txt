@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC -O3 -DNDEBUG -rdynamic -shared -Wl,-soname,multibind.xpl -o multibind.xpl CMakeFiles/multibind.dir/src/multibind.cpp.o CMakeFiles/multibind.dir/src/config.cpp.o CMakeFiles/multibind.dir/src/combination_tracker.cpp.o CMakeFiles/multibind.dir/src/ui.cpp.o 

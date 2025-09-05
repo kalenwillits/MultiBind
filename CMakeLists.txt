@@ -6,16 +6,16 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Platform-specific settings
 if(WIN32)
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/win_x64)
-    set(PLUGIN_EXTENSION ".xpl")
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Multibind)
+    set(PLUGIN_FILENAME "win.xpl")
 elseif(APPLE)
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/mac_x64)
-    set(PLUGIN_EXTENSION ".xpl")
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Multibind)
+    set(PLUGIN_FILENAME "mac.xpl")
     # Support both Intel and Apple Silicon
     set(CMAKE_OSX_ARCHITECTURES "x86_64;arm64")
 else()
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lin_x64)
-    set(PLUGIN_EXTENSION ".xpl")
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Multibind)
+    set(PLUGIN_FILENAME "lin.xpl")
 endif()
 
 # Find X-Plane SDK with comprehensive search and helpful error messages
@@ -130,7 +130,8 @@ if(WIN32)
         ${XPLANE_SDK_ROOT_DIR}/Libraries/Win/XPWidgets_64.lib
     )
     set_target_properties(multibind PROPERTIES
-        SUFFIX ${PLUGIN_EXTENSION}
+        OUTPUT_NAME "win"
+        SUFFIX ".xpl"
         PREFIX ""
     )
 elseif(APPLE)
@@ -142,7 +143,8 @@ elseif(APPLE)
         ${XPLANE_SDK_ROOT_DIR}/Libraries/Mac/XPWidgets.framework
     )
     set_target_properties(multibind PROPERTIES
-        SUFFIX ${PLUGIN_EXTENSION}
+        OUTPUT_NAME "mac"
+        SUFFIX ".xpl"
         PREFIX ""
         BUNDLE TRUE
         BUNDLE_EXTENSION "xpl"
@@ -153,11 +155,9 @@ else()
         APL=0 IBM=0 LIN=1
     )
     set_target_properties(multibind PROPERTIES
-        SUFFIX ${PLUGIN_EXTENSION}
+        OUTPUT_NAME "lin"
+        SUFFIX ".xpl"
         PREFIX ""
-    )
-    # Link with -rdynamic for proper symbol export on Linux
-    set_target_properties(multibind PROPERTIES
         LINK_FLAGS "-rdynamic"
     )
 endif()
@@ -195,19 +195,37 @@ message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 message(STATUS "Compiler: ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION}")
 message(STATUS "Platform: ${CMAKE_SYSTEM_NAME}")
 if(WIN32)
-    message(STATUS "Output: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/multibind.xpl")
+    message(STATUS "Output: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/win.xpl")
 elseif(APPLE)
-    message(STATUS "Output: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/multibind.xpl (Universal Binary)")
+    message(STATUS "Output: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/mac.xpl (Universal Binary)")
 else()
-    message(STATUS "Output: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/multibind.xpl")
+    message(STATUS "Output: ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/lin.xpl")
 endif()
+message(STATUS "Installation: Run 'make install' or 'cmake --build . --target install' to create package")
 message(STATUS "==========================")
 
 # Add install target for easier deployment
+# This creates a proper X-Plane plugin folder structure
 install(TARGETS multibind
-    RUNTIME DESTINATION "Multibind/${CMAKE_SYSTEM_NAME}_x64"
-    LIBRARY DESTINATION "Multibind/${CMAKE_SYSTEM_NAME}_x64"
-    BUNDLE DESTINATION "Multibind/mac_x64"
+    RUNTIME DESTINATION "Multibind"
+    LIBRARY DESTINATION "Multibind"
+    BUNDLE DESTINATION "Multibind"
+)
+
+# Add a packaging target to create distributable plugin
+add_custom_target(package
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/package/Multibind
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:multibind> ${CMAKE_BINARY_DIR}/package/Multibind/
+    DEPENDS multibind
+    COMMENT "Creating X-Plane plugin package in build/package/"
+)
+
+# Add a direct target to create plugin directory structure in build folder
+add_custom_target(plugin
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/Multibind
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:multibind> ${CMAKE_BINARY_DIR}/Multibind/
+    DEPENDS multibind
+    COMMENT "Creating plugin directory structure"
 )
 
 # Create convenience target for building release version

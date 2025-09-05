@@ -17,12 +17,10 @@ fi
 # Detect platform
 if [[ "$OSTYPE" == "darwin"* ]]; then
     PLATFORM="macOS"
-    OUTPUT_DIR="mac_x64"
-    PLUGIN_EXT=".xpl"
+    PLUGIN_NAME="mac.xpl"
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     PLATFORM="Linux"
-    OUTPUT_DIR="lin_x64"
-    PLUGIN_EXT=".xpl"
+    PLUGIN_NAME="lin.xpl"
 else
     echo "❌ Unsupported platform: $OSTYPE"
     exit 1
@@ -110,10 +108,15 @@ else
     make -j$(nproc)
 fi
 
+# Create the plugin directory structure
+echo
+echo "Creating plugin directory structure..."
+make plugin
+
 cd ..
 
 # Check if build was successful
-PLUGIN_PATH="build/$OUTPUT_DIR/multibind$PLUGIN_EXT"
+PLUGIN_PATH="build/Multibind/$PLUGIN_NAME"
 if [[ -f "$PLUGIN_PATH" ]]; then
     echo
     echo "========================================"
@@ -126,18 +129,24 @@ if [[ -f "$PLUGIN_PATH" ]]; then
     echo "1. Copy the entire 'Multibind' folder to:"
     echo "   X-Plane 12/Resources/plugins/"
     echo
-    echo "2. The folder structure should be:"
-    echo "   X-Plane 12/Resources/plugins/Multibind/$OUTPUT_DIR/multibind$PLUGIN_EXT"
+    echo "2. Final path should be:"
+    echo "   X-Plane 12/Resources/plugins/Multibind/$PLUGIN_NAME"
     echo
+    echo "The plugin is now ready for installation!"
     
     # Show file info
     echo "Plugin file details:"
     ls -la "$PLUGIN_PATH"
     
+    # Show the complete directory structure
+    echo
+    echo "Plugin directory structure:"
+    ls -la build/Multibind/
+    
     if [[ "$PLATFORM" == "macOS" ]]; then
         echo
         echo "Opening build directory..."
-        open "build/$OUTPUT_DIR"
+        open "build/Multibind"
     fi
 else
     echo

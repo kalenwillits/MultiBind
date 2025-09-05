@@ -40,20 +40,22 @@ An X-Plane 12 plugin that creates 1000 custom commands (`multibind/000` through 
 
 After building:
 
-1. **Copy** the plugin folder to X-Plane:
+1. **Copy** the generated `build/Multibind/` folder to X-Plane:
    ```
    X-Plane 12/Resources/plugins/Multibind/
    ```
 
-2. **Folder structure should be:**
+2. **Final plugin paths will be:**
    ```
    X-Plane 12/Resources/plugins/Multibind/
-   ├── win_x64/multibind.xpl     (Windows)
-   ├── mac_x64/multibind.xpl     (macOS) 
-   └── lin_x64/multibind.xpl     (Linux)
+   ├── win.xpl     (Windows)
+   ├── mac.xpl     (macOS) 
+   └── lin.xpl     (Linux)
    ```
 
 3. **Restart X-Plane**
+
+**Note**: The build process now creates the correct folder structure automatically!
 
 ---
 
