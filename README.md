@@ -69,9 +69,42 @@ build.bat
 - **X-Plane SDK** (for compilation) - See download instructions below
 - **CMake 3.16+**
 - **C++17 compatible compiler**:
-  - **Windows**: Visual Studio 2019/2022 with C++ development tools, or MinGW-w64
+  - **Windows**: Visual Studio 2019/2022 with C++ development tools, Visual Studio Build Tools, or MinGW-w64
+    - ⚠️ **Note**: Visual Studio Code is NOT a compiler - you need one of the above
   - **macOS**: Xcode Command Line Tools or full Xcode
   - **Linux**: GCC 7+ or Clang 5+
+
+### Windows Compiler Setup
+
+⚠️ **Visual Studio Code vs Visual Studio**: These are different products! 
+- **Visual Studio Code** = Code editor (what you might have installed)
+- **Visual Studio** = Full IDE with C++ compiler (what you need for building)
+
+**Choose ONE of these options:**
+
+#### Option 1: Visual Studio Community (Full IDE - Recommended for beginners)
+1. Download from [visualstudio.microsoft.com](https://visualstudio.microsoft.com/downloads/)
+2. During installation, select **"Desktop development with C++"** workload
+3. This includes everything you need
+
+#### Option 2: Build Tools for Visual Studio (Smaller download - 3GB vs 7GB)
+1. Download [Build Tools for Visual Studio](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022)  
+2. During installation, select **"C++ build tools"** workload
+3. Perfect if you're already using Visual Studio Code as your editor
+
+#### Option 3: MinGW-w64 (Open source alternative)
+**Via winget (easiest):**
+```cmd
+winget install mingw-w64
+```
+
+**Via MSYS2 (manual):**
+1. Download and install [MSYS2](https://www.msys2.org/)
+2. Open MSYS2 terminal and run:
+   ```bash
+   pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake mingw-w64-x86_64-make
+   ```
+3. Add `C:\msys64\mingw64\bin` to your PATH environment variable
 
 ### Download X-Plane SDK
 1. Download the X-Plane SDK from [developer.x-plane.com](https://developer.x-plane.com/sdk/plugin-sdk-downloads/)
@@ -81,29 +114,27 @@ build.bat
 
 #### Windows
 
-**Option 1: Visual Studio (Recommended)**
+**Automated (Recommended)**
 ```cmd
-mkdir build
-cd build
-# For Visual Studio 2022
-cmake .. -G "Visual Studio 17 2022" -A x64
-cmake --build . --config Release
-
-# For Visual Studio 2019
-cmake .. -G "Visual Studio 16 2019" -A x64
-cmake --build . --config Release
-
-# Or let CMake auto-detect your Visual Studio version
-cmake .. -A x64
-cmake --build . --config Release
+build.bat
 ```
+The build script automatically detects your compiler (Visual Studio, Build Tools, or MinGW-w64) and builds the plugin.
 
-**Option 2: MinGW-w64**
+**Manual Build**
 ```cmd
 mkdir build
 cd build
+
+# If you have Visual Studio or Build Tools
+cmake .. -A x64 -DCMAKE_BUILD_TYPE=Release
+cmake --build . --config Release
+
+# If you have MinGW-w64
 cmake .. -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release
 cmake --build .
+
+# Create plugin directory structure
+cmake --build . --target plugin
 ```
 
 #### Mac
@@ -183,12 +214,16 @@ Example file content:
 ### Compilation Issues
 
 #### Windows-Specific Issues
-- **"Visual Studio not found"**: Install Visual Studio 2019/2022 with "Desktop development with C++" workload
+- **"Could not create named file generator"**: You have Visual Studio Code (editor) but need a C++ compiler. See [Windows Compiler Setup](#windows-compiler-setup) above
+- **"No suitable C++ compiler found"**: Install Visual Studio, Build Tools for Visual Studio, or MinGW-w64
+- **Visual Studio Code vs Visual Studio confusion**: 
+  - Visual Studio Code = Code editor (NOT a compiler)
+  - Visual Studio = Full IDE with C++ compiler (what you need)
 - **CMake not found**: Install CMake via Visual Studio Installer or from [cmake.org](https://cmake.org/download/)
-- **"SDK not found"**: Ensure the X-Plane SDK is extracted to the `SDK/` directory in your project folder
+- **"SDK not found"**: Ensure the X-Plane SDK is extracted to the `SDK/` directory in your project folder  
 - **Path issues**: Use forward slashes or double backslashes in paths: `C:/path/to/sdk` or `C:\\path\\to\\sdk`
 - **Antivirus interference**: Add your build directory to antivirus exclusions
-- **"LNK2019 unresolved external symbol"**: Make sure you're building for x64 architecture with `-A x64`
+- **MinGW-w64 build fails**: Make sure MinGW-w64 is in your PATH environment variable
 
 #### General Issues
 - **CMake version error**: Ensure CMake 3.16+ is installed

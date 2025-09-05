@@ -985,6 +985,10 @@ _deps
 # C/C++ binary extension file
 *.bin
 
+##### X-Plane Plugin Specific
+# X-Plane plugin files
+*.xpl
+
 ##### C
 # Prerequisites
 *.d

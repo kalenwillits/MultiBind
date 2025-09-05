@@ -90,8 +90,12 @@ Now when you press that button combination, the engine starter engages!
 ## Troubleshooting
 
 ### Build Issues
+- **"Could not create named file generator"**: You have Visual Studio Code (editor) but need a C++ compiler
+  - Install Visual Studio 2019/2022 with "Desktop development with C++" OR
+  - Install Build Tools for Visual Studio OR  
+  - Install MinGW-w64: `winget install mingw-w64`
+- **"No suitable C++ compiler found"**: See above - you need a real compiler, not just Visual Studio Code
 - **SDK not found**: Run the setup script first (`setup-sdk.bat` or `./setup-sdk.sh`)
-- **Build fails**: Make sure you have Visual Studio (Windows) or development tools installed
 - **Permission errors**: Run as administrator (Windows) or check file permissions (Linux/Mac)
 
 ### Plugin Issues
@@ -104,7 +108,8 @@ Now when you press that button combination, the engine starter engages!
 ## Requirements
 
 - **X-Plane 12**
-- **Windows**: Visual Studio 2019/2022 or MinGW-w64
+- **Windows**: Visual Studio 2019/2022, Visual Studio Build Tools, or MinGW-w64
+  - ⚠️ **Visual Studio Code is NOT a compiler** - you need one of the above
 - **macOS**: Xcode Command Line Tools
 - **Linux**: GCC 7+ or Clang 5+
 - **CMake 3.16+** (auto-installed by build scripts)
