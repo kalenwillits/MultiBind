@@ -7,6 +7,7 @@
 #include <sstream>
 #include <algorithm>
 #include <cstring>
+#include <iomanip>
 
 UI::~UI()
 {
@@ -379,13 +380,9 @@ void UI::handle_save_button()
         show_status_message("New binding added successfully");
     }
     
-    // Save to file and update tracker
-    if (!_config->save_config()) {
-        show_status_message("Error: Failed to save configuration file", true);
-        return;
-    }
-    
+    // Note: Configuration saving disabled - users must edit files directly
     _tracker->set_bindings(_config->get_bindings());
+    show_status_message("Note: Changes not saved to file - edit config manually to persist", false);
     
     // Clear inputs and stop recording
     handle_clear_button();
@@ -506,14 +503,9 @@ void UI::handle_confirm_button()
     int display_num = _delete_candidate_index + 1; // For user feedback
     _config->remove_binding(_delete_candidate_index);
     
-    if (!_config->save_config()) {
-        show_status_message("Error: Failed to save after deletion", true);
-        _confirming_delete = false;
-        update_button_visibility();
-        return;
-    }
-    
+    // Note: Configuration saving disabled - users must edit files directly
     _tracker->set_bindings(_config->get_bindings());
+    show_status_message("Binding deleted from memory only - edit config file to persist", false);
     
     // Reset state
     _confirming_delete = false;
@@ -567,7 +559,7 @@ std::string UI::format_combination(const std::set<int>& combination) const
     bool first = true;
     for (int button : combination) {
         if (!first) ss << "+";
-        ss << button;
+        ss << std::setfill('0') << std::setw(3) << button;
         first = false;
     }
     return ss.str();

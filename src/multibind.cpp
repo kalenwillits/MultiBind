@@ -66,6 +66,7 @@ PLUGIN_API int XPluginStart(char* out_name, char* out_sig, char* out_desc)
         g_menu_item_id = XPLMAppendMenuItem(g_menu_id, "Multibind", nullptr, 1);
         XPLMMenuID submenu = XPLMCreateMenu("Multibind", g_menu_id, g_menu_item_id, menu_handler, nullptr);
         XPLMAppendMenuItem(submenu, "Open Multibind Window", (void*)1, 1);
+        XPLMAppendMenuItem(submenu, "Reload Configuration", (void*)2, 1);
     }
 
     create_multibind_commands();
@@ -101,7 +102,7 @@ PLUGIN_API int XPluginEnable(void)
 PLUGIN_API void XPluginDisable(void)
 {
     g_ui.hide_window();
-    g_config.save_config();
+    // Note: Configuration saving disabled - users must edit files directly
 }
 
 PLUGIN_API void XPluginReceiveMessage(XPLMPluginID from, int msg, void* param)
@@ -196,6 +197,18 @@ static void menu_handler(void* menu_ref, void* item_ref)
     switch (item) {
         case 1: // Open Multibind Window
             g_ui.show_window();
+            break;
+        case 2: // Reload Configuration
+            {
+                std::string log_msg = "Multibind: Reloading configuration for current aircraft\n";
+                XPLMDebugString(log_msg.c_str());
+                
+                // Force reload by clearing the last aircraft ICAO
+                g_last_aircraft_icao.clear();
+                load_aircraft_config();
+                
+                XPLMDebugString("Multibind: Configuration reloaded successfully\n");
+            }
             break;
     }
 }

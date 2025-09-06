@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <filesystem>
 #include <cstring>
+#include <iomanip>
 
 bool Config::load_config(const std::string& aircraft_id)
 {
@@ -22,9 +23,9 @@ bool Config::load_config(const std::string& aircraft_id)
     std::ifstream file(config_file);
     
     if (!file.is_open()) {
-        std::string log_msg = "Multibind: Config file not found, creating new one: " + config_file + "\n";
+        std::string log_msg = "Multibind: Config file not found: " + config_file + " (users must create manually)\n";
         XPLMDebugString(log_msg.c_str());
-        return save_config(); // Create empty config file
+        return true; // Don't auto-create - users must create files manually
     }
     
     std::string line;
@@ -47,11 +48,10 @@ bool Config::load_config(const std::string& aircraft_id)
             continue;
         }
         
-        // Simple format: "button1+button2+button3|command|description"
-        size_t first_pipe = line.find('|');
-        size_t second_pipe = line.find('|', first_pipe + 1);
+        // Simple format: "button1+button2+button3=command"
+        size_t equals_pos = line.find('=');
         
-        if (first_pipe == std::string::npos || second_pipe == std::string::npos) {
+        if (equals_pos == std::string::npos) {
             std::string truncated_line = line.length() > 100 ? line.substr(0, 100) + "..." : line;
             std::string error_msg = "Multibind: Invalid line format at line " + std::to_string(line_number) + 
                                   ": " + truncated_line + "\n";
@@ -59,9 +59,9 @@ bool Config::load_config(const std::string& aircraft_id)
             continue;
         }
         
-        std::string combination_str = line.substr(0, first_pipe);
-        std::string command = line.substr(first_pipe + 1, second_pipe - first_pipe - 1);
-        std::string description = line.substr(second_pipe + 1);
+        std::string combination_str = line.substr(0, equals_pos);
+        std::string command = line.substr(equals_pos + 1);
+        std::string description = ""; // No description in new format
         
         // Validate input components
         if (!multibind::validation::is_valid_xplane_command(command)) {
@@ -104,40 +104,9 @@ bool Config::load_config(const std::string& aircraft_id)
 
 bool Config::save_config()
 {
-    if (_aircraft_id.empty()) {
-        XPLMDebugString("Multibind: ERROR - Cannot save config, no aircraft ID set\n");
-        return false;
-    }
-    
-    if (!create_multibind_directory()) {
-        XPLMDebugString("Multibind: ERROR - Could not create multibind directory\n");
-        return false;
-    }
-    
-    std::string config_file = get_config_file_path();
-    std::ofstream file(config_file);
-    
-    if (!file.is_open()) {
-        std::string error_msg = "Multibind: ERROR - Could not open config file for writing: " + config_file + "\n";
-        XPLMDebugString(error_msg.c_str());
-        return false;
-    }
-    
-    file << "# Multibind configuration for " << _aircraft_id << "\n";
-    file << "# Format: button1+button2+button3|command|description\n";
-    file << "# Example: 1+5+10|sim/starters/engage_starter_1|Start Engine 1\n";
-    file << "\n";
-    
-    for (const auto& binding : _bindings) {
-        file << combination_to_string(binding.button_combination) << "|" 
-             << binding.target_command << "|" 
-             << binding.description << "\n";
-    }
-    
-    std::string log_msg = "Multibind: Saved " + std::to_string(_bindings.size()) + " bindings to " + config_file + "\n";
-    XPLMDebugString(log_msg.c_str());
-    
-    return true;
+    // Configuration saving disabled - users must edit config files directly
+    XPLMDebugString("Multibind: Configuration saving disabled - users must edit config files manually\n");
+    return false;
 }
 
 void Config::add_binding(const MultibindBinding& binding)
@@ -195,7 +164,7 @@ std::string Config::combination_to_string(const std::set<int>& combination) cons
     
     for (int button : combination) {
         if (!first) ss << "+";
-        ss << button;
+        ss << std::setfill('0') << std::setw(3) << button;
         first = false;
     }
     
