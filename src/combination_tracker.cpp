@@ -133,8 +133,8 @@ void CombinationTracker::process_enhanced_triggers()
                     std::string log_msg = "Multibind: Enhanced trigger sequence matched, triggering: " + binding.target_command + "\n";
                     XPLMDebugString(log_msg.c_str());
                     
-                    // Clear transitions after successful match to prevent re-triggering
-                    _button_transitions.clear();
+                    // Selectively clear only discrete transitions to allow re-triggering
+                    clear_discrete_transitions(binding.button_triggers);
                 }
             }
             return;
@@ -155,20 +155,35 @@ bool CombinationTracker::check_trigger_sequence_match(const std::vector<ButtonTr
         
         // Check if this button has the required transition
         if (transition_it == _button_transitions.end()) {
-            // Button hasn't transitioned - check if it's in the required state
+            // Button hasn't transitioned recently - check based on action type
             if (trigger.action == ButtonAction::HELD) {
                 // For HELD, check if button is currently pressed
                 if (_currently_pressed.find(trigger.button_id) == _currently_pressed.end()) {
                     return false;
                 }
             } else {
-                // For PRESSED or RELEASED, we need an actual transition
+                // For PRESSED or RELEASED, we need a recent transition - pattern doesn't match
                 return false;
             }
         } else {
             // Button has transitioned - check if it matches required action
-            if (transition_it->second != trigger.action) {
-                return false;
+            ButtonAction recorded_action = transition_it->second;
+            
+            if (trigger.action == ButtonAction::PRESSED) {
+                // PRESSED matches either PRESSED or HELD transitions
+                if (recorded_action != ButtonAction::PRESSED && recorded_action != ButtonAction::HELD) {
+                    return false;
+                }
+            } else if (trigger.action == ButtonAction::HELD) {
+                // HELD matches HELD or PRESSED transitions (since HELD follows PRESSED)
+                if (recorded_action != ButtonAction::HELD && recorded_action != ButtonAction::PRESSED) {
+                    return false;
+                }
+            } else if (trigger.action == ButtonAction::RELEASED) {
+                // RELEASED only matches RELEASED transitions
+                if (recorded_action != ButtonAction::RELEASED) {
+                    return false;
+                }
             }
         }
     }
@@ -239,6 +254,21 @@ void CombinationTracker::stop_all_continuous_commands()
     }
     
     XPLMDebugString("Multibind: All continuous commands stopped\n");
+}
+
+void CombinationTracker::clear_discrete_transitions(const std::vector<ButtonTrigger>& triggers)
+{
+    // Only clear transitions for discrete actions (PRESSED/RELEASED)
+    // Preserve HELD transitions so they can be reused for repeated triggering
+    for (const auto& trigger : triggers) {
+        if (trigger.action == ButtonAction::PRESSED || trigger.action == ButtonAction::RELEASED) {
+            auto it = _button_transitions.find(trigger.button_id);
+            if (it != _button_transitions.end() && it->second == trigger.action) {
+                _button_transitions.erase(it);
+            }
+        }
+        // Keep HELD transitions intact for repeated pattern matching
+    }
 }
 
 bool CombinationTracker::should_run_continuously(const std::vector<ButtonTrigger>& triggers) const

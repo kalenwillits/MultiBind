@@ -61,6 +61,7 @@ private:
     void start_continuous_command(const std::string& command, const std::vector<ButtonTrigger>& triggers);
     void stop_continuous_command(const std::string& command);
     void update_continuous_commands();
+    void clear_discrete_transitions(const std::vector<ButtonTrigger>& triggers);
     bool should_run_continuously(const std::vector<ButtonTrigger>& triggers) const;
     bool is_continuous_pattern_active(const std::vector<ButtonTrigger>& triggers) const;
 };
