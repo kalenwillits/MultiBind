@@ -102,6 +102,8 @@ PLUGIN_API int XPluginEnable(void)
 PLUGIN_API void XPluginDisable(void)
 {
     g_ui.hide_window();
+    // Stop any running continuous commands
+    g_tracker.stop_all_continuous_commands();
     // Note: Configuration saving disabled - users must edit files directly
 }
 
@@ -158,6 +160,9 @@ void load_aircraft_config()
         
         std::string log_msg = "Multibind: Loading config for aircraft: " + aircraft_id + "\n";
         XPLMDebugString(log_msg.c_str());
+        
+        // Stop any continuous commands from previous aircraft
+        g_tracker.stop_all_continuous_commands();
         
         g_config.load_config(aircraft_id);
         g_tracker.set_bindings(g_config.get_bindings());

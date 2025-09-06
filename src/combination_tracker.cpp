@@ -48,6 +48,9 @@ void CombinationTracker::set_bindings(const std::vector<MultibindBinding>& bindi
 
 void CombinationTracker::update()
 {
+    // Update continuous commands
+    update_continuous_commands();
+    
     // Note: _triggered_command is cleared by get_triggered_command() 
     // after being retrieved, not here. This allows commands triggered
     // during update to be properly retrieved.
@@ -116,16 +119,23 @@ void CombinationTracker::process_enhanced_triggers()
     // Check enhanced trigger bindings
     for (const auto& binding : _bindings) {
         if (binding.uses_enhanced_triggers() && check_trigger_sequence_match(binding.button_triggers)) {
-            // Small delay to prevent accidental double-triggering
-            if (now - _last_trigger_time > std::chrono::milliseconds(TRIGGER_DEBOUNCE_MS)) {
-                _triggered_command = binding.target_command;
-                _last_trigger_time = now;
-                
-                std::string log_msg = "Multibind: Enhanced trigger sequence matched, triggering: " + binding.target_command + "\n";
-                XPLMDebugString(log_msg.c_str());
-                
-                // Clear transitions after successful match to prevent re-triggering
-                _button_transitions.clear();
+            
+            // Determine if this should run continuously
+            if (should_run_continuously(binding.button_triggers)) {
+                // Start continuous command execution
+                start_continuous_command(binding.target_command, binding.button_triggers);
+            } else {
+                // One-time trigger (legacy behavior)
+                if (now - _last_trigger_time > std::chrono::milliseconds(TRIGGER_DEBOUNCE_MS)) {
+                    _triggered_command = binding.target_command;
+                    _last_trigger_time = now;
+                    
+                    std::string log_msg = "Multibind: Enhanced trigger sequence matched, triggering: " + binding.target_command + "\n";
+                    XPLMDebugString(log_msg.c_str());
+                    
+                    // Clear transitions after successful match to prevent re-triggering
+                    _button_transitions.clear();
+                }
             }
             return;
         }
@@ -163,5 +173,102 @@ bool CombinationTracker::check_trigger_sequence_match(const std::vector<ButtonTr
         }
     }
     
+    return true;
+}
+
+void CombinationTracker::start_continuous_command(const std::string& command, const std::vector<ButtonTrigger>& triggers)
+{
+    if (_active_continuous_commands.find(command) != _active_continuous_commands.end()) {
+        return; // Already running
+    }
+    
+    XPLMCommandRef command_ref = XPLMFindCommand(command.c_str());
+    if (command_ref) {
+        XPLMCommandBegin(command_ref);
+        _active_continuous_commands[command] = command_ref;
+        _continuous_bindings[command] = triggers;
+        
+        std::string log_msg = "Multibind: Started continuous command: " + command + "\n";
+        XPLMDebugString(log_msg.c_str());
+    }
+}
+
+void CombinationTracker::stop_continuous_command(const std::string& command)
+{
+    auto it = _active_continuous_commands.find(command);
+    if (it != _active_continuous_commands.end()) {
+        XPLMCommandEnd(it->second);
+        _active_continuous_commands.erase(it);
+        _continuous_bindings.erase(command);
+        
+        std::string log_msg = "Multibind: Stopped continuous command: " + command + "\n";
+        XPLMDebugString(log_msg.c_str());
+    }
+}
+
+void CombinationTracker::update_continuous_commands()
+{
+    // Check if any continuous commands should be stopped
+    std::vector<std::string> commands_to_stop;
+    
+    for (const auto& pair : _continuous_bindings) {
+        const std::string& command = pair.first;
+        const std::vector<ButtonTrigger>& triggers = pair.second;
+        
+        if (!is_continuous_pattern_active(triggers)) {
+            commands_to_stop.push_back(command);
+        }
+    }
+    
+    // Stop commands that are no longer active
+    for (const std::string& command : commands_to_stop) {
+        stop_continuous_command(command);
+    }
+}
+
+void CombinationTracker::stop_all_continuous_commands()
+{
+    // Stop all currently running continuous commands
+    std::vector<std::string> all_commands;
+    for (const auto& pair : _active_continuous_commands) {
+        all_commands.push_back(pair.first);
+    }
+    
+    for (const std::string& command : all_commands) {
+        stop_continuous_command(command);
+    }
+    
+    XPLMDebugString("Multibind: All continuous commands stopped\n");
+}
+
+bool CombinationTracker::should_run_continuously(const std::vector<ButtonTrigger>& triggers) const
+{
+    // A pattern should run continuously if it contains HELD actions
+    for (const auto& trigger : triggers) {
+        if (trigger.action == ButtonAction::HELD) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool CombinationTracker::is_continuous_pattern_active(const std::vector<ButtonTrigger>& triggers) const
+{
+    // Check if the current button states match the continuous pattern requirements
+    for (const auto& trigger : triggers) {
+        switch (trigger.action) {
+            case ButtonAction::HELD:
+                // For HELD, button must be currently pressed
+                if (_currently_pressed.find(trigger.button_id) == _currently_pressed.end()) {
+                    return false;
+                }
+                break;
+            case ButtonAction::PRESSED:
+            case ButtonAction::RELEASED:
+                // For discrete actions, these are not continuous requirements
+                // The pattern was already triggered, so these don't affect continuous state
+                break;
+        }
+    }
     return true;
 }

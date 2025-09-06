@@ -1,6 +1,7 @@
 #pragma once
 
 #include "config.h"
+#include "XPLMUtilities.h"
 #include <unordered_map>
 #include <set>
 #include <string>
@@ -26,6 +27,9 @@ public:
     void stop_recording() { _recording = false; }
     const std::set<int>& get_recorded_combination() const { return _recorded_combination; }
     
+    // Public cleanup method
+    void stop_all_continuous_commands();
+    
 private:
     std::unordered_map<int, bool> _button_states;  // button_id -> pressed
     std::set<int> _currently_pressed;              // Currently pressed buttons
@@ -34,6 +38,10 @@ private:
     // Enhanced state tracking for new trigger system
     std::unordered_map<int, ButtonAction> _button_transitions;  // Latest button state transitions
     std::chrono::steady_clock::time_point _last_transition_time{};
+    
+    // Continuous command execution tracking
+    std::unordered_map<std::string, XPLMCommandRef> _active_continuous_commands;  // Commands currently running
+    std::unordered_map<std::string, std::vector<ButtonTrigger>> _continuous_bindings; // Commands that should run continuously
     
     std::string _triggered_command;                // Command to execute this frame
     
@@ -48,4 +56,11 @@ private:
     void process_combination_change();
     void process_enhanced_triggers();
     bool check_trigger_sequence_match(const std::vector<ButtonTrigger>& sequence) const;
+    
+    // Continuous command management
+    void start_continuous_command(const std::string& command, const std::vector<ButtonTrigger>& triggers);
+    void stop_continuous_command(const std::string& command);
+    void update_continuous_commands();
+    bool should_run_continuously(const std::vector<ButtonTrigger>& triggers) const;
+    bool is_continuous_pattern_active(const std::vector<ButtonTrigger>& triggers) const;
 };
