@@ -12,6 +12,7 @@ public:
     ~CombinationTracker() = default;
     
     void set_button_pressed(int button_id, bool pressed);
+    void set_button_state_transition(int button_id, ButtonAction action);
     void set_bindings(const std::vector<MultibindBinding>& bindings);
     
     void update();
@@ -30,6 +31,10 @@ private:
     std::set<int> _currently_pressed;              // Currently pressed buttons
     std::vector<MultibindBinding> _bindings;       // Current bindings to check against
     
+    // Enhanced state tracking for new trigger system
+    std::unordered_map<int, ButtonAction> _button_transitions;  // Latest button state transitions
+    std::chrono::steady_clock::time_point _last_transition_time{};
+    
     std::string _triggered_command;                // Command to execute this frame
     
     bool _recording = false;                       // Whether we're recording a new combination
@@ -41,4 +46,6 @@ private:
     
     bool check_combination_match(const std::set<int>& pressed, const std::set<int>& target) const;
     void process_combination_change();
+    void process_enhanced_triggers();
+    bool check_trigger_sequence_match(const std::vector<ButtonTrigger>& sequence) const;
 };

@@ -219,10 +219,16 @@ static int multibind_command_handler(XPLMCommandRef command,
 {
     int command_id = (int)(intptr_t)refcon;
     
+    // Enhanced state tracking for new trigger system
     if (phase == xplm_CommandBegin) {
-        g_tracker.set_button_pressed(command_id, true);
+        g_tracker.set_button_state_transition(command_id, ButtonAction::PRESSED);
+        g_tracker.set_button_pressed(command_id, true);  // Maintain backward compatibility
+    } else if (phase == xplm_CommandContinue) {
+        g_tracker.set_button_state_transition(command_id, ButtonAction::HELD);
+        g_tracker.set_button_pressed(command_id, true);  // Maintain backward compatibility
     } else if (phase == xplm_CommandEnd) {
-        g_tracker.set_button_pressed(command_id, false);
+        g_tracker.set_button_state_transition(command_id, ButtonAction::RELEASED);
+        g_tracker.set_button_pressed(command_id, false); // Maintain backward compatibility
     }
     
     return 0;

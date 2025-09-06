@@ -5,14 +5,48 @@
 #include <unordered_map>
 #include <set>
 
+enum class ButtonAction {
+    PRESSED,    // Button just pressed (+ prefix)
+    HELD,       // Button held down (* prefix)
+    RELEASED    // Button just released (- prefix)
+};
+
+struct ButtonTrigger {
+    int button_id;
+    ButtonAction action;
+    
+    ButtonTrigger() = default;
+    ButtonTrigger(int id, ButtonAction act) : button_id(id), action(act) {}
+    
+    // For compatibility with existing code that expects comparison
+    bool operator<(const ButtonTrigger& other) const {
+        if (button_id != other.button_id) return button_id < other.button_id;
+        return static_cast<int>(action) < static_cast<int>(other.action);
+    }
+    
+    bool operator==(const ButtonTrigger& other) const {
+        return button_id == other.button_id && action == other.action;
+    }
+};
+
 struct MultibindBinding {
-    std::set<int> button_combination;  // Set of multibind button IDs (0-999)
-    std::string target_command;        // XPlane command to execute
-    std::string description;           // User-friendly description
+    std::vector<ButtonTrigger> button_triggers;  // Enhanced button triggers with actions
+    std::set<int> button_combination;            // Deprecated - for backward compatibility
+    std::string target_command;                  // XPlane command to execute
+    std::string description;                     // User-friendly description
     
     MultibindBinding() = default;
+    
+    // New constructor for enhanced triggers
+    MultibindBinding(const std::vector<ButtonTrigger>& triggers, const std::string& command, const std::string& desc)
+        : button_triggers(triggers), target_command(command), description(desc) {}
+    
+    // Deprecated constructor for backward compatibility
     MultibindBinding(const std::set<int>& buttons, const std::string& command, const std::string& desc)
         : button_combination(buttons), target_command(command), description(desc) {}
+    
+    // Helper to check if this uses new trigger system
+    bool uses_enhanced_triggers() const { return !button_triggers.empty(); }
 };
 
 class Config {
@@ -39,7 +73,13 @@ private:
     std::string _aircraft_id;
     std::vector<MultibindBinding> _bindings;
     
+    // Enhanced trigger parsing functions
+    std::string triggers_to_string(const std::vector<ButtonTrigger>& triggers) const;
+    std::vector<ButtonTrigger> string_to_triggers(const std::string& str) const;
+    
+    // Deprecated - for backward compatibility  
     std::string combination_to_string(const std::set<int>& combination) const;
     std::set<int> string_to_combination(const std::string& str) const;
+    
     std::string get_multibind_directory() const;
 };

@@ -48,7 +48,7 @@ bool Config::load_config(const std::string& aircraft_id)
             continue;
         }
         
-        // Simple format: "button1+button2+button3=command"
+        // Format: "button1+button2=command" or "*button1+button2-button3=command"
         size_t equals_pos = line.find('=');
         
         if (equals_pos == std::string::npos) {
@@ -78,21 +78,45 @@ bool Config::load_config(const std::string& aircraft_id)
             continue;
         }
         
-        std::set<int> combination = string_to_combination(combination_str);
-        if (!combination.empty() && !command.empty()) {
-            // Prevent excessive bindings (DOS protection)
-            constexpr size_t MAX_BINDINGS = 1000;
-            if (_bindings.size() >= MAX_BINDINGS) {
-                std::string error_msg = "Multibind: Maximum number of bindings (" + 
-                                      std::to_string(MAX_BINDINGS) + ") reached at line " + 
-                                      std::to_string(line_number) + ", ignoring remaining entries\n";
+        // Detect format: enhanced (*+-) vs legacy (numeric+numeric)
+        bool has_enhanced_format = combination_str.find_first_of("*+-") != std::string::npos;
+        
+        if (has_enhanced_format) {
+            // Parse enhanced trigger format (*005+018-020)
+            std::vector<ButtonTrigger> triggers = string_to_triggers(combination_str);
+            if (!triggers.empty() && !command.empty()) {
+                // Prevent excessive bindings (DOS protection)
+                constexpr size_t MAX_BINDINGS = 1000;
+                if (_bindings.size() >= MAX_BINDINGS) {
+                    std::string error_msg = "Multibind: Maximum number of bindings (" + 
+                                          std::to_string(MAX_BINDINGS) + ") reached at line " + 
+                                          std::to_string(line_number) + ", ignoring remaining entries\n";
+                    XPLMDebugString(error_msg.c_str());
+                    break;
+                }
+                _bindings.emplace_back(triggers, command, description);
+            } else if (triggers.empty()) {
+                std::string error_msg = "Multibind: No valid button triggers at line " + std::to_string(line_number) + "\n";
                 XPLMDebugString(error_msg.c_str());
-                break;
             }
-            _bindings.emplace_back(combination, command, description);
-        } else if (combination.empty()) {
-            std::string error_msg = "Multibind: No valid button combination at line " + std::to_string(line_number) + "\n";
-            XPLMDebugString(error_msg.c_str());
+        } else {
+            // Parse legacy combination format (000+018)
+            std::set<int> combination = string_to_combination(combination_str);
+            if (!combination.empty() && !command.empty()) {
+                // Prevent excessive bindings (DOS protection)
+                constexpr size_t MAX_BINDINGS = 1000;
+                if (_bindings.size() >= MAX_BINDINGS) {
+                    std::string error_msg = "Multibind: Maximum number of bindings (" + 
+                                          std::to_string(MAX_BINDINGS) + ") reached at line " + 
+                                          std::to_string(line_number) + ", ignoring remaining entries\n";
+                    XPLMDebugString(error_msg.c_str());
+                    break;
+                }
+                _bindings.emplace_back(combination, command, description);
+            } else if (combination.empty()) {
+                std::string error_msg = "Multibind: No valid button combination at line " + std::to_string(line_number) + "\n";
+                XPLMDebugString(error_msg.c_str());
+            }
         }
     }
     
@@ -166,6 +190,65 @@ std::string Config::combination_to_string(const std::set<int>& combination) cons
         if (!first) ss << "+";
         ss << std::setfill('0') << std::setw(3) << button;
         first = false;
+    }
+    
+    return ss.str();
+}
+
+std::vector<ButtonTrigger> Config::string_to_triggers(const std::string& str) const
+{
+    using namespace multibind::constants;
+    
+    std::vector<ButtonTrigger> triggers;
+    std::string current_token;
+    
+    for (size_t i = 0; i < str.length(); ++i) {
+        char c = str[i];
+        
+        if (c == '*' || c == '+' || c == '-') {
+            // Found a trigger prefix - extract the button ID that follows
+            ButtonAction action;
+            switch (c) {
+                case '*': action = ButtonAction::HELD; break;
+                case '+': action = ButtonAction::PRESSED; break; 
+                case '-': action = ButtonAction::RELEASED; break;
+            }
+            
+            // Extract button number (next 3 digits)
+            if (i + 3 < str.length()) {
+                std::string button_str = str.substr(i + 1, 3);
+                try {
+                    int button = std::stoi(button_str);
+                    if (button >= MIN_BUTTON_ID && button <= MAX_BUTTON_ID) {
+                        triggers.emplace_back(button, action);
+                    }
+                } catch (const std::exception&) {
+                    // Invalid button number, skip
+                }
+                i += 3; // Skip the button digits we just processed
+            }
+        }
+    }
+    
+    return triggers;
+}
+
+std::string Config::triggers_to_string(const std::vector<ButtonTrigger>& triggers) const
+{
+    std::stringstream ss;
+    
+    for (size_t i = 0; i < triggers.size(); ++i) {
+        const auto& trigger = triggers[i];
+        
+        // Add prefix based on action
+        switch (trigger.action) {
+            case ButtonAction::HELD: ss << "*"; break;
+            case ButtonAction::PRESSED: ss << "+"; break;
+            case ButtonAction::RELEASED: ss << "-"; break;
+        }
+        
+        // Add zero-padded button ID
+        ss << std::setfill('0') << std::setw(3) << trigger.button_id;
     }
     
     return ss.str();

@@ -235,12 +235,21 @@ void UI::update_binding_list()
     std::string list_content;
     
     for (size_t i = 0; i < bindings.size(); ++i) {
-        std::string combo_str = format_combination(bindings[i].button_combination);
-        std::string description = bindings[i].description.empty() ? "No description" : bindings[i].description;
+        const auto& binding = bindings[i];
+        
+        // Use appropriate formatting based on binding type
+        std::string combo_str;
+        if (binding.uses_enhanced_triggers()) {
+            combo_str = format_triggers(binding.button_triggers);
+        } else {
+            combo_str = format_combination(binding.button_combination);
+        }
+        
+        std::string description = binding.description.empty() ? "No description" : binding.description;
         
         // Format: [Index] Buttons -> Command (Description)
         list_content += std::to_string(i + 1) + ". " + combo_str + " -> " + 
-                       bindings[i].target_command + "\n   (" + description + ")\n\n";
+                       binding.target_command + "\n   (" + description + ")\n\n";
         
         // Limit display to prevent UI overflow (about 10-15 bindings visible)
         if (list_content.length() > 1500) {
@@ -562,6 +571,28 @@ std::string UI::format_combination(const std::set<int>& combination) const
         ss << std::setfill('0') << std::setw(3) << button;
         first = false;
     }
+    return ss.str();
+}
+
+std::string UI::format_triggers(const std::vector<ButtonTrigger>& triggers) const
+{
+    if (triggers.empty()) {
+        return "None";
+    }
+    
+    std::stringstream ss;
+    for (const auto& trigger : triggers) {
+        // Add prefix based on action
+        switch (trigger.action) {
+            case ButtonAction::HELD: ss << "*"; break;
+            case ButtonAction::PRESSED: ss << "+"; break;
+            case ButtonAction::RELEASED: ss << "-"; break;
+        }
+        
+        // Add zero-padded button ID
+        ss << std::setfill('0') << std::setw(3) << trigger.button_id;
+    }
+    
     return ss.str();
 }
 

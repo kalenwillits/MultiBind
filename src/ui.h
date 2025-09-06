@@ -91,5 +91,6 @@ private:
     int handle_widget_message(XPWidgetMessage message, XPWidgetID widget, intptr_t param1, intptr_t param2);
     
     std::string format_combination(const std::set<int>& combination) const;
+    std::string format_triggers(const std::vector<ButtonTrigger>& triggers) const;
     void refresh_ui();
 };
