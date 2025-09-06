@@ -14,14 +14,14 @@ jobs:
         include:
           - name: Windows
             os: windows-latest
-            cmake_generator: "Visual Studio 17 2022"
+            cmake_generator: "Visual Studio 16 2019"
             cmake_arch: "-A x64"
             output_dir: win_x64
             artifact_name: multibind-windows
             
           - name: macOS
             os: macos-latest
-            cmake_generator: "Xcode"
+            cmake_generator: "Unix Makefiles"
             cmake_arch: ""
             output_dir: mac_x64
             artifact_name: multibind-macos
