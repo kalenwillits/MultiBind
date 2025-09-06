@@ -33,12 +33,11 @@ void CombinationTracker::set_button_state_transition(int button_id, ButtonAction
         return;
     }
     
-    // Record the transition and timestamp
+    // Record the transition for frame-based processing
     _button_transitions[button_id] = action;
     _last_transition_time = std::chrono::steady_clock::now();
     
-    // Process enhanced trigger patterns
-    process_enhanced_triggers();
+    // Pattern processing now happens in update() cycle - no immediate processing
 }
 
 void CombinationTracker::set_bindings(const std::vector<MultibindBinding>& bindings)
@@ -48,8 +47,14 @@ void CombinationTracker::set_bindings(const std::vector<MultibindBinding>& bindi
 
 void CombinationTracker::update()
 {
+    // Process enhanced trigger patterns with accumulated transitions from this frame
+    process_enhanced_triggers();
+    
     // Update continuous commands
     update_continuous_commands();
+    
+    // Clear frame transitions for next frame
+    clear_frame_transitions();
     
     // Note: _triggered_command is cleared by get_triggered_command() 
     // after being retrieved, not here. This allows commands triggered
@@ -264,6 +269,13 @@ void CombinationTracker::stop_all_continuous_commands()
     }
     
     XPLMDebugString("Multibind: All continuous commands stopped\n");
+}
+
+void CombinationTracker::clear_frame_transitions()
+{
+    // Clear all transitions for next frame - this gives each frame fresh pattern detection
+    // HELD states are maintained through _currently_pressed, so continuous patterns still work
+    _button_transitions.clear();
 }
 
 
