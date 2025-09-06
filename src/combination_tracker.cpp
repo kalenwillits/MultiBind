@@ -125,16 +125,26 @@ void CombinationTracker::process_enhanced_triggers()
                 // Start continuous command execution
                 start_continuous_command(binding.target_command, binding.button_triggers);
             } else {
-                // One-time trigger (legacy behavior)
-                if (now - _last_trigger_time > std::chrono::milliseconds(TRIGGER_DEBOUNCE_MS)) {
+                // One-time trigger - check if this pattern contains HELD actions for different debounce logic
+                bool has_held_actions = false;
+                for (const auto& trigger : binding.button_triggers) {
+                    if (trigger.action == ButtonAction::HELD) {
+                        has_held_actions = true;
+                        break;
+                    }
+                }
+                
+                // For patterns with HELD actions, use shorter debounce to allow rapid re-triggering
+                auto debounce_time = has_held_actions ? 
+                    std::chrono::milliseconds(50) :  // Short debounce for ambiguous patterns
+                    std::chrono::milliseconds(TRIGGER_DEBOUNCE_MS); // Normal debounce for discrete patterns
+                
+                if (now - _last_trigger_time > debounce_time) {
                     _triggered_command = binding.target_command;
                     _last_trigger_time = now;
                     
                     std::string log_msg = "Multibind: Enhanced trigger sequence matched, triggering: " + binding.target_command + "\n";
                     XPLMDebugString(log_msg.c_str());
-                    
-                    // Selectively clear only discrete transitions to allow re-triggering
-                    clear_discrete_transitions(binding.button_triggers);
                 }
             }
             return;
@@ -256,20 +266,6 @@ void CombinationTracker::stop_all_continuous_commands()
     XPLMDebugString("Multibind: All continuous commands stopped\n");
 }
 
-void CombinationTracker::clear_discrete_transitions(const std::vector<ButtonTrigger>& triggers)
-{
-    // Only clear transitions for discrete actions (PRESSED/RELEASED)
-    // Preserve HELD transitions so they can be reused for repeated triggering
-    for (const auto& trigger : triggers) {
-        if (trigger.action == ButtonAction::PRESSED || trigger.action == ButtonAction::RELEASED) {
-            auto it = _button_transitions.find(trigger.button_id);
-            if (it != _button_transitions.end() && it->second == trigger.action) {
-                _button_transitions.erase(it);
-            }
-        }
-        // Keep HELD transitions intact for repeated pattern matching
-    }
-}
 
 bool CombinationTracker::should_run_continuously(const std::vector<ButtonTrigger>& triggers) const
 {
