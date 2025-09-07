@@ -30,23 +30,15 @@ struct ButtonTrigger {
 };
 
 struct MultibindBinding {
-    std::vector<ButtonTrigger> button_triggers;  // Enhanced button triggers with actions
-    std::set<int> button_combination;            // Deprecated - for backward compatibility
+    std::vector<ButtonTrigger> button_triggers;  // Button triggers with actions
     std::string target_command;                  // XPlane command to execute
     std::string description;                     // User-friendly description
     
     MultibindBinding() = default;
     
-    // New constructor for enhanced triggers
+    // Constructor for button triggers
     MultibindBinding(const std::vector<ButtonTrigger>& triggers, const std::string& command, const std::string& desc)
         : button_triggers(triggers), target_command(command), description(desc) {}
-    
-    // Deprecated constructor for backward compatibility
-    MultibindBinding(const std::set<int>& buttons, const std::string& command, const std::string& desc)
-        : button_combination(buttons), target_command(command), description(desc) {}
-    
-    // Helper to check if this uses new trigger system
-    bool uses_enhanced_triggers() const { return !button_triggers.empty(); }
 };
 
 class Config {
@@ -73,13 +65,9 @@ private:
     std::string _aircraft_id;
     std::vector<MultibindBinding> _bindings;
     
-    // Enhanced trigger parsing functions
+    // Trigger parsing functions
     std::string triggers_to_string(const std::vector<ButtonTrigger>& triggers) const;
     std::vector<ButtonTrigger> string_to_triggers(const std::string& str) const;
-    
-    // Deprecated - for backward compatibility  
-    std::string combination_to_string(const std::set<int>& combination) const;
-    std::set<int> string_to_combination(const std::string& str) const;
     
     std::string get_multibind_directory() const;
 };

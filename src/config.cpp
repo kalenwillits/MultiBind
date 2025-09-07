@@ -78,11 +78,28 @@ bool Config::load_config(const std::string& aircraft_id)
             continue;
         }
         
-        // Detect format: enhanced (*+-) vs legacy (numeric+numeric)
-        bool has_enhanced_format = combination_str.find_first_of("*+-") != std::string::npos;
+        // Detect format: check for proper trigger pattern (*000, +001, -002)
+        bool has_trigger_format = false;
+        for (size_t i = 0; i < combination_str.length(); ++i) {
+            char c = combination_str[i];
+            if ((c == '*' || c == '+' || c == '-') && (i + 3 < combination_str.length())) {
+                // Check if followed by 3 digits
+                bool valid_digits = true;
+                for (int j = 1; j <= 3; ++j) {
+                    if (!std::isdigit(combination_str[i + j])) {
+                        valid_digits = false;
+                        break;
+                    }
+                }
+                if (valid_digits) {
+                    has_trigger_format = true;
+                    break;
+                }
+            }
+        }
         
-        if (has_enhanced_format) {
-            // Parse enhanced trigger format (*005+018-020)
+        if (has_trigger_format) {
+            // Parse trigger format (*005+018-020)
             std::vector<ButtonTrigger> triggers = string_to_triggers(combination_str);
             if (!triggers.empty() && !command.empty()) {
                 // Prevent excessive bindings (DOS protection)
@@ -100,23 +117,9 @@ bool Config::load_config(const std::string& aircraft_id)
                 XPLMDebugString(error_msg.c_str());
             }
         } else {
-            // Parse legacy combination format (000+018)
-            std::set<int> combination = string_to_combination(combination_str);
-            if (!combination.empty() && !command.empty()) {
-                // Prevent excessive bindings (DOS protection)
-                constexpr size_t MAX_BINDINGS = 1000;
-                if (_bindings.size() >= MAX_BINDINGS) {
-                    std::string error_msg = "Multibind: Maximum number of bindings (" + 
-                                          std::to_string(MAX_BINDINGS) + ") reached at line " + 
-                                          std::to_string(line_number) + ", ignoring remaining entries\n";
-                    XPLMDebugString(error_msg.c_str());
-                    break;
-                }
-                _bindings.emplace_back(combination, command, description);
-            } else if (combination.empty()) {
-                std::string error_msg = "Multibind: No valid button combination at line " + std::to_string(line_number) + "\n";
-                XPLMDebugString(error_msg.c_str());
-            }
+            // Invalid format
+            std::string error_msg = "Multibind: Invalid format at line " + std::to_string(line_number) + ". Use format like *000+001=command\n";
+            XPLMDebugString(error_msg.c_str());
         }
     }
     
@@ -181,19 +184,6 @@ std::string Config::get_multibind_directory() const
     return xplane_path + "multibind";
 }
 
-std::string Config::combination_to_string(const std::set<int>& combination) const
-{
-    std::stringstream ss;
-    bool first = true;
-    
-    for (int button : combination) {
-        if (!first) ss << "+";
-        ss << std::setfill('0') << std::setw(3) << button;
-        first = false;
-    }
-    
-    return ss.str();
-}
 
 std::vector<ButtonTrigger> Config::string_to_triggers(const std::string& str) const
 {
@@ -216,14 +206,25 @@ std::vector<ButtonTrigger> Config::string_to_triggers(const std::string& str) co
             
             // Extract button number (next 3 digits)
             if (i + 3 < str.length()) {
-                std::string button_str = str.substr(i + 1, 3);
-                try {
-                    int button = std::stoi(button_str);
-                    if (button >= MIN_BUTTON_ID && button <= MAX_BUTTON_ID) {
-                        triggers.emplace_back(button, action);
+                // Validate that next 3 characters are digits
+                bool valid_digits = true;
+                for (int j = 1; j <= 3; ++j) {
+                    if (!std::isdigit(str[i + j])) {
+                        valid_digits = false;
+                        break;
                     }
-                } catch (const std::exception&) {
-                    // Invalid button number, skip
+                }
+                
+                if (valid_digits) {
+                    std::string button_str = str.substr(i + 1, 3);
+                    try {
+                        int button = std::stoi(button_str);
+                        if (button >= MIN_BUTTON_ID && button <= MAX_BUTTON_ID) {
+                            triggers.emplace_back(button, action);
+                        }
+                    } catch (const std::exception&) {
+                        // Invalid button number, skip
+                    }
                 }
                 i += 3; // Skip the button digits we just processed
             }
@@ -254,24 +255,3 @@ std::string Config::triggers_to_string(const std::vector<ButtonTrigger>& trigger
     return ss.str();
 }
 
-std::set<int> Config::string_to_combination(const std::string& str) const
-{
-    using namespace multibind::constants;
-    
-    std::set<int> combination;
-    std::stringstream ss(str);
-    std::string button_str;
-    
-    while (std::getline(ss, button_str, '+')) {
-        try {
-            int button = std::stoi(button_str);
-            if (button >= MIN_BUTTON_ID && button <= MAX_BUTTON_ID) {
-                combination.insert(button);
-            }
-        } catch (const std::exception&) {
-            // Invalid button number, skip
-        }
-    }
-    
-    return combination;
-}

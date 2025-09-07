@@ -237,13 +237,7 @@ void UI::update_binding_list()
     for (size_t i = 0; i < bindings.size(); ++i) {
         const auto& binding = bindings[i];
         
-        // Use appropriate formatting based on binding type
-        std::string combo_str;
-        if (binding.uses_enhanced_triggers()) {
-            combo_str = format_triggers(binding.button_triggers);
-        } else {
-            combo_str = format_combination(binding.button_combination);
-        }
+        std::string combo_str = format_triggers(binding.button_triggers);
         
         std::string description = binding.description.empty() ? "No description" : binding.description;
         
@@ -267,13 +261,21 @@ void UI::update_current_combination_display()
         return;
     }
     
-    const auto& pressed = _tracker->get_currently_pressed_buttons();
+    const auto& button_states = _tracker->get_current_button_states();
     std::string display_text = "Current Combination: ";
     
-    if (pressed.empty()) {
+    // Convert button states map to set of pressed buttons
+    std::set<int> pressed_buttons;
+    for (const auto& pair : button_states) {
+        if (pair.second) {  // Button is pressed
+            pressed_buttons.insert(pair.first);
+        }
+    }
+    
+    if (pressed_buttons.empty()) {
         display_text += "None";
     } else {
-        display_text += format_combination(pressed);
+        display_text += format_combination(pressed_buttons);
     }
     
     XPSetWidgetDescriptor(_current_combination_label, display_text.c_str());
@@ -325,7 +327,7 @@ void UI::handle_clear_button()
 {
     if (!_tracker) return;
     
-    _tracker->clear_currently_pressed();
+    _tracker->clear_current_button_states();
     if (_recording) {
         _tracker->stop_recording();
         _tracker->start_recording(); // Restart recording with empty combination
@@ -354,8 +356,18 @@ void UI::handle_save_button()
         XPGetWidgetDescriptor(_description_input, description_text, sizeof(description_text));
     }
     
-    // Get recorded combination
-    const auto& combination = _recording ? _tracker->get_recorded_combination() : _tracker->get_currently_pressed_buttons();
+    // Get recorded combination or current button states
+    std::set<int> combination;
+    if (_recording) {
+        combination = _tracker->get_recorded_combination();
+    } else {
+        const auto& button_states = _tracker->get_current_button_states();
+        for (const auto& pair : button_states) {
+            if (pair.second) {  // Button is pressed
+                combination.insert(pair.first);
+            }
+        }
+    }
     
     // Validation
     if (combination.empty()) {
@@ -376,7 +388,12 @@ void UI::handle_save_button()
     }
     
     // Create and save binding
-    MultibindBinding binding(combination, std::string(command_text), std::string(description_text));
+    std::vector<ButtonTrigger> triggers;
+    for (int button : combination) {
+        triggers.emplace_back(button, ButtonAction::PRESSED);
+    }
+    
+    MultibindBinding binding(triggers, std::string(command_text), std::string(description_text));
     
     if (_selected_binding_index >= 0) {
         // Update existing binding
@@ -444,7 +461,7 @@ void UI::handle_edit_button()
     }
     
     // Show the combination (but user will need to re-record it)
-    std::string combo_str = format_combination(binding.button_combination);
+    std::string combo_str = format_triggers(binding.button_triggers);
     show_status_message("Editing binding #" + std::to_string(selection_num) + " (" + combo_str + ") - modify and Save");
 }
 
@@ -488,7 +505,7 @@ void UI::handle_delete_button()
     
     // Show confirmation message
     const auto& binding = bindings[_delete_candidate_index];
-    std::string combo_str = format_combination(binding.button_combination);
+    std::string combo_str = format_triggers(binding.button_triggers);
     show_status_message("Delete binding #" + std::to_string(selection_num) + " (" + combo_str + ")? Click Confirm or Cancel");
     
     update_button_visibility();
