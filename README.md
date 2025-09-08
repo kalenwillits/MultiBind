@@ -1,303 +1,235 @@
-# Multibind - XPlane-12 Multi-Button Command Plugin
+# Multibind - X-Plane 12 Multi-Button Command Plugin
 
-[![Build Status](https://github.com/yourusername/multibind/workflows/Build%20Multibind%20Plugin/badge.svg)](https://github.com/yourusername/multibind/actions)
-[![Release](https://img.shields.io/github/v/release/yourusername/multibind)](https://github.com/yourusername/multibind/releases)
-[![License](https://img.shields.io/github/license/yourusername/multibind)](LICENSE)
-[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-blue)](https://github.com/yourusername/multibind/releases)
-
-An X-Plane 12 plugin that enables multi-button joystick command binding. Create complex button combinations on your joystick/HOTAS and map them to any X-Plane command.
+An X-Plane 12 plugin that enables multi-button joystick command binding. Create complex button combinations on your joystick/HOTAS and map them to any X-Plane command through simple configuration files.
 
 ## Features
 
-- **1000 Custom Commands**: Creates `multibind/000` through `multibind/999` that can be assigned to joystick buttons in X-Plane's settings
-- **Multi-Button Combinations**: Press multiple multibind buttons simultaneously to trigger X-Plane commands
+- **1000 Custom Commands**: Creates `multibind/000` through `multibind/999` for use in X-Plane's joystick settings
+- **Multi-Button Combinations**: Press multiple buttons simultaneously to trigger X-Plane commands
 - **Aircraft-Specific Profiles**: Automatically loads/saves configurations per aircraft
-- **Simple Configuration UI**: Easy-to-use plugin window for creating and managing bindings
+- **Configuration File Based**: Simple text files for easy editing and sharing
 - **Cross-Platform**: Supports Windows, Mac, and Linux
 
 ## How It Works
 
-1. **Setup Phase**: Plugin creates 1000 custom commands that appear in X-Plane's joystick settings
-2. **Assignment Phase**: You assign these `multibind/XXX` commands to your joystick buttons using X-Plane's standard joystick configuration
-3. **Combination Phase**: Define combinations in the plugin UI (e.g., "buttons 5+10+15 = start engine 1")
-4. **Execution Phase**: When you press the button combination, the plugin triggers the target X-Plane command
+1. **Setup**: Plugin creates 1000 custom commands (`multibind/000` to `multibind/999`) that appear in X-Plane's joystick settings
+2. **Assignment**: Assign these `multibind/XXX` commands to your joystick buttons using X-Plane's standard joystick configuration
+3. **Configuration**: Define combinations in simple text files (e.g., "buttons 5+10+15 = start engine 1")
+4. **Execution**: When you press the button combination, the plugin triggers the target X-Plane command
 
-## 🚀 Quick Start
+## Installation
 
-**Want to build immediately?** See [QUICKSTART.md](QUICKSTART.md) for the 2-step build process!
+1. **Download** the appropriate package for your platform:
+   - **Windows**: `multibind-windows.zip`
+   - **macOS**: `multibind-macos.zip` (Universal binary)
+   - **Linux**: `multibind-linux.zip`
 
-## Download
+2. **Extract** the downloaded file
 
-### Pre-built Releases
-Download the latest pre-built plugin from the [Releases page](https://github.com/yourusername/multibind/releases):
-
-- **Windows**: `multibind-windows.zip` 
-- **macOS**: `multibind-macos.zip` (Universal binary: Intel + Apple Silicon)
-- **Linux**: `multibind-linux.zip`
-
-### Installation from Release
-1. Download the appropriate package for your platform
-2. Extract the zip file  
-3. Copy the `Multibind` folder to `X-Plane 12/Resources/plugins/`
-4. Restart X-Plane
-
-The final plugin path should be: `X-Plane 12/Resources/plugins/Multibind/[platform].xpl`
-- Linux: `X-Plane 12/Resources/plugins/Multibind/lin.xpl`
-- macOS: `X-Plane 12/Resources/plugins/Multibind/mac.xpl`  
-- Windows: `X-Plane 12/Resources/plugins/Multibind/win.xpl`
-
-## Building from Source
-
-### ⚡ Simple Method (Recommended)
-
-**Windows:**
-```cmd
-setup-sdk.bat
-build.bat
-```
-
-**Linux/Mac:**
-```bash
-./setup-sdk.sh
-./build.sh
-```
-
-### 🔧 Manual Method
-
-### Prerequisites
-- **X-Plane 12**
-- **X-Plane SDK** (for compilation) - See download instructions below
-- **CMake 3.16+**
-- **C++17 compatible compiler**:
-  - **Windows**: Visual Studio 2019/2022 with C++ development tools, Visual Studio Build Tools, or MinGW-w64
-    - ⚠️ **Note**: Visual Studio Code is NOT a compiler - you need one of the above
-  - **macOS**: Xcode Command Line Tools or full Xcode
-  - **Linux**: GCC 7+ or Clang 5+
-
-### Windows Compiler Setup
-
-⚠️ **Visual Studio Code vs Visual Studio**: These are different products! 
-- **Visual Studio Code** = Code editor (what you might have installed)
-- **Visual Studio** = Full IDE with C++ compiler (what you need for building)
-
-**Choose ONE of these options:**
-
-#### Option 1: Visual Studio Community (Full IDE - Recommended for beginners)
-1. Download from [visualstudio.microsoft.com](https://visualstudio.microsoft.com/downloads/)
-2. During installation, select **"Desktop development with C++"** workload
-3. This includes everything you need
-
-#### Option 2: Build Tools for Visual Studio (Smaller download - 3GB vs 7GB)
-1. Download [Build Tools for Visual Studio](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022)  
-2. During installation, select **"C++ build tools"** workload
-3. Perfect if you're already using Visual Studio Code as your editor
-
-#### Option 3: MinGW-w64 (Open source alternative)
-**Via winget (easiest):**
-```cmd
-winget install mingw-w64
-```
-
-**Via MSYS2 (manual):**
-1. Download and install [MSYS2](https://www.msys2.org/)
-2. Open MSYS2 terminal and run:
-   ```bash
-   pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake mingw-w64-x86_64-make
+3. **Install** by copying the `.xpl` file to:
    ```
-3. Add `C:\msys64\mingw64\bin` to your PATH environment variable
+   X-Plane 12/Resources/plugins/
+   ```
 
-### Download X-Plane SDK
-1. Download the X-Plane SDK from [developer.x-plane.com](https://developer.x-plane.com/sdk/plugin-sdk-downloads/)
-2. Extract it to the project directory as `SDK/` or set the `XPLANE_SDK_PATH` environment variable
+4. **Restart** X-Plane
 
-### Compilation
-
-#### Windows
-
-**Automated (Recommended)**
-```cmd
-build.bat
-```
-The build script automatically detects your compiler (Visual Studio, Build Tools, or MinGW-w64) and builds the plugin.
-
-**Manual Build**
-```cmd
-mkdir build
-cd build
-
-# If you have Visual Studio or Build Tools
-cmake .. -A x64 -DCMAKE_BUILD_TYPE=Release
-cmake --build . --config Release
-
-# If you have MinGW-w64
-cmake .. -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release
-cmake --build .
-
-# Create plugin directory structure
-cmake --build . --target plugin
-```
-
-#### Mac
-```bash
-mkdir build
-cd build
-cmake .. -DCMAKE_BUILD_TYPE=Release
-make
-```
-
-#### Linux
-```bash
-mkdir build
-cd build
-cmake .. -DCMAKE_BUILD_TYPE=Release
-make
-```
-
-### Plugin Installation
-After building, copy the generated `Multibind` folder to your X-Plane plugins directory:
-1. Copy the entire `build/Multibind/` folder to `X-Plane 12/Resources/plugins/`
-2. The final plugin path will be:
-   - **Linux**: `X-Plane 12/Resources/plugins/Multibind/lin.xpl`
-   - **macOS**: `X-Plane 12/Resources/plugins/Multibind/mac.xpl`
-   - **Windows**: `X-Plane 12/Resources/plugins/Multibind/win.xpl`
-
-**Note**: The build process now automatically creates the correct `Multibind` folder structure for easy installation.
+The final plugin path should be one of:
+- Linux: `X-Plane 12/Resources/plugins/lin.xpl`
+- macOS: `X-Plane 12/Resources/plugins/mac.xpl`
+- Windows: `X-Plane 12/Resources/plugins/win.xpl`
 
 ## Usage
 
-### Initial Setup
-1. Start X-Plane 12 and load any aircraft
-2. Go to **Plugins → Multibind** to open the configuration window
-3. The plugin automatically creates a `multibind/` directory in your X-Plane folder
+### Step 1: Assign Joystick Buttons
 
-### Assigning Joystick Buttons
-1. Open X-Plane's **Settings → Joystick & Equipment**
-2. Go to the **Buttons: Basic** tab
-3. Press your desired joystick button
-4. In the command dropdown, find and assign a `multibind/XXX` command (e.g., `multibind/001`)
-5. Repeat for all buttons you want to use in combinations
+1. **Open** X-Plane's Settings → Joystick & Equipment
+2. **Go to** the Buttons: Basic tab
+3. **Press** your desired joystick button
+4. **Find and assign** a `multibind/XXX` command (e.g., `multibind/001`)
+5. **Repeat** for all buttons you want to use in combinations
 
-### Creating Combinations
-1. Open the Multibind plugin window (**Plugins → Multibind**)
-2. Click **"Record"** to start recording a combination
-3. Press the joystick buttons you want in the combination (they should be assigned to multibind commands)
-4. The plugin will show which buttons are currently pressed
-5. Enter the target X-Plane command (e.g., `sim/starters/engage_starter_1`)
-6. Add a description (optional, e.g., "Start Engine 1")
-7. Click **"Save"** to save the combination
-8. Click **"Record"** again to stop recording mode
+**Example Button Assignments:**
+- Hat Switch Up → `multibind/010`
+- Hat Switch Down → `multibind/011`  
+- Trigger → `multibind/001`
+- Button 1 → `multibind/005`
+- Button 2 → `multibind/006`
 
-### Example Combinations
-- **Engine Start**: `multibind/001 + multibind/005` → `sim/starters/engage_starter_1`
-- **Gear + Brakes**: `multibind/010 + multibind/020` → `sim/flight_controls/landing_gear_toggle`
-- **Emergency**: `multibind/050 + multibind/060 + multibind/070` → `sim/operation/pause_toggle`
+### Step 2: Create Configuration Files
 
-## Configuration Files
+The plugin automatically creates a `multibind/` directory in your X-Plane folder. Configuration files are stored here with the aircraft ICAO code as the filename.
 
-The plugin stores configurations in simple text files:
-- **Location**: `X-Plane 12/multibind/{aircraft-name}.txt`
-- **Format**: `button1+button2+button3|command|description`
-
-Example file content:
+**Configuration File Location:**
 ```
-# Multibind configuration for Baron_58
-# Format: button1+button2+button3|command|description
-# Example: 1+5+10|sim/starters/engage_starter_1|Start Engine 1
+X-Plane 12/multibind/{AIRCRAFT-ICAO}.txt
+```
 
+**File Format:**
+```
+button1+button2+button3|command|description
+```
+
+**Example Configuration File** (`X-Plane 12/multibind/B58T.txt`):
+```
+# Multibind configuration for Baron 58
+# Format: button1+button2+button3|command|description
+
+# Engine controls
 1+5|sim/starters/engage_starter_1|Start Engine 1
 2+6|sim/starters/engage_starter_2|Start Engine 2
-10+20+30|sim/operation/pause_toggle|Emergency Pause
+1+2+10|sim/engines/mixture_max|Emergency Full Rich
+
+# Landing gear and flaps
+10+11|sim/flight_controls/landing_gear_toggle|Gear Toggle
+10+12|sim/flight_controls/flaps_down|Flaps Down
+11+12|sim/flight_controls/flaps_up|Flaps Up
+
+# Emergency procedures
+1+5+10+15|sim/operation/pause_toggle|Emergency Pause
 ```
+
+### Step 3: Using Your Combinations
+
+1. **Load your aircraft** in X-Plane
+2. **Press the button combinations** you defined
+3. **The corresponding X-Plane commands will execute**
+
+**Example Usage:**
+- Press buttons assigned to `multibind/001` and `multibind/005` simultaneously → Engine 1 starts
+- Press buttons assigned to `multibind/010` and `multibind/011` simultaneously → Landing gear toggles
+
+## Configuration File Examples
+
+### Combat Aircraft (F/A-18)
+```
+# Weapons systems
+1+2|sim/weapons/master_arm_toggle|Master Arm Toggle
+1+3|sim/weapons/gun_trigger|Gun Fire
+2+4|sim/weapons/missile_launch|Missile Launch
+
+# Emergency procedures
+1+2+3+4|sim/operation/quit|Emergency Quit
+```
+
+### Airliner (737)
+```
+# Engine management  
+1+10|sim/engines/engage_start_run_1|Engine 1 Start
+2+10|sim/engines/engage_start_run_2|Engine 2 Start
+1+2+15|sim/engines/thrust_reverse_toggle|Reverse Thrust
+
+# Autopilot combinations
+5+6|sim/autopilot/heading_select|HDG Select
+5+7|sim/autopilot/altitude_select|ALT Select
+6+7|sim/autopilot/speed_select|SPD Select
+```
+
+### General Aviation
+```
+# Pre-flight checks
+1+2|sim/engines/mixture_max|Mixture Rich
+1+3|sim/engines/prop_advance|Prop Full Forward  
+2+3|sim/electrical/battery_1_on|Battery On
+
+# Landing pattern
+10+11|sim/flight_controls/landing_gear_down|Gear Down
+10+12|sim/flight_controls/flaps_down|Flaps Down
+11+12|sim/lights/landing_lights_toggle|Landing Lights
+```
+
+## Finding X-Plane Commands
+
+To find available X-Plane commands for your configurations:
+
+1. **In X-Plane**: Open Developer → Command Search
+2. **Search** for commands by category (e.g., "engine", "gear", "autopilot")
+3. **Use the exact command name** in your configuration file
+
+**Common Command Categories:**
+- `sim/engines/` - Engine controls
+- `sim/flight_controls/` - Flight controls (gear, flaps, trim)  
+- `sim/autopilot/` - Autopilot functions
+- `sim/lights/` - Aircraft lighting
+- `sim/electrical/` - Electrical systems
+- `sim/fuel/` - Fuel system controls
+
+## Aircraft-Specific Configurations
+
+The plugin automatically loads the correct configuration file based on the aircraft's ICAO code:
+
+- **Cessna 172**: `C172.txt`
+- **Boeing 737**: `B737.txt`
+- **Airbus A320**: `A320.txt`
+- **Baron 58**: `B58T.txt`
+
+This allows you to have different button combinations for different aircraft types.
 
 ## Troubleshooting
 
-### Compilation Issues
+### Plugin Not Loading
+- **Check** X-Plane's Log.txt for error messages
+- **Verify** the plugin file is in the correct location
+- **Ensure** you have the correct architecture (64-bit)
 
-#### Windows-Specific Issues
-- **"Could not create named file generator"**: You have Visual Studio Code (editor) but need a C++ compiler. See [Windows Compiler Setup](#windows-compiler-setup) above
-- **"No suitable C++ compiler found"**: Install Visual Studio, Build Tools for Visual Studio, or MinGW-w64
-- **Visual Studio Code vs Visual Studio confusion**: 
-  - Visual Studio Code = Code editor (NOT a compiler)
-  - Visual Studio = Full IDE with C++ compiler (what you need)
-- **CMake not found**: Install CMake via Visual Studio Installer or from [cmake.org](https://cmake.org/download/)
-- **"SDK not found"**: Ensure the X-Plane SDK is extracted to the `SDK/` directory in your project folder  
-- **Path issues**: Use forward slashes or double backslashes in paths: `C:/path/to/sdk` or `C:\\path\\to\\sdk`
-- **Antivirus interference**: Add your build directory to antivirus exclusions
-- **MinGW-w64 build fails**: Make sure MinGW-w64 is in your PATH environment variable
+### Combinations Not Working
+- **Verify** all buttons are assigned to `multibind/XXX` commands in X-Plane's joystick settings
+- **Check** your configuration file syntax (use pipes `|` as separators)
+- **Ensure** the X-Plane command exists (use Command Search in X-Plane)
+- **Test** timing - all buttons must be pressed within a short time window
 
-#### General Issues
-- **CMake version error**: Ensure CMake 3.16+ is installed
-- **C++17 compiler error**: Update your compiler to support C++17 standard
-- **SDK path issues**: Set `XPLANE_SDK_PATH` environment variable if SDK is not in project directory
+### Configuration File Issues
+- **Location**: Files must be in `X-Plane 12/multibind/`
+- **Filename**: Must match aircraft ICAO code (check X-Plane's aircraft data)
+- **Format**: Use format `button+button|command|description`
+- **Comments**: Lines starting with `#` are ignored
 
-### Plugin Runtime Issues
+### Button Numbers
+- Button numbers correspond to the `multibind/XXX` number you assigned
+- If you assigned `multibind/005` to a button, use `5` in your configuration file
+- Numbers can range from 0-999
 
-#### Plugin Not Loading
-- Check X-Plane's **Log.txt** for error messages
-- Ensure the plugin is in the correct directory structure
-- Verify you have the correct architecture (64-bit)
-- **Windows**: Make sure Visual C++ Redistributable is installed
+## Menu Options
 
-#### Commands Not Working
-- Ensure you've assigned multibind commands to your joystick buttons in X-Plane's settings
-- Check that the target X-Plane command exists (use X-Plane's command search)
-- Look for debug messages in X-Plane's developer console
+The plugin adds a "Multibind" menu to X-Plane's Plugins menu with:
 
-#### Combinations Not Triggering
-- Verify all buttons in the combination are assigned to multibind commands
-- Check the timing - all buttons must be pressed within a short time window
-- Ensure button combinations don't conflict with existing X-Plane assignments
+- **Reload Configuration**: Reloads the current aircraft's configuration file without restarting X-Plane
 
-## Continuous Integration
+Use this when you edit configuration files and want to test changes immediately.
 
-This project uses GitHub Actions for automated building and releasing:
+## Configuration File Sharing
 
-### Build Workflow
-- **Triggers**: Push to main/develop, pull requests, manual dispatch
-- **Platforms**: Windows (VS2022), macOS (Xcode), Linux (GCC)
-- **Artifacts**: Build outputs stored for 30 days
-- **SDK Caching**: X-Plane SDK cached to speed up builds
+Configuration files are simple text files that can be easily shared:
 
-### Release Workflow  
-- **Triggers**: Git tags (`v*.*.*`) or manual dispatch
-- **Automatic Releases**: Creates GitHub releases with downloadable binaries
-- **Cross-Platform Packages**: Windows, macOS, and Linux builds packaged automatically
+1. **Export**: Copy your aircraft's configuration file from `X-Plane 12/multibind/`
+2. **Share**: Send the `.txt` file to other users
+3. **Import**: Other users place the file in their `multibind/` directory
 
-To trigger a release:
-```bash
-git tag v1.0.0
-git push origin v1.0.0
-```
+This makes it easy to share button configurations within communities or flight simulation groups.
 
-## Development
+## Tips and Best Practices
 
-### Code Structure
-```
-src/
-├── multibind.cpp          # Main plugin entry point and lifecycle
-├── config.h/cpp           # Configuration file management
-├── combination_tracker.h/cpp  # Multi-button combination detection
-└── ui.h/cpp              # Plugin window interface
-```
+### Button Assignment Strategy
+- **Use logical groupings**: Assign related buttons to sequential multibind numbers
+- **Reserve ranges**: Use 1-10 for primary controls, 11-20 for secondary, etc.
+- **Document your assignments**: Keep notes on which physical buttons map to which multibind numbers
 
-### Key Classes
-- **Config**: Manages loading/saving aircraft-specific binding configurations
-- **CombinationTracker**: Detects button press combinations and triggers commands
-- **UI**: Provides the plugin configuration window interface
+### Configuration File Organization
+- **Use comments**: Add `#` comments to explain button combinations
+- **Group by system**: Organize commands by aircraft systems (engines, flight controls, etc.)
+- **Include descriptions**: Use meaningful descriptions for easier identification
 
-### Building for Development
-Use `CMAKE_BUILD_TYPE=Debug` for development builds with additional logging:
-```bash
-cmake .. -DCMAKE_BUILD_TYPE=Debug
-```
-
-## License
-
-This project is provided as-is for educational and personal use. See the code for implementation details.
+### Testing New Configurations
+1. **Start simple**: Test single button combinations first
+2. **Use reload**: Use the Plugins → Multibind → Reload Configuration menu option
+3. **Check logs**: Monitor X-Plane's Log.txt for error messages
+4. **Test in safe conditions**: Test new combinations on the ground first
 
 ## Support
 
 For issues and questions:
-1. Check the troubleshooting section above
-2. Review X-Plane's Log.txt for error messages
-3. Ensure you're using a supported X-Plane 12 version
+1. **Check** the troubleshooting section above
+2. **Review** X-Plane's Log.txt for error messages  
+3. **Verify** your configuration file syntax and X-Plane command names
+4. **Test** with simple combinations first before creating complex ones
+
+This plugin provides a powerful way to create custom button combinations for any X-Plane aircraft, enhancing your simulation experience through personalized control schemes.

@@ -6,7 +6,6 @@
 
 #include "config.h"
 #include "combination_tracker.h"
-#include "ui.h"
 #include "constants.h"
 
 #include <string>
@@ -20,7 +19,6 @@ static int g_menu_item_id = -1;
 static std::vector<XPLMCommandRef> g_multibind_commands;
 static Config g_config;
 static CombinationTracker g_tracker;
-static UI g_ui;
 
 static XPLMDataRef g_aircraft_icao_ref = nullptr;
 static std::string g_last_aircraft_icao;
@@ -65,13 +63,11 @@ PLUGIN_API int XPluginStart(char* out_name, char* out_sig, char* out_desc)
     if (g_menu_id) {
         g_menu_item_id = XPLMAppendMenuItem(g_menu_id, "Multibind", nullptr, 1);
         XPLMMenuID submenu = XPLMCreateMenu("Multibind", g_menu_id, g_menu_item_id, menu_handler, nullptr);
-        XPLMAppendMenuItem(submenu, "Open Multibind Window", (void*)1, 1);
         XPLMAppendMenuItem(submenu, "Reload Configuration", (void*)2, 1);
     }
 
     create_multibind_commands();
     
-    g_ui.initialize(&g_config, &g_tracker);
     
     XPLMRegisterFlightLoopCallback(flight_loop_callback, -1.0f, nullptr);
 
@@ -101,7 +97,6 @@ PLUGIN_API int XPluginEnable(void)
 
 PLUGIN_API void XPluginDisable(void)
 {
-    g_ui.hide_window();
     // Stop any running continuous commands
     g_tracker.stop_all_continuous_commands();
     // Note: Configuration saving disabled - users must edit files directly
@@ -167,8 +162,6 @@ void load_aircraft_config()
         g_config.load_config(aircraft_id);
         g_tracker.set_bindings(g_config.get_bindings());
         
-        // Update UI with current aircraft name
-        g_ui.update_aircraft_display(aircraft_id);
     }
 }
 
@@ -179,7 +172,6 @@ static float flight_loop_callback(float elapsed_since_last_call,
                                  void* refcon)
 {
     g_tracker.update();
-    g_ui.update();
     
     std::string triggered_command = g_tracker.get_triggered_command();
     if (!triggered_command.empty()) {
@@ -200,9 +192,6 @@ static void menu_handler(void* menu_ref, void* item_ref)
     intptr_t item = (intptr_t)item_ref;
     
     switch (item) {
-        case 1: // Open Multibind Window
-            g_ui.show_window();
-            break;
         case 2: // Reload Configuration
             {
                 std::string log_msg = "Multibind: Reloading configuration for current aircraft\n";

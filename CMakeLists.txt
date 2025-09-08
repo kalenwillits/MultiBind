@@ -99,7 +99,6 @@ set(PLUGIN_SOURCES
     src/config.cpp
     src/combination_tracker.cpp
     src/event_system.cpp
-    src/ui.cpp
 )
 
 # Plugin headers
@@ -107,7 +106,6 @@ set(PLUGIN_HEADERS
     src/config.h
     src/combination_tracker.h
     src/event_system.h
-    src/ui.h
 )
 
 # Create the plugin target
