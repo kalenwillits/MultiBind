@@ -2,262 +2,83 @@
 #include "XPLMUtilities.h"
 #include "constants.h"
 
+CombinationTracker::CombinationTracker() {
+    // Set up the command callback for the state machine manager
+    _state_machine_manager.set_command_callback(
+        [this](const std::string& command) {
+            this->on_command_triggered(command);
+        }
+    );
+}
 
-void CombinationTracker::set_button_state_transition(int button_id, ButtonAction action)
-{
+void CombinationTracker::set_button_state_transition(int button_id, ButtonAction action) {
     using namespace multibind::constants;
    
     if (button_id < MIN_BUTTON_ID || button_id > MAX_BUTTON_ID) {
         return;
     }
     
-    // Record the transition for frame-based processing
-    _button_transitions[button_id] = action;
-    _last_transition_time = std::chrono::steady_clock::now();
-    
-    // Update current button states based on the action
-    if (action == ButtonAction::PRESSED) {
-        bool was_pressed = _current_button_states[button_id];
-        _current_button_states[button_id] = true;
+    // Handle recording if active
+    if (_recording && action == ButtonAction::PRESSED) {
+        // Check if this was a new press (not already in the combination)
+        const auto& current_states = _state_machine_manager.get_current_button_states();
+        auto state_it = current_states.find(button_id);
+        bool was_pressed = (state_it != current_states.end() && state_it->second);
         
-        // Handle recording if active
-        if (_recording && !was_pressed) {
+        if (!was_pressed) {
             _recorded_combination.insert(button_id);
         }
-    } else if (action == ButtonAction::RELEASED) {
-        _current_button_states[button_id] = false;
     }
-    // For HELD actions, state doesn't change (button remains pressed)
     
-    // Pattern processing now happens in update() cycle - no immediate processing
+    // Send to state machine manager
+    _state_machine_manager.process_button_transition(button_id, action);
 }
 
-void CombinationTracker::set_bindings(const std::vector<MultibindBinding>& bindings)
-{
-    _bindings = bindings;
+void CombinationTracker::set_bindings(const std::vector<MultibindBinding>& bindings) {
+    // Clear existing state machines
+    _state_machine_manager.clear();
+    
+    // Build state machines for each binding
+    for (const auto& binding : bindings) {
+        if (!binding.button_triggers.empty()) {
+            _state_machine_manager.add_state_machine(
+                binding.button_triggers, 
+                binding.target_command, 
+                binding.description
+            );
+        }
+    }
 }
 
-void CombinationTracker::update()
-{
-    // Process trigger patterns with accumulated transitions from this frame
-    process_triggers();
-    
-    // Update continuous commands
-    update_continuous_commands();
-    
-    // Clear frame transitions for next frame
-    clear_frame_transitions();
-    
-    // Note: _triggered_command is cleared by get_triggered_command() 
-    // after being retrieved, not here. This allows commands triggered
-    // during update to be properly retrieved.
+void CombinationTracker::update() {
+    // In the state machine system, processing happens immediately when events occur
+    // The update() method is now mainly for compatibility with the existing interface
+    // Commands are queued by the state machines and retrieved via get_triggered_command()
 }
 
-std::string CombinationTracker::get_triggered_command()
-{
-    std::string command = _triggered_command;
-    _triggered_command.clear(); // Only trigger once
+std::string CombinationTracker::get_triggered_command() {
+    if (_triggered_commands.empty()) {
+        return "";
+    }
+    
+    std::string command = _triggered_commands.front();
+    _triggered_commands.pop();
     return command;
 }
 
-
-
-void CombinationTracker::process_triggers()
-{
-    using namespace multibind::constants;
-    
-    auto now = std::chrono::steady_clock::now();
-    
-    // Check trigger bindings
-    for (const auto& binding : _bindings) {
-        if (check_trigger_sequence_match(binding.button_triggers)) {
-            
-            // Determine if this should run continuously
-            if (should_run_continuously(binding.button_triggers)) {
-                // Start continuous command execution
-                start_continuous_command(binding.target_command, binding.button_triggers);
-            } else {
-                // One-time trigger - check if this pattern contains HELD actions for different debounce logic
-                bool has_held_actions = false;
-                for (const auto& trigger : binding.button_triggers) {
-                    if (trigger.action == ButtonAction::HELD) {
-                        has_held_actions = true;
-                        break;
-                    }
-                }
-                
-                // For patterns with HELD actions, use shorter debounce to allow rapid re-triggering
-                auto debounce_time = has_held_actions ? 
-                    std::chrono::milliseconds(50) :  // Short debounce for ambiguous patterns
-                    std::chrono::milliseconds(TRIGGER_DEBOUNCE_MS); // Normal debounce for discrete patterns
-                
-                if (now - _last_trigger_time > debounce_time) {
-                    _triggered_command = binding.target_command;
-                    _last_trigger_time = now;
-                    
-                    std::string log_msg = "Multibind: Trigger sequence matched, triggering: " + binding.target_command + "\n";
-                    XPLMDebugString(log_msg.c_str());
-                }
-            }
-            return;
-        }
-    }
+const std::unordered_map<int, bool>& CombinationTracker::get_current_button_states() const {
+    return _state_machine_manager.get_current_button_states();
 }
 
-bool CombinationTracker::check_trigger_sequence_match(const std::vector<ButtonTrigger>& sequence) const
-{
-    if (sequence.empty()) {
-        return false;
-    }
-    
-    // For now, implement a simple "all triggers must match current state" approach
-    // This can be enhanced later for more complex sequential matching
-    for (const auto& trigger : sequence) {
-        auto transition_it = _button_transitions.find(trigger.button_id);
-        
-        // Check if this button has the required transition
-        if (transition_it == _button_transitions.end()) {
-            // Button hasn't transitioned recently - check based on action type
-            if (trigger.action == ButtonAction::HELD) {
-                // For HELD, check if button is currently pressed
-                auto state_it = _current_button_states.find(trigger.button_id);
-                if (state_it == _current_button_states.end() || !state_it->second) {
-                    return false;
-                }
-            } else {
-                // For PRESSED or RELEASED, we need a recent transition - pattern doesn't match
-                return false;
-            }
-        } else {
-            // Button has transitioned - check if it matches required action
-            ButtonAction recorded_action = transition_it->second;
-            
-            if (trigger.action == ButtonAction::PRESSED) {
-                // PRESSED matches either PRESSED or HELD transitions
-                if (recorded_action != ButtonAction::PRESSED && recorded_action != ButtonAction::HELD) {
-                    return false;
-                }
-            } else if (trigger.action == ButtonAction::HELD) {
-                // HELD matches HELD or PRESSED transitions (since HELD follows PRESSED)
-                if (recorded_action != ButtonAction::HELD && recorded_action != ButtonAction::PRESSED) {
-                    return false;
-                }
-            } else if (trigger.action == ButtonAction::RELEASED) {
-                // RELEASED only matches RELEASED transitions
-                if (recorded_action != ButtonAction::RELEASED) {
-                    return false;
-                }
-            }
-        }
-    }
-    
-    return true;
+void CombinationTracker::clear_current_button_states() {
+    _state_machine_manager.clear();
+    _recorded_combination.clear();
 }
 
-void CombinationTracker::start_continuous_command(const std::string& command, const std::vector<ButtonTrigger>& triggers)
-{
-    if (_active_continuous_commands.find(command) != _active_continuous_commands.end()) {
-        return; // Already running
-    }
+void CombinationTracker::on_command_triggered(const std::string& command) {
+    // Queue the command for retrieval by the flight loop
+    _triggered_commands.push(command);
     
-    XPLMCommandRef command_ref = XPLMFindCommand(command.c_str());
-    if (command_ref) {
-        XPLMCommandBegin(command_ref);
-        _active_continuous_commands[command] = command_ref;
-        _continuous_bindings[command] = triggers;
-        
-        std::string log_msg = "Multibind: Started continuous command: " + command + "\n";
-        XPLMDebugString(log_msg.c_str());
-    }
-}
-
-void CombinationTracker::stop_continuous_command(const std::string& command)
-{
-    auto it = _active_continuous_commands.find(command);
-    if (it != _active_continuous_commands.end()) {
-        XPLMCommandEnd(it->second);
-        _active_continuous_commands.erase(it);
-        _continuous_bindings.erase(command);
-        
-        std::string log_msg = "Multibind: Stopped continuous command: " + command + "\n";
-        XPLMDebugString(log_msg.c_str());
-    }
-}
-
-void CombinationTracker::update_continuous_commands()
-{
-    // Check if any continuous commands should be stopped
-    std::vector<std::string> commands_to_stop;
-    
-    for (const auto& pair : _continuous_bindings) {
-        const std::string& command = pair.first;
-        const std::vector<ButtonTrigger>& triggers = pair.second;
-        
-        if (!is_continuous_pattern_active(triggers)) {
-            commands_to_stop.push_back(command);
-        }
-    }
-    
-    // Stop commands that are no longer active
-    for (const std::string& command : commands_to_stop) {
-        stop_continuous_command(command);
-    }
-}
-
-void CombinationTracker::stop_all_continuous_commands()
-{
-    // Stop all currently running continuous commands
-    std::vector<std::string> all_commands;
-    for (const auto& pair : _active_continuous_commands) {
-        all_commands.push_back(pair.first);
-    }
-    
-    for (const std::string& command : all_commands) {
-        stop_continuous_command(command);
-    }
-    
-    XPLMDebugString("Multibind: All continuous commands stopped\n");
-}
-
-void CombinationTracker::clear_frame_transitions()
-{
-    // Clear all transitions for next frame - this gives each frame fresh pattern detection
-    // HELD states are maintained through _current_button_states, so continuous patterns still work
-    _button_transitions.clear();
-}
-
-
-bool CombinationTracker::should_run_continuously(const std::vector<ButtonTrigger>& triggers) const
-{
-    // A pattern should run continuously if it contains HELD actions
-    for (const auto& trigger : triggers) {
-        if (trigger.action == ButtonAction::HELD) {
-            return true;
-        }
-    }
-    return false;
-}
-
-bool CombinationTracker::is_continuous_pattern_active(const std::vector<ButtonTrigger>& triggers) const
-{
-    // Check if the current button states match the continuous pattern requirements
-    for (const auto& trigger : triggers) {
-        switch (trigger.action) {
-            case ButtonAction::HELD:
-                // For HELD, button must be currently pressed
-                {
-                    auto state_it = _current_button_states.find(trigger.button_id);
-                    if (state_it == _current_button_states.end() || !state_it->second) {
-                        return false;
-                    }
-                }
-                break;
-            case ButtonAction::PRESSED:
-            case ButtonAction::RELEASED:
-                // For discrete actions, these are not continuous requirements
-                // The pattern was already triggered, so these don't affect continuous state
-                break;
-        }
-    }
-    return true;
+    std::string log_msg = "StateMachine: Command queued: " + command + "\n";
+    XPLMDebugString(log_msg.c_str());
 }

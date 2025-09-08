@@ -98,6 +98,7 @@ set(PLUGIN_SOURCES
     src/multibind.cpp
     src/config.cpp
     src/combination_tracker.cpp
+    src/event_system.cpp
     src/ui.cpp
 )
 
@@ -105,6 +106,7 @@ set(PLUGIN_SOURCES
 set(PLUGIN_HEADERS
     src/config.h
     src/combination_tracker.h
+    src/event_system.h
     src/ui.h
 )
 
