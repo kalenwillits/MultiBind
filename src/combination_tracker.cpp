@@ -9,6 +9,13 @@ CombinationTracker::CombinationTracker() {
             this->on_command_triggered(command);
         }
     );
+    
+    // Set up the continuous command callback
+    _state_machine_manager.set_continuous_command_callback(
+        [this](const std::string& command, bool start) {
+            this->on_continuous_command_triggered(command, start);
+        }
+    );
 }
 
 void CombinationTracker::set_button_state_transition(int button_id, ButtonAction action) {
@@ -51,6 +58,9 @@ void CombinationTracker::set_bindings(const std::vector<MultibindBinding>& bindi
 }
 
 void CombinationTracker::update() {
+    // Update continuous command states based on current button states
+    _state_machine_manager.update_continuous_commands();
+    
     // In the state machine system, processing happens immediately when events occur
     // The update() method is now mainly for compatibility with the existing interface
     // Commands are queued by the state machines and retrieved via get_triggered_command()
@@ -81,4 +91,40 @@ void CombinationTracker::on_command_triggered(const std::string& command) {
     
     std::string log_msg = "StateMachine: Command queued: " + command + "\n";
     XPLMDebugString(log_msg.c_str());
+}
+
+void CombinationTracker::on_continuous_command_triggered(const std::string& command, bool start) {
+    // Queue the continuous command action for retrieval by the flight loop
+    _continuous_command_queue.push(std::make_pair(command, start));
+    
+    std::string log_msg = "StateMachine: Continuous command queued: " + command + 
+                         (start ? " (START)" : " (STOP)") + "\n";
+    XPLMDebugString(log_msg.c_str());
+}
+
+std::pair<std::string, bool> CombinationTracker::get_continuous_command_action() {
+    if (_continuous_command_queue.empty()) {
+        return std::make_pair("", false);
+    }
+    
+    auto action = _continuous_command_queue.front();
+    _continuous_command_queue.pop();
+    return action;
+}
+
+void CombinationTracker::stop_all_continuous_commands_real() {
+    // Stop all active continuous commands
+    for (const auto& pair : _active_continuous_commands) {
+        XPLMCommandEnd(pair.second);
+        
+        std::string log_msg = "CombinationTracker: Force stopped continuous command: " + 
+                             pair.first + "\n";
+        XPLMDebugString(log_msg.c_str());
+    }
+    _active_continuous_commands.clear();
+    
+    // Clear any pending continuous command actions
+    while (!_continuous_command_queue.empty()) {
+        _continuous_command_queue.pop();
+    }
 }

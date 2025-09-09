@@ -92,12 +92,16 @@ class StateMachine {
 public:
     using StatePtr = std::shared_ptr<StateNode>;
     using CommandCallback = std::function<void(const std::string&)>;
+    using ContinuousCommandCallback = std::function<void(const std::string&, bool)>;  // command, start/stop
     
 private:
     StatePtr _root_state;
     StatePtr _current_state;
     std::string _pattern_description;
     CommandCallback _command_callback;
+    bool _is_continuous_pattern = false;  // True if all triggers are HELD
+    std::vector<ButtonTrigger> _triggers;  // Store the original triggers
+    std::string _command;  // Store the command
     
 public:
     StateMachine(const std::string& pattern_desc = "") 
@@ -113,6 +117,15 @@ public:
     
     // Build the state machine from a button trigger pattern
     void build_from_pattern(const std::vector<ButtonTrigger>& triggers, const std::string& command);
+    
+    // Check if this pattern should run continuously (all triggers are HELD)
+    bool is_continuous_pattern() const { return _is_continuous_pattern; }
+    
+    // Get the command this state machine will execute
+    std::string get_command() const;
+    
+    // Get the triggers for this state machine
+    const std::vector<ButtonTrigger>& get_triggers() const { return _triggers; }
     
     // Process a button event through the state machine  
     void process_event(const ButtonEvent& event, const std::unordered_map<int, bool>& current_button_states);
@@ -137,6 +150,8 @@ private:
     std::vector<std::unique_ptr<StateMachine>> _state_machines;
     std::unordered_map<int, bool> _current_button_states;  // Track button press states
     StateMachine::CommandCallback _command_callback;
+    StateMachine::ContinuousCommandCallback _continuous_command_callback;
+    std::unordered_map<std::string, bool> _active_continuous_commands;  // Track running continuous commands
     
 public:
     StateMachineManager() = default;
@@ -145,6 +160,14 @@ public:
     void set_command_callback(StateMachine::CommandCallback callback) {
         _command_callback = callback;
     }
+    
+    // Set the callback for continuous commands (command, start/stop)
+    void set_continuous_command_callback(StateMachine::ContinuousCommandCallback callback) {
+        _continuous_command_callback = callback;
+    }
+    
+    // Update continuous command states based on current button states
+    void update_continuous_commands();
     
     // Add a state machine for a binding pattern
     void add_state_machine(const std::vector<ButtonTrigger>& triggers, const std::string& command, const std::string& description);
@@ -164,6 +187,11 @@ public:
     const std::vector<std::unique_ptr<StateMachine>>& get_state_machines() const {
         return _state_machines;
     }
+    
+private:
+    // Helper methods for continuous command management
+    bool is_continuous_pattern_currently_active(const StateMachine& machine);
+    std::string get_command_from_machine(const StateMachine& machine);
 };
 
 // Helper function to convert ButtonAction to EventType

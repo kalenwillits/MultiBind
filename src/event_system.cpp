@@ -12,6 +12,10 @@ void StateMachine::build_from_pattern(const std::vector<ButtonTrigger>& triggers
         return;
     }
     
+    // Store the triggers and command for later reference
+    _triggers = triggers;
+    _command = command;
+    
     // Build a linear state machine for the trigger sequence
     // Example: *000+001 creates: ROOT -> HELD(000) -> PRESSED(001) -> TERMINAL(command)
     
@@ -49,7 +53,17 @@ void StateMachine::build_from_pattern(const std::vector<ButtonTrigger>& triggers
     debug_stream << " = " << command;
     _pattern_description = debug_stream.str();
     
-    std::string log_msg = "StateMachine: Built pattern: " + _pattern_description + "\n";
+    // Determine if this is a continuous pattern (all triggers are HELD)
+    _is_continuous_pattern = true;
+    for (const auto& trigger : triggers) {
+        if (trigger.action != ButtonAction::HELD) {
+            _is_continuous_pattern = false;
+            break;
+        }
+    }
+    
+    std::string log_msg = "StateMachine: Built pattern: " + _pattern_description + 
+                         (_is_continuous_pattern ? " (CONTINUOUS)" : " (ONE-TIME)") + "\n";
     XPLMDebugString(log_msg.c_str());
 }
 
@@ -155,4 +169,75 @@ void StateMachineManager::process_button_transition(int button_id, ButtonAction 
 void StateMachineManager::clear() {
     _state_machines.clear();
     _current_button_states.clear();
+    _active_continuous_commands.clear();
+}
+
+void StateMachineManager::update_continuous_commands() {
+    if (!_continuous_command_callback) {
+        return; // No continuous command callback set
+    }
+    
+    // Check each state machine for continuous patterns
+    for (const auto& machine : _state_machines) {
+        if (!machine->is_continuous_pattern()) {
+            continue; // Skip one-time patterns
+        }
+        
+        // Check if this continuous pattern should be active
+        bool should_be_active = is_continuous_pattern_currently_active(*machine);
+        
+        // Get the command from the state machine (we need to enhance this)
+        std::string command = get_command_from_machine(*machine);
+        if (command.empty()) {
+            continue;
+        }
+        
+        auto it = _active_continuous_commands.find(command);
+        bool is_currently_active = (it != _active_continuous_commands.end() && it->second);
+        
+        if (should_be_active && !is_currently_active) {
+            // Start continuous command
+            _continuous_command_callback(command, true);
+            _active_continuous_commands[command] = true;
+            
+            std::string log_msg = "StateMachineManager: Started continuous command: " + command + "\n";
+            XPLMDebugString(log_msg.c_str());
+        } else if (!should_be_active && is_currently_active) {
+            // Stop continuous command
+            _continuous_command_callback(command, false);
+            _active_continuous_commands[command] = false;
+            
+            std::string log_msg = "StateMachineManager: Stopped continuous command: " + command + "\n";
+            XPLMDebugString(log_msg.c_str());
+        }
+    }
+}
+
+// Helper method to check if a continuous pattern should be active
+bool StateMachineManager::is_continuous_pattern_currently_active(const StateMachine& machine) {
+    if (!machine.is_continuous_pattern()) {
+        return false;
+    }
+    
+    // Check if all HELD buttons in the pattern are currently pressed
+    const auto& triggers = machine.get_triggers();
+    for (const auto& trigger : triggers) {
+        if (trigger.action == ButtonAction::HELD) {
+            auto it = _current_button_states.find(trigger.button_id);
+            if (it == _current_button_states.end() || !it->second) {
+                return false; // Button not pressed
+            }
+        }
+    }
+    return true;
+}
+
+// Helper method to get command from state machine
+std::string StateMachineManager::get_command_from_machine(const StateMachine& machine) {
+    return machine.get_command();
+}
+
+// Implementation of StateMachine::get_command
+std::string StateMachine::get_command() const {
+    return _command;
 }

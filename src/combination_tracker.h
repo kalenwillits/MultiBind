@@ -20,6 +20,12 @@ public:
     void update();
     std::string get_triggered_command();
     
+    // Get next continuous command action (command, start/stop)
+    std::pair<std::string, bool> get_continuous_command_action();
+    
+    // Stop all active continuous commands
+    void stop_all_continuous_commands_real();
+    
     const std::unordered_map<int, bool>& get_current_button_states() const;
     void clear_current_button_states();
     
@@ -38,10 +44,15 @@ private:
     // Command queue for triggered commands
     std::queue<std::string> _triggered_commands;
     
+    // Continuous command tracking
+    std::unordered_map<std::string, XPLMCommandRef> _active_continuous_commands;
+    std::queue<std::pair<std::string, bool>> _continuous_command_queue;  // command, start/stop
+    
     // UI recording support
     bool _recording = false;
     std::set<int> _recorded_combination;
     
     // Command callback for state machines
     void on_command_triggered(const std::string& command);
+    void on_continuous_command_triggered(const std::string& command, bool start);
 };

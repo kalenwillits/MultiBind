@@ -93,7 +93,7 @@ PLUGIN_API int XPluginEnable(void)
 PLUGIN_API void XPluginDisable(void)
 {
     // Stop any running continuous commands
-    g_tracker.stop_all_continuous_commands();
+    g_tracker.stop_all_continuous_commands_real();
     // Note: Configuration saving disabled - users must edit files directly
 }
 
@@ -165,6 +165,7 @@ static float flight_loop_callback(float, float, int, void*)
 {
     g_tracker.update();
     
+    // Handle one-time commands
     std::string triggered_command = g_tracker.get_triggered_command();
     if (!triggered_command.empty()) {
         XPLMCommandRef command_ref = XPLMFindCommand(triggered_command.c_str());
@@ -173,6 +174,26 @@ static float flight_loop_callback(float, float, int, void*)
             
             std::string log_msg = "Multibind: Triggered command: " + triggered_command + "\n";
             XPLMDebugString(log_msg.c_str());
+        }
+    }
+    
+    // Handle continuous commands (start/stop)
+    auto continuous_action = g_tracker.get_continuous_command_action();
+    if (!continuous_action.first.empty()) {
+        const std::string& command = continuous_action.first;
+        bool start = continuous_action.second;
+        
+        XPLMCommandRef command_ref = XPLMFindCommand(command.c_str());
+        if (command_ref) {
+            if (start) {
+                XPLMCommandBegin(command_ref);
+                std::string log_msg = "Multibind: Started continuous command: " + command + "\n";
+                XPLMDebugString(log_msg.c_str());
+            } else {
+                XPLMCommandEnd(command_ref);
+                std::string log_msg = "Multibind: Stopped continuous command: " + command + "\n";
+                XPLMDebugString(log_msg.c_str());
+            }
         }
     }
     
