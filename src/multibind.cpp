@@ -23,15 +23,10 @@ static CombinationTracker g_tracker;
 static XPLMDataRef g_aircraft_icao_ref = nullptr;
 static std::string g_last_aircraft_icao;
 
-static float flight_loop_callback(float elapsed_since_last_call, 
-                                 float elapsed_time_since_last_flightloop,
-                                 int counter, 
-                                 void* refcon);
+static float flight_loop_callback(float, float, int, void*);
 
-static void menu_handler(void* menu_ref, void* item_ref);
-static int multibind_command_handler(XPLMCommandRef command, 
-                                   XPLMCommandPhase phase, 
-                                   void* refcon);
+static void menu_handler(void*, void* item_ref);
+static int multibind_command_handler(XPLMCommandRef, XPLMCommandPhase phase, void* refcon);
 
 void create_multibind_commands();
 void load_aircraft_config();
@@ -102,7 +97,7 @@ PLUGIN_API void XPluginDisable(void)
     // Note: Configuration saving disabled - users must edit files directly
 }
 
-PLUGIN_API void XPluginReceiveMessage(XPLMPluginID from, int msg, void* param)
+PLUGIN_API void XPluginReceiveMessage(XPLMPluginID, int msg, void*)
 {
     if (msg == XPLM_MSG_PLANE_LOADED) {
         load_aircraft_config();
@@ -166,10 +161,7 @@ void load_aircraft_config()
 }
 
 
-static float flight_loop_callback(float elapsed_since_last_call, 
-                                 float elapsed_time_since_last_flightloop,
-                                 int counter, 
-                                 void* refcon)
+static float flight_loop_callback(float, float, int, void*)
 {
     g_tracker.update();
     
@@ -187,7 +179,7 @@ static float flight_loop_callback(float elapsed_since_last_call,
     return -1.0f;
 }
 
-static void menu_handler(void* menu_ref, void* item_ref)
+static void menu_handler(void*, void* item_ref)
 {
     intptr_t item = (intptr_t)item_ref;
     
@@ -207,9 +199,7 @@ static void menu_handler(void* menu_ref, void* item_ref)
     }
 }
 
-static int multibind_command_handler(XPLMCommandRef command, 
-                                   XPLMCommandPhase phase, 
-                                   void* refcon)
+static int multibind_command_handler(XPLMCommandRef, XPLMCommandPhase phase, void* refcon)
 {
     int command_id = (int)(intptr_t)refcon;
     
