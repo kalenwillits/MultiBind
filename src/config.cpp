@@ -166,10 +166,6 @@ void Config::update_binding(size_t index, const MultibindBinding& binding)
 std::string Config::get_config_file_path() const
 {
     std::string aircraft_dir = get_aircraft_directory();
-    if (aircraft_dir.empty()) {
-        return "MultiBind.cfg"; // Fallback to current directory
-    }
-    
     return aircraft_dir + "/MultiBind.cfg";
 }
 
