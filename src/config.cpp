@@ -19,9 +19,20 @@ bool Config::load_config()
     std::ifstream file(config_file);
     
     if (!file.is_open()) {
-        std::string log_msg = "MultiBind: Config file not found: " + config_file + " (users must create manually)\n";
+        std::string log_msg = "MultiBind: Config file not found: " + config_file + ", creating default config\n";
         XPLMDebugString(log_msg.c_str());
-        return true; // Don't auto-create - users must create files manually
+        
+        if (!create_default_config()) {
+            return false; // Failed to create default config
+        }
+        
+        // Try to open the newly created file
+        file.open(config_file);
+        if (!file.is_open()) {
+            std::string error_msg = "MultiBind: ERROR - Could not open newly created config file: " + config_file + "\n";
+            XPLMDebugString(error_msg.c_str());
+            return false;
+        }
     }
     
     std::string line;
@@ -173,14 +184,61 @@ std::string Config::get_aircraft_directory() const
     
     std::string aircraft_path(path);
     if (!aircraft_path.empty()) {
-        // Remove the filename to get just the directory
-        size_t last_slash = aircraft_path.find_last_of('/');
+        // The path includes the .acf filename, extract just the directory
+        size_t last_slash = aircraft_path.find_last_of("/\\");
         if (last_slash != std::string::npos) {
             aircraft_path = aircraft_path.substr(0, last_slash);
         }
     }
     
     return aircraft_path;
+}
+
+bool Config::create_default_config() const
+{
+    std::string config_file = get_config_file_path();
+    
+    // Create directory if it doesn't exist
+    std::filesystem::path config_path(config_file);
+    std::filesystem::path config_dir = config_path.parent_path();
+    
+    if (!config_dir.empty()) {
+        try {
+            std::filesystem::create_directories(config_dir);
+        } catch (const std::exception& e) {
+            std::string error_msg = "MultiBind: ERROR - Failed to create directory " + config_dir.string() + ": " + e.what() + "\n";
+            XPLMDebugString(error_msg.c_str());
+            return false;
+        }
+    }
+    
+    // Create default config file with instructions
+    std::ofstream file(config_file);
+    if (!file.is_open()) {
+        std::string error_msg = "MultiBind: ERROR - Could not create config file: " + config_file + "\n";
+        XPLMDebugString(error_msg.c_str());
+        return false;
+    }
+    
+    // Write default config with comments
+    file << "# MultiBind Configuration File\n";
+    file << "# \n";
+    file << "# Format: *button1+button2=command_name\n";
+    file << "# Example: *000+001=sim/pitch_trim_up\n";
+    file << "# \n";
+    file << "# Button numbers correspond to joystick buttons (000-999)\n";
+    file << "# Multiple buttons can be combined with +\n";
+    file << "# Lines starting with # are comments\n";
+    file << "# \n";
+    file << "# Add your button combinations below:\n";
+    file << "\n";
+    
+    file.close();
+    
+    std::string log_msg = "MultiBind: Created default config file: " + config_file + "\n";
+    XPLMDebugString(log_msg.c_str());
+    
+    return true;
 }
 
 

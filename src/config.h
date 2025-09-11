@@ -67,4 +67,5 @@ private:
     std::vector<ButtonTrigger> string_to_triggers(const std::string& str) const;
     
     std::string get_aircraft_directory() const;
+    bool create_default_config() const;
 };
