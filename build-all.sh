@@ -31,10 +31,10 @@ echo "✅ BUILD COMPLETE!"
 echo "========================================"
 echo
 echo "Next steps:"
-echo "1. Copy the Multibind folder to: X-Plane 12/Resources/plugins/"
+echo "1. Copy the MultiBind folder to: X-Plane 12/Resources/plugins/"
 echo "2. Restart X-Plane"
 echo "3. Configure your joystick buttons in X-Plane Settings"
-echo "4. Create button combinations in Plugins → Multibind"
+echo "4. Create button combinations in Plugins → MultiBind"
 echo
 echo "See QUICKSTART.md for detailed usage instructions"
 echo

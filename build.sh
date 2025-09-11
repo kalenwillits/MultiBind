@@ -90,7 +90,7 @@ else
 fi
 
 echo
-echo "Building Multibind Plugin..."
+echo "Building MultiBind Plugin..."
 echo
 
 cd build
@@ -116,7 +116,7 @@ make plugin
 cd ..
 
 # Check if build was successful
-PLUGIN_PATH="build/Multibind/$PLUGIN_NAME"
+PLUGIN_PATH="build/MultiBind/$PLUGIN_NAME"
 if [[ -f "$PLUGIN_PATH" ]]; then
     echo
     echo "========================================"
@@ -126,11 +126,11 @@ if [[ -f "$PLUGIN_PATH" ]]; then
     echo "Plugin built: $PLUGIN_PATH"
     echo
     echo "Installation:"
-    echo "1. Copy the entire 'Multibind' folder to:"
+    echo "1. Copy the entire 'MultiBind' folder to:"
     echo "   X-Plane 12/Resources/plugins/"
     echo
     echo "2. Final path should be:"
-    echo "   X-Plane 12/Resources/plugins/Multibind/$PLUGIN_NAME"
+    echo "   X-Plane 12/Resources/plugins/MultiBind/$PLUGIN_NAME"
     echo
     echo "The plugin is now ready for installation!"
     
@@ -141,12 +141,12 @@ if [[ -f "$PLUGIN_PATH" ]]; then
     # Show the complete directory structure
     echo
     echo "Plugin directory structure:"
-    ls -la build/Multibind/
+    ls -la build/MultiBind/
     
     if [[ "$PLATFORM" == "macOS" ]]; then
         echo
         echo "Opening build directory..."
-        open "build/Multibind"
+        open "build/MultiBind"
     fi
 else
     echo

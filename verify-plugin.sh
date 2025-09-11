@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Multibind Plugin Verification Script
+# MultiBind Plugin Verification Script
 # This script helps verify that the plugin is built correctly and ready for X-Plane
 
 echo "======================================="
-echo " Multibind Plugin Verification"
+echo " MultiBind Plugin Verification"
 echo "======================================="
 echo
 
@@ -24,7 +24,7 @@ else
     exit 1
 fi
 
-PLUGIN_PATH="build/Multibind/$PLUGIN_NAME"
+PLUGIN_PATH="build/MultiBind/$PLUGIN_NAME"
 
 echo "Platform: $(uname -s)"
 echo "Expected plugin: $PLUGIN_PATH"
@@ -73,7 +73,7 @@ fi
 
 echo
 echo "📁 Plugin directory structure:"
-ls -la build/Multibind/
+ls -la build/MultiBind/
 echo
 
 echo "======================================="
@@ -81,11 +81,11 @@ echo "✅ PLUGIN VERIFICATION SUCCESSFUL!"
 echo "======================================="
 echo
 echo "Installation instructions:"
-echo "1. Copy the entire 'build/Multibind' folder to:"
+echo "1. Copy the entire 'build/MultiBind' folder to:"
 echo "   X-Plane 12/Resources/plugins/"
 echo
 echo "2. The final path should be:"
-echo "   X-Plane 12/Resources/plugins/Multibind/$PLUGIN_NAME"
+echo "   X-Plane 12/Resources/plugins/MultiBind/$PLUGIN_NAME"
 echo
-echo "3. Restart X-Plane and look for 'Multibind' in the Plugins menu"
+echo "3. Restart X-Plane and look for 'MultiBind' in the Plugins menu"
 echo

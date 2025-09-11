@@ -1,20 +1,20 @@
 cmake_minimum_required(VERSION 3.16)
-project(Multibind VERSION 1.0.0 LANGUAGES CXX)
+project(MultiBind VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Platform-specific settings
 if(WIN32)
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Multibind)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/MultiBind)
     set(PLUGIN_FILENAME "win.xpl")
 elseif(APPLE)
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Multibind)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/MultiBind)
     set(PLUGIN_FILENAME "mac.xpl")
     # Support both Intel and Apple Silicon
     set(CMAKE_OSX_ARCHITECTURES "x86_64;arm64")
 else()
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Multibind)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/MultiBind)
     set(PLUGIN_FILENAME "lin.xpl")
 endif()
 
@@ -207,23 +207,23 @@ message(STATUS "==========================")
 # Add install target for easier deployment
 # This creates a proper X-Plane plugin folder structure
 install(TARGETS multibind
-    RUNTIME DESTINATION "Multibind"
-    LIBRARY DESTINATION "Multibind"
-    BUNDLE DESTINATION "Multibind"
+    RUNTIME DESTINATION "MultiBind"
+    LIBRARY DESTINATION "MultiBind"
+    BUNDLE DESTINATION "MultiBind"
 )
 
 # Add a packaging target to create distributable plugin
 add_custom_target(package
-    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/package/Multibind
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:multibind> ${CMAKE_BINARY_DIR}/package/Multibind/
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/package/MultiBind
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:multibind> ${CMAKE_BINARY_DIR}/package/MultiBind/
     DEPENDS multibind
     COMMENT "Creating X-Plane plugin package in build/package/"
 )
 
 # Add a direct target to create plugin directory structure in build folder
 add_custom_target(plugin
-    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/Multibind
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:multibind> ${CMAKE_BINARY_DIR}/Multibind/
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/MultiBind
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:multibind> ${CMAKE_BINARY_DIR}/MultiBind/
     DEPENDS multibind
     COMMENT "Creating plugin directory structure"
 )

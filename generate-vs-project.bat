@@ -89,7 +89,7 @@ echo.
 echo Project files created in: vs-build\
 echo.
 echo To build in Visual Studio:
-echo 1. Open: vs-build\Multibind.sln
+echo 1. Open: vs-build\MultiBind.sln
 echo 2. Set build configuration to "Release"
 echo 3. Build → Build Solution (Ctrl+Shift+B)
 echo.
@@ -99,9 +99,9 @@ echo.
 
 set /p "OPEN_VS=Open Visual Studio now? (Y/n): "
 if /i not "!OPEN_VS!" == "n" (
-    if exist "vs-build\Multibind.sln" (
+    if exist "vs-build\MultiBind.sln" (
         echo Opening Visual Studio...
-        start "" "vs-build\Multibind.sln"
+        start "" "vs-build\MultiBind.sln"
     )
 )
 

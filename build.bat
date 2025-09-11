@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 echo ========================================
-echo  Multibind X-Plane Plugin Build Script
+echo  MultiBind X-Plane Plugin Build Script
 echo ========================================
 echo.
 
@@ -144,7 +144,7 @@ if !COMPILER_FOUND! == 0 (
 )
 
 echo.
-echo Building Multibind Plugin...
+echo Building MultiBind Plugin...
 echo.
 
 cd build
@@ -226,7 +226,7 @@ if !errorlevel! neq 0 (
 cd ..
 
 REM Check if build was successful
-if exist "build\Multibind\win.xpl" (
+if exist "build\MultiBind\win.xpl" (
     echo.
     echo ========================================
     echo ✅ BUILD SUCCESSFUL!
@@ -239,24 +239,24 @@ if exist "build\Multibind\win.xpl" (
     ) else (
         echo Compiled with: !BUILD_GENERATOR! ^(MSVC^)
     )
-    echo Plugin built: build\Multibind\win.xpl
+    echo Plugin built: build\MultiBind\win.xpl
     echo.
     echo Installation:
-    echo 1. Copy the entire 'Multibind' folder to:
+    echo 1. Copy the entire 'MultiBind' folder to:
     echo    X-Plane 12\Resources\plugins\
     echo.
     echo 2. Final path should be:
-    echo    X-Plane 12\Resources\plugins\Multibind\win.xpl
+    echo    X-Plane 12\Resources\plugins\MultiBind\win.xpl
     echo.
     echo The plugin is now ready for installation!
     echo.
     echo Press any key to open the plugin directory...
     pause >nul
-    explorer build\Multibind
+    explorer build\MultiBind
 ) else (
     echo.
     echo ❌ Build completed but plugin file not found!
-    echo Expected: build\Multibind\win.xpl
+    echo Expected: build\MultiBind\win.xpl
     echo.
     echo This might happen if:
     if "!BUILD_GENERATOR!" == """MinGW Makefiles""" (
