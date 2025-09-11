@@ -1,5 +1,6 @@
 #include "config.h"
 #include "XPLMUtilities.h"
+#include "XPLMPlanes.h"
 #include "constants.h"
 #include "input_validation.h"
 
@@ -10,20 +11,15 @@
 #include <cstring>
 #include <iomanip>
 
-bool Config::load_config(const std::string& aircraft_id)
+bool Config::load_config()
 {
-    _aircraft_id = aircraft_id;
     _bindings.clear();
-    
-    if (!create_multibind_directory()) {
-        XPLMDebugString("Multibind: WARNING - Could not create multibind directory\n");
-    }
     
     std::string config_file = get_config_file_path();
     std::ifstream file(config_file);
     
     if (!file.is_open()) {
-        std::string log_msg = "Multibind: Config file not found: " + config_file + " (users must create manually)\n";
+        std::string log_msg = "MultiBind: Config file not found: " + config_file + " (users must create manually)\n";
         XPLMDebugString(log_msg.c_str());
         return true; // Don't auto-create - users must create files manually
     }
@@ -37,7 +33,7 @@ bool Config::load_config(const std::string& aircraft_id)
         // Bounds checking: prevent extremely long lines from causing issues
         constexpr size_t MAX_LINE_LENGTH = 2048;
         if (line.length() > MAX_LINE_LENGTH) {
-            std::string error_msg = "Multibind: Line " + std::to_string(line_number) + " exceeds maximum length (" + 
+            std::string error_msg = "MultiBind: Line " + std::to_string(line_number) + " exceeds maximum length (" + 
                                   std::to_string(MAX_LINE_LENGTH) + " characters), skipping\n";
             XPLMDebugString(error_msg.c_str());
             continue;
@@ -53,7 +49,7 @@ bool Config::load_config(const std::string& aircraft_id)
         
         if (equals_pos == std::string::npos) {
             std::string truncated_line = line.length() > 100 ? line.substr(0, 100) + "..." : line;
-            std::string error_msg = "Multibind: Invalid line format at line " + std::to_string(line_number) + 
+            std::string error_msg = "MultiBind: Invalid line format at line " + std::to_string(line_number) + 
                                   ": " + truncated_line + "\n";
             XPLMDebugString(error_msg.c_str());
             continue;
@@ -65,14 +61,14 @@ bool Config::load_config(const std::string& aircraft_id)
         
         // Validate input components
         if (!multibind::validation::is_valid_xplane_command(command)) {
-            std::string error_msg = "Multibind: Invalid command at line " + std::to_string(line_number) + 
+            std::string error_msg = "MultiBind: Invalid command at line " + std::to_string(line_number) + 
                                   ": " + command + "\n";
             XPLMDebugString(error_msg.c_str());
             continue;
         }
         
         if (!multibind::validation::is_valid_description(description)) {
-            std::string error_msg = "Multibind: Invalid description at line " + std::to_string(line_number) + 
+            std::string error_msg = "MultiBind: Invalid description at line " + std::to_string(line_number) + 
                                   " (too long)\n";
             XPLMDebugString(error_msg.c_str());
             continue;
@@ -105,7 +101,7 @@ bool Config::load_config(const std::string& aircraft_id)
                 // Prevent excessive bindings (DOS protection)
                 constexpr size_t MAX_BINDINGS = 1000;
                 if (_bindings.size() >= MAX_BINDINGS) {
-                    std::string error_msg = "Multibind: Maximum number of bindings (" + 
+                    std::string error_msg = "MultiBind: Maximum number of bindings (" + 
                                           std::to_string(MAX_BINDINGS) + ") reached at line " + 
                                           std::to_string(line_number) + ", ignoring remaining entries\n";
                     XPLMDebugString(error_msg.c_str());
@@ -113,17 +109,17 @@ bool Config::load_config(const std::string& aircraft_id)
                 }
                 _bindings.emplace_back(triggers, command, description);
             } else if (triggers.empty()) {
-                std::string error_msg = "Multibind: No valid button triggers at line " + std::to_string(line_number) + "\n";
+                std::string error_msg = "MultiBind: No valid button triggers at line " + std::to_string(line_number) + "\n";
                 XPLMDebugString(error_msg.c_str());
             }
         } else {
             // Invalid format
-            std::string error_msg = "Multibind: Invalid format at line " + std::to_string(line_number) + ". Use format like *000+001=command\n";
+            std::string error_msg = "MultiBind: Invalid format at line " + std::to_string(line_number) + ". Use format like *000+001=command\n";
             XPLMDebugString(error_msg.c_str());
         }
     }
     
-    std::string log_msg = "Multibind: Loaded " + std::to_string(_bindings.size()) + " bindings from " + config_file + "\n";
+    std::string log_msg = "MultiBind: Loaded " + std::to_string(_bindings.size()) + " bindings from " + config_file + "\n";
     XPLMDebugString(log_msg.c_str());
     
     return true;
@@ -132,7 +128,7 @@ bool Config::load_config(const std::string& aircraft_id)
 bool Config::save_config()
 {
     // Configuration saving disabled - users must edit config files directly
-    XPLMDebugString("Multibind: Configuration saving disabled - users must edit config files manually\n");
+    XPLMDebugString("MultiBind: Configuration saving disabled - users must edit config files manually\n");
     return false;
 }
 
@@ -155,33 +151,36 @@ void Config::update_binding(size_t index, const MultibindBinding& binding)
     }
 }
 
-bool Config::create_multibind_directory()
-{
-    std::string multibind_dir = get_multibind_directory();
-    
-    try {
-        std::filesystem::create_directories(multibind_dir);
-        return true;
-    } catch (const std::exception& e) {
-        std::string error_msg = "Multibind: ERROR - Failed to create directory " + multibind_dir + ": " + e.what() + "\n";
-        XPLMDebugString(error_msg.c_str());
-        return false;
-    }
-}
 
 std::string Config::get_config_file_path() const
 {
-    return get_multibind_directory() + "/" + _aircraft_id + ".txt";
+    std::string aircraft_dir = get_aircraft_directory();
+    if (aircraft_dir.empty()) {
+        return "MultiBind.cfg"; // Fallback to current directory
+    }
+    
+    return aircraft_dir + "/MultiBind.cfg";
 }
 
-std::string Config::get_multibind_directory() const
+std::string Config::get_aircraft_directory() const
 {
     using namespace multibind::constants;
     
-    std::string xplane_path(XPLANE_PATH_BUFFER_SIZE, '\0');
-    XPLMGetSystemPath(&xplane_path[0]);
-    xplane_path.resize(std::strlen(xplane_path.c_str())); // Trim to actual length
-    return xplane_path + "multibind";
+    char filename[XPLANE_PATH_BUFFER_SIZE];
+    char path[XPLANE_PATH_BUFFER_SIZE];
+    
+    XPLMGetNthAircraftModel(0, filename, path);
+    
+    std::string aircraft_path(path);
+    if (!aircraft_path.empty()) {
+        // Remove the filename to get just the directory
+        size_t last_slash = aircraft_path.find_last_of('/');
+        if (last_slash != std::string::npos) {
+            aircraft_path = aircraft_path.substr(0, last_slash);
+        }
+    }
+    
+    return aircraft_path;
 }
 
 

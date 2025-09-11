@@ -1,6 +1,6 @@
 #pragma once
 
-// Multibind Plugin Constants
+// MultiBind Plugin Constants
 
 namespace multibind {
 namespace constants {

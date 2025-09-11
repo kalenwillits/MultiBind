@@ -3,7 +3,7 @@
 set -e  # Exit on any error
 
 echo "========================================"
-echo " Multibind X-Plane Plugin Build Script"
+echo " MultiBind X-Plane Plugin Build Script"
 echo "========================================"
 echo
 

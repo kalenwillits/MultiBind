@@ -3,7 +3,7 @@
 set -e
 
 echo "========================================"
-echo " Multibind - Complete Build Script"
+echo " MultiBind - Complete Build Script"
 echo "========================================"
 echo
 echo "This script will:"

@@ -18,13 +18,13 @@ inline void log_error(Severity severity, const std::string& message) {
     const char* prefix = "";
     switch (severity) {
         case Severity::INFO:
-            prefix = "Multibind: INFO - ";
+            prefix = "MultiBind: INFO - ";
             break;
         case Severity::WARNING:
-            prefix = "Multibind: WARNING - ";
+            prefix = "MultiBind: WARNING - ";
             break;
         case Severity::ERROR:
-            prefix = "Multibind: ERROR - ";
+            prefix = "MultiBind: ERROR - ";
             break;
     }
     

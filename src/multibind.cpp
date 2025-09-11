@@ -20,8 +20,6 @@ static std::vector<XPLMCommandRef> g_multibind_commands;
 static Config g_config;
 static CombinationTracker g_tracker;
 
-static XPLMDataRef g_aircraft_icao_ref = nullptr;
-static std::string g_last_aircraft_icao;
 
 static float flight_loop_callback(float, float, int, void*);
 
@@ -35,7 +33,7 @@ PLUGIN_API int XPluginStart(char* out_name, char* out_sig, char* out_desc)
 {
     using namespace multibind::constants;
     
-    std::string name = "Multibind";
+    std::string name = "MultiBind";
     std::string sig = "multibind.plugin";
     std::string desc = "Multi-button joystick command binding plugin";
     
@@ -47,17 +45,10 @@ PLUGIN_API int XPluginStart(char* out_name, char* out_sig, char* out_desc)
     out_sig[XPLANE_STRING_BUFFER_SIZE - 1] = '\0';
     out_desc[XPLANE_STRING_BUFFER_SIZE - 1] = '\0';
 
-    // X-Plane 12: Use acf_ICAO instead of deprecated acf_filename
-    g_aircraft_icao_ref = XPLMFindDataRef("sim/aircraft/view/acf_ICAO");
-    if (!g_aircraft_icao_ref) {
-        XPLMDebugString("Multibind: ERROR - Could not find aircraft ICAO dataref\n");
-        return 0;
-    }
-
     g_menu_id = XPLMFindPluginsMenu();
     if (g_menu_id) {
-        g_menu_item_id = XPLMAppendMenuItem(g_menu_id, "Multibind", nullptr, 1);
-        XPLMMenuID submenu = XPLMCreateMenu("Multibind", g_menu_id, g_menu_item_id, menu_handler, nullptr);
+        g_menu_item_id = XPLMAppendMenuItem(g_menu_id, "MultiBind", nullptr, 1);
+        XPLMMenuID submenu = XPLMCreateMenu("MultiBind", g_menu_id, g_menu_item_id, menu_handler, nullptr);
         XPLMAppendMenuItem(submenu, "Reload Configuration", (void*)2, 1);
     }
 
@@ -66,7 +57,7 @@ PLUGIN_API int XPluginStart(char* out_name, char* out_sig, char* out_desc)
     
     XPLMRegisterFlightLoopCallback(flight_loop_callback, -1.0f, nullptr);
 
-    XPLMDebugString("Multibind: Plugin started successfully\n");
+    XPLMDebugString("MultiBind: Plugin started successfully\n");
     return 1;
 }
 
@@ -81,7 +72,7 @@ PLUGIN_API void XPluginStop(void)
     }
     g_multibind_commands.clear();
 
-    XPLMDebugString("Multibind: Plugin stopped\n");
+    XPLMDebugString("MultiBind: Plugin stopped\n");
 }
 
 PLUGIN_API int XPluginEnable(void)
@@ -124,40 +115,26 @@ void create_multibind_commands()
             XPLMRegisterCommandHandler(command, multibind_command_handler, 1, (void*)(intptr_t)i);
             g_multibind_commands.push_back(command);
         } else {
-            std::string error_msg = "Multibind: ERROR - Failed to create command " + command_name + "\n";
+            std::string error_msg = "MultiBind: ERROR - Failed to create command " + command_name + "\n";
             XPLMDebugString(error_msg.c_str());
         }
     }
     
     std::ostringstream log_msg_ss;
-    log_msg_ss << "Multibind: Created " << g_multibind_commands.size() << " multibind commands (000-999)\n";
+    log_msg_ss << "MultiBind: Created " << g_multibind_commands.size() << " multibind commands (000-999)\n";
     std::string log_msg = log_msg_ss.str();
     XPLMDebugString(log_msg.c_str());
 }
 
 void load_aircraft_config()
 {
-    using namespace multibind::constants;
+    XPLMDebugString("MultiBind: Loading aircraft configuration\n");
     
-    std::string aircraft_icao(XPLANE_PATH_BUFFER_SIZE, '\0');
-    XPLMGetDatab(g_aircraft_icao_ref, &aircraft_icao[0], 0, aircraft_icao.size());
-    aircraft_icao.resize(std::strlen(aircraft_icao.c_str())); // Trim to actual length
+    // Stop any continuous commands from previous aircraft
+    g_tracker.stop_all_continuous_commands();
     
-    if (aircraft_icao != g_last_aircraft_icao) {
-        g_last_aircraft_icao = aircraft_icao;
-        
-        std::string aircraft_id = aircraft_icao; // Use ICAO directly as aircraft ID
-        
-        std::string log_msg = "Multibind: Loading config for aircraft: " + aircraft_id + "\n";
-        XPLMDebugString(log_msg.c_str());
-        
-        // Stop any continuous commands from previous aircraft
-        g_tracker.stop_all_continuous_commands();
-        
-        g_config.load_config(aircraft_id);
-        g_tracker.set_bindings(g_config.get_bindings());
-        
-    }
+    g_config.load_config();
+    g_tracker.set_bindings(g_config.get_bindings());
 }
 
 
@@ -172,7 +149,7 @@ static float flight_loop_callback(float, float, int, void*)
         if (command_ref) {
             XPLMCommandOnce(command_ref);
             
-            std::string log_msg = "Multibind: Triggered command: " + triggered_command + "\n";
+            std::string log_msg = "MultiBind: Triggered command: " + triggered_command + "\n";
             XPLMDebugString(log_msg.c_str());
         }
     }
@@ -187,11 +164,11 @@ static float flight_loop_callback(float, float, int, void*)
         if (command_ref) {
             if (start) {
                 XPLMCommandBegin(command_ref);
-                std::string log_msg = "Multibind: Started continuous command: " + command + "\n";
+                std::string log_msg = "MultiBind: Started continuous command: " + command + "\n";
                 XPLMDebugString(log_msg.c_str());
             } else {
                 XPLMCommandEnd(command_ref);
-                std::string log_msg = "Multibind: Stopped continuous command: " + command + "\n";
+                std::string log_msg = "MultiBind: Stopped continuous command: " + command + "\n";
                 XPLMDebugString(log_msg.c_str());
             }
         }
@@ -207,14 +184,13 @@ static void menu_handler(void*, void* item_ref)
     switch (item) {
         case 2: // Reload Configuration
             {
-                std::string log_msg = "Multibind: Reloading configuration for current aircraft\n";
+                std::string log_msg = "MultiBind: Reloading configuration for current aircraft\n";
                 XPLMDebugString(log_msg.c_str());
                 
-                // Force reload by clearing the last aircraft ICAO
-                g_last_aircraft_icao.clear();
+                // Force reload configuration
                 load_aircraft_config();
                 
-                XPLMDebugString("Multibind: Configuration reloaded successfully\n");
+                XPLMDebugString("MultiBind: Configuration reloaded successfully\n");
             }
             break;
     }

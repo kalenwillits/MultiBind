@@ -46,7 +46,7 @@ public:
     Config() = default;
     ~Config() = default;
     
-    bool load_config(const std::string& aircraft_id);
+    bool load_config();
     bool save_config();
     
     void add_binding(const MultibindBinding& binding);
@@ -56,18 +56,15 @@ public:
     const std::vector<MultibindBinding>& get_bindings() const { return _bindings; }
     std::vector<MultibindBinding>& get_bindings() { return _bindings; }
     
-    const std::string& get_aircraft_id() const { return _aircraft_id; }
     
-    bool create_multibind_directory();
     std::string get_config_file_path() const;
     
 private:
-    std::string _aircraft_id;
     std::vector<MultibindBinding> _bindings;
     
     // Trigger parsing functions
     std::string triggers_to_string(const std::vector<ButtonTrigger>& triggers) const;
     std::vector<ButtonTrigger> string_to_triggers(const std::string& str) const;
     
-    std::string get_multibind_directory() const;
+    std::string get_aircraft_directory() const;
 };
