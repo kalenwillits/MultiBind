@@ -8,24 +8,28 @@
 enum class ButtonAction {
     PRESSED,    // Button just pressed (+ prefix)
     HELD,       // Button held down (* prefix)
-    RELEASED    // Button just released (- prefix)
+    RELEASED,   // Button just released (- prefix)
+    NOT_HELD    // Button NOT held down (~ prefix)
 };
 
 struct ButtonTrigger {
     int button_id;
     ButtonAction action;
-    
-    ButtonTrigger() = default;
-    ButtonTrigger(int id, ButtonAction act) : button_id(id), action(act) {}
-    
+    bool is_negated;  // true if ~ prefix used (button must NOT be held)
+
+    ButtonTrigger() : button_id(0), action(ButtonAction::PRESSED), is_negated(false) {}
+    ButtonTrigger(int id, ButtonAction act, bool negated = false)
+        : button_id(id), action(act), is_negated(negated) {}
+
     // For compatibility with existing code that expects comparison
     bool operator<(const ButtonTrigger& other) const {
         if (button_id != other.button_id) return button_id < other.button_id;
+        if (is_negated != other.is_negated) return is_negated < other.is_negated;
         return static_cast<int>(action) < static_cast<int>(other.action);
     }
-    
+
     bool operator==(const ButtonTrigger& other) const {
-        return button_id == other.button_id && action == other.action;
+        return button_id == other.button_id && action == other.action && is_negated == other.is_negated;
     }
 };
 
