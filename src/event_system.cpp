@@ -139,12 +139,43 @@ void StateMachine::smart_reset_for_held_buttons(const std::unordered_map<int, bo
 
 // StateMachineManager implementation
 
-void StateMachineManager::add_state_machine(const std::vector<ButtonTrigger>& triggers, 
-                                           const std::string& command, 
+void StateMachineManager::add_state_machine(const std::vector<ButtonTrigger>& triggers,
+                                           const std::string& command,
                                            const std::string& description) {
     auto machine = std::make_unique<StateMachine>(description);
     machine->set_command_callback(_command_callback);
     machine->build_from_pattern(triggers, command);
+    _state_machines.push_back(std::move(machine));
+}
+
+void StateMachineManager::add_state_machine_axis(const std::vector<ButtonTrigger>& triggers,
+                                                 const std::string& axis_id,
+                                                 const std::string& target_dataref,
+                                                 const std::string& description) {
+    auto machine = std::make_unique<StateMachine>(description + " (axis)");
+
+    // For axis bindings, we need to check if all triggers are HELD actions
+    // If so, treat as continuous; otherwise, treat as one-time
+    bool all_held = true;
+    for (const auto& trigger : triggers) {
+        if (trigger.action != ButtonAction::HELD) {
+            all_held = false;
+            break;
+        }
+    }
+
+    if (all_held) {
+        // Treat as continuous axis binding - use special continuous command format
+        std::string axis_command = "AXIS_CONTINUOUS:" + axis_id + ":" + target_dataref;
+        machine->set_command_callback(_command_callback);
+        machine->build_from_pattern(triggers, axis_command);
+    } else {
+        // Treat as one-time axis trigger
+        std::string axis_command = "AXIS:" + axis_id + ":" + target_dataref;
+        machine->set_command_callback(_command_callback);
+        machine->build_from_pattern(triggers, axis_command);
+    }
+
     _state_machines.push_back(std::move(machine));
 }
 

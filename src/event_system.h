@@ -93,6 +93,7 @@ public:
     using StatePtr = std::shared_ptr<StateNode>;
     using CommandCallback = std::function<void(const std::string&)>;
     using ContinuousCommandCallback = std::function<void(const std::string&, bool)>;  // command, start/stop
+    using AxisCallback = std::function<void(const std::string&, const std::string&)>;  // axis_id, target_dataref
     
 private:
     StatePtr _root_state;
@@ -151,6 +152,7 @@ private:
     std::unordered_map<int, bool> _current_button_states;  // Track button press states
     StateMachine::CommandCallback _command_callback;
     StateMachine::ContinuousCommandCallback _continuous_command_callback;
+    StateMachine::AxisCallback _axis_callback;
     std::unordered_map<std::string, bool> _active_continuous_commands;  // Track running continuous commands
     
 public:
@@ -165,12 +167,20 @@ public:
     void set_continuous_command_callback(StateMachine::ContinuousCommandCallback callback) {
         _continuous_command_callback = callback;
     }
+
+    // Set the callback for axis actions (axis_id, target_dataref)
+    void set_axis_callback(StateMachine::AxisCallback callback) {
+        _axis_callback = callback;
+    }
     
     // Update continuous command states based on current button states
     void update_continuous_commands();
     
     // Add a state machine for a binding pattern
     void add_state_machine(const std::vector<ButtonTrigger>& triggers, const std::string& command, const std::string& description);
+
+    // Add a state machine for an axis binding pattern
+    void add_state_machine_axis(const std::vector<ButtonTrigger>& triggers, const std::string& axis_id, const std::string& target_dataref, const std::string& description);
     
     // Process a button state change and generate appropriate events
     void process_button_transition(int button_id, ButtonAction action);

@@ -23,6 +23,16 @@ static CombinationTracker g_tracker;
 static XPLMDataRef g_aircraft_icao_ref = nullptr;
 static std::string g_last_aircraft_icao;
 
+// Axis override system
+static bool g_axis_override_active = false;
+static XPLMDataRef g_joystick_axis_values_ref = nullptr;
+static XPLMDataRef g_override_throttles_ref = nullptr;
+static XPLMDataRef g_override_control_surfaces_ref = nullptr;
+static XPLMDataRef g_override_flightcontrol_ref = nullptr;
+
+// Dataref cache for performance
+static std::unordered_map<std::string, XPLMDataRef> g_dataref_cache;
+
 static float flight_loop_callback(float, float, int, void*);
 
 static void menu_handler(void*, void* item_ref);
@@ -30,6 +40,10 @@ static int multibind_command_handler(XPLMCommandRef, XPLMCommandPhase phase, voi
 
 void create_multibind_commands();
 void load_aircraft_config();
+void initialize_axis_system();
+void apply_override_state(bool enable);
+float get_axis_value(const std::string& axis_id);
+XPLMDataRef get_cached_dataref(const std::string& dataref_name);
 
 PLUGIN_API int XPluginStart(char* out_name, char* out_sig, char* out_desc)
 {
@@ -62,8 +76,8 @@ PLUGIN_API int XPluginStart(char* out_name, char* out_sig, char* out_desc)
     }
 
     create_multibind_commands();
-    
-    
+    initialize_axis_system();
+
     XPLMRegisterFlightLoopCallback(flight_loop_callback, -1.0f, nullptr);
 
     XPLMDebugString("Multibind: Plugin started successfully\n");
@@ -156,6 +170,10 @@ void load_aircraft_config()
         
         g_config.load_config(aircraft_id);
         g_tracker.set_bindings(g_config.get_bindings());
+
+        // Check for axis bindings and apply override state automatically
+        bool has_axis_bindings = g_config.has_axis_bindings();
+        apply_override_state(has_axis_bindings);
         
     }
 }
@@ -182,7 +200,7 @@ static float flight_loop_callback(float, float, int, void*)
     if (!continuous_action.first.empty()) {
         const std::string& command = continuous_action.first;
         bool start = continuous_action.second;
-        
+
         XPLMCommandRef command_ref = XPLMFindCommand(command.c_str());
         if (command_ref) {
             if (start) {
@@ -194,6 +212,35 @@ static float flight_loop_callback(float, float, int, void*)
                 std::string log_msg = "Multibind: Stopped continuous command: " + command + "\n";
                 XPLMDebugString(log_msg.c_str());
             }
+        }
+    }
+
+    // Handle continuous axis processing (only when override is active)
+    if (g_axis_override_active) {
+        // Process all currently active axis bindings every frame
+        const auto& active_axis_bindings = g_tracker.get_active_axis_bindings();
+        for (const auto& binding : active_axis_bindings) {
+            const std::string& axis_id = binding.first;
+            const std::string& target_dataref = binding.second;
+
+            // Get current axis value
+            float axis_value = get_axis_value(axis_id);
+
+            // Find target dataref using cache and write axis value
+            XPLMDataRef dataref = get_cached_dataref(target_dataref);
+            if (dataref) {
+                XPLMSetDataf(dataref, axis_value);
+                // Note: Removed per-frame logging to reduce spam
+            }
+            // Note: Error message already printed by get_cached_dataref if needed
+        }
+
+        // Also handle any one-time axis actions (for compatibility)
+        auto axis_action = g_tracker.get_axis_action();
+        if (!axis_action.first.empty() && !axis_action.second.empty()) {
+            // This is now primarily for logging/debugging
+            std::string log_msg = "Multibind: One-time axis action: " + axis_action.first + " -> " + axis_action.second + "\n";
+            XPLMDebugString(log_msg.c_str());
         }
     }
     
@@ -234,4 +281,127 @@ static int multibind_command_handler(XPLMCommandRef, XPLMCommandPhase phase, voi
     }
     
     return 0;
+}
+
+void initialize_axis_system()
+{
+    // Find axis-related datarefs
+    g_joystick_axis_values_ref = XPLMFindDataRef("sim/joystick/joystick_axis_values");
+    g_override_throttles_ref = XPLMFindDataRef("sim/operation/override/override_throttles");
+    g_override_control_surfaces_ref = XPLMFindDataRef("sim/operation/override/override_control_surfaces");
+    g_override_flightcontrol_ref = XPLMFindDataRef("sim/operation/override/override_flightcontrol");
+
+    if (!g_joystick_axis_values_ref) {
+        XPLMDebugString("Multibind: WARNING - Could not find joystick axis values dataref\n");
+    }
+
+    if (!g_override_throttles_ref) {
+        XPLMDebugString("Multibind: WARNING - Could not find throttle override dataref\n");
+    }
+
+    if (!g_override_control_surfaces_ref) {
+        XPLMDebugString("Multibind: WARNING - Could not find control surfaces override dataref\n");
+    }
+
+    if (!g_override_flightcontrol_ref) {
+        XPLMDebugString("Multibind: WARNING - Could not find flight control override dataref\n");
+    }
+
+    XPLMDebugString("Multibind: Axis system initialized\n");
+}
+
+void apply_override_state(bool enable)
+{
+    g_axis_override_active = enable;
+
+    if (enable) {
+        XPLMDebugString("Multibind: Axis bindings detected - enabling axis override mode\n");
+
+        // Enable override datarefs
+        if (g_override_throttles_ref) {
+            XPLMSetDatai(g_override_throttles_ref, 1);
+        }
+        if (g_override_control_surfaces_ref) {
+            XPLMSetDatai(g_override_control_surfaces_ref, 1);
+        }
+        if (g_override_flightcontrol_ref) {
+            XPLMSetDatai(g_override_flightcontrol_ref, 1);
+        }
+    } else {
+        XPLMDebugString("Multibind: No axis bindings - normal X-Plane axis control\n");
+
+        // Stop all active axis bindings before disabling override
+        g_tracker.stop_all_continuous_commands_real();
+
+        // Disable override datarefs
+        if (g_override_throttles_ref) {
+            XPLMSetDatai(g_override_throttles_ref, 0);
+        }
+        if (g_override_control_surfaces_ref) {
+            XPLMSetDatai(g_override_control_surfaces_ref, 0);
+        }
+        if (g_override_flightcontrol_ref) {
+            XPLMSetDatai(g_override_flightcontrol_ref, 0);
+        }
+
+        // Clear dataref cache to avoid stale references for new aircraft
+        g_dataref_cache.clear();
+        XPLMDebugString("Multibind: Cleared dataref cache\n");
+    }
+}
+
+float get_axis_value(const std::string& axis_id)
+{
+    using namespace multibind::constants;
+
+    if (!g_joystick_axis_values_ref) {
+        return 0.0f;  // Return neutral if no axis dataref available
+    }
+
+    // Parse axis ID (A00-A66) to get axis index
+    if (axis_id.length() < 3 || axis_id[0] != 'A') {
+        return 0.0f;  // Invalid axis ID format
+    }
+
+    std::string axis_number_str = axis_id.substr(1, 2);
+    int axis_index;
+    try {
+        axis_index = std::stoi(axis_number_str);
+    } catch (const std::exception&) {
+        return 0.0f;  // Invalid axis number
+    }
+
+    if (axis_index < MIN_AXIS_ID || axis_index > MAX_AXIS_ID) {
+        return 0.0f;  // Axis index out of range
+    }
+
+    // Read the axis values array
+    float axis_values[MAX_AXIS_ASSIGNMENTS];
+    int values_read = XPLMGetDatavf(g_joystick_axis_values_ref, axis_values, 0, MAX_AXIS_ASSIGNMENTS);
+
+    if (values_read > axis_index) {
+        return axis_values[axis_index];
+    }
+
+    return 0.0f;  // Axis index beyond available values
+}
+
+XPLMDataRef get_cached_dataref(const std::string& dataref_name)
+{
+    // Check cache first
+    auto it = g_dataref_cache.find(dataref_name);
+    if (it != g_dataref_cache.end()) {
+        return it->second;
+    }
+
+    // Not in cache, look it up and cache it
+    XPLMDataRef dataref = XPLMFindDataRef(dataref_name.c_str());
+    g_dataref_cache[dataref_name] = dataref;  // Cache even if nullptr for failed lookups
+
+    if (!dataref) {
+        std::string error_msg = "Multibind: WARNING - Dataref not found (cached): " + dataref_name + "\n";
+        XPLMDebugString(error_msg.c_str());
+    }
+
+    return dataref;
 }

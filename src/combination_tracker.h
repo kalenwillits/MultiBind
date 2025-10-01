@@ -22,6 +22,12 @@ public:
     
     // Get next continuous command action (command, start/stop)
     std::pair<std::string, bool> get_continuous_command_action();
+
+    // Get next axis action (axis_id, target_dataref)
+    std::pair<std::string, std::string> get_axis_action();
+
+    // Get currently active axis bindings for continuous processing
+    const std::unordered_map<std::string, std::string>& get_active_axis_bindings() const;
     
     // Stop all active continuous commands
     void stop_all_continuous_commands_real();
@@ -47,6 +53,10 @@ private:
     // Continuous command tracking
     std::unordered_map<std::string, XPLMCommandRef> _active_continuous_commands;
     std::queue<std::pair<std::string, bool>> _continuous_command_queue;  // command, start/stop
+
+    // Axis binding tracking
+    std::queue<std::pair<std::string, std::string>> _axis_action_queue;  // axis_id, target_dataref
+    std::unordered_map<std::string, std::string> _active_axis_bindings;  // axis_id -> target_dataref (currently active)
     
     // UI recording support
     bool _recording = false;
@@ -55,4 +65,5 @@ private:
     // Command callback for state machines
     void on_command_triggered(const std::string& command);
     void on_continuous_command_triggered(const std::string& command, bool start);
+    void on_axis_triggered(const std::string& axis_id, const std::string& target_dataref);
 };

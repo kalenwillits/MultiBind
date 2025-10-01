@@ -78,43 +78,76 @@ bool Config::load_config(const std::string& aircraft_id)
             continue;
         }
         
-        // Detect format: check for proper trigger pattern (*000, +001, -002)
+        // Detect format: check for proper trigger pattern (*000, +001, -002) or axis pattern (*000^A04)
         bool has_trigger_format = false;
-        for (size_t i = 0; i < combination_str.length(); ++i) {
-            char c = combination_str[i];
-            if ((c == '*' || c == '+' || c == '-') && (i + 3 < combination_str.length())) {
-                // Check if followed by 3 digits
-                bool valid_digits = true;
-                for (int j = 1; j <= 3; ++j) {
-                    if (!std::isdigit(combination_str[i + j])) {
-                        valid_digits = false;
+        bool is_axis_binding = false;
+
+        // Check for axis binding first (contains ^)
+        size_t axis_pos = combination_str.find('^');
+        if (axis_pos != std::string::npos) {
+            is_axis_binding = true;
+            has_trigger_format = true;
+        } else {
+            // Check for regular trigger format
+            for (size_t i = 0; i < combination_str.length(); ++i) {
+                char c = combination_str[i];
+                if ((c == '*' || c == '+' || c == '-') && (i + 3 < combination_str.length())) {
+                    // Check if followed by 3 digits
+                    bool valid_digits = true;
+                    for (int j = 1; j <= 3; ++j) {
+                        if (!std::isdigit(combination_str[i + j])) {
+                            valid_digits = false;
+                            break;
+                        }
+                    }
+                    if (valid_digits) {
+                        has_trigger_format = true;
                         break;
                     }
-                }
-                if (valid_digits) {
-                    has_trigger_format = true;
-                    break;
                 }
             }
         }
         
         if (has_trigger_format) {
-            // Parse trigger format (*005+018-020)
-            std::vector<ButtonTrigger> triggers = string_to_triggers(combination_str);
-            if (!triggers.empty() && !command.empty()) {
-                // Prevent excessive bindings (DOS protection)
-                constexpr size_t MAX_BINDINGS = 1000;
-                if (_bindings.size() >= MAX_BINDINGS) {
-                    std::string error_msg = "Multibind: Maximum number of bindings (" + 
-                                          std::to_string(MAX_BINDINGS) + ") reached at line " + 
-                                          std::to_string(line_number) + ", ignoring remaining entries\n";
+            if (is_axis_binding) {
+                // Parse axis binding format (*005^A04=dataref)
+                auto axis_result = string_to_axis_binding(combination_str);
+                std::vector<ButtonTrigger> triggers = axis_result.first;
+                std::string axis_id = axis_result.second;
+
+                if (!triggers.empty() && !axis_id.empty() && !command.empty()) {
+                    // Prevent excessive bindings (DOS protection)
+                    constexpr size_t MAX_BINDINGS = 1000;
+                    if (_bindings.size() >= MAX_BINDINGS) {
+                        std::string error_msg = "Multibind: Maximum number of bindings (" +
+                                              std::to_string(MAX_BINDINGS) + ") reached at line " +
+                                              std::to_string(line_number) + ", ignoring remaining entries\n";
+                        XPLMDebugString(error_msg.c_str());
+                        break;
+                    }
+                    _bindings.emplace_back(triggers, axis_id, command, description);
+                } else {
+                    std::string error_msg = "Multibind: Invalid axis binding at line " + std::to_string(line_number) + "\n";
                     XPLMDebugString(error_msg.c_str());
-                    break;
                 }
-                _bindings.emplace_back(triggers, command, description);
-            } else if (triggers.empty()) {
-                std::string error_msg = "Multibind: No valid button triggers at line " + std::to_string(line_number) + "\n";
-                XPLMDebugString(error_msg.c_str());
+            } else {
+                // Parse regular trigger format (*005+018-020)
+                std::vector<ButtonTrigger> triggers = string_to_triggers(combination_str);
+                if (!triggers.empty() && !command.empty()) {
+                    // Prevent excessive bindings (DOS protection)
+                    constexpr size_t MAX_BINDINGS = 1000;
+                    if (_bindings.size() >= MAX_BINDINGS) {
+                        std::string error_msg = "Multibind: Maximum number of bindings (" +
+                                              std::to_string(MAX_BINDINGS) + ") reached at line " +
+                                              std::to_string(line_number) + ", ignoring remaining entries\n";
+                        XPLMDebugString(error_msg.c_str());
+                        break;
+                    }
+                    _bindings.emplace_back(triggers, command, description);
+                } else if (triggers.empty()) {
+                    std::string error_msg = "Multibind: No valid button triggers at line " + std::to_string(line_number) + "\n";
+                    XPLMDebugString(error_msg.c_str());
+                }
             }
         } else {
             // Invalid format
@@ -125,7 +158,7 @@ bool Config::load_config(const std::string& aircraft_id)
     
     std::string log_msg = "Multibind: Loaded " + std::to_string(_bindings.size()) + " bindings from " + config_file + "\n";
     XPLMDebugString(log_msg.c_str());
-    
+
     return true;
 }
 
@@ -253,5 +286,63 @@ std::string Config::triggers_to_string(const std::vector<ButtonTrigger>& trigger
     }
     
     return ss.str();
+}
+
+std::pair<std::vector<ButtonTrigger>, std::string> Config::string_to_axis_binding(const std::string& str) const
+{
+    using namespace multibind::constants;
+
+    std::vector<ButtonTrigger> triggers;
+    std::string axis_id;
+
+    // Find the ^ character that separates triggers from axis ID
+    size_t axis_pos = str.find('^');
+    if (axis_pos == std::string::npos) {
+        return std::make_pair(triggers, axis_id);  // Return empty if no ^ found
+    }
+
+    // Parse button triggers before the ^
+    std::string trigger_part = str.substr(0, axis_pos);
+    triggers = string_to_triggers(trigger_part);
+
+    // Parse axis ID after the ^
+    std::string axis_part = str.substr(axis_pos + 1);
+
+    // Validate axis ID format (A00-A66)
+    if (axis_part.length() >= 3 && axis_part[0] == 'A') {
+        std::string axis_number_str = axis_part.substr(1, 2);
+
+        // Check if next 2 characters are digits
+        bool valid_digits = true;
+        for (char c : axis_number_str) {
+            if (!std::isdigit(c)) {
+                valid_digits = false;
+                break;
+            }
+        }
+
+        if (valid_digits) {
+            try {
+                int axis_number = std::stoi(axis_number_str);
+                if (axis_number >= MIN_AXIS_ID && axis_number <= MAX_AXIS_ID) {
+                    axis_id = axis_part.substr(0, 3);  // A00-A66
+                }
+            } catch (const std::exception&) {
+                // Invalid axis number, leave axis_id empty
+            }
+        }
+    }
+
+    return std::make_pair(triggers, axis_id);
+}
+
+bool Config::has_axis_bindings() const
+{
+    for (const auto& binding : _bindings) {
+        if (binding.is_axis_binding) {
+            return true;
+        }
+    }
+    return false;
 }
 

@@ -10,6 +10,11 @@ constexpr int MAX_MULTIBIND_COMMANDS = 1000;
 constexpr int MIN_BUTTON_ID = 0;
 constexpr int MAX_BUTTON_ID = MAX_MULTIBIND_COMMANDS - 1;
 
+// Axis system limits
+constexpr int MAX_AXIS_ASSIGNMENTS = 67;  // X-Plane supports A00-A66 (67 total)
+constexpr int MIN_AXIS_ID = 0;
+constexpr int MAX_AXIS_ID = MAX_AXIS_ASSIGNMENTS - 1;
+
 // Timing constants
 constexpr int TRIGGER_DEBOUNCE_MS = 200;  // Milliseconds to prevent double-triggering
 

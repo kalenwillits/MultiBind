@@ -1,0 +1,51 @@
+# MultiBind Axis Feature Test Configuration - Comprehensive Edge Cases
+# Test axis bindings with ^ syntax
+
+# ========== BACKWARD COMPATIBILITY TESTS ==========
+# Basic button bindings (should still work exactly as before)
+*010+011=sim/electrical/battery_on
++005-006=sim/lights/landing_lights_toggle
+
+# ========== BASIC AXIS BINDINGS ==========
+# These should work with continuous axis control
+*020^A04=sim/engines/throttle_1         # Throttle axis
+*021^A04=sim/engines/throttle_2         # Same axis, different target
+*030^A08=sim/engines/prop_1             # Prop axis
+*031^A09=sim/engines/mixture_1          # Mixture axis
+
+# ========== EDGE CASE TESTS ==========
+# Test boundary axis IDs
+*040^A00=sim/test/axis_none             # A00 (None)
+*041^A66=sim/test/axis_max              # A66 (Maximum)
+
+# Test multi-button combinations with axis
+*050+051^A04=sim/engines/throttle_3     # Multi-button + axis
+*060+061+062^A08=sim/engines/prop_2     # Three buttons + axis
+
+# Test mixed trigger types (should NOT be continuous - one-time only)
++070*071^A04=sim/test/mixed_triggers    # PRESSED + HELD + axis
+-080*081^A08=sim/test/released_held     # RELEASED + HELD + axis
+
+# ========== INVALID/MALFORMED ENTRIES ==========
+# These should be gracefully ignored with error messages
+*090^=sim/test/no_axis                  # Missing axis ID
+*091^A=sim/test/incomplete_axis         # Incomplete axis ID
+*092^A999=sim/test/invalid_axis         # Invalid axis number (>66)
+*093^ABC=sim/test/non_numeric           # Non-numeric axis ID
+^A04=sim/test/no_buttons                # Axis without buttons
+
+# Empty or malformed lines
+*094^A04=                               # Empty target dataref
+=sim/test/no_triggers                   # No triggers
+
+# ========== STRESS TEST ==========
+# Multiple axis bindings active simultaneously
+*100^A04=sim/engines/throttle_4
+*101^A08=sim/engines/prop_3
+*102^A09=sim/engines/mixture_2
+*103^A11=sim/flight_controls/flap_ratio
+
+# ========== SPECIAL CHARACTERS TEST ==========
+# Test dataref names with various valid characters
+*110^A04=sim/cockpit2/engine/throttle_ratio
+*111^A08=sim/aircraft/prop/prop_pitch_deg
