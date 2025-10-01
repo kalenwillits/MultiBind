@@ -1,0 +1,50 @@
+# MultiBind Negate Operator - Fixed Implementation Test Configuration
+# Tests for critical bug fixes
+
+# ========== CRITICAL FIX #1: Terminal State with Trailing Negation ==========
+# These patterns END with negated triggers - previously broken, now fixed
+*005*010~015=sim/test/ends_with_negation_1     # 005 held, 010 held, 015 NOT held
+*020*021~022~023=sim/test/ends_with_negation_2 # 020 held, 021 held, 022 NOT held, 023 NOT held
+*030~040=sim/test/simple_trailing_negation      # 030 held, 040 NOT held
+
+# ========== CRITICAL FIX #2: Continuous Axis with Negation ==========
+# These axis bindings have negation - previously triggered once, now continuous
+~000*010^A04=sim/engines/throttle_1              # 000 NOT held, 010 held → continuous throttle
+~001*020^A08=sim/engines/prop_1                  # 001 NOT held, 020 held → continuous prop
+~000~001*030^A09=sim/engines/mixture_1           # 000 NOT held, 001 NOT held, 030 held → continuous mixture
+*050~060^A05=sim/engines/throttle_2              # 050 held, 060 NOT held → continuous throttle 2
+
+# ========== FIX #3: Contradictory Pattern Validation ==========
+# These should be REJECTED with error messages
+# ~000*000=sim/test/contradictory                # SHOULD FAIL - button 000 both positive and negated
+# *010~010*020=sim/test/contradictory_2          # SHOULD FAIL - button 010 both positive and negated
+# ~050*051~051=sim/test/contradictory_3          # SHOULD FAIL - button 051 both positive and negated
+
+# ========== FIX #4: Negation During Sequences ==========
+# These validate negation throughout the entire sequence, not just at the end
+~000+010+011=sim/test/sequence_negation_1        # 000 must NOT be held during entire sequence
+~100*200+201=sim/test/sequence_negation_2        # 100 NOT held, 200 held, then 201 pressed
+~050~051+060+061=sim/test/sequence_negation_3    # 050 NOT held, 051 NOT held, 060 pressed, 061 pressed
+
+# ========== REGRESSION TESTS: Regular Patterns ==========
+# Ensure fixes don't break existing functionality
+*030+031=sim/electrical/battery_on               # Regular pattern (no negation)
++005-006=sim/lights/landing_lights_toggle        # Regular pattern (no negation)
+*001*002*003=sim/test/all_held                   # All held (no negation)
++010+011+012=sim/test/sequence                   # Sequence (no negation)
+*020^A06=sim/engines/throttle_3                  # Axis without negation
+
+# ========== EDGE CASES ==========
+# Negation at various positions
+~000*010*020=sim/test/negation_first             # Negation first
+*000~010*020=sim/test/negation_middle            # Negation in middle
+*000*010~020=sim/test/negation_last              # Negation last (CRITICAL FIX #1 test)
+
+# Multiple negations scattered
+~000*010~020*030~040=sim/test/scattered_negations # Mixed throughout
+
+# All negations at start
+~000~001~002*050=sim/test/all_negations_start    # All negations first
+
+# Complex combination
+~100~101*110*111+120~130=sim/test/complex        # Multiple negations + held + pressed + trailing negation

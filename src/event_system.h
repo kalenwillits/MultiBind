@@ -101,6 +101,7 @@ private:
     CommandCallback _command_callback;
     bool _is_continuous_pattern = false;  // True if all triggers are HELD
     std::vector<ButtonTrigger> _triggers;  // Store the original triggers
+    std::vector<ButtonTrigger> _negated_triggers;  // Store negated triggers separately
     std::string _command;  // Store the command
     
 public:
@@ -126,6 +127,12 @@ public:
     
     // Get the triggers for this state machine
     const std::vector<ButtonTrigger>& get_triggers() const { return _triggers; }
+
+    // Get the negated triggers for this state machine
+    const std::vector<ButtonTrigger>& get_negated_triggers() const { return _negated_triggers; }
+
+    // Validate negated button conditions
+    bool validate_negated_conditions(const std::unordered_map<int, bool>& current_button_states) const;
     
     // Process a button event through the state machine  
     void process_event(const ButtonEvent& event, const std::unordered_map<int, bool>& current_button_states);

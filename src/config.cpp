@@ -9,6 +9,7 @@
 #include <filesystem>
 #include <cstring>
 #include <iomanip>
+#include <set>
 
 bool Config::load_config(const std::string& aircraft_id)
 {
@@ -78,11 +79,11 @@ bool Config::load_config(const std::string& aircraft_id)
             continue;
         }
         
-        // Detect format: check for proper trigger pattern (*000, +001, -002)
+        // Detect format: check for proper trigger pattern (*000, +001, -002, ~000)
         bool has_trigger_format = false;
         for (size_t i = 0; i < combination_str.length(); ++i) {
             char c = combination_str[i];
-            if ((c == '*' || c == '+' || c == '-') && (i + 3 < combination_str.length())) {
+            if ((c == '*' || c == '+' || c == '-' || c == '~') && (i + 3 < combination_str.length())) {
                 // Check if followed by 3 digits
                 bool valid_digits = true;
                 for (int j = 1; j <= 3; ++j) {
@@ -102,11 +103,41 @@ bool Config::load_config(const std::string& aircraft_id)
             // Parse trigger format (*005+018-020)
             std::vector<ButtonTrigger> triggers = string_to_triggers(combination_str);
             if (!triggers.empty() && !command.empty()) {
+                // Validate for contradictory patterns (same button both positive and negated)
+                std::set<int> positive_buttons;
+                std::set<int> negated_buttons;
+
+                for (const auto& trigger : triggers) {
+                    if (trigger.is_negated) {
+                        negated_buttons.insert(trigger.button_id);
+                    } else {
+                        positive_buttons.insert(trigger.button_id);
+                    }
+                }
+
+                // Check for overlap (contradictions)
+                bool has_contradiction = false;
+                for (int button_id : positive_buttons) {
+                    if (negated_buttons.find(button_id) != negated_buttons.end()) {
+                        std::string error_msg = "Multibind: Contradictory pattern at line " +
+                                              std::to_string(line_number) +
+                                              " - button " + std::to_string(button_id) +
+                                              " is both positive and negated, skipping\n";
+                        XPLMDebugString(error_msg.c_str());
+                        has_contradiction = true;
+                        break;
+                    }
+                }
+
+                if (has_contradiction) {
+                    continue; // Skip this binding
+                }
+
                 // Prevent excessive bindings (DOS protection)
                 constexpr size_t MAX_BINDINGS = 1000;
                 if (_bindings.size() >= MAX_BINDINGS) {
-                    std::string error_msg = "Multibind: Maximum number of bindings (" + 
-                                          std::to_string(MAX_BINDINGS) + ") reached at line " + 
+                    std::string error_msg = "Multibind: Maximum number of bindings (" +
+                                          std::to_string(MAX_BINDINGS) + ") reached at line " +
                                           std::to_string(line_number) + ", ignoring remaining entries\n";
                     XPLMDebugString(error_msg.c_str());
                     break;
@@ -194,16 +225,22 @@ std::vector<ButtonTrigger> Config::string_to_triggers(const std::string& str) co
     
     for (size_t i = 0; i < str.length(); ++i) {
         char c = str[i];
-        
-        if (c == '*' || c == '+' || c == '-') {
+
+        if (c == '*' || c == '+' || c == '-' || c == '~') {
             // Found a trigger prefix - extract the button ID that follows
             ButtonAction action;
+            bool is_negated = false;
+
             switch (c) {
                 case '*': action = ButtonAction::HELD; break;
-                case '+': action = ButtonAction::PRESSED; break; 
+                case '+': action = ButtonAction::PRESSED; break;
                 case '-': action = ButtonAction::RELEASED; break;
+                case '~':
+                    action = ButtonAction::NOT_HELD;
+                    is_negated = true;
+                    break;
             }
-            
+
             // Extract button number (next 3 digits)
             if (i + 3 < str.length()) {
                 // Validate that next 3 characters are digits
@@ -214,13 +251,13 @@ std::vector<ButtonTrigger> Config::string_to_triggers(const std::string& str) co
                         break;
                     }
                 }
-                
+
                 if (valid_digits) {
                     std::string button_str = str.substr(i + 1, 3);
                     try {
                         int button = std::stoi(button_str);
                         if (button >= MIN_BUTTON_ID && button <= MAX_BUTTON_ID) {
-                            triggers.emplace_back(button, action);
+                            triggers.emplace_back(button, action, is_negated);
                         }
                     } catch (const std::exception&) {
                         // Invalid button number, skip
@@ -237,21 +274,26 @@ std::vector<ButtonTrigger> Config::string_to_triggers(const std::string& str) co
 std::string Config::triggers_to_string(const std::vector<ButtonTrigger>& triggers) const
 {
     std::stringstream ss;
-    
+
     for (size_t i = 0; i < triggers.size(); ++i) {
         const auto& trigger = triggers[i];
-        
+
         // Add prefix based on action
-        switch (trigger.action) {
-            case ButtonAction::HELD: ss << "*"; break;
-            case ButtonAction::PRESSED: ss << "+"; break;
-            case ButtonAction::RELEASED: ss << "-"; break;
+        if (trigger.is_negated) {
+            ss << "~";
+        } else {
+            switch (trigger.action) {
+                case ButtonAction::HELD: ss << "*"; break;
+                case ButtonAction::PRESSED: ss << "+"; break;
+                case ButtonAction::RELEASED: ss << "-"; break;
+                case ButtonAction::NOT_HELD: ss << "~"; break;  // Fallback
+            }
         }
-        
+
         // Add zero-padded button ID
         ss << std::setfill('0') << std::setw(3) << trigger.button_id;
     }
-    
+
     return ss.str();
 }
 
