@@ -115,6 +115,12 @@ bool Config::load_config(const std::string& aircraft_id)
                 std::vector<ButtonTrigger> triggers = axis_result.first;
                 std::string axis_id = axis_result.second;
 
+                // Debug: log parsed axis binding components
+                std::string debug_msg = "Multibind: Parsing axis binding at line " + std::to_string(line_number) +
+                                      ": triggers=" + std::to_string(triggers.size()) +
+                                      ", axis_id='" + axis_id + "', dataref='" + command + "'\n";
+                XPLMDebugString(debug_msg.c_str());
+
                 if (!triggers.empty() && !axis_id.empty() && !command.empty()) {
                     // Validate for contradictory patterns (same button both positive and negated)
                     std::set<int> positive_buttons;
@@ -156,8 +162,10 @@ bool Config::load_config(const std::string& aircraft_id)
                         break;
                     }
                     _bindings.emplace_back(triggers, axis_id, command, description);
+                    std::string success_msg = "Multibind: ✅ Loaded AXIS binding: " + axis_id + " -> " + command + "\n";
+                    XPLMDebugString(success_msg.c_str());
                 } else {
-                    std::string error_msg = "Multibind: Invalid axis binding at line " + std::to_string(line_number) + "\n";
+                    std::string error_msg = "Multibind: ❌ Invalid axis binding at line " + std::to_string(line_number) + "\n";
                     XPLMDebugString(error_msg.c_str());
                 }
             } else {
@@ -409,11 +417,17 @@ std::pair<std::vector<ButtonTrigger>, std::string> Config::string_to_axis_bindin
 
 bool Config::has_axis_bindings() const
 {
+    int axis_count = 0;
     for (const auto& binding : _bindings) {
         if (binding.is_axis_binding) {
-            return true;
+            axis_count++;
         }
     }
-    return false;
+
+    std::string debug_msg = "Multibind: Axis detection check - found " + std::to_string(axis_count) +
+                          " axis bindings out of " + std::to_string(_bindings.size()) + " total bindings\n";
+    XPLMDebugString(debug_msg.c_str());
+
+    return axis_count > 0;
 }
 
