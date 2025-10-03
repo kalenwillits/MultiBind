@@ -3,6 +3,7 @@
 #include "XPLMMenus.h"
 #include "XPLMDataAccess.h"
 #include "XPLMProcessing.h"
+#include "XPLMPlanes.h"
 
 #include "config.h"
 #include "combination_tracker.h"
@@ -20,15 +21,18 @@ static std::vector<XPLMCommandRef> g_multibind_commands;
 static Config g_config;
 static CombinationTracker g_tracker;
 
-static XPLMDataRef g_aircraft_icao_ref = nullptr;
-static std::string g_last_aircraft_icao;
+static std::string g_last_aircraft_id;
 
 // Axis override system
 static bool g_axis_override_active = false;
 static XPLMDataRef g_joystick_axis_values_ref = nullptr;
+static XPLMDataRef g_joystick_axis_assignments_ref = nullptr;
 static XPLMDataRef g_override_throttles_ref = nullptr;
 static XPLMDataRef g_override_control_surfaces_ref = nullptr;
 static XPLMDataRef g_override_flightcontrol_ref = nullptr;
+
+// Cache for axis assignment → physical index mapping
+static std::unordered_map<int, int> g_axis_assignment_to_index;
 
 // Dataref cache for performance
 static std::unordered_map<std::string, XPLMDataRef> g_dataref_cache;
@@ -40,6 +44,7 @@ static int multibind_command_handler(XPLMCommandRef, XPLMCommandPhase phase, voi
 
 void create_multibind_commands();
 void load_aircraft_config();
+void build_axis_assignment_cache();
 void initialize_axis_system();
 void apply_override_state(bool enable);
 float get_axis_value(const std::string& axis_id);
@@ -60,13 +65,6 @@ PLUGIN_API int XPluginStart(char* out_name, char* out_sig, char* out_desc)
     out_name[XPLANE_STRING_BUFFER_SIZE - 1] = '\0';
     out_sig[XPLANE_STRING_BUFFER_SIZE - 1] = '\0';
     out_desc[XPLANE_STRING_BUFFER_SIZE - 1] = '\0';
-
-    // X-Plane 12: Use acf_ICAO instead of deprecated acf_filename
-    g_aircraft_icao_ref = XPLMFindDataRef("sim/aircraft/view/acf_ICAO");
-    if (!g_aircraft_icao_ref) {
-        XPLMDebugString("Multibind: ERROR - Could not find aircraft ICAO dataref\n");
-        return 0;
-    }
 
     g_menu_id = XPLMFindPluginsMenu();
     if (g_menu_id) {
@@ -152,29 +150,36 @@ void create_multibind_commands()
 void load_aircraft_config()
 {
     using namespace multibind::constants;
-    
-    std::string aircraft_icao(XPLANE_PATH_BUFFER_SIZE, '\0');
-    XPLMGetDatab(g_aircraft_icao_ref, &aircraft_icao[0], 0, aircraft_icao.size());
-    aircraft_icao.resize(std::strlen(aircraft_icao.c_str())); // Trim to actual length
-    
-    if (aircraft_icao != g_last_aircraft_icao) {
-        g_last_aircraft_icao = aircraft_icao;
-        
-        std::string aircraft_id = aircraft_icao; // Use ICAO directly as aircraft ID
-        
-        std::string log_msg = "Multibind: Loading config for aircraft: " + aircraft_id + "\n";
+
+    // Use SDK function to get aircraft filename - always reliable
+    char filename[256];
+    char path[512];
+    XPLMGetNthAircraftModel(0, filename, path);  // 0 = user's aircraft
+
+    // Extract aircraft ID from filename (e.g., "Cessna_172SP.acf" → "Cessna_172SP")
+    std::string aircraft_file(filename);
+    std::string aircraft_id = aircraft_file.substr(0, aircraft_file.find_last_of('.'));
+
+    if (aircraft_id != g_last_aircraft_id) {
+        g_last_aircraft_id = aircraft_id;
+
+        std::string log_msg = "Multibind: Loading config for aircraft: " + aircraft_id +
+                            " (from file: " + aircraft_file + ")\n";
         XPLMDebugString(log_msg.c_str());
-        
+
         // Stop any continuous commands from previous aircraft
         g_tracker.stop_all_continuous_commands();
-        
+
         g_config.load_config(aircraft_id);
         g_tracker.set_bindings(g_config.get_bindings());
+
+        // Rebuild axis assignment cache for new aircraft
+        build_axis_assignment_cache();
 
         // Check for axis bindings and apply override state automatically
         bool has_axis_bindings = g_config.has_axis_bindings();
         apply_override_state(has_axis_bindings);
-        
+
     }
 }
 
@@ -258,7 +263,7 @@ static void menu_handler(void*, void* item_ref)
                 XPLMDebugString(log_msg.c_str());
                 
                 // Force reload by clearing the last aircraft ICAO
-                g_last_aircraft_icao.clear();
+                g_last_aircraft_id.clear();
                 load_aircraft_config();
                 
                 XPLMDebugString("Multibind: Configuration reloaded successfully\n");
@@ -283,16 +288,48 @@ static int multibind_command_handler(XPLMCommandRef, XPLMCommandPhase phase, voi
     return 0;
 }
 
+void build_axis_assignment_cache()
+{
+    using namespace multibind::constants;
+
+    g_axis_assignment_to_index.clear();
+
+    if (!g_joystick_axis_assignments_ref) {
+        return;
+    }
+
+    // Read all 500 axis assignments
+    int assignments[500];
+    int count = XPLMGetDatavi(g_joystick_axis_assignments_ref, assignments, 0, 500);
+
+    // Build reverse map: assignment_enum → physical_axis_index
+    for (int i = 0; i < count; ++i) {
+        int assignment_enum = assignments[i];
+        if (assignment_enum >= MIN_AXIS_ID && assignment_enum <= MAX_AXIS_ID) {
+            g_axis_assignment_to_index[assignment_enum] = i;
+        }
+    }
+
+    std::string log_msg = "Multibind: Built axis assignment cache with " +
+                         std::to_string(g_axis_assignment_to_index.size()) + " mappings\n";
+    XPLMDebugString(log_msg.c_str());
+}
+
 void initialize_axis_system()
 {
     // Find axis-related datarefs
     g_joystick_axis_values_ref = XPLMFindDataRef("sim/joystick/joystick_axis_values");
+    g_joystick_axis_assignments_ref = XPLMFindDataRef("sim/joystick/joystick_axis_assignments");
     g_override_throttles_ref = XPLMFindDataRef("sim/operation/override/override_throttles");
     g_override_control_surfaces_ref = XPLMFindDataRef("sim/operation/override/override_control_surfaces");
     g_override_flightcontrol_ref = XPLMFindDataRef("sim/operation/override/override_flightcontrol");
 
     if (!g_joystick_axis_values_ref) {
         XPLMDebugString("Multibind: WARNING - Could not find joystick axis values dataref\n");
+    }
+
+    if (!g_joystick_axis_assignments_ref) {
+        XPLMDebugString("Multibind: WARNING - Could not find joystick axis assignments dataref\n");
     }
 
     if (!g_override_throttles_ref) {
@@ -306,6 +343,9 @@ void initialize_axis_system()
     if (!g_override_flightcontrol_ref) {
         XPLMDebugString("Multibind: WARNING - Could not find flight control override dataref\n");
     }
+
+    // Build initial cache
+    build_axis_assignment_cache();
 
     XPLMDebugString("Multibind: Axis system initialized\n");
 }
@@ -358,32 +398,42 @@ float get_axis_value(const std::string& axis_id)
         return 0.0f;  // Return neutral if no axis dataref available
     }
 
-    // Parse axis ID (A00-A66) to get axis index
+    // Parse axis ID (A00-A66) to get assignment enum
     if (axis_id.length() < 3 || axis_id[0] != 'A') {
         return 0.0f;  // Invalid axis ID format
     }
 
     std::string axis_number_str = axis_id.substr(1, 2);
-    int axis_index;
+    int assignment_enum;
     try {
-        axis_index = std::stoi(axis_number_str);
+        assignment_enum = std::stoi(axis_number_str);
     } catch (const std::exception&) {
         return 0.0f;  // Invalid axis number
     }
 
-    if (axis_index < MIN_AXIS_ID || axis_index > MAX_AXIS_ID) {
-        return 0.0f;  // Axis index out of range
+    if (assignment_enum < MIN_AXIS_ID || assignment_enum > MAX_AXIS_ID) {
+        return 0.0f;  // Assignment enum out of range
     }
+
+    // Look up physical axis index from assignment enum
+    auto it = g_axis_assignment_to_index.find(assignment_enum);
+    if (it == g_axis_assignment_to_index.end()) {
+        // This assignment not found in joystick configuration
+        // This is normal - user may not have this axis mapped
+        return 0.0f;
+    }
+
+    int physical_axis_index = it->second;
 
     // Read the axis values array
-    float axis_values[MAX_AXIS_ASSIGNMENTS];
-    int values_read = XPLMGetDatavf(g_joystick_axis_values_ref, axis_values, 0, MAX_AXIS_ASSIGNMENTS);
+    float axis_values[500];
+    int values_read = XPLMGetDatavf(g_joystick_axis_values_ref, axis_values, 0, 500);
 
-    if (values_read > axis_index) {
-        return axis_values[axis_index];
+    if (physical_axis_index < values_read) {
+        return axis_values[physical_axis_index];
     }
 
-    return 0.0f;  // Axis index beyond available values
+    return 0.0f;  // Physical index beyond available values
 }
 
 XPLMDataRef get_cached_dataref(const std::string& dataref_name)

@@ -424,8 +424,10 @@ bool Config::has_axis_bindings() const
         }
     }
 
+    std::string config_path = get_config_file_path();
     std::string debug_msg = "Multibind: Axis detection check - found " + std::to_string(axis_count) +
-                          " axis bindings out of " + std::to_string(_bindings.size()) + " total bindings\n";
+                          " axis bindings out of " + std::to_string(_bindings.size()) +
+                          " total bindings (config: " + config_path + ")\n";
     XPLMDebugString(debug_msg.c_str());
 
     return axis_count > 0;
