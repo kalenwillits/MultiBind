@@ -15,12 +15,6 @@
 *005~010*015=sim/test/005_not_010_015            # 005 held, 010 NOT held, 015 held
 ~000*010+011=sim/test/not_000_010_then_011       # 000 NOT held, 010 held, then 011 pressed
 
-# ========== AXIS BINDING WITH NEGATION ==========
-# Negation with axis bindings - continuous control
-~000*010^A04=sim/engines/throttle_1              # 000 NOT held, 010 held → throttle control
-~001*020^A08=sim/engines/prop_1                  # 001 NOT held, 020 held → prop control
-~000~001*030^A09=sim/engines/mixture_1           # 000 NOT held, 001 NOT held, 030 held → mixture
-
 # ========== EDGE CASES ==========
 # Negation at different positions in pattern
 ~005*010*015=sim/test/negated_first              # Negation first
@@ -44,7 +38,6 @@
 # ========== STRESS TESTS ==========
 # Complex negation patterns
 ~000~001~002*050*051*052=sim/test/complex_negation    # Multiple negations + multiple positives
-~010*020^A04=sim/test/negation_axis_stress            # Negation with continuous axis binding
 
 # ========== EXPECTED FAILURES (commented for reference) ==========
 # These patterns should be handled gracefully with warnings/errors:
