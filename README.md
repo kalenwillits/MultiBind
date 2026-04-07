@@ -14,7 +14,7 @@ An X-Plane 12 plugin that enables multi-button joystick command binding. Create 
 
 1. **Setup**: Plugin creates 1000 custom commands (`multibind/000` to `multibind/999`) that appear in X-Plane's joystick settings
 2. **Assignment**: Assign these `multibind/XXX` commands to your joystick buttons using X-Plane's standard joystick configuration
-3. **Configuration**: Define combinations in simple text files (e.g., "buttons 5+10+15 = start engine 1")
+3. **Configuration**: Define combinations in simple text files (e.g., `*005*010+015=sim/starters/engage_starter_1`)
 4. **Execution**: When you press the button combination, the plugin triggers the target X-Plane command
 
 ## Installation
@@ -66,26 +66,35 @@ X-Plane 12/multibind/{AIRCRAFT-ICAO}.txt
 
 **File Format:**
 ```
-button1+button2+button3|command|description
+<triggers>=<command>
 ```
+
+Each trigger is a prefix character followed by a 3-digit zero-padded button ID:
+
+| Prefix | Meaning | Description |
+|--------|---------|-------------|
+| `*` | HELD | Button must be held down |
+| `+` | PRESSED | Button was just pressed (fires on press) |
+| `-` | RELEASED | Button was just released (fires on release) |
+| `~` | NOT HELD | Button must NOT be held (negation) |
 
 **Example Configuration File** (`X-Plane 12/multibind/B58T.txt`):
 ```
 # Multibind configuration for Baron 58
-# Format: button1+button2+button3|command|description
+# Format: <triggers>=<command>
 
-# Engine controls
-1+5|sim/starters/engage_starter_1|Start Engine 1
-2+6|sim/starters/engage_starter_2|Start Engine 2
-1+2+10|sim/engines/mixture_max|Emergency Full Rich
+# Engine controls - hold button 001, then press 005 to start engine 1
+*001+005=sim/starters/engage_starter_1
+*002+006=sim/starters/engage_starter_2
+*001*002+010=sim/engines/mixture_max
 
 # Landing gear and flaps
-10+11|sim/flight_controls/landing_gear_toggle|Gear Toggle
-10+12|sim/flight_controls/flaps_down|Flaps Down
-11+12|sim/flight_controls/flaps_up|Flaps Up
+*010+011=sim/flight_controls/landing_gear_toggle
+*010+012=sim/flight_controls/flaps_down
+*011+012=sim/flight_controls/flaps_up
 
-# Emergency procedures
-1+5+10+15|sim/operation/pause_toggle|Emergency Pause
+# Emergency procedures - hold 001+005+010, press 015
+*001*005*010+015=sim/operation/pause_toggle
 ```
 
 ### Step 3: Using Your Combinations
@@ -95,46 +104,56 @@ button1+button2+button3|command|description
 3. **The corresponding X-Plane commands will execute**
 
 **Example Usage:**
-- Press buttons assigned to `multibind/001` and `multibind/005` simultaneously → Engine 1 starts
-- Press buttons assigned to `multibind/010` and `multibind/011` simultaneously → Landing gear toggles
+- Hold button assigned to `multibind/001`, then press `multibind/005` → Engine 1 starts
+- Hold button assigned to `multibind/010`, then press `multibind/011` → Landing gear toggles
 
 ## Configuration File Examples
 
 ### Combat Aircraft (F/A-18)
 ```
 # Weapons systems
-1+2|sim/weapons/master_arm_toggle|Master Arm Toggle
-1+3|sim/weapons/gun_trigger|Gun Fire
-2+4|sim/weapons/missile_launch|Missile Launch
+*001+002=sim/weapons/master_arm_toggle
+*001+003=sim/weapons/gun_trigger
+*002+004=sim/weapons/missile_launch
 
 # Emergency procedures
-1+2+3+4|sim/operation/quit|Emergency Quit
+*001*002*003+004=sim/operation/quit
 ```
 
 ### Airliner (737)
 ```
 # Engine management  
-1+10|sim/engines/engage_start_run_1|Engine 1 Start
-2+10|sim/engines/engage_start_run_2|Engine 2 Start
-1+2+15|sim/engines/thrust_reverse_toggle|Reverse Thrust
+*001+010=sim/engines/engage_start_run_1
+*002+010=sim/engines/engage_start_run_2
+*001*002+015=sim/engines/thrust_reverse_toggle
 
 # Autopilot combinations
-5+6|sim/autopilot/heading_select|HDG Select
-5+7|sim/autopilot/altitude_select|ALT Select
-6+7|sim/autopilot/speed_select|SPD Select
+*005+006=sim/autopilot/heading_select
+*005+007=sim/autopilot/altitude_select
+*006+007=sim/autopilot/speed_select
 ```
 
 ### General Aviation
 ```
 # Pre-flight checks
-1+2|sim/engines/mixture_max|Mixture Rich
-1+3|sim/engines/prop_advance|Prop Full Forward  
-2+3|sim/electrical/battery_1_on|Battery On
+*001+002=sim/engines/mixture_max
+*001+003=sim/engines/prop_advance
+*002+003=sim/electrical/battery_1_on
 
 # Landing pattern
-10+11|sim/flight_controls/landing_gear_down|Gear Down
-10+12|sim/flight_controls/flaps_down|Flaps Down
-11+12|sim/lights/landing_lights_toggle|Landing Lights
+*010+011=sim/flight_controls/landing_gear_down
+*010+012=sim/flight_controls/flaps_down
+*011+012=sim/lights/landing_lights_toggle
+```
+
+### Using Negation (~) for Exclusive Modes
+```
+# Safety guard - gear toggle only works when safety button (050) is NOT held
+~050*051+052=sim/gear/landing_gear_toggle
+
+# Mode-exclusive controls
+~100*110+111=sim/autopilot/mode_a   # Mode A only when 100 NOT held
+*100*110+111=sim/autopilot/mode_b   # Mode B only when 100 IS held
 ```
 
 ## Finding X-Plane Commands
@@ -173,20 +192,21 @@ This allows you to have different button combinations for different aircraft typ
 
 ### Combinations Not Working
 - **Verify** all buttons are assigned to `multibind/XXX` commands in X-Plane's joystick settings
-- **Check** your configuration file syntax (use pipes `|` as separators)
+- **Check** your configuration file syntax (use `=` to separate triggers from command)
+- **Ensure** trigger prefixes are correct (`*` held, `+` pressed, `-` released, `~` not held)
+- **Ensure** button IDs are 3-digit zero-padded numbers (e.g., `*005` not `*5`)
 - **Ensure** the X-Plane command exists (use Command Search in X-Plane)
-- **Test** timing - all buttons must be pressed within a short time window
 
 ### Configuration File Issues
 - **Location**: Files must be in `X-Plane 12/multibind/`
 - **Filename**: Must match aircraft ICAO code (check X-Plane's aircraft data)
-- **Format**: Use format `button+button|command|description`
+- **Format**: Use format `<triggers>=<command>` (e.g., `*001+005=sim/some/command`)
 - **Comments**: Lines starting with `#` are ignored
 
 ### Button Numbers
 - Button numbers correspond to the `multibind/XXX` number you assigned
-- If you assigned `multibind/005` to a button, use `5` in your configuration file
-- Numbers can range from 0-999
+- If you assigned `multibind/005` to a button, use `005` in your configuration file (always 3 digits, zero-padded)
+- Numbers can range from 000-999
 
 ## Menu Options
 
