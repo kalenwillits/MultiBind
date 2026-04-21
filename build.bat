@@ -58,7 +58,7 @@ if not exist %VSWHERE% (
 )
 
 set COMPILER_FOUND=0
-for /f "tokens=1 delims=." %%v in ('%VSWHERE% -latest -property installationVersion 2^>nul') do (
+for /f "tokens=1 delims=." %%v in ('%VSWHERE% -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationVersion 2^>nul') do (
     if !COMPILER_FOUND! == 0 (
         set VS_MAJOR=%%v
         set COMPILER_FOUND=1
