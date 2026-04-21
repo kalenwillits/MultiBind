@@ -87,8 +87,8 @@ if !COMPILER_FOUND! == 0 (
     where /q cl 2>nul
     if !errorlevel! == 0 (
         echo ✅ Found Visual Studio Build Tools (MSVC compiler available)
-        set BUILD_GENERATOR=""
-        set CMAKE_EXTRA_FLAGS=-A x64
+        set BUILD_GENERATOR="NMake Makefiles"
+        set CMAKE_EXTRA_FLAGS=
         set COMPILER_FOUND=1
     )
 )
