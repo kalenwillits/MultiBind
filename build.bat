@@ -76,7 +76,11 @@ if !COMPILER_FOUND! == 0 (
     exit /b 1
 )
 
-set BUILD_GENERATOR="Visual Studio 17 2022"
+if "!VS_MAJOR!" == "18" (
+    set BUILD_GENERATOR="Visual Studio 18 2026"
+) else (
+    set BUILD_GENERATOR="Visual Studio 17 2022"
+)
 
 echo ✅ Found !BUILD_GENERATOR!
 
