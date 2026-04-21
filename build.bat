@@ -76,16 +76,10 @@ if !COMPILER_FOUND! == 0 (
     exit /b 1
 )
 
-if "!VS_MAJOR!" == "17" (
-    set BUILD_GENERATOR="Visual Studio 17 2022"
-) else if "!VS_MAJOR!" == "18" (
+if "!VS_MAJOR!" == "18" (
     set BUILD_GENERATOR="Visual Studio 18 2025"
 ) else (
-    echo.
-    echo ❌ Unsupported Visual Studio version ^(major: !VS_MAJOR!^)
-    echo.
-    pause
-    exit /b 1
+    set BUILD_GENERATOR="Visual Studio 17 2022"
 )
 
 echo ✅ Found !BUILD_GENERATOR!
