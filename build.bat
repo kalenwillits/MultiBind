@@ -44,87 +44,51 @@ if !SDK_FOUND! == 0 (
     exit /b 1
 )
 
-REM Detect available compilers
-set COMPILER_FOUND=0
-set BUILD_GENERATOR=""
-set CMAKE_EXTRA_FLAGS=""
-
-echo Detecting available compilers...
-
-REM Use vswhere to detect Visual Studio installations (IDE and Build Tools)
+REM Detect Visual Studio via vswhere
 set VSWHERE="%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe"
-if exist %VSWHERE% (
-    REM Try VS 2022 first
-    for /f "tokens=*" %%i in ('%VSWHERE% -version "[17.0,18.0)" -latest -property installationPath 2^>nul') do (
-        if !COMPILER_FOUND! == 0 (
-            set BUILD_GENERATOR="Visual Studio 17 2022"
-            set CMAKE_EXTRA_FLAGS=-A x64
-            set COMPILER_FOUND=1
-            echo ✅ Found Visual Studio 2022 at %%i
-        )
-    )
-    REM Try VS 2019
-    if !COMPILER_FOUND! == 0 (
-        for /f "tokens=*" %%i in ('%VSWHERE% -version "[16.0,17.0)" -latest -property installationPath 2^>nul') do (
-            if !COMPILER_FOUND! == 0 (
-                set BUILD_GENERATOR="Visual Studio 16 2019"
-                set CMAKE_EXTRA_FLAGS=-A x64
-                set COMPILER_FOUND=1
-                echo ✅ Found Visual Studio 2019 at %%i
-            )
-        )
-    )
-)
-
-REM 4. Try MinGW-w64 as fallback
-if !COMPILER_FOUND! == 0 (
-    where /q gcc 2>nul
-    if !errorlevel! == 0 (
-        where /q mingw32-make 2>nul
-        if !errorlevel! == 0 (
-            echo ✅ Found MinGW-w64 (GCC compiler)
-            set BUILD_GENERATOR="MinGW Makefiles"
-            set CMAKE_EXTRA_FLAGS=-DCMAKE_MAKE_PROGRAM=mingw32-make
-            set COMPILER_FOUND=1
-        ) else (
-            where /q make 2>nul
-            if !errorlevel! == 0 (
-                echo ✅ Found MinGW-w64 (GCC compiler)
-                set BUILD_GENERATOR="MinGW Makefiles"
-                set CMAKE_EXTRA_FLAGS=""
-                set COMPILER_FOUND=1
-            )
-        )
-    )
-)
-
-REM Handle case where no compiler was found
-if !COMPILER_FOUND! == 0 (
+if not exist %VSWHERE% (
     echo.
-    echo ❌ No suitable C++ compiler found!
+    echo ❌ Visual Studio not found!
     echo.
-    echo You have Visual Studio Code, but you need a C++ compiler to build this project.
-    echo Visual Studio Code is a code editor, not a compiler.
-    echo.
-    echo Please install ONE of the following:
-    echo.
-    echo 1. Visual Studio 2019/2022 Community ^(free^):
-    echo    https://visualstudio.microsoft.com/downloads/
-    echo    - Install "Desktop development with C++" workload
-    echo.
-    echo 2. Build Tools for Visual Studio ^(smaller download^):
-    echo    https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022
-    echo    - Install "C++ build tools" workload
-    echo.
-    echo 3. MinGW-w64 via winget ^(command line^):
-    echo    winget install mingw-w64
-    echo.
-    echo 4. MinGW-w64 via MSYS2 ^(manual^):
-    echo    https://www.msys2.org/
+    echo Please install Visual Studio with the "Desktop development with C++" workload:
+    echo   https://visualstudio.microsoft.com/downloads/
     echo.
     pause
     exit /b 1
 )
+
+set COMPILER_FOUND=0
+for /f "tokens=1 delims=." %%v in ('%VSWHERE% -latest -property installationVersion 2^>nul') do (
+    if !COMPILER_FOUND! == 0 (
+        set VS_MAJOR=%%v
+        set COMPILER_FOUND=1
+    )
+)
+
+if !COMPILER_FOUND! == 0 (
+    echo.
+    echo ❌ No Visual Studio installation found!
+    echo.
+    echo Please install Visual Studio with the "Desktop development with C++" workload:
+    echo   https://visualstudio.microsoft.com/downloads/
+    echo.
+    pause
+    exit /b 1
+)
+
+if "!VS_MAJOR!" == "17" (
+    set BUILD_GENERATOR="Visual Studio 17 2022"
+) else if "!VS_MAJOR!" == "18" (
+    set BUILD_GENERATOR="Visual Studio 18 2025"
+) else (
+    echo.
+    echo ❌ Unsupported Visual Studio version ^(major: !VS_MAJOR!^)
+    echo.
+    pause
+    exit /b 1
+)
+
+echo ✅ Found !BUILD_GENERATOR!
 
 echo.
 echo Building Multibind Plugin...
@@ -132,18 +96,16 @@ echo.
 
 cd build
 
-REM Configure with CMake using detected compiler
-if "!BUILD_GENERATOR!" == """" (
-    echo Configuring with auto-detected generator...
-    cmake .. !CMAKE_EXTRA_FLAGS! -DCMAKE_BUILD_TYPE=Release
-) else (
-    echo Configuring with !BUILD_GENERATOR!...
-    cmake .. -G !BUILD_GENERATOR! !CMAKE_EXTRA_FLAGS! -DCMAKE_BUILD_TYPE=Release
-)
+echo Configuring with !BUILD_GENERATOR!...
+cmake .. -G !BUILD_GENERATOR! -A x64 -DCMAKE_BUILD_TYPE=Release
 
 if !errorlevel! neq 0 (
     echo.
     echo ❌ CMake configuration failed!
+    echo.
+    echo Troubleshooting:
+    echo - Make sure Visual Studio C++ tools are properly installed
+    echo - Reinstall Visual Studio with "Desktop development with C++" workload
     echo.
     pause
     cd ..
@@ -153,31 +115,15 @@ if !errorlevel! neq 0 (
 REM Build the project
 echo.
 echo Building plugin...
-if "!BUILD_GENERATOR!" == """MinGW Makefiles""" (
-    REM MinGW uses make instead of cmake --build
-    if "!CMAKE_EXTRA_FLAGS!" == "-DCMAKE_MAKE_PROGRAM=mingw32-make" (
-        mingw32-make
-    ) else (
-        make
-    )
-) else (
-    cmake --build . --config Release
-)
+cmake --build . --config Release
 
 if !errorlevel! neq 0 (
     echo.
     echo ❌ Build failed!
     echo.
-    echo Troubleshooting tips:
-    if "!BUILD_GENERATOR!" == """MinGW Makefiles""" (
-        echo - Make sure MinGW-w64 is properly installed and in PATH
-        echo - Try installing via: winget install mingw-w64
-        echo - Or reinstall via MSYS2: https://www.msys2.org/
-    ) else (
-        echo - Make sure Visual Studio C++ tools are properly installed
-        echo - Try running from "Developer Command Prompt for VS"
-        echo - Reinstall Visual Studio with "Desktop development with C++" workload
-    )
+    echo Troubleshooting:
+    echo - Make sure Visual Studio C++ tools are properly installed
+    echo - Reinstall Visual Studio with "Desktop development with C++" workload
     echo.
     pause
     cd ..
@@ -187,15 +133,7 @@ if !errorlevel! neq 0 (
 REM Create the plugin directory structure
 echo.
 echo Creating plugin directory structure...
-if "!BUILD_GENERATOR!" == """MinGW Makefiles""" (
-    if "!CMAKE_EXTRA_FLAGS!" == "-DCMAKE_MAKE_PROGRAM=mingw32-make" (
-        mingw32-make plugin
-    ) else (
-        make plugin
-    )
-) else (
-    cmake --build . --target plugin
-)
+cmake --build . --target plugin
 
 if !errorlevel! neq 0 (
     echo.
@@ -215,13 +153,7 @@ if exist "build\Multibind\win.xpl" (
     echo ✅ BUILD SUCCESSFUL!
     echo ========================================
     echo.
-    if "!BUILD_GENERATOR!" == """MinGW Makefiles""" (
-        echo Compiled with: MinGW-w64 ^(GCC^)
-    ) else if "!BUILD_GENERATOR!" == """" (
-        echo Compiled with: Visual Studio Build Tools ^(MSVC^)
-    ) else (
-        echo Compiled with: !BUILD_GENERATOR! ^(MSVC^)
-    )
+    echo Compiled with: !BUILD_GENERATOR! ^(MSVC^)
     echo Plugin built: build\Multibind\win.xpl
     echo.
     echo Installation:
@@ -241,16 +173,8 @@ if exist "build\Multibind\win.xpl" (
     echo ❌ Build completed but plugin file not found!
     echo Expected: build\Multibind\win.xpl
     echo.
-    echo This might happen if:
-    if "!BUILD_GENERATOR!" == """MinGW Makefiles""" (
-        echo - MinGW-w64 installation is incomplete
-        echo - PATH environment variable doesn't include MinGW-w64
-        echo - Try reinstalling MinGW-w64: winget install mingw-w64
-    ) else (
-        echo - Visual Studio C++ tools are not properly configured
-        echo - Try running from "Developer Command Prompt for VS"
-        echo - Reinstall Visual Studio with C++ development tools
-    )
+    echo - Visual Studio C++ tools may not be properly configured
+    echo - Reinstall Visual Studio with C++ development tools
     echo.
     pause
     exit /b 1
