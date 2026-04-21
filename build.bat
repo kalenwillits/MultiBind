@@ -51,45 +51,28 @@ set CMAKE_EXTRA_FLAGS=""
 
 echo Detecting available compilers...
 
-REM 1. Try Visual Studio 2022 first
-where /q devenv 2>nul
-if !errorlevel! == 0 (
-    for /f "tokens=*" %%i in ('where devenv 2^>nul') do (
-        if "!BUILD_GENERATOR!" == """" (
-            echo %%i | findstr /i "2022" >nul
-            if !errorlevel! == 0 (
-                set BUILD_GENERATOR="Visual Studio 17 2022"
-                set CMAKE_EXTRA_FLAGS=-A x64
-                set COMPILER_FOUND=1
-                echo ✅ Found Visual Studio 2022
-            )
+REM Use vswhere to detect Visual Studio installations (IDE and Build Tools)
+set VSWHERE="%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe"
+if exist %VSWHERE% (
+    REM Try VS 2022 first
+    for /f "tokens=*" %%i in ('%VSWHERE% -version "[17.0,18.0)" -latest -property installationPath 2^>nul') do (
+        if !COMPILER_FOUND! == 0 (
+            set BUILD_GENERATOR="Visual Studio 17 2022"
+            set CMAKE_EXTRA_FLAGS=-A x64
+            set COMPILER_FOUND=1
+            echo ✅ Found Visual Studio 2022 at %%i
         )
     )
-)
-
-REM 2. Try Visual Studio 2019
-if !COMPILER_FOUND! == 0 (
-    for /f "tokens=*" %%i in ('where devenv 2^>nul') do (
-        if "!BUILD_GENERATOR!" == """" (
-            echo %%i | findstr /i "2019" >nul
-            if !errorlevel! == 0 (
+    REM Try VS 2019
+    if !COMPILER_FOUND! == 0 (
+        for /f "tokens=*" %%i in ('%VSWHERE% -version "[16.0,17.0)" -latest -property installationPath 2^>nul') do (
+            if !COMPILER_FOUND! == 0 (
                 set BUILD_GENERATOR="Visual Studio 16 2019"
                 set CMAKE_EXTRA_FLAGS=-A x64
                 set COMPILER_FOUND=1
-                echo ✅ Found Visual Studio 2019
+                echo ✅ Found Visual Studio 2019 at %%i
             )
         )
-    )
-)
-
-REM 3. Try Visual Studio Build Tools (lighter than full VS)
-if !COMPILER_FOUND! == 0 (
-    where /q cl 2>nul
-    if !errorlevel! == 0 (
-        echo ✅ Found Visual Studio Build Tools (MSVC compiler available)
-        set BUILD_GENERATOR="NMake Makefiles"
-        set CMAKE_EXTRA_FLAGS=
-        set COMPILER_FOUND=1
     )
 )
 
