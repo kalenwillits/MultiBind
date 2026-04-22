@@ -21,7 +21,6 @@ static Config g_config;
 static CombinationTracker g_tracker;
 
 static XPLMDataRef g_aircraft_icao_ref = nullptr;
-static std::string g_last_aircraft_icao;
 
 static float flight_loop_callback(float, float, int, void*);
 
@@ -138,26 +137,19 @@ void create_multibind_commands()
 void load_aircraft_config()
 {
     using namespace multibind::constants;
-    
+
     std::string aircraft_icao(XPLANE_PATH_BUFFER_SIZE, '\0');
     XPLMGetDatab(g_aircraft_icao_ref, &aircraft_icao[0], 0, aircraft_icao.size());
     aircraft_icao.resize(std::strlen(aircraft_icao.c_str())); // Trim to actual length
-    
-    if (aircraft_icao != g_last_aircraft_icao) {
-        g_last_aircraft_icao = aircraft_icao;
-        
-        std::string aircraft_id = aircraft_icao; // Use ICAO directly as aircraft ID
-        
-        std::string log_msg = "Multibind: Loading config for aircraft: " + aircraft_id + "\n";
-        XPLMDebugString(log_msg.c_str());
-        
-        // Stop any continuous commands from previous aircraft
-        g_tracker.stop_all_continuous_commands();
-        
-        g_config.load_config(aircraft_id);
-        g_tracker.set_bindings(g_config.get_bindings());
-        
-    }
+
+    std::string log_msg = "Multibind: Loading config for aircraft: " + aircraft_icao + "\n";
+    XPLMDebugString(log_msg.c_str());
+
+    // Stop any continuous commands from previous aircraft
+    g_tracker.stop_all_continuous_commands();
+
+    g_config.load_config(aircraft_icao);
+    g_tracker.set_bindings(g_config.get_bindings());
 }
 
 
@@ -207,13 +199,8 @@ static void menu_handler(void*, void* item_ref)
     switch (item) {
         case 2: // Reload Configuration
             {
-                std::string log_msg = "Multibind: Reloading configuration for current aircraft\n";
-                XPLMDebugString(log_msg.c_str());
-                
-                // Force reload by clearing the last aircraft ICAO
-                g_last_aircraft_icao.clear();
+                XPLMDebugString("Multibind: Reloading configuration for current aircraft\n");
                 load_aircraft_config();
-                
                 XPLMDebugString("Multibind: Configuration reloaded successfully\n");
             }
             break;

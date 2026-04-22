@@ -1,12 +1,12 @@
 #include "config.h"
 #include "XPLMUtilities.h"
+#include "XPLMPlanes.h"
 #include "constants.h"
 #include "input_validation.h"
 
 #include <fstream>
 #include <sstream>
 #include <algorithm>
-#include <filesystem>
 #include <cstring>
 #include <iomanip>
 #include <set>
@@ -15,11 +15,7 @@ bool Config::load_config(const std::string& aircraft_id)
 {
     _aircraft_id = aircraft_id;
     _bindings.clear();
-    
-    if (!create_multibind_directory()) {
-        XPLMDebugString("Multibind: WARNING - Could not create multibind directory\n");
-    }
-    
+
     std::string config_file = get_config_file_path();
     std::ifstream file(config_file);
     
@@ -186,33 +182,27 @@ void Config::update_binding(size_t index, const MultibindBinding& binding)
     }
 }
 
-bool Config::create_multibind_directory()
+std::string Config::get_aircraft_directory() const
 {
-    std::string multibind_dir = get_multibind_directory();
-    
-    try {
-        std::filesystem::create_directories(multibind_dir);
-        return true;
-    } catch (const std::exception& e) {
-        std::string error_msg = "Multibind: ERROR - Failed to create directory " + multibind_dir + ": " + e.what() + "\n";
-        XPLMDebugString(error_msg.c_str());
-        return false;
+    using namespace multibind::constants;
+
+    char filename[XPLANE_PATH_BUFFER_SIZE];
+    char path[XPLANE_PATH_BUFFER_SIZE];
+    XPLMGetNthAircraftModel(0, filename, path);
+
+    std::string aircraft_path(path);
+    if (!aircraft_path.empty()) {
+        size_t last_slash = aircraft_path.find_last_of("/\\");
+        if (last_slash != std::string::npos) {
+            aircraft_path = aircraft_path.substr(0, last_slash);
+        }
     }
+    return aircraft_path;
 }
 
 std::string Config::get_config_file_path() const
 {
-    return get_multibind_directory() + "/" + _aircraft_id + ".txt";
-}
-
-std::string Config::get_multibind_directory() const
-{
-    using namespace multibind::constants;
-    
-    std::string xplane_path(XPLANE_PATH_BUFFER_SIZE, '\0');
-    XPLMGetSystemPath(&xplane_path[0]);
-    xplane_path.resize(std::strlen(xplane_path.c_str())); // Trim to actual length
-    return xplane_path + "multibind";
+    return get_aircraft_directory() + "/MultiBind.cfg";
 }
 
 
